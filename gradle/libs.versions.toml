@@ -1,0 +1,73 @@
+[versions]
+# Core Dependencies
+jmonkeyengine = "3.8.1-stable"
+groovy        = "3.0.23"
+lemur         = "1.16.0"
+lemur-props   = "1.2.0"
+lemur-proto   = "1.13.0"
+sio2          = "1.8.0"
+heart         = "9.2.0"
+minie         = "9.0.1"
+
+# Logging, Utility, and JSON
+logback       = "1.5.19"
+guava         = "33.4.0-jre"
+jackson       = "2.18.2"
+reflections   = "0.10.2"
+
+# Test Dependencies
+junit-bom     = "5.11.4"
+mockito       = "5.15.2"
+
+
+[libraries]
+# --- JMonkeyEngine (JME) ---
+jme-core        = { group = "org.jmonkeyengine", name = "jme3-core", version.ref = "jmonkeyengine" }
+jme-desktop     = { group = "org.jmonkeyengine", name = "jme3-desktop", version.ref = "jmonkeyengine" }
+jme-lwjgl3      = { group = "org.jmonkeyengine", name = "jme3-lwjgl3", version.ref = "jmonkeyengine" }
+jme-plugins     = { group = "org.jmonkeyengine", name = "jme3-plugins", version.ref = "jmonkeyengine" }
+jme-effects     = { group = "org.jmonkeyengine", name = "jme3-effects", version.ref = "jmonkeyengine" }
+jme-testdata    = { group = "org.jmonkeyengine", name = "jme3-testdata", version.ref = "jmonkeyengine" }
+jme-awt-dialogs = { group = "org.jmonkeyengine", name = "jme3-awt-dialogs", version.ref = "jmonkeyengine" }
+
+# --- Groovy & Simsilica ---
+groovy-all     = { group = "org.codehaus.groovy", name = "groovy-all", version.ref = "groovy" }
+lemur          = { group = "com.simsilica", name = "lemur", version.ref = "lemur" }
+lemur-props    = { group = "com.simsilica", name = "lemur-props", version.ref = "lemur-props" }
+lemur-proto    = { group = "com.simsilica", name = "lemur-proto", version.ref = "lemur-proto" }
+sio2           = { group = "com.simsilica", name = "sio2", version.ref = "sio2" }
+
+# --- Stephen Gold Libraries ---
+heart          = { group = "com.github.stephengold", name = "Heart", version.ref = "heart" }
+minie          = { group = "com.github.stephengold", name = "Minie", version.ref = "minie" }
+
+# --- Utility and Core ---
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+guava           = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
+reflections     = { group = "org.reflections", name = "reflections", version.ref = "reflections" }
+
+# --- Testing ---
+junit-bom-platform = { group = "org.junit", name = "junit-bom", version.ref = "junit-bom" }
+junit-jupiter     = { group = "org.junit.jupiter", name = "junit-jupiter" } # Version is omitted, as it's managed by the BOM
+mockito-core      = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+
+
+[bundles]
+# Group all the JME modules for easier application
+jme-base = [
+    "jme-core",
+    "jme-desktop",
+    "jme-lwjgl3",
+    "jme-plugins",
+    "jme-effects",
+    "jme-testdata"
+]
+
+# Group all Simsilica libraries
+simsilica-ui = [
+    "lemur",
+    "lemur-props",
+    "lemur-proto",
+    "sio2"
+]
