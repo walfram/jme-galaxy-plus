@@ -1,1 +1,4 @@
 rootProject.name = 'jme-galaxy-plus'
+
+include 'shared'
+include 'dev-test'

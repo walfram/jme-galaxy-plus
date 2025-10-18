@@ -12,9 +12,6 @@ repositories {
 }
 
 dependencies {
-    // Platform/BOM dependency
-    testImplementation platform(libs.junit.bom.platform)
-
     // Core dependencies using bundles and individual accessors
     implementation libs.bundles.jme.base
     runtimeOnly libs.jme.awt.dialogs
@@ -30,6 +27,8 @@ dependencies {
     implementation libs.jackson.databind
     implementation libs.reflections
 
+    // Platform/BOM dependency
+    testImplementation platform(libs.junit.bom.platform)
     // Test dependencies (junit-jupiter gets its version from the BOM)
     testImplementation libs.junit.jupiter
     testImplementation libs.mockito.core
