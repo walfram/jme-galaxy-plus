@@ -1,0 +1,127 @@
+[
+  {
+    "id": "SL-001",
+    "size": 2347,
+    "resources": 2.14
+  },
+  {
+    "id": "CM-001",
+    "size": 823,
+    "resources": 6.72
+  },
+  {
+    "id": "LG-001",
+    "size": 1456,
+    "resources": 7.89
+  },
+  {
+    "id": "SM-001",
+    "size": 287,
+    "resources": 18.45
+  },
+  {
+    "id": "CM-002",
+    "size": 651,
+    "resources": 3.21
+  },
+  {
+    "id": "CM-003",
+    "size": 912,
+    "resources": 8.93
+  },
+  {
+    "id": "AS-001",
+    "size": 7,
+    "resources": 0.34
+  },
+  {
+    "id": "LG-002",
+    "size": 1789,
+    "resources": 5.67
+  },
+  {
+    "id": "SM-002",
+    "size": 156,
+    "resources": 21.73
+  },
+  {
+    "id": "CM-004",
+    "size": 734,
+    "resources": 4.56
+  },
+  {
+    "id": "SL-002",
+    "size": 2198,
+    "resources": 1.87
+  },
+  {
+    "id": "LG-003",
+    "size": 1623,
+    "resources": 9.12
+  },
+  {
+    "id": "CM-005",
+    "size": 567,
+    "resources": 2.34
+  },
+  {
+    "id": "SM-003",
+    "size": 423,
+    "resources": 14.89
+  },
+  {
+    "id": "AS-002",
+    "size": 3,
+    "resources": 0.67
+  },
+  {
+    "id": "CM-006",
+    "size": 891,
+    "resources": 7.45
+  },
+  {
+    "id": "LG-004",
+    "size": 1234,
+    "resources": 3.78
+  },
+  {
+    "id": "CM-007",
+    "size": 678,
+    "resources": 5.23
+  },
+  {
+    "id": "SL-003",
+    "size": 2412,
+    "resources": 0.98
+  },
+  {
+    "id": "SM-004",
+    "size": 198,
+    "resources": 19.56
+  },
+  {
+    "id": "CM-008",
+    "size": 789,
+    "resources": 6.11
+  },
+  {
+    "id": "AS-003",
+    "size": 9,
+    "resources": 0.23
+  },
+  {
+    "id": "LG-005",
+    "size": 1567,
+    "resources": 8.34
+  },
+  {
+    "id": "CM-009",
+    "size": 543,
+    "resources": 1.89
+  },
+  {
+    "id": "CM-010",
+    "size": 834,
+    "resources": 9.67
+  }
+]
