@@ -5,9 +5,11 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
+import com.simsilica.lemur.Axis;
 import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
+import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
 
@@ -29,7 +31,7 @@ public class MainMenuState extends BaseAppState {
 		menuNode.attachChild(main);
 		main.setLocalTranslation(
 				application.getCamera().getWidth() / 2f - main.getPreferredSize().x / 2f,
-				application.getCamera().getHeight() / 2f,
+				application.getCamera().getHeight() / 2f + main.getPreferredSize().y / 2f,
 				0f
 		);
 	}
@@ -42,11 +44,9 @@ public class MainMenuState extends BaseAppState {
 
 		dialog.addChild(new Label("Are you sure you want to exit?"));
 
-		Container actions = dialog.addChild(new Container());
+		Container actions = dialog.addChild(new Container(new SpringGridLayout(Axis.X, Axis.Y)));
 		actions.addChild(new Button("yes")).addClickCommands(cmd -> getApplication().stop(true));
-		actions.addChild(new Button("no")).addClickCommands(cmd -> {
-			getState(PopupState.class).closePopup(dialog);
-		});
+		actions.addChild(new Button("no")).addClickCommands(cmd -> getState(PopupState.class).closePopup(dialog));
 
 		dialog.setLocalTranslation(
 				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,

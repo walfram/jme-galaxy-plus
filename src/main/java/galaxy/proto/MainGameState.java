@@ -49,7 +49,7 @@ public class MainGameState extends BaseAppState {
 
 		dialog.addChild(new Label("Are you sure you want to exit?"));
 
-		Container actions = dialog.addChild(new Container());
+		Container actions = dialog.addChild(new Container(new SpringGridLayout(Axis.X, Axis.Y)));
 		actions.addChild(new Button("yes")).addClickCommands(cmd -> {
 			setEnabled(false);
 			getState(PopupState.class).closePopup(dialog);
