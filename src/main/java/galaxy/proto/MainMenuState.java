@@ -3,10 +3,12 @@ package galaxy.proto;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
+import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
 
 public class MainMenuState extends BaseAppState {
@@ -22,7 +24,7 @@ public class MainMenuState extends BaseAppState {
 
 		main.addChild(new Button("load")).addClickCommands(cmd -> getState(MainGameState.class).setEnabled(true));
 		main.addChild(new Button("settings"));
-		main.addChild(new Button("exit")).addClickCommands(cmd -> application.stop(true));
+		main.addChild(new Button("exit")).addClickCommands(this::onExitClick);
 
 		menuNode.attachChild(main);
 		main.setLocalTranslation(
@@ -30,6 +32,29 @@ public class MainMenuState extends BaseAppState {
 				application.getCamera().getHeight() / 2f,
 				0f
 		);
+	}
+
+	private void onExitClick(Button button) {
+		Container dialog = new Container();
+
+		Label header = dialog.addChild(new Label("Exit?", new ElementId("header")));
+		header.setMaxWidth(256f);
+
+		dialog.addChild(new Label("Are you sure you want to exit?"));
+
+		Container actions = dialog.addChild(new Container());
+		actions.addChild(new Button("yes")).addClickCommands(cmd -> getApplication().stop(true));
+		actions.addChild(new Button("no")).addClickCommands(cmd -> {
+			getState(PopupState.class).closePopup(dialog);
+		});
+
+		dialog.setLocalTranslation(
+				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
+				getApplication().getCamera().getHeight() * 0.5f + dialog.getPreferredSize().y * 0.5f,
+				0f
+		);
+
+		getState(PopupState.class).showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	@Override

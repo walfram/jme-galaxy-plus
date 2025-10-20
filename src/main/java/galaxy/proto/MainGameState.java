@@ -58,7 +58,7 @@ public class MainGameState extends BaseAppState {
 
 		dialog.setLocalTranslation(
 				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
-				getApplication().getCamera().getHeight() * 0.5f - dialog.getPreferredSize().y * 0.5f,
+				getApplication().getCamera().getHeight() * 0.5f + dialog.getPreferredSize().y * 0.5f,
 				0f
 		);
 
