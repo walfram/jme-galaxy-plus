@@ -3,7 +3,7 @@ package galaxy.proto;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import galaxy.generator.PlanetGenerator;
-import galaxy.generator.SimplePlanetGenerator;
+import galaxy.generator.simple.SimplePlanetGenerator;
 import galaxy.domain.Planet;
 
 import java.util.ArrayList;

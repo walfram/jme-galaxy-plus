@@ -1,7 +1,10 @@
-package galaxy.generator;
+package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
 import galaxy.domain.*;
+import galaxy.generator.PlanetGenerator;
+import galaxy.generator.PlanetTemplate;
+import galaxy.generator.WeightedDistribution;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 

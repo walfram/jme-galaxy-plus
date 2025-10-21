@@ -1,5 +1,7 @@
-package galaxy.generator;
+package galaxy.generator.simple;
 
+import galaxy.generator.PlanetTemplate;
+import galaxy.generator.WeightedDistribution;
 import jme3utilities.math.noise.Generator;
 
 import java.util.List;
