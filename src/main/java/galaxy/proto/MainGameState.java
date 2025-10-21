@@ -11,6 +11,9 @@ import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class MainGameState extends BaseAppState {
@@ -18,6 +21,8 @@ public class MainGameState extends BaseAppState {
 	private static final Logger logger = getLogger(MainGameState.class);
 
 	private final Node gameMenuNode = new Node("game-menu-node");
+
+	private final List<BaseAppState> states = new ArrayList<>();
 
 	MainGameState() {
 		setEnabled(false);
@@ -75,6 +80,12 @@ public class MainGameState extends BaseAppState {
 		getState(MainMenuState.class).setEnabled(false);
 
 		((SimpleApplication) getApplication()).getGuiNode().attachChild(gameMenuNode);
+
+		states.add(new GalaxyContextState());
+		states.add(new GalaxyCameraState());
+		states.add(new GalaxyViewState());
+
+		states.forEach(state -> getStateManager().attach(state));
 	}
 
 	@Override
@@ -82,5 +93,7 @@ public class MainGameState extends BaseAppState {
 		getState(MainMenuState.class).setEnabled(true);
 
 		((SimpleApplication) getApplication()).getGuiNode().detachChild(gameMenuNode);
+
+		states.forEach(state -> getStateManager().detach(state));
 	}
 }

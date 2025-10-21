@@ -1,0 +1,130 @@
+package galaxy.generator;
+
+import com.jme3.math.Vector3f;
+import galaxy.domain.*;
+import jme3utilities.math.noise.Generator;
+import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.slf4j.LoggerFactory.getLogger;
+
+public class SimplePlanetGenerator implements PlanetGenerator {
+
+	private static final Logger logger = getLogger(SimplePlanetGenerator.class);
+
+	private static final int SEED_COUNT = 16384;
+	private static final float SEED_SCALE = 256f;
+	private static final float DISTANCE_HW = 30f;
+	private static final float DISTANCE_DW_MIN = 5f;
+	private static final float DISTANCE_DW_MAX = 10f;
+
+	private final Generator random;
+
+	private final int raceCount;
+	private final int planetRatio;
+
+	public SimplePlanetGenerator(Generator random, int raceCount, int planetRatio) {
+		this.random = random;
+		this.raceCount = raceCount;
+		this.planetRatio = planetRatio;
+	}
+
+	public SimplePlanetGenerator() {
+		this(
+				new Generator(),
+				10,
+				10
+		);
+	}
+
+	private int planetCount() {
+		return raceCount * planetRatio;
+	}
+
+	@Override
+	public List<Planet> planets() {
+		List<Vector3f> seedSource = new ArrayList<>(SEED_COUNT);
+		for (int i = 0; i < SEED_COUNT; i++) {
+			// TODO this will create sphere, must use 3d-ellipse
+			Vector3f point = random.nextVector3f().multLocal(SEED_SCALE);
+			seedSource.add(point);
+		}
+
+		List<Vector3f> origins = new ArrayList<>(raceCount);
+
+		List<Vector3f> seed = new ArrayList<>(seedSource);
+		for (int i = 0; i < planetCount(); i++) {
+			Vector3f origin = seed.stream().min((left, right) -> Float.compare(left.length(), right.length())).orElseThrow();
+			seed.remove(origin);
+			origins.add(origin);
+
+			List<Vector3f> remove = seed.stream().filter(p -> p.distance(origin) <= DISTANCE_HW).toList();
+			seed.removeAll(remove);
+		}
+
+		logger.debug("origins: {}", origins);
+
+		List<Planet> planets = new ArrayList<>(planetCount());
+
+		int planetIndex = 0;
+		for (Vector3f origin : origins) {
+			planets.add(new Planet(
+					"hw-%s".formatted(planetIndex++),
+					new Coordinates(origin),
+					new Size(1000f),
+					new Resources(10f),
+					new Population(1000f),
+					new Industry(1000f)
+			));
+
+			Vector3f dw1Origin = random
+					.nextVector3f()
+					.multLocal(random.nextFloat(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
+					.addLocal(origin);
+
+			planets.add(new Planet(
+					"dw-%s-1".formatted(planetIndex),
+					new Coordinates(dw1Origin),
+					new Size(500f),
+					new Resources(10f),
+					new Population(500f),
+					new Industry(500f)
+			));
+
+			Vector3f dw2Origin = random
+					.nextVector3f()
+					.multLocal(random.nextFloat(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
+					.addLocal(origin);
+
+			planets.add(new Planet(
+					"dw-%s-2".formatted(planetIndex),
+					new Coordinates(dw2Origin),
+					new Size(500f),
+					new Resources(10f),
+					new Population(500f),
+					new Industry(500f)
+			));
+		}
+
+		WeightedDistribution<PlanetTemplate> distribution = new SimplePlanetDistribution();
+		for (int i = 0; i < planetCount() - planets.size(); i++) {
+			PlanetTemplate template = distribution.pick(random);
+			// convert existing planets to List<Vector3f>
+			List<Vector3f> coordinates = planets.stream().map(planet -> planet.coordinates().asVector3f()).toList();
+			// copy seedSource
+			List<Vector3f> seedSourceCopy = new ArrayList<>(seedSource);
+			// remove from seedSource based on existing planets and template.minDistance
+			seedSourceCopy.removeIf(v -> coordinates.stream().anyMatch(c -> c.distance(v) <= template.minDistance()));
+
+			// pick random point - use as planet origin
+			Vector3f picked = random.pick(seedSourceCopy);
+			Planet planet = template.createAtCoordinates(picked, random);
+			planets.add(planet);
+		}
+
+		return planets;
+	}
+
+}

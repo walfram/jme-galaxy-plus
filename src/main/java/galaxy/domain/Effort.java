@@ -1,4 +1,4 @@
-package galaxy.shared;
+package galaxy.domain;
 
 public record Effort(Industry industry, Population population) {
 	public float value() {

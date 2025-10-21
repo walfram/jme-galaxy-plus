@@ -1,6 +1,4 @@
-package galaxy.shared;
-
-import com.jme3.math.Vector3f;
+package galaxy.domain;
 
 public class Planet {
 
