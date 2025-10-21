@@ -55,7 +55,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 		List<Vector3f> origins = new ArrayList<>(raceCount);
 
 		List<Vector3f> seed = new ArrayList<>(seedSource);
-		for (int i = 0; i < planetCount(); i++) {
+		for (int i = 0; i < raceCount; i++) {
 			Vector3f origin = seed.stream().min((left, right) -> Float.compare(left.length(), right.length())).orElseThrow();
 			seed.remove(origin);
 			origins.add(origin);
