@@ -2,9 +2,7 @@ package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
 import galaxy.domain.*;
-import galaxy.generator.PlanetGenerator;
-import galaxy.generator.PlanetTemplate;
-import galaxy.generator.WeightedDistribution;
+import galaxy.generator.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
@@ -17,8 +15,6 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 	private static final Logger logger = getLogger(SimplePlanetGenerator.class);
 
-	private static final int SEED_COUNT = 16384;
-	private static final float SEED_SCALE = 256f;
 	private static final float DISTANCE_HW = 30f;
 	private static final float DISTANCE_DW_MIN = 5f;
 	private static final float DISTANCE_DW_MAX = 10f;
@@ -28,19 +24,23 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 	private final int raceCount;
 	private final int planetRatio;
 
-	public SimplePlanetGenerator(Generator random, int raceCount, int planetRatio) {
+	private final SeedSource seedSource;
+
+	public SimplePlanetGenerator(Generator random, int raceCount, int planetRatio, SeedSource seedSource) {
 		this.random = random;
 		this.raceCount = raceCount;
 		this.planetRatio = planetRatio;
+		this.seedSource = seedSource;
 	}
 
-	public SimplePlanetGenerator() {
-		this(
-				new Generator(),
-				10,
-				10
-		);
-	}
+//	public SimplePlanetGenerator() {
+//		this(
+//				new Generator(42),
+//				10,
+//				10,
+//				new SimpleSeedSource()
+//		);
+//	}
 
 	private int planetCount() {
 		return raceCount * planetRatio;
@@ -48,18 +48,13 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 	@Override
 	public List<Planet> planets() {
-		List<Vector3f> seedSource = new ArrayList<>(SEED_COUNT);
-		for (int i = 0; i < SEED_COUNT; i++) {
-			// TODO this will create sphere, must use 3d-ellipse
-			Vector3f point = random.nextVector3f().multLocal(SEED_SCALE);
-			seedSource.add(point);
-		}
-
 		List<Vector3f> origins = new ArrayList<>(raceCount);
 
-		List<Vector3f> seed = new ArrayList<>(seedSource);
+		List<Vector3f> seed = new ArrayList<>(seedSource.points());
 		for (int i = 0; i < raceCount; i++) {
-			Vector3f origin = seed.stream().min((left, right) -> Float.compare(left.length(), right.length())).orElseThrow();
+//			Vector3f origin = seed.stream().min((left, right) -> Float.compare(left.length(), right.length())).orElseThrow();
+			Vector3f origin = random.pick(seed);
+
 			seed.remove(origin);
 			origins.add(origin);
 
@@ -117,7 +112,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			// convert existing planets to List<Vector3f>
 			List<Vector3f> coordinates = planets.stream().map(planet -> planet.coordinates().asVector3f()).toList();
 			// copy seedSource
-			List<Vector3f> seedSourceCopy = new ArrayList<>(seedSource);
+			List<Vector3f> seedSourceCopy = new ArrayList<>(seedSource.points());
 			// remove from seedSource based on existing planets and template.minDistance
 			seedSourceCopy.removeIf(v -> coordinates.stream().anyMatch(c -> c.distance(v) <= template.minDistance()));
 
@@ -126,6 +121,8 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			Planet planet = template.createAtCoordinates(picked, random);
 			planets.add(planet);
 		}
+
+		logger.debug("planets: {}", planets.size());
 
 		return planets;
 	}
