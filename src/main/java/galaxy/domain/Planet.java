@@ -21,6 +21,10 @@ public class Planet {
 		this.industry = industry;
 	}
 
+	@Override
+	public String toString() {
+		return "Planet(%s, %s, %s, %s, %s, %s)".formatted(id, coordinates, size, resource, population, industry);
+	}
 
 	public String id() {
 		return id;

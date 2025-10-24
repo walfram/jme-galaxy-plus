@@ -42,7 +42,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 //		);
 //	}
 
-	private int planetCount() {
+	int planetCount() {
 		return raceCount * planetRatio;
 	}
 
@@ -52,7 +52,6 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 		List<Vector3f> seed = new ArrayList<>(seedSource.points());
 		for (int i = 0; i < raceCount; i++) {
-//			Vector3f origin = seed.stream().min((left, right) -> Float.compare(left.length(), right.length())).orElseThrow();
 			Vector3f origin = random.pick(seed);
 
 			seed.remove(origin);
@@ -62,7 +61,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			seed.removeAll(remove);
 		}
 
-		logger.debug("origins: {}", origins);
+		logger.debug("planet origins: {}", origins.size());
 
 		List<Planet> planets = new ArrayList<>(planetCount());
 
@@ -107,7 +106,8 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 		}
 
 		WeightedDistribution<PlanetTemplate> distribution = new SimplePlanetDistribution();
-		for (int i = 0; i < planetCount() - planets.size(); i++) {
+		int remaining = planetCount() - planets.size();
+		for (int i = 0; i < remaining; i++) {
 			PlanetTemplate template = distribution.pick(random);
 			// convert existing planets to List<Vector3f>
 			List<Vector3f> coordinates = planets.stream().map(planet -> planet.coordinates().asVector3f()).toList();

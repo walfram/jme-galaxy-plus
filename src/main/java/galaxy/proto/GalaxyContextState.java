@@ -51,11 +51,11 @@ public class GalaxyContextState extends BaseAppState {
 
 	@Override
 	protected void onEnable() {
-		((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
+		// ((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
 	}
 
 	@Override
 	protected void onDisable() {
-		((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
+		// ((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
 	}
 }

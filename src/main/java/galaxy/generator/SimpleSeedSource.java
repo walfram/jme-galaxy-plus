@@ -8,8 +8,8 @@ import java.util.List;
 
 public class SimpleSeedSource implements SeedSource {
 
-	private static final float K_COMPRESSION_STRENGTH = 0.9f; // Controls max compression (0.9 -> 90% reduction at edges)
-	private static final float N_COMPRESSION_POWER = 0.8f;    // Controls the curve shape (2.0 is a smooth parabola)
+	private static final float K_COMPRESSION_STRENGTH = 0.9f;
+	private static final float N_COMPRESSION_POWER = 0.8f;
 
 	private final int seedCount;
 	private final float seedScale;
