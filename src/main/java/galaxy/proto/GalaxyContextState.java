@@ -1,18 +1,16 @@
 package galaxy.proto;
 
 import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.simsilica.lemur.core.UnshadedMaterialAdapter;
+import galaxy.domain.Planet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
 import galaxy.generator.SimpleSeedSource;
 import galaxy.generator.simple.SimplePlanetGenerator;
-import galaxy.domain.Planet;
 import galaxy.shared.DebugPointMesh;
 import galaxy.shared.UnshadedMaterial;
 import jme3utilities.math.noise.Generator;
