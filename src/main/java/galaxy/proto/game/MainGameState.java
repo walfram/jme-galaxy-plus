@@ -1,4 +1,4 @@
-package galaxy.proto;
+package galaxy.proto.game;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -9,6 +9,7 @@ import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
+import galaxy.proto.menu.MainMenuState;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;

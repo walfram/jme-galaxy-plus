@@ -1,4 +1,4 @@
-package galaxy.proto;
+package galaxy.proto.menu;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -12,6 +12,7 @@ import com.simsilica.lemur.Label;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
+import galaxy.proto.game.MainGameState;
 
 public class MainMenuState extends BaseAppState {
 

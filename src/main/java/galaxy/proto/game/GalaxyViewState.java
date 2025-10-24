@@ -1,4 +1,4 @@
-package galaxy.proto;
+package galaxy.proto.game;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
