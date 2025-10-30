@@ -17,6 +17,27 @@ class PlanetTest {
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	@Test
+	void test_planet_effort() {
+		Planet hw = new ClassicHomeWorld("hw", new Coordinates(0f, 0f, 0f));
+		assertEquals(1000f, hw.effort().value());
+
+		Planet dw = new ClassicDaughterWorld("dw", new Coordinates(1, 1, 1));
+		assertEquals(500f, dw.effort().value());
+
+		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000f), new Resources(10f), new Population(1000f), new Industry(500f));
+		assertEquals(625f, foo.effort().value());
+	}
+
+	@Test
+	void test_create_empty_planet() {
+		Planet planet = new Planet("test", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f));
+
+		assertEquals(0, planet.effort().value());
+		assertEquals(0, planet.population().value());
+		assertEquals(0, planet.industry().value());
+	}
+
+	@Test
 	void test_loading_planets_from_json() {
 		ArrayList<Planet> planets = new ArrayList<>();
 

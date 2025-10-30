@@ -25,7 +25,7 @@ public class MainGameState extends BaseAppState {
 
 	private final List<BaseAppState> states = new ArrayList<>();
 
-	MainGameState() {
+	public MainGameState() {
 		setEnabled(false);
 	}
 
