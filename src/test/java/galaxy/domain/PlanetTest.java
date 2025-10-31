@@ -9,12 +9,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlanetTest {
 
 	private final ObjectMapper mapper = new ObjectMapper();
+
+	@Test
+	void should_throw_exception_if_industry_or_population_is_greater_then_size() {
+		assertThrows(
+				IllegalArgumentException.class,
+				() -> new Planet("foo", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f), new Population(1001f), new Industry(1000f))
+		);
+
+		assertThrows(
+				IllegalArgumentException.class,
+				() -> new Planet("foo", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f), new Population(1000f), new Industry(1001f))
+		);
+	}
 
 	@Test
 	void test_planet_effort() {
