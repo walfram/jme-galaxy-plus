@@ -18,10 +18,6 @@ public class Planet {
 		this.size = size;
 		this.resource = resource;
 
-		if (population.value() > size.value()) {
-			throw new IllegalArgumentException("Population can't be greater then size");
-		}
-
 		this.population = population;
 
 		if (industry.value() > size.value()) {
@@ -77,5 +73,9 @@ public class Planet {
 
 	public Effort effort() {
 		return new Effort(industry, population);
+	}
+
+	public Colonists colonists() {
+		return new Colonists(population, size);
 	}
 }

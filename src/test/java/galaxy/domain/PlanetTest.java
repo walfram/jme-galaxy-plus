@@ -16,15 +16,17 @@ class PlanetTest {
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	@Test
-	void should_throw_exception_if_industry_or_population_is_greater_then_size() {
-		assertThrows(
-				IllegalArgumentException.class,
-				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0))
-		);
-
+	void should_throw_exception_if_industry_is_larger_then_size() {
 		assertThrows(
 				IllegalArgumentException.class,
 				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f))
+		);
+	}
+
+	@Test
+	void should_not_throw_exception_if_population_is_larger_then_size() {
+		assertDoesNotThrow(
+				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0))
 		);
 	}
 
