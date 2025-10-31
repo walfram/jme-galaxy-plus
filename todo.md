@@ -4,3 +4,4 @@
 - ship design view
 - planet view
 - routing
+- technology and science research
