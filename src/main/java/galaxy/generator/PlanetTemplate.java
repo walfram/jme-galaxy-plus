@@ -7,24 +7,24 @@ import jme3utilities.math.noise.Generator;
 import java.util.UUID;
 
 public record PlanetTemplate(
-		float minSize, float maxSize,
-		float minResources, float maxResources,
-		float frequency,
-		float minDistance
+		double minSize, double maxSize,
+		double minResources, double maxResources,
+		double frequency,
+		double minDistance
 ) implements Weighted {
 	@Override
-	public float weight() {
+	public double weight() {
 		return frequency;
 	}
 
-	private String name(float size) {
-		if (size > 2000f) {
+	private String name(double size) {
+		if (size > 2000.0) {
 			return "SLG-%s";
-		} else if (size > 1000f) {
+		} else if (size > 1000.0) {
 			return "LG-%s";
-		} else if (size > 500f) {
+		} else if (size > 500.0) {
 			return "AVG-%s";
-		} else if (size > 10f) {
+		} else if (size > 10.0) {
 			return "SM-%s";
 		}
 
@@ -32,14 +32,14 @@ public record PlanetTemplate(
 	}
 
 	public Planet createAtCoordinates(Vector3f picked, Generator random) {
-		float size = random.nextFloat(minSize, maxSize);
+		double size = random.nextDouble(minSize, maxSize);
 		return new Planet(
 				name(size).formatted(UUID.randomUUID().toString().substring(0, 4)),
 				new Coordinates(picked),
 				new Size(size),
-				new Resources(random.nextFloat(minResources, maxResources)),
-				new Population(0f),
-				new Industry(0f)
+				new Resources(random.nextDouble(minResources, maxResources)),
+				new Population(0),
+				new Industry(0)
 		);
 	}
 }

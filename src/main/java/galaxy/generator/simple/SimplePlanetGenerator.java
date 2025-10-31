@@ -2,7 +2,10 @@ package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
 import galaxy.domain.*;
-import galaxy.generator.*;
+import galaxy.generator.PlanetGenerator;
+import galaxy.generator.PlanetTemplate;
+import galaxy.generator.SeedSource;
+import galaxy.generator.WeightedDistribution;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
@@ -15,9 +18,9 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 	private static final Logger logger = getLogger(SimplePlanetGenerator.class);
 
-	private static final float DISTANCE_HW = 30f;
-	private static final float DISTANCE_DW_MIN = 5f;
-	private static final float DISTANCE_DW_MAX = 10f;
+	private static final double DISTANCE_HW = 30.0;
+	private static final double DISTANCE_DW_MIN = 5.0;
+	private static final double DISTANCE_DW_MAX = 10.0;
 
 	private final Generator random;
 
@@ -70,38 +73,38 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			planets.add(new Planet(
 					"hw-%s".formatted(planetIndex++),
 					new Coordinates(origin),
-					new Size(1000f),
-					new Resources(10f),
-					new Population(1000f),
-					new Industry(1000f)
+					new Size(1000),
+					new Resources(10),
+					new Population(1000),
+					new Industry(1000)
 			));
 
 			Vector3f dw1Origin = random
 					.nextVector3f()
-					.multLocal(random.nextFloat(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
+					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
 			planets.add(new Planet(
 					"dw-%s-1".formatted(planetIndex),
 					new Coordinates(dw1Origin),
-					new Size(500f),
-					new Resources(10f),
-					new Population(500f),
-					new Industry(500f)
+					new Size(500),
+					new Resources(10),
+					new Population(500),
+					new Industry(500)
 			));
 
 			Vector3f dw2Origin = random
 					.nextVector3f()
-					.multLocal(random.nextFloat(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
+					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
 			planets.add(new Planet(
 					"dw-%s-2".formatted(planetIndex),
 					new Coordinates(dw2Origin),
-					new Size(500f),
-					new Resources(10f),
-					new Population(500f),
-					new Industry(500f)
+					new Size(500),
+					new Resources(10),
+					new Population(500),
+					new Industry(500)
 			));
 		}
 

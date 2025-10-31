@@ -2,15 +2,15 @@ package galaxy.domain;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public record Resources(float value) {
+public record Resources(double value) {
 
 	public Resources {
-		if (value < 0f) {
+		if (value < 0) {
 			throw new IllegalArgumentException("Resources value must be positive");
 		}
 	}
 
 	public Resources(JsonNode source) {
-		this(source.floatValue());
+		this(source.doubleValue());
 	}
 }

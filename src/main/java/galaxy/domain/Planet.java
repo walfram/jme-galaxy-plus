@@ -37,8 +37,8 @@ public class Planet {
 				coordinates,
 				size,
 				resource,
-				new Population(0f),
-				new Industry(0f)
+				new Population(0),
+				new Industry(0)
 		);
 	}
 

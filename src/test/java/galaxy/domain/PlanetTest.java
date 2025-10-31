@@ -19,30 +19,30 @@ class PlanetTest {
 	void should_throw_exception_if_industry_or_population_is_greater_then_size() {
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> new Planet("foo", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f), new Population(1001f), new Industry(1000f))
+				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0))
 		);
 
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> new Planet("foo", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f), new Population(1000f), new Industry(1001f))
+				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f))
 		);
 	}
 
 	@Test
 	void test_planet_effort() {
-		Planet hw = new ClassicHomeWorld("hw", new Coordinates(0f, 0f, 0f));
-		assertEquals(1000f, hw.effort().value());
+		Planet hw = new ClassicHomeWorld("hw", new Coordinates(0.0, 0.0, 0.0));
+		assertEquals(1000.0, hw.effort().value());
 
 		Planet dw = new ClassicDaughterWorld("dw", new Coordinates(1, 1, 1));
-		assertEquals(500f, dw.effort().value());
+		assertEquals(500.0, dw.effort().value());
 
-		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000f), new Resources(10f), new Population(1000f), new Industry(500f));
+		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(500.0));
 		assertEquals(625f, foo.effort().value());
 	}
 
 	@Test
 	void test_create_empty_planet() {
-		Planet planet = new Planet("test", new Coordinates(0f, 0f, 0f), new Size(1000f), new Resources(10f));
+		Planet planet = new Planet("test", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0));
 
 		assertEquals(0, planet.effort().value());
 		assertEquals(0, planet.population().value());
@@ -83,19 +83,19 @@ class PlanetTest {
 		Generator random = new Generator(42);
 
 		Planet planet = new Planet(
-				"id", new Coordinates(random.nextUnitVector3f()), new Size(1000f), new Resources(10f), new Population(1000f), new Industry(1000f)
+				"id", new Coordinates(random.nextUnitVector3f()), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1000.0)
 		);
 
 		assertNotNull(planet.id());
 		assertNotNull(planet.name());
-		assertEquals(1000f, planet.size().value());
+		assertEquals(1000.0, planet.size().value());
 
 		assertNotNull(planet.coordinates());
 
-		assertEquals(10f, planet.resource().value());
-		assertEquals(1000f, planet.population().value());
-		assertEquals(1000f, planet.industry().value());
-		assertEquals(1000f, planet.effort().value());
+		assertEquals(10.0, planet.resource().value());
+		assertEquals(1000.0, planet.population().value());
+		assertEquals(1000.0, planet.industry().value());
+		assertEquals(1000.0, planet.effort().value());
 	}
 
 }

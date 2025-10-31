@@ -8,18 +8,18 @@ import java.util.List;
 
 public class SimpleSeedSource implements SeedSource {
 
-	private static final float K_COMPRESSION_STRENGTH = 0.9f;
-	private static final float N_COMPRESSION_POWER = 0.8f;
+	private static final double K_COMPRESSION_STRENGTH = 0.9;
+	private static final double N_COMPRESSION_POWER = 0.8;
 
 	private final int seedCount;
-	private final float seedScale;
+	private final double seedScale;
 	private final long randomSeed;
 
 	public SimpleSeedSource() {
 		this(16384, 256f, 42L);
 	}
 
-	public SimpleSeedSource(int seedCount, float seedScale, long randomSeed) {
+	public SimpleSeedSource(int seedCount, double seedScale, long randomSeed) {
 		this.seedCount = seedCount;
 		this.seedScale = seedScale;
 		this.randomSeed = randomSeed;
@@ -42,18 +42,18 @@ public class SimpleSeedSource implements SeedSource {
 
 			// 3. Determine the compression factor alpha(r).
 			//    alpha = 1 - K * r^N
-			float r_powered = (float) Math.pow(r, N_COMPRESSION_POWER);
-			float y_compression_factor = 1.0f - K_COMPRESSION_STRENGTH * r_powered;
+			double r_powered = Math.pow(r, N_COMPRESSION_POWER);
+			double y_compression_factor = 1.0 - K_COMPRESSION_STRENGTH * r_powered;
 
 			// Ensure the factor is not negative (though it shouldn't be with K <= 1)
-			y_compression_factor = Math.max(0.0f, y_compression_factor);
+			y_compression_factor = Math.max(0.0, y_compression_factor);
 
 			// 4. Apply y-axis compression
 			// The y-component is scaled down by a factor based on its distance from the center.
-			point.y *= y_compression_factor;
+			point.y *= (float) y_compression_factor;
 
 			// 5. Scale the vector to the final desired size
-			point.multLocal(seedScale);
+			point.multLocal((float) seedScale);
 
 			seedSource.add(point);
 		}

@@ -2,15 +2,15 @@ package galaxy.domain;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public record Size(float value) {
+public record Size(double value) {
 
 	public Size {
-		if (value < 0f) {
+		if (value < 0) {
 			throw new IllegalArgumentException("Size value must be positive");
 		}
 	}
 
 	public Size(JsonNode source) {
-		this(source.floatValue());
+		this(source.doubleValue());
 	}
 }

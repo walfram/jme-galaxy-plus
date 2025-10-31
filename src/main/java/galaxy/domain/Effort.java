@@ -1,7 +1,9 @@
 package galaxy.domain;
 
 public record Effort(Industry industry, Population population) {
-	public float value() {
-		return industry.value() * 0.75f + population.value() * 0.25f;
+
+	public double value() {
+		return industry.value() * 0.75 + population.value() * 0.25;
 	}
+
 }

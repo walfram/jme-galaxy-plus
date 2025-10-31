@@ -4,22 +4,22 @@ import galaxy.domain.Effort;
 
 public abstract class Technology {
 
-	private float value;
+	private double value;
 
 	protected Technology() {
 		this(1f);
 	}
 
-	protected Technology(float value) {
+	protected Technology(double value) {
 		this.value = value;
 	}
 
-	public float value() {
+	public double value() {
 		return value;
 	}
 
 	public void upgrade(Effort effort) {
-		float delta = effort.value() / 5000f;
+		double delta = effort.value() / 5000.0d;
 		value += delta;
 	}
 }
