@@ -1,14 +1,25 @@
 package galaxy.domain.production;
 
-import galaxy.domain.ClassicHomeWorld;
-import galaxy.domain.Colonists;
-import galaxy.domain.Coordinates;
-import galaxy.domain.Planet;
+import galaxy.domain.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductionTest {
+
+	@Test
+	void test_materials_production() {
+		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+
+		Materials materials = planet.materials();
+
+		assertEquals(0.0, materials.value());
+
+		Production production = new MaterialsProduction(planet);
+		production.execute();
+
+		assertEquals(10000.0, materials.value());
+	}
 
 	@Test
 	void test_population_production() {

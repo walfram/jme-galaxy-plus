@@ -39,7 +39,8 @@ public record PlanetTemplate(
 				new Size(size),
 				new Resources(random.nextDouble(minResources, maxResources)),
 				new Population(0),
-				new Industry(0)
+				new Industry(0),
+				new Materials(0)
 		);
 	}
 }

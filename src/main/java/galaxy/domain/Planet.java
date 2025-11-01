@@ -8,15 +8,17 @@ public class Planet {
 
 	private final Size size;
 
-	private final Resources resource;
+	private final Resources resources;
 	private final Population population;
 	private final Industry industry;
 
-	public Planet(String id, Coordinates coordinates, Size size, Resources resource, Population population, Industry industry) {
+	private final Materials materials;
+
+	public Planet(String id, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
 		this.id = id;
 		this.coordinates = coordinates;
 		this.size = size;
-		this.resource = resource;
+		this.resources = resources;
 
 		this.population = population;
 
@@ -25,22 +27,24 @@ public class Planet {
 		}
 
 		this.industry = industry;
+		this.materials = materials;
 	}
 
-	public Planet(String id, Coordinates coordinates, Size size, Resources resource) {
+	public Planet(String id, Coordinates coordinates, Size size, Resources resources) {
 		this(
 				id,
 				coordinates,
 				size,
-				resource,
-				new Population(0),
-				new Industry(0)
+				resources,
+				new Population(0.0),
+				new Industry(0.0),
+				new Materials(0.0)
 		);
 	}
 
 	@Override
 	public String toString() {
-		return "Planet(%s, %s, %s, %s, %s, %s)".formatted(id, coordinates, size, resource, population, industry);
+		return "Planet(%s, %s, %s, %s, %s, %s)".formatted(id, coordinates, size, resources, population, industry);
 	}
 
 	public String id() {
@@ -59,8 +63,8 @@ public class Planet {
 		return coordinates;
 	}
 
-	public Resources resource() {
-		return resource;
+	public Resources resources() {
+		return resources;
 	}
 
 	public Population population() {
@@ -77,5 +81,9 @@ public class Planet {
 
 	public Colonists colonists() {
 		return new Colonists(population, size);
+	}
+
+	public Materials materials() {
+		return materials;
 	}
 }

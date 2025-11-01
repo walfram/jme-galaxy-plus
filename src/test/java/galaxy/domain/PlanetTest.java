@@ -19,14 +19,14 @@ class PlanetTest {
 	void should_throw_exception_if_industry_is_larger_then_size() {
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f))
+				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f), new Materials(0))
 		);
 	}
 
 	@Test
 	void should_not_throw_exception_if_population_is_larger_then_size() {
 		assertDoesNotThrow(
-				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0))
+				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0), new Materials(0))
 		);
 	}
 
@@ -38,7 +38,7 @@ class PlanetTest {
 		Planet dw = new ClassicDaughterWorld("dw", new Coordinates(1, 1, 1));
 		assertEquals(500.0, dw.effort().value());
 
-		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(500.0));
+		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(500.0), new Materials(0));
 		assertEquals(625f, foo.effort().value());
 	}
 
@@ -67,7 +67,8 @@ class PlanetTest {
 						new Size(planetNode.get("size")),
 						new Resources(planetNode.get("resources")),
 						new Population(planetNode.path("population")),
-						new Industry(planetNode.path("industry"))
+						new Industry(planetNode.path("industry")),
+						new Materials(planetNode.path("materials"))
 				);
 
 				planets.add(planet);
@@ -85,7 +86,7 @@ class PlanetTest {
 		Generator random = new Generator(42);
 
 		Planet planet = new Planet(
-				"id", new Coordinates(random.nextUnitVector3f()), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1000.0)
+				"id", new Coordinates(random.nextUnitVector3f()), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1000.0), new Materials(0)
 		);
 
 		assertNotNull(planet.id());
@@ -94,7 +95,7 @@ class PlanetTest {
 
 		assertNotNull(planet.coordinates());
 
-		assertEquals(10.0, planet.resource().value());
+		assertEquals(10.0, planet.resources().value());
 		assertEquals(1000.0, planet.population().value());
 		assertEquals(1000.0, planet.industry().value());
 		assertEquals(1000.0, planet.effort().value());
