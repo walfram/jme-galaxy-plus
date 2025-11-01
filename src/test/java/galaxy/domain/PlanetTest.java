@@ -16,9 +16,8 @@ class PlanetTest {
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	@Test
-	void should_throw_exception_if_industry_is_larger_then_size() {
-		assertThrows(
-				IllegalArgumentException.class,
+	void should_not_throw_exception_if_industry_is_larger_then_size() {
+		assertDoesNotThrow(
 				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f), new Materials(0))
 		);
 	}

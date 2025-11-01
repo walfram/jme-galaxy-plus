@@ -8,6 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductionTest {
 
 	@Test
+	void test_capital_production() {
+		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+
+		Industry before = planet.industry();
+		assertEquals(1000.0, before.value());
+
+		Production production = new CapitalProduction(planet);
+		production.execute();
+
+		Industry after = planet.industry();
+		assertEquals(1196.078431372549, after.value());
+	}
+
+	@Test
 	void test_materials_production() {
 		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
 

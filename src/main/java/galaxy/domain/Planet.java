@@ -19,13 +19,7 @@ public class Planet {
 		this.coordinates = coordinates;
 		this.size = size;
 		this.resources = resources;
-
 		this.population = population;
-
-		if (industry.value() > size.value()) {
-			throw new IllegalArgumentException("Industry can't be greater then size");
-		}
-
 		this.industry = industry;
 		this.materials = materials;
 	}
