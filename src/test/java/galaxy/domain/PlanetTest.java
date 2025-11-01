@@ -48,6 +48,7 @@ class PlanetTest {
 		assertEquals(0, planet.effort().value());
 		assertEquals(0, planet.population().value());
 		assertEquals(0, planet.industry().value());
+		assertEquals(0.0, planet.materials().value());
 	}
 
 	@Test

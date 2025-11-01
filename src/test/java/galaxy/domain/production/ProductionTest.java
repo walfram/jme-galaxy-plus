@@ -1,11 +1,26 @@
 package galaxy.domain.production;
 
 import galaxy.domain.*;
+import galaxy.domain.technology.DriveTechnology;
+import galaxy.domain.technology.Technology;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductionTest {
+
+	@Test
+	void test_technology_production() {
+		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+
+		Technology technology = new DriveTechnology();
+		assertEquals(1.0, technology.value());
+
+		Production production = new TechnologyProduction(planet, technology);
+		production.execute();
+
+		assertEquals(1.2, technology.value());
+	}
 
 	@Test
 	void test_capital_production() {
