@@ -47,6 +47,18 @@ class ShipTemplateTest {
 	}
 
 	@Test
+	void test_turrel_9x11_template() {
+		ShipTemplate turrel = assertDoesNotThrow(() -> new ShipTemplate(
+				"turret",
+				new EnginesTemplate(99.0),
+				new WeaponsTemplate(9, 11.0),
+				new ShieldsTemplate(43.0), new CargoTemplate(1.0)
+		));
+
+		assertEquals(198.0, turrel.weight());
+	}
+
+	@Test
 	void test_gunship_template() {
 		ShipTemplate gunship = assertDoesNotThrow(() -> new ShipTemplate(
 				"gunship",

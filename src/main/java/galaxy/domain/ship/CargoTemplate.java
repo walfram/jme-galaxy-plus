@@ -12,4 +12,7 @@ public record CargoTemplate(double value) {
 		}
 	}
 
+	public double weight() {
+		return value;
+	}
 }

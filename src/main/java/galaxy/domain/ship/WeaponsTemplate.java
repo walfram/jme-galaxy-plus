@@ -20,4 +20,13 @@ public record WeaponsTemplate(int guns, double caliber) {
 		}
 	}
 
+	public double weight() {
+		if (guns == 1) {
+			return caliber;
+		} else if (guns > 1) {
+			return caliber + ((guns - 1) * 0.5 * caliber);
+		} else {
+			return 0.0;
+		}
+	}
 }

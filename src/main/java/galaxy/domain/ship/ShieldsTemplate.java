@@ -12,4 +12,7 @@ public record ShieldsTemplate(double value) {
 		}
 	}
 
+	public double weight() {
+		return value;
+	}
 }
