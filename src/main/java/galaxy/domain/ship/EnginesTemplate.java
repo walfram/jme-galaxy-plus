@@ -1,6 +1,15 @@
 package galaxy.domain.ship;
 
-public class EnginesTemplate {
-	public EnginesTemplate(double value) {
+public record EnginesTemplate(double value) {
+
+	public EnginesTemplate {
+		if (value < 0) {
+			throw new IllegalArgumentException("Engines value must be positive");
+		}
+
+		if (value > 0.0 && value < 1.0) {
+			throw new IllegalArgumentException("Engines value must be between 0.0 and 1.0");
+		}
 	}
+
 }

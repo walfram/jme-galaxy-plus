@@ -14,6 +14,9 @@ class ShipTemplateTest {
 		assertThrows(IllegalArgumentException.class, () -> new WeaponsTemplate(0, 1.0));
 		assertThrows(IllegalArgumentException.class, () -> new WeaponsTemplate(1, 0.0));
 		assertThrows(IllegalArgumentException.class, () -> new WeaponsTemplate(1, 0.5));
+
+		assertThrows(IllegalArgumentException.class, () -> new WeaponsTemplate(-1, 1.0));
+		assertThrows(IllegalArgumentException.class, () -> new WeaponsTemplate(1, -1.0));
 	}
 
 	@Test
