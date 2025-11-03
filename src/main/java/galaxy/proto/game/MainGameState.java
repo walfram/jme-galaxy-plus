@@ -5,10 +5,14 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
-import com.simsilica.lemur.*;
+import com.simsilica.lemur.Axis;
+import com.simsilica.lemur.Button;
+import com.simsilica.lemur.Container;
+import com.simsilica.lemur.Label;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
+import galaxy.proto.menu.GameConfig;
 import galaxy.proto.menu.MainMenuState;
 import org.slf4j.Logger;
 
@@ -24,6 +28,8 @@ public class MainGameState extends BaseAppState {
 	private final Node gameMenuNode = new Node("game-menu-node");
 
 	private final List<BaseAppState> states = new ArrayList<>();
+
+	private GameConfig gameConfig;
 
 	public MainGameState() {
 		setEnabled(false);
@@ -73,7 +79,6 @@ public class MainGameState extends BaseAppState {
 
 	@Override
 	protected void cleanup(Application app) {
-
 	}
 
 	@Override
@@ -82,7 +87,7 @@ public class MainGameState extends BaseAppState {
 
 		((SimpleApplication) getApplication()).getGuiNode().attachChild(gameMenuNode);
 
-		states.add(new GalaxyContextState());
+		states.add(new GalaxyContextState(gameConfig));
 		states.add(new GalaxyCameraState());
 		states.add(new GalaxyViewState());
 
@@ -96,5 +101,10 @@ public class MainGameState extends BaseAppState {
 		((SimpleApplication) getApplication()).getGuiNode().detachChild(gameMenuNode);
 
 		states.forEach(state -> getStateManager().detach(state));
+		states.clear();
+	}
+
+	public void configureGame(GameConfig gameConfig) {
+		this.gameConfig = gameConfig;
 	}
 }

@@ -6,6 +6,7 @@ import galaxy.domain.planet.Coordinates;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.ship.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Fixtures {
@@ -33,5 +34,15 @@ public final class Fixtures {
 				new WeaponsTemplate(0, 0.0),
 				new ShieldsTemplate(0.0), new CargoTemplate(0.0)
 		);
+	}
+
+	public static List<Race> races() {
+		List<Race> races = new ArrayList<>();
+
+		for (int i = 0; i < 10; i++) {
+			races.add(new Race("%s".formatted(i), "Race %s".formatted(i), new ArrayList<>()));
+		}
+
+		return races;
 	}
 }

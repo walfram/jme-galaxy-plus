@@ -1,5 +1,7 @@
 package galaxy.generator.simple;
 
+import galaxy.domain.Fixtures;
+import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.generator.SimpleSeedSource;
 import jme3utilities.math.noise.Generator;
@@ -13,7 +15,9 @@ class SimplePlanetGeneratorTest {
 
 	@Test
 	void test_planet_count() {
-		SimplePlanetGenerator simple = new SimplePlanetGenerator(new Generator(42), 10, 10, new SimpleSeedSource(1024, 128f, 42));
+		List<Race> races = Fixtures.races();
+
+		SimplePlanetGenerator simple = new SimplePlanetGenerator(new Generator(42), races, 10, new SimpleSeedSource(1024, 128f, 42));
 
 		int planetCount = simple.planetCount();
 		assertEquals(100, planetCount);

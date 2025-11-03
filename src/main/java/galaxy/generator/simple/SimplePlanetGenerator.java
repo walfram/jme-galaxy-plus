@@ -1,7 +1,11 @@
 package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
-import galaxy.domain.planet.*;
+import galaxy.domain.Race;
+import galaxy.domain.planet.ClassicDaughterWorld;
+import galaxy.domain.planet.ClassicHomeWorld;
+import galaxy.domain.planet.Coordinates;
+import galaxy.domain.planet.Planet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.PlanetTemplate;
 import galaxy.generator.SeedSource;
@@ -10,6 +14,7 @@ import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -24,37 +29,28 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 	private final Generator random;
 
-	private final int raceCount;
+	private final List<Race> races;
 	private final int planetRatio;
 
 	private final SeedSource seedSource;
 
-	public SimplePlanetGenerator(Generator random, int raceCount, int planetRatio, SeedSource seedSource) {
+	public SimplePlanetGenerator(Generator random, List<Race> races, int planetRatio, SeedSource seedSource) {
 		this.random = random;
-		this.raceCount = raceCount;
+		this.races = races;
 		this.planetRatio = planetRatio;
 		this.seedSource = seedSource;
 	}
 
-//	public SimplePlanetGenerator() {
-//		this(
-//				new Generator(42),
-//				10,
-//				10,
-//				new SimpleSeedSource()
-//		);
-//	}
-
 	int planetCount() {
-		return raceCount * planetRatio;
+		return races.size() * planetRatio;
 	}
 
 	@Override
 	public List<Planet> planets() {
-		List<Vector3f> origins = new ArrayList<>(raceCount);
+		List<Vector3f> origins = new ArrayList<>(races.size());
 
 		List<Vector3f> seed = new ArrayList<>(seedSource.points());
-		for (int i = 0; i < raceCount; i++) {
+		for (int i = 0; i < races.size(); i++) {
 			Vector3f origin = random.pick(seed);
 
 			seed.remove(origin);
@@ -69,46 +65,32 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 		List<Planet> planets = new ArrayList<>(planetCount());
 
 		int planetIndex = 0;
+		Iterator<Race> raceSource = races.iterator();
+
 		for (Vector3f origin : origins) {
-			planets.add(new Planet(
-					"hw-%s".formatted(planetIndex++),
-					new Coordinates(origin),
-					new Size(1000),
-					new Resources(10),
-					new Population(1000),
-					new Industry(1000),
-					new Materials(0)
-			));
+			Race race = raceSource.next();
+
+			ClassicHomeWorld hw = new ClassicHomeWorld("hw-%s".formatted(planetIndex++), new Coordinates(origin));
+			planets.add(hw);
+			race.claim(hw);
 
 			Vector3f dw1Origin = random
 					.nextVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			planets.add(new Planet(
-					"dw-%s-1".formatted(planetIndex),
-					new Coordinates(dw1Origin),
-					new Size(500),
-					new Resources(10),
-					new Population(500),
-					new Industry(500),
-					new Materials(0)
-			));
+			ClassicDaughterWorld dw1 = new ClassicDaughterWorld("dw-%s-1".formatted(planetIndex), new Coordinates(dw1Origin));
+			planets.add(dw1);
+			race.claim(dw1);
 
 			Vector3f dw2Origin = random
 					.nextVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			planets.add(new Planet(
-					"dw-%s-2".formatted(planetIndex),
-					new Coordinates(dw2Origin),
-					new Size(500),
-					new Resources(10),
-					new Population(500),
-					new Industry(500),
-					new Materials(0)
-			));
+			ClassicDaughterWorld dw2 = new ClassicDaughterWorld("dw-%s-2".formatted(planetIndex), new Coordinates(dw2Origin));
+			planets.add(dw2);
+			race.claim(dw2);
 		}
 
 		WeightedDistribution<PlanetTemplate> distribution = new SimplePlanetDistribution();

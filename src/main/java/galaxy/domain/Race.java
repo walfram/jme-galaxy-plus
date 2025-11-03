@@ -1,5 +1,6 @@
 package galaxy.domain;
 
+import galaxy.domain.planet.ClassicHomeWorld;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.ship.ShipTemplate;
 import galaxy.domain.technology.*;
@@ -66,5 +67,10 @@ public class Race {
 		}
 
 		ships.addAll(group);
+	}
+
+	public void claim(Planet planet) {
+		this.planets.add(planet);
+		planet.updateOwner(this);
 	}
 }

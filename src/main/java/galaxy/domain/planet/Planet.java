@@ -1,5 +1,7 @@
 package galaxy.domain.planet;
 
+import galaxy.domain.Race;
+
 public class Planet {
 
 	private final String id;
@@ -13,6 +15,8 @@ public class Planet {
 	private final Industry industry;
 
 	private final Materials materials;
+
+	private Race owner;
 
 	// TODO perhaps better handling of this?
 	private double massFromPrevTurn;
@@ -90,5 +94,9 @@ public class Planet {
 
 	public void setMassFromPrevTurn(double value) {
 		this.massFromPrevTurn = value;
+	}
+
+	public void updateOwner(Race owner) {
+		this.owner = owner;
 	}
 }
