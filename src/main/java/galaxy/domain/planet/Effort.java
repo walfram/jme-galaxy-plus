@@ -1,4 +1,4 @@
-package galaxy.domain;
+package galaxy.domain.planet;
 
 public record Effort(Industry industry, Population population) {
 

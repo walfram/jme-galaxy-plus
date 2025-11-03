@@ -1,4 +1,4 @@
-package galaxy.domain;
+package galaxy.domain.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jme3.math.Vector3f;

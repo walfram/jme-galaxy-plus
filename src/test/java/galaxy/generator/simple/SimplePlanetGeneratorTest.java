@@ -1,6 +1,6 @@
 package galaxy.generator.simple;
 
-import galaxy.domain.Planet;
+import galaxy.domain.planet.Planet;
 import galaxy.generator.SimpleSeedSource;
 import jme3utilities.math.noise.Generator;
 import org.junit.jupiter.api.Test;

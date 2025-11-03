@@ -1,6 +1,6 @@
 package galaxy.domain.production;
 
-import galaxy.domain.*;
+import galaxy.domain.planet.*;
 import galaxy.domain.technology.DriveTechnology;
 import galaxy.domain.technology.Technology;
 import org.junit.jupiter.api.Test;

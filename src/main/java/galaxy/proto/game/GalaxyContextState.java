@@ -6,7 +6,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import galaxy.domain.Planet;
+import galaxy.domain.planet.Planet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
 import galaxy.generator.SimpleSeedSource;

@@ -1,6 +1,6 @@
 package galaxy.domain.technology;
 
-import galaxy.domain.Effort;
+import galaxy.domain.planet.Effort;
 
 public abstract class Technology {
 

@@ -7,7 +7,7 @@ import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
-import galaxy.domain.Planet;
+import galaxy.domain.planet.Planet;
 import galaxy.shared.ShowNormalsMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;

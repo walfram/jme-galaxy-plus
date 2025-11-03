@@ -1,4 +1,4 @@
-package galaxy.domain;
+package galaxy.domain.planet;
 
 import org.junit.jupiter.api.Test;
 

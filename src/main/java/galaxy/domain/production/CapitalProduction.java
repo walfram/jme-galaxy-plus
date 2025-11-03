@@ -1,6 +1,6 @@
 package galaxy.domain.production;
 
-import galaxy.domain.Planet;
+import galaxy.domain.planet.Planet;
 
 public class CapitalProduction extends Production {
 

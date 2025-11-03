@@ -1,7 +1,7 @@
 package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
-import galaxy.domain.*;
+import galaxy.domain.planet.*;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.PlanetTemplate;
 import galaxy.generator.SeedSource;

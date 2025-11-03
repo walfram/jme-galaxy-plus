@@ -1,4 +1,4 @@
-package galaxy.domain;
+package galaxy.domain.planet;
 
 public class ClassicHomeWorld extends Planet {
 	public ClassicHomeWorld(String id, Coordinates coordinates) {
