@@ -3,10 +3,12 @@ package galaxy.domain;
 import galaxy.domain.planet.ClassicDaughterWorld;
 import galaxy.domain.planet.ClassicHomeWorld;
 import galaxy.domain.planet.Coordinates;
+import galaxy.domain.planet.Planet;
+import galaxy.domain.ship.*;
 
 import java.util.List;
 
-final class Fixtures {
+public final class Fixtures {
 
 	public static Race race() {
 		return new Race(
@@ -20,4 +22,16 @@ final class Fixtures {
 		);
 	}
 
+	public static Planet homeworld() {
+		return new ClassicHomeWorld("hw", new Coordinates(0, 0, 0));
+	}
+
+	public static ShipTemplate droneTemplate() {
+		return new ShipTemplate(
+				"drone",
+				new EnginesTemplate(1.0),
+				new WeaponsTemplate(0, 0.0),
+				new ShieldsTemplate(0.0), new CargoTemplate(0.0)
+		);
+	}
 }

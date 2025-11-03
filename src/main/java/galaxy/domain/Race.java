@@ -57,4 +57,14 @@ public class Race {
 		return id;
 	}
 
+	// TODO temporary method, does not use Planet at the moment
+	public void addShipGroup(int count, ShipTemplate shipTemplate, Planet planet) {
+		List<Ship> group = new ArrayList<>(count);
+
+		for (int i = 0; i < count; i++) {
+			group.add(shipTemplate.build(technologies()));
+		}
+
+		ships.addAll(group);
+	}
 }

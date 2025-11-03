@@ -14,6 +14,9 @@ public class Planet {
 
 	private final Materials materials;
 
+	// TODO perhaps better handling of this?
+	private double massFromPrevTurn;
+
 	public Planet(String id, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
 		this.id = id;
 		this.coordinates = coordinates;
@@ -79,5 +82,13 @@ public class Planet {
 
 	public Materials materials() {
 		return materials;
+	}
+
+	public double massFromPrevTurn() {
+		return massFromPrevTurn;
+	}
+
+	public void setMassFromPrevTurn(double value) {
+		this.massFromPrevTurn = value;
 	}
 }
