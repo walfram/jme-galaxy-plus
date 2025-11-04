@@ -1,7 +1,7 @@
 package galaxy.domain.production;
 
 import galaxy.domain.planet.*;
-import galaxy.domain.technology.DriveTechnology;
+import galaxy.domain.technology.EnginesTechnology;
 import galaxy.domain.technology.Technology;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class ProductionTest {
 	void test_technology_production() {
 		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
 
-		Technology technology = new DriveTechnology();
+		Technology technology = new EnginesTechnology();
 		assertEquals(1.0, technology.value());
 
 		Production production = new TechnologyProduction(planet, technology);

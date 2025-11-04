@@ -75,7 +75,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			race.claim(hw);
 
 			Vector3f dw1Origin = random
-					.nextVector3f()
+					.nextUnitVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
@@ -84,7 +84,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			race.claim(dw1);
 
 			Vector3f dw2Origin = random
-					.nextVector3f()
+					.nextUnitVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 

@@ -1,20 +1,20 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.ClassicHomeWorld;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.ship.ShipTemplate;
 import galaxy.domain.technology.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Race {
 
 	private final String id;
 	private final String name;
 
-	private final List<Technology> technologies = List.of(
-			new DriveTechnology(), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
+	private final Technologies technologies = new Technologies(
+			new EnginesTechnology(), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
 	);
 
 	private final List<Planet> planets = new ArrayList<>(128);
@@ -30,8 +30,8 @@ public class Race {
 		this.planets.addAll(initialPlanets);
 	}
 
-	public List<Technology> technologies() {
-		return List.copyOf(technologies);
+	public Technologies technologies() {
+		return technologies;
 	}
 
 	public List<Planet> planets() {
@@ -72,5 +72,9 @@ public class Race {
 	public void claim(Planet planet) {
 		this.planets.add(planet);
 		planet.updateOwner(this);
+	}
+
+	public Optional<Planet> planet(String planetId) {
+		return planets.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
 }

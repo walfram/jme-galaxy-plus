@@ -1,6 +1,8 @@
 package galaxy.domain.planet;
 
 import galaxy.domain.Race;
+import galaxy.domain.production.Production;
+import galaxy.domain.production.TechnologyProduction;
 
 public class Planet {
 
@@ -20,6 +22,8 @@ public class Planet {
 
 	// TODO perhaps better handling of this?
 	private double massFromPrevTurn;
+
+	private Production production;
 
 	public Planet(String id, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
 		this.id = id;
@@ -98,5 +102,9 @@ public class Planet {
 
 	public void updateOwner(Race owner) {
 		this.owner = owner;
+	}
+
+	public void startProduction(Production production) {
+		this.production = production;
 	}
 }

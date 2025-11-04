@@ -1,10 +1,8 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.ClassicDaughterWorld;
-import galaxy.domain.planet.ClassicHomeWorld;
-import galaxy.domain.planet.Coordinates;
-import galaxy.domain.planet.Planet;
+import galaxy.domain.planet.*;
 import galaxy.domain.ship.*;
+import galaxy.domain.technology.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +42,29 @@ public final class Fixtures {
 		}
 
 		return races;
+	}
+
+	public static List<Planet> fixedPlanets(int count) {
+		List<Planet> planets = new ArrayList<>(count);
+
+		for (int i = 0; i < count; i++) {
+			planets.add(
+					new Planet(
+							"fixed-%s".formatted(i),
+							new Coordinates(i, i, 0),
+							new Size(1600 + i),
+							new Resources(0.5 + i),
+							new Population(0), new Industry(0), new Materials(0)
+					)
+			);
+		}
+
+		return planets;
+	}
+
+	public static Technologies baseTechnologies() {
+		return new Technologies(
+			new EnginesTechnology(), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
+		);
 	}
 }

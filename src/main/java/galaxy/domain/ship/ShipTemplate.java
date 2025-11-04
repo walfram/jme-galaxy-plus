@@ -1,9 +1,7 @@
 package galaxy.domain.ship;
 
 import galaxy.domain.Ship;
-import galaxy.domain.technology.Technology;
-
-import java.util.List;
+import galaxy.domain.technology.Technologies;
 
 public record ShipTemplate(
 		String name,
@@ -17,12 +15,12 @@ public record ShipTemplate(
 		return enginesTemplate.weight() + weaponsTemplate.weight() + shieldsTemplate.weight() + cargoTemplate.weight();
 	}
 
-	public Ship build(List<Technology> technologies) {
+	public Ship build(Technologies technologies) {
 		return new Ship(
-				new Engines(enginesTemplate),
-				new Weapons(weaponsTemplate),
-				new Shields(shieldsTemplate),
-				new Cargo(cargoTemplate)
+				new Engines(enginesTemplate, technologies.engines()),
+				new Weapons(weaponsTemplate, technologies.weapons()),
+				new Shields(shieldsTemplate, technologies.shields()),
+				new Cargo(cargoTemplate, technologies.cargo())
 		);
 	}
 }

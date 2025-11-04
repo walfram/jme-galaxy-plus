@@ -12,6 +12,10 @@ public record EnginesTemplate(double value) {
 		}
 	}
 
+	public EnginesTemplate(EnginesTemplate source) {
+		this(source.value);
+	}
+
 	public double weight() {
 		return value;
 	}
