@@ -2,6 +2,8 @@ package galaxy.domain.technology;
 
 import galaxy.domain.planet.Effort;
 
+import java.util.Objects;
+
 public abstract class Technology {
 
 	// TODO GameSettings or similar
@@ -24,4 +26,18 @@ public abstract class Technology {
 		double delta = effort.value() / TECHNOLOGY_COST;
 		value += delta;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		Technology other = (Technology) obj;
+		return Double.compare(other.value, value) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getClass(), value);
+	}
+
 }
