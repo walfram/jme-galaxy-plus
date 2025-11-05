@@ -1,17 +1,13 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.ClassicDaughterWorld;
-import galaxy.domain.planet.ClassicHomeWorld;
-import galaxy.domain.planet.Coordinates;
 import galaxy.domain.technology.CargoTechnology;
 import galaxy.domain.technology.EnginesTechnology;
 import galaxy.domain.technology.ShieldsTechnology;
 import galaxy.domain.technology.WeaponsTechnology;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RaceTest {
 
