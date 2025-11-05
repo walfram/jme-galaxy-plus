@@ -10,4 +10,8 @@ public class ShieldsTechnology extends Technology {
 		super(value);
 	}
 
+	public ShieldsTechnology(ShieldsTechnology source) {
+		this(source.value());
+	}
+
 }

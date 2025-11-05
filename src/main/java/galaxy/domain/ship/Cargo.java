@@ -10,7 +10,7 @@ public class Cargo {
 
 	public Cargo(CargoTemplate template, CargoTechnology technology) {
 		this.template = template;
-		this.technology = technology;
+		this.technology = new CargoTechnology(technology);
 	}
 
 	public double techLevel() {

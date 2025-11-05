@@ -4,6 +4,10 @@ import galaxy.domain.technology.WeaponsTechnology;
 
 public record Weapons(WeaponsTemplate template, WeaponsTechnology technology) {
 
+	public Weapons {
+		technology = new WeaponsTechnology(technology);
+	}
+
 	public double weight() {
 		return template.weight();
 	}

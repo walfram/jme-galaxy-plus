@@ -10,4 +10,8 @@ public class CargoTechnology extends Technology {
 		super(value);
 	}
 
+	public CargoTechnology(CargoTechnology source) {
+		this(source.value());
+	}
+
 }

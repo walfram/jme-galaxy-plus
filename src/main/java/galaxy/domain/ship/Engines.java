@@ -4,6 +4,10 @@ import galaxy.domain.technology.EnginesTechnology;
 
 public record Engines(EnginesTemplate template, EnginesTechnology technology) {
 
+	public Engines {
+		technology = new EnginesTechnology(technology);
+	}
+
 	public double value() {
 		return template.value();
 	}

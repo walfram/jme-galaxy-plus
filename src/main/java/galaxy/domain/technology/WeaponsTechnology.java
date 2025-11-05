@@ -10,4 +10,8 @@ public class WeaponsTechnology extends Technology {
 		super(value);
 	}
 
+	public WeaponsTechnology(WeaponsTechnology source) {
+		this(source.value());
+	}
+
 }

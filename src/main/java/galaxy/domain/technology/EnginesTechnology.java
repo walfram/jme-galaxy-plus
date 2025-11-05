@@ -8,4 +8,9 @@ public class EnginesTechnology extends Technology {
 	public EnginesTechnology() {
 		super();
 	}
+
+	public EnginesTechnology(EnginesTechnology source) {
+		this(source.value());
+	}
+
 }
