@@ -2,21 +2,29 @@ package galaxy.domain.ship;
 
 import galaxy.domain.Fixtures;
 import galaxy.domain.Race;
-import galaxy.domain.Ship;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.production.Production;
 import galaxy.domain.production.ShipProduction;
+import galaxy.domain.technology.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShipTest {
 
+	// TODO test that checks that ship's technologies are independent from race technologies
+
 	@Test
 	void test_ship_speed() {
 		ShipTemplate droneTemplate = Fixtures.droneTemplate();
-		Ship drone = droneTemplate.build(Fixtures.baseTechnologies());
+
+		Ship drone = droneTemplate.build(new Technologies());
 		assertEquals(20.0, drone.speed());
+
+		Ship fastDrone = droneTemplate.build(new Technologies(
+				new EnginesTechnology(2.0), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
+		));
+		assertEquals(40.0, fastDrone.speed());
 	}
 
 	@Test

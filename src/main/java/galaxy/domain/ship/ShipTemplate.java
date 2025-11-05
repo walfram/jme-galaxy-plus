@@ -1,6 +1,5 @@
 package galaxy.domain.ship;
 
-import galaxy.domain.Ship;
 import galaxy.domain.technology.Technologies;
 
 public record ShipTemplate(

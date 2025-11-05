@@ -11,7 +11,7 @@ public abstract class Technology {
 	private double value;
 
 	protected Technology() {
-		this(1f);
+		this(1.0);
 	}
 
 	protected Technology(double value) {

@@ -19,4 +19,5 @@ public record EnginesTemplate(double value) {
 	public double weight() {
 		return value;
 	}
+
 }

@@ -106,4 +106,17 @@ class ShipTemplateTest {
 		assertEquals(1.0, drone.weight());
 	}
 
+	@Test
+	void test_weight_1() {
+		ShipTemplate template = new ShipTemplate(
+				"test",
+				new EnginesTemplate(10.0),
+				new WeaponsTemplate(1, 10.0),
+				new ShieldsTemplate(10.0),
+				new CargoTemplate(0.0)
+		);
+
+		assertEquals(30.0, template.weight());
+	}
+
 }

@@ -2,15 +2,7 @@ package galaxy.domain.ship;
 
 import galaxy.domain.technology.EnginesTechnology;
 
-public class Engines {
-
-	private final EnginesTemplate template;
-	private final EnginesTechnology technology;
-
-	public Engines(EnginesTemplate enginesTemplate, EnginesTechnology technology) {
-		this.template = new EnginesTemplate(enginesTemplate);
-		this.technology = technology;
-	}
+public record Engines(EnginesTemplate template, EnginesTechnology technology) {
 
 	public double value() {
 		return template.value();
