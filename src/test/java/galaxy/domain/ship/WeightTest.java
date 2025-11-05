@@ -24,7 +24,7 @@ public class WeightTest {
 
 	@Test
 	public void test_fighter_weight() {
-		assertEquals(4.95, ShipTemplates.fighter().weight(), 0.001);
+		assertEquals(4.949999999999999, ShipTemplates.fighter().weight());
 	}
 
 	@Test
