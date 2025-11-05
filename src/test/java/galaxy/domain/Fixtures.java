@@ -82,4 +82,5 @@ public final class Fixtures {
 				new CargoTemplate(0)
 		).build(new Technologies());
 	}
+
 }

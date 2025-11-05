@@ -15,4 +15,8 @@ public record CargoTemplate(double value) {
 	public double weight() {
 		return value;
 	}
+
+	public double capacity() {
+		return new CargoCapacity(this).value();
+	}
 }

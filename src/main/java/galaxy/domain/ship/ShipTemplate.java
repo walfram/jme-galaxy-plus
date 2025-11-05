@@ -22,4 +22,12 @@ public record ShipTemplate(
 				new Cargo(cargoTemplate, technologies.cargo())
 		);
 	}
+
+	public double speed() {
+		return new Speed(this).value();
+	}
+
+	public double speedLoaded() {
+		return new Speed(this).fullyLoaded();
+	}
 }

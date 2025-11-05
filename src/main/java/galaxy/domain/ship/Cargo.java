@@ -21,14 +21,13 @@ public class Cargo {
 		return template.weight();
 	}
 
-	// TODO must no exceed effective cargo weight
+	// TODO must not exceed effective cargo weight
 	public double loadedQuantity() {
 		return loadedQuantity;
 	}
 
-	// TODO weight -> capacity
-	public double effectiveCargoWeight() {
-		double cargoSize = template.weight();
-		return technology.value() * ( cargoSize + (cargoSize * cargoSize) / 20 );
+	public double cargoCapacity() {
+		return new CargoCapacity(this).value();
 	}
+
 }
