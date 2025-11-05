@@ -19,7 +19,7 @@ public class GalaxyCameraState extends BaseAppState {
 		galaxyViewDebugNode.addControl(axesVisualizer);
 		axesVisualizer.setEnabled(true);
 
-		new DebugGrid(app.getAssetManager(), 8f, 24).attachTo(galaxyViewDebugNode);
+		new DebugGrid(app.getAssetManager(), 16f, 16).attachTo(galaxyViewDebugNode);
 
 		ChaseCamera chaseCamera = new ChaseCamera(app.getCamera(), galaxyViewDebugNode, app.getInputManager());
 		chaseCamera.setUpVector(Vector3f.UNIT_Y);
@@ -27,7 +27,7 @@ public class GalaxyCameraState extends BaseAppState {
 
 		chaseCamera.setMaxDistance(512f);
 		chaseCamera.setDefaultDistance(256f);
-		chaseCamera.setZoomSensitivity(4f);
+		chaseCamera.setZoomSensitivity(8f);
 	}
 
 	@Override
