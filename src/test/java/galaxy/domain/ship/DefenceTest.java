@@ -52,13 +52,9 @@ class DefenceTest {
 
 	@Test
 	void test_ship_defence() {
-		ShipTemplate template = Fixtures.testShipTemplate();
+		Ship sample = Fixtures.sampleShip();
+		double defence = new Defence(sample).value();
 
-		Ship ship = template.build(new Technologies(
-				new EnginesTechnology(4.34), new WeaponsTechnology(3.5), new ShieldsTechnology(3.91), new CargoTechnology(2.09)
-		));
-
-		double defence = new Defence(ship).value();
 		assertEquals(89.63216799463753, defence);
 	}
 

@@ -62,13 +62,15 @@ public final class Fixtures {
 		return planets;
 	}
 
-	public static ShipTemplate testShipTemplate() {
+	public static Ship sampleShip() {
 		return new ShipTemplate(
 				"turret",
 				new EnginesTemplate(99.0),
 				new WeaponsTemplate(9, 11.0),
 				new ShieldsTemplate(43.0), new CargoTemplate(1.0)
-		);
+		).build(new Technologies(
+				new EnginesTechnology(4.34), new WeaponsTechnology(3.5), new ShieldsTechnology(3.91), new CargoTechnology(2.09)
+		));
 	}
 
 	public static Ship battleStation() {
