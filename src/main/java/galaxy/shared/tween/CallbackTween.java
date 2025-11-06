@@ -5,7 +5,7 @@ import com.simsilica.lemur.anim.AbstractTween;
 public class CallbackTween extends AbstractTween {
 	private final Runnable callback;
 
-	protected CallbackTween(Runnable callback) {
+	public CallbackTween(Runnable callback) {
 		super(0);
 		this.callback = callback;
 	}

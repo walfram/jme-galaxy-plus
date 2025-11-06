@@ -12,6 +12,7 @@ import com.jme3.scene.Spatial;
 import com.simsilica.lemur.event.DefaultMouseListener;
 import com.simsilica.lemur.event.MouseEventControl;
 import galaxy.domain.planet.Planet;
+import galaxy.proto.controls.PlanetRefControl;
 import galaxy.shared.material.ShowNormalsMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;

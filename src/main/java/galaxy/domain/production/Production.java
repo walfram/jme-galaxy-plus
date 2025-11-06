@@ -11,4 +11,9 @@ public abstract class Production {
 	}
 
 	abstract public void execute();
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName();
+	}
 }

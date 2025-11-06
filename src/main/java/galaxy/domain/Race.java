@@ -59,6 +59,11 @@ public class Race {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	// TODO temporary method, does not use Planet at the moment
 	public void addShipGroup(int count, ShipTemplate shipTemplate, Planet planet) {
 		List<Ship> group = new ArrayList<>(count);

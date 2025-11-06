@@ -103,7 +103,16 @@ public class Planet {
 		this.owner = owner;
 	}
 
+	public Race owner() {
+		return owner;
+	}
+
 	public void startProduction(Production production) {
 		this.production = production;
 	}
+
+	public Production production() {
+		return production;
+	}
+
 }
