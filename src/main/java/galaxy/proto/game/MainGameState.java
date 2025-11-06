@@ -90,6 +90,7 @@ public class MainGameState extends BaseAppState {
 		states.add(new GalaxyContextState(gameConfig));
 		states.add(new GalaxyCameraState());
 		states.add(new GalaxyViewState());
+		states.add(new GalaxyUiState());
 
 		states.forEach(state -> getStateManager().attach(state));
 	}

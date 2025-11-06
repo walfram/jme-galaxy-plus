@@ -3,10 +3,14 @@ package galaxy.proto.game;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.input.event.MouseButtonEvent;
 import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.simsilica.lemur.event.DefaultMouseListener;
+import com.simsilica.lemur.event.MouseEventControl;
 import galaxy.domain.planet.Planet;
 import galaxy.shared.ShowNormalsMaterial;
 import jme3utilities.mesh.Icosphere;
@@ -19,6 +23,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class GalaxyViewState extends BaseAppState {
 
 	private static final Logger logger = getLogger(GalaxyViewState.class);
+
 	private static final float PLANET_SCALE = 0.001f;
 	private static final float MIN_SCALE = 1f;
 
@@ -41,6 +46,15 @@ public class GalaxyViewState extends BaseAppState {
 			geometry.setLocalScale(scale);
 
 			galaxyViewNode.attachChild(geometry);
+
+			MouseEventControl.addListenersToSpatial(geometry, new DefaultMouseListener() {
+				@Override
+				protected void click(MouseButtonEvent event, Spatial target, Spatial capture) {
+					logger.info("click on target={}, capture={}", target, capture);
+					getState(GalaxyCameraState.class).centerOn(capture);
+					getState(GalaxyUiState.class).showPlanetInfo(capture);
+				}
+			});
 		});
 	}
 
