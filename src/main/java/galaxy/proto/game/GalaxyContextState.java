@@ -13,8 +13,8 @@ import galaxy.generator.SeedSource;
 import galaxy.generator.SimpleSeedSource;
 import galaxy.generator.simple.SimplePlanetGenerator;
 import galaxy.proto.menu.GameConfig;
-import galaxy.shared.DebugPointMesh;
-import galaxy.shared.UnshadedMaterial;
+import galaxy.shared.debug.DebugPointMesh;
+import galaxy.shared.material.UnshadedMaterial;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 

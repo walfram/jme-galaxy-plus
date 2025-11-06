@@ -8,7 +8,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.simsilica.lemur.anim.*;
-import galaxy.shared.DebugGrid;
+import galaxy.shared.debug.DebugGrid;
+import galaxy.shared.tween.CallbackTween;
 import jme3utilities.debug.AxesVisualizer;
 
 public class GalaxyCameraState extends BaseAppState {

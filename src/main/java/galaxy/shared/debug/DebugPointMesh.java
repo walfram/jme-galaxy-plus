@@ -1,4 +1,4 @@
-package galaxy.shared;
+package galaxy.shared.debug;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;

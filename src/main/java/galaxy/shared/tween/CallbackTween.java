@@ -1,4 +1,4 @@
-package galaxy.proto.game;
+package galaxy.shared.tween;
 
 import com.simsilica.lemur.anim.AbstractTween;
 
