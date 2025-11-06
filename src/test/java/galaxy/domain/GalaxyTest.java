@@ -43,7 +43,6 @@ public class GalaxyTest {
 		Galaxy galaxy = new ClassicGalaxy(races, planets);
 
 		foo.planet("foo-secondary-1").ifPresent(p -> p.startProduction(new TechnologyProduction(p, new EnginesTechnology())));
-
 	}
 
 }

@@ -12,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class RaceTest {
 
 	@Test
+	void test_race_relations() {
+
+	}
+
+	@Test
 	void test_race_init() {
 		Race race = Fixtures.race();
 

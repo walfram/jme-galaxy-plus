@@ -7,6 +7,7 @@ import galaxy.domain.technology.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Race {
@@ -29,6 +30,23 @@ public class Race {
 		this.id = id;
 		this.name = name;
 		this.planets.addAll(initialPlanets);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (this == obj) return true;
+
+		if (getClass() != obj.getClass()) return false;
+
+		Race other = (Race) obj;
+
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getClass(), id);
 	}
 
 	public Technologies technologies() {
