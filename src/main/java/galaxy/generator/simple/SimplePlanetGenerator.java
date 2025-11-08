@@ -6,10 +6,7 @@ import galaxy.domain.planet.ClassicDaughterWorld;
 import galaxy.domain.planet.ClassicHomeWorld;
 import galaxy.domain.planet.Coordinates;
 import galaxy.domain.planet.Planet;
-import galaxy.generator.PlanetGenerator;
-import galaxy.generator.PlanetTemplate;
-import galaxy.generator.SeedSource;
-import galaxy.generator.WeightedDistribution;
+import galaxy.generator.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
@@ -93,8 +90,10 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			race.claim(dw2);
 		}
 
+		PlanetNameSource planetNameSource = new SizeSuffixNameSource();
 		WeightedDistribution<PlanetTemplate> distribution = new SimplePlanetDistribution();
 		int remaining = planetCount() - planets.size();
+
 		for (int i = 0; i < remaining; i++) {
 			PlanetTemplate template = distribution.pick(random);
 			// convert existing planets to List<Vector3f>
@@ -106,7 +105,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 			// pick random point - use as planet origin
 			Vector3f picked = random.pick(seedSourceCopy);
-			Planet planet = template.createAtCoordinates(picked, random);
+			Planet planet = template.createAtCoordinates(picked, random, planetNameSource);
 			planets.add(planet);
 		}
 
