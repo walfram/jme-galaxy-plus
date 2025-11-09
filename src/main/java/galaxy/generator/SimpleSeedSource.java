@@ -25,6 +25,10 @@ public class SimpleSeedSource implements SeedSource {
 		this.randomSeed = randomSeed;
 	}
 
+	public SimpleSeedSource(int seedCount, double scale) {
+		this(seedCount, scale, 42L);
+	}
+
 	@Override
 	public List<Vector3f> points() {
 		Generator random = new Generator(randomSeed);

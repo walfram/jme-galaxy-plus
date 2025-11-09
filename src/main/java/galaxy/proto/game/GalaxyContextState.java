@@ -50,9 +50,9 @@ public class GalaxyContextState extends BaseAppState {
 		}
 
 		Generator random = new Generator();
-		int seedCount = (int) (16384 * races.size() * 0.1f);
-		float scale = 256f * races.size() * 0.1f;
-		SeedSource seedSource = new SimpleSeedSource(scale);
+		int seedCount = (int) (16384 * races.size() * 0.1);
+		double scale = 256 * races.size() * 0.1;
+		SeedSource seedSource = new SimpleSeedSource(seedCount, scale);
 
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());
