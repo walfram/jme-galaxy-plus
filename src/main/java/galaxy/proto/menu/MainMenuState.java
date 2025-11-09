@@ -7,7 +7,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.SpringGridLayout;
-import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.proto.game.MainGameState;
 
