@@ -22,7 +22,7 @@ public class MainMenuState extends BaseAppState {
 		Label header = main.addChild(new Label("jme galaxy+", new ElementId("header")));
 		header.setMaxWidth(320f);
 
-		main.addChild(new Button("load")).addClickCommands(this::onLoadGameClick);
+		main.addChild(new Button("new game")).addClickCommands(this::onStartNewGameClick);
 		main.addChild(new Button("settings"));
 		main.addChild(new Button("exit")).addClickCommands(this::onExitClick);
 
@@ -34,43 +34,25 @@ public class MainMenuState extends BaseAppState {
 		);
 	}
 
-	private void onLoadGameClick(Button button) {
-//		getState(MainGameState.class).setEnabled(true);
+	private void onStartNewGameClick(Button button) {
+		Button accept = new Button("accept");
+		Button cancel = new Button("cancel");
 
-		Container dialog = new Container();
+		NewGameDialog newGameDialog = new NewGameDialog(accept, cancel);
 
-		Label header = dialog.addChild(new Label("Configure game", new ElementId("header")));
-		header.setMaxWidth(256f);
-
-		Container form = dialog.addChild(new Container());
-
-		form.addChild(new Label("Race count"));
-		TextField tfRaceCount = form.addChild(new TextField("10"), 1);
-
-		form.addChild(new Label("Planets per race"));
-		TextField tfPlanetsPerRace = form.addChild(new TextField("10"), 1);
-
-		Container actions = dialog.addChild(new Container(new SpringGridLayout(Axis.X, Axis.Y)));
-		actions.addChild(new Button("ok")).addClickCommands(cmd -> {
-			getState(PopupState.class).closePopup(dialog);
-
-			GameConfig gameConfig = new GameConfig(
-				Integer.parseInt(tfRaceCount.getText()),
-				Integer.parseInt(tfPlanetsPerRace.getText())
-			);
-
+		accept.addClickCommands(b -> {
+			GameConfig gameConfig = newGameDialog.config();
 			getState(MainGameState.class).configureGame(gameConfig);
 			getState(MainGameState.class).setEnabled(true);
 		});
-		actions.addChild(new Button("cancel")).addClickCommands(cmd -> getState(PopupState.class).closePopup(dialog));
 
-		dialog.setLocalTranslation(
-				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
-				getApplication().getCamera().getHeight() * 0.5f + dialog.getPreferredSize().y * 0.5f,
+		newGameDialog.setLocalTranslation(
+				getApplication().getCamera().getWidth() * 0.5f - newGameDialog.getPreferredSize().x * 0.5f,
+				getApplication().getCamera().getHeight() * 0.5f + newGameDialog.getPreferredSize().y * 0.5f,
 				0f
 		);
 
-		getState(PopupState.class).showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().showModalPopup(newGameDialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	private void onExitClick(Button button) {
@@ -83,7 +65,7 @@ public class MainMenuState extends BaseAppState {
 
 		Container actions = dialog.addChild(new Container(new SpringGridLayout(Axis.X, Axis.Y)));
 		actions.addChild(new Button("yes")).addClickCommands(cmd -> getApplication().stop(true));
-		actions.addChild(new Button("no")).addClickCommands(cmd -> getState(PopupState.class).closePopup(dialog));
+		actions.addChild(new Button("no")).addClickCommands(cmd -> GuiGlobals.getInstance().getPopupState().closePopup(dialog));
 
 		dialog.setLocalTranslation(
 				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
@@ -91,7 +73,7 @@ public class MainMenuState extends BaseAppState {
 				0f
 		);
 
-		getState(PopupState.class).showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	@Override

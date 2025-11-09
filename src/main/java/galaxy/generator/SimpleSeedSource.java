@@ -15,8 +15,8 @@ public class SimpleSeedSource implements SeedSource {
 	private final double seedScale;
 	private final long randomSeed;
 
-	public SimpleSeedSource() {
-		this(16384, 256f, 42L);
+	public SimpleSeedSource(float scale) {
+		this(16384, scale, 42L);
 	}
 
 	public SimpleSeedSource(int seedCount, double seedScale, long randomSeed) {

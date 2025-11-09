@@ -1,6 +1,7 @@
 package galaxy.proto.game;
 
 import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -31,6 +32,7 @@ public class GalaxyContextState extends BaseAppState {
 
 	private final List<Race> races = new ArrayList<>(128);
 	private final List<Planet> planets = new ArrayList<>(1024);
+
 	private final GameConfig gameConfig;
 
 	public GalaxyContextState(GameConfig gameConfig) {
@@ -48,7 +50,9 @@ public class GalaxyContextState extends BaseAppState {
 		}
 
 		Generator random = new Generator();
-		SeedSource seedSource = new SimpleSeedSource();
+		int seedCount = (int) (16384 * races.size() * 0.1f);
+		float scale = 256f * races.size() * 0.1f;
+		SeedSource seedSource = new SimpleSeedSource(scale);
 
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());
@@ -57,7 +61,7 @@ public class GalaxyContextState extends BaseAppState {
 		Geometry debug = new Geometry("debug-seed-points", new DebugPointMesh(points));
 		debug.setMaterial(new UnshadedMaterial(app.getAssetManager(), ColorRGBA.Red));
 		debug.getMaterial().setFloat("PointSize", 1f);
-		debugNode.attachChild(debug);
+//		debugNode.attachChild(debug);
 	}
 
 	public List<Planet> planets() {
@@ -70,11 +74,11 @@ public class GalaxyContextState extends BaseAppState {
 
 	@Override
 	protected void onEnable() {
-		// ((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
+		 ((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
 	}
 
 	@Override
 	protected void onDisable() {
-		// ((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
+		 ((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
 	}
 }
