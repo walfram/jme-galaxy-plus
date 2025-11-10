@@ -2,11 +2,16 @@ package galaxy.generator;
 
 import com.jme3.math.Vector3f;
 import jme3utilities.math.noise.Generator;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class SimpleSeedSource implements SeedSource {
+
+	private static final Logger logger = getLogger(SimpleSeedSource.class);
 
 	private static final double K_COMPRESSION_STRENGTH = 0.9;
 	private static final double N_COMPRESSION_POWER = 0.8;
@@ -14,6 +19,8 @@ public class SimpleSeedSource implements SeedSource {
 	private final int seedCount;
 	private final double seedScale;
 	private final long randomSeed;
+
+	private final List<Vector3f> points;
 
 	public SimpleSeedSource(float scale) {
 		this(16384, scale, 42L);
@@ -23,6 +30,7 @@ public class SimpleSeedSource implements SeedSource {
 		this.seedCount = seedCount;
 		this.seedScale = seedScale;
 		this.randomSeed = randomSeed;
+		this.points = new ArrayList<>(seedCount);
 	}
 
 	public SimpleSeedSource(int seedCount, double scale) {
@@ -31,9 +39,19 @@ public class SimpleSeedSource implements SeedSource {
 
 	@Override
 	public List<Vector3f> points() {
+		if (points.isEmpty()) {
+			points.addAll(generate());
+		}
+
+		return new ArrayList<>(points);
+	}
+
+	private List<Vector3f> generate() {
 		Generator random = new Generator(randomSeed);
 
 		List<Vector3f> seedSource = new ArrayList<>(seedCount);
+
+		logger.debug("Generating {} seed points", seedCount);
 		for (int i = 0; i < seedCount; i++) {
 //			Vector3f point = random.nextVector3f().multLocal(SEED_SCALE);
 //			seedSource.add(point);
@@ -61,6 +79,7 @@ public class SimpleSeedSource implements SeedSource {
 
 			seedSource.add(point);
 		}
+		logger.debug("Generated {} seed points", seedSource.size());
 
 		return seedSource;
 	}

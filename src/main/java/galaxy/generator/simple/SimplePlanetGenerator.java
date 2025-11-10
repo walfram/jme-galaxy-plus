@@ -96,12 +96,16 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 		for (int i = 0; i < remaining; i++) {
 			PlanetTemplate template = distribution.pick(random);
+
 			// convert existing planets to List<Vector3f>
 			List<Vector3f> coordinates = planets.stream().map(planet -> planet.coordinates().asVector3f()).toList();
+
 			// copy seedSource
 			List<Vector3f> seedSourceCopy = new ArrayList<>(seedSource.points());
+
 			// remove from seedSource based on existing planets and template.minDistance
-			seedSourceCopy.removeIf(v -> coordinates.stream().anyMatch(c -> c.distance(v) <= template.minDistance()));
+			List<Vector3f> filtered = seedSourceCopy.stream().filter(v -> coordinates.stream().noneMatch(c -> c.distance(v) > template.minDistance())).toList();
+			seedSourceCopy.removeAll(filtered);
 
 			// pick random point - use as planet origin
 			Vector3f picked = random.pick(seedSourceCopy);
