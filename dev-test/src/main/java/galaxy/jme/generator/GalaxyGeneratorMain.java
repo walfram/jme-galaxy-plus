@@ -1,15 +1,17 @@
-package galaxy.jme;
+package galaxy.jme.generator;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import galaxy.shared.InitLemurState;
+import galaxy.shared.debug.DebugGrid;
 import jme3utilities.MyCamera;
+import jme3utilities.debug.AxesVisualizer;
 
-public class GalaxyMain extends SimpleApplication {
+public class GalaxyGeneratorMain extends SimpleApplication {
 
 	public static void main(String[] args) {
-		GalaxyMain app = new GalaxyMain();
+		GalaxyGeneratorMain app = new GalaxyGeneratorMain();
 		app.start();
 	}
 
@@ -24,9 +26,16 @@ public class GalaxyMain extends SimpleApplication {
 
 		MyCamera.setNearFar(cam, cam.getFrustumNear(), 16384f);
 
+		new DebugGrid(assetManager, 32, 32).attachTo(rootNode);
+		AxesVisualizer axesVisualizer = new AxesVisualizer(assetManager, 256, 1);
+		rootNode.addControl(axesVisualizer);
+		axesVisualizer.setEnabled(true);
+
 		stateManager.attach(new InitLemurState());
 
-		stateManager.attach(new GalaxyViewState());
+		stateManager.attach(new GeneratorUiState());
+
+		stateManager.attach(new GeneratorViewState());
 	}
 
 }
