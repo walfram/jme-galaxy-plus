@@ -15,9 +15,7 @@ public class Race {
 	private final String id;
 	private final String name;
 
-	private final Technologies technologies = new Technologies(
-			new EnginesTechnology(), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
-	);
+	private final Technologies technologies = new Technologies(new EnginesTechnology(), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology());
 
 	private final List<Planet> planets = new ArrayList<>(128);
 	private final List<Route> routes = new ArrayList<>(128);
@@ -25,6 +23,9 @@ public class Race {
 	private final List<ShipTemplate> shipTemplates = new ArrayList<>(128);
 	private final List<Ship> ships = new ArrayList<>(1024);
 
+	public Race(String id, String name) {
+		this(id, name, List.of());
+	}
 
 	public Race(String id, String name, List<Planet> initialPlanets) {
 		this.id = id;
@@ -101,4 +102,5 @@ public class Race {
 	public Optional<Planet> planet(String planetId) {
 		return planets.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
+
 }

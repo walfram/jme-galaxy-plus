@@ -18,32 +18,32 @@ class PlanetTest {
 	@Test
 	void should_not_throw_exception_if_industry_is_larger_then_size() {
 		assertDoesNotThrow(
-				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f), new Materials(0))
+				() -> new Planet(1L, "foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1001f), new Materials(0))
 		);
 	}
 
 	@Test
 	void should_not_throw_exception_if_population_is_larger_then_size() {
 		assertDoesNotThrow(
-				() -> new Planet("foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0), new Materials(0))
+				() -> new Planet(1L, "foo", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0), new Population(1001f), new Industry(1000.0), new Materials(0))
 		);
 	}
 
 	@Test
 	void test_planet_effort() {
-		Planet hw = new ClassicHomeWorld("hw", new Coordinates(0.0, 0.0, 0.0));
+		Planet hw = new ClassicHomeWorld(1L, new Coordinates(0.0, 0.0, 0.0));
 		assertEquals(1000.0, hw.effort().value());
 
-		Planet dw = new ClassicDaughterWorld("dw", new Coordinates(1, 1, 1));
+		Planet dw = new ClassicDaughterWorld(2L, new Coordinates(1, 1, 1));
 		assertEquals(500.0, dw.effort().value());
 
-		Planet foo = new Planet("foo", new Coordinates(2, 3, 4), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(500.0), new Materials(0));
+		Planet foo = new Planet(3L, "foo", new Coordinates(2, 3, 4), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(500.0), new Materials(0));
 		assertEquals(625f, foo.effort().value());
 	}
 
 	@Test
 	void test_create_empty_planet() {
-		Planet planet = new Planet("test", new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0));
+		Planet planet = new Planet(1L, new Coordinates(0.0, 0.0, 0.0), new Size(1000.0), new Resources(10.0));
 
 		assertEquals(0, planet.effort().value());
 		assertEquals(0, planet.population().value());
@@ -62,7 +62,7 @@ class PlanetTest {
 
 			root.forEach(planetNode -> {
 				Planet planet = new Planet(
-						planetNode.get("id").asText(),
+						planetNode.get("id").asLong(),
 						new Coordinates(planetNode.path("coordinates")),
 						new Size(planetNode.get("size")),
 						new Resources(planetNode.get("resources")),
@@ -86,7 +86,7 @@ class PlanetTest {
 		Generator random = new Generator(42);
 
 		Planet planet = new Planet(
-				"id", new Coordinates(random.nextUnitVector3f()), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1000.0), new Materials(0)
+				1L, "id", new Coordinates(random.nextUnitVector3f()), new Size(1000.0), new Resources(10.0), new Population(1000.0), new Industry(1000.0), new Materials(0)
 		);
 
 		assertNotNull(planet.id());

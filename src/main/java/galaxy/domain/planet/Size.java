@@ -2,7 +2,7 @@ package galaxy.domain.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public record Size(double value) {
+public record Size(double value) implements PlanetProperty {
 
 	public Size {
 		if (value < 0) {

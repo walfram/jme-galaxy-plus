@@ -14,15 +14,15 @@ public final class Fixtures {
 				"test-race-id",
 				"Test Race Name",
 				List.of(
-						new ClassicHomeWorld("hw", new Coordinates(0, 0, 0)),
-						new ClassicDaughterWorld("dw-1", new Coordinates(1, 1, 1)),
-						new ClassicDaughterWorld("dw-2", new Coordinates(2, 2, 2))
+						new ClassicHomeWorld(1L, new Coordinates(0, 0, 0)),
+						new ClassicDaughterWorld(2L, new Coordinates(1, 1, 1)),
+						new ClassicDaughterWorld(3L, new Coordinates(2, 2, 2))
 				)
 		);
 	}
 
 	public static Planet homeworld() {
-		return new ClassicHomeWorld("hw", new Coordinates(0, 0, 0));
+		return new ClassicHomeWorld(1L, new Coordinates(0, 0, 0));
 	}
 
 	public static ShipTemplate droneTemplate() {
@@ -50,7 +50,7 @@ public final class Fixtures {
 		for (int i = 0; i < count; i++) {
 			planets.add(
 					new Planet(
-							"fixed-%s".formatted(i),
+							(long) i,
 							new Coordinates(i, i, 0),
 							new Size(1600 + i),
 							new Resources(0.5 + i),

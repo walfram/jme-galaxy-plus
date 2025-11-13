@@ -4,12 +4,14 @@ import galaxy.domain.planet.Planet;
 
 import java.util.List;
 
-public abstract class Galaxy {
-	private final List<Race> races;
-	private final List<Planet> planets;
+public interface Galaxy {
 
-	public Galaxy(List<Race> races, List<Planet> planets) {
-		this.races = races;
-		this.planets = planets;
-	}
+	PlanetInfo planetInfo(Race race, Planet planet);
+
+	List<Race> races();
+
+	Race findRaceByName(String raceId);
+
+	Race findRaceById(long id);
+
 }

@@ -2,7 +2,7 @@ package galaxy.domain.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public final class Population {
+public final class Population implements PlanetProperty {
 
 	private double value;
 

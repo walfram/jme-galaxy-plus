@@ -15,10 +15,10 @@ public record PlanetTemplate(
 		return frequency;
 	}
 
-	public Planet createAtCoordinates(Vector3f coordinates, Generator random, PlanetNameSource planetNameSource) {
+	public Planet createAtCoordinates(Vector3f coordinates, Generator random, Long id) {
 		double size = random.nextDouble(minSize, maxSize);
 		return new Planet(
-				planetNameSource.name(size),
+				id,
 				new Coordinates(coordinates),
 				new Size(size),
 				new Resources(random.nextDouble(minResources, maxResources)),

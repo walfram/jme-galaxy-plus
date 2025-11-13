@@ -25,6 +25,8 @@ dependencies {
     implementation libs.jackson.databind
     implementation libs.reflections
 
+    implementation project(":shared")
+
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)
     // Test dependencies (junit-jupiter gets its version from the BOM)

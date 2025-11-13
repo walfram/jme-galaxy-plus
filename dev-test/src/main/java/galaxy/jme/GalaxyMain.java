@@ -1,17 +1,15 @@
-package galaxy.proto;
+package galaxy.jme;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import galaxy.proto.game.MainGameState;
-import galaxy.proto.menu.MainMenuState;
 import galaxy.shared.InitLemurState;
 import jme3utilities.MyCamera;
 
-public class GalaxyProtoMain extends SimpleApplication {
+public class GalaxyMain extends SimpleApplication {
 
 	public static void main(String[] args) {
-		GalaxyProtoMain app = new GalaxyProtoMain();
+		GalaxyMain app = new GalaxyMain();
 		app.start();
 	}
 
@@ -28,8 +26,7 @@ public class GalaxyProtoMain extends SimpleApplication {
 
 		stateManager.attach(new InitLemurState());
 
-		stateManager.attach(new MainMenuState());
-		stateManager.attach(new MainGameState());
+		stateManager.attach(new GalaxyViewState());
 	}
 
 }

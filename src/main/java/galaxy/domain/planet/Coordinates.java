@@ -3,7 +3,7 @@ package galaxy.domain.planet;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jme3.math.Vector3f;
 
-public record Coordinates(double x, double y, double z) {
+public record Coordinates(double x, double y, double z) implements PlanetProperty {
 
 	public Coordinates(Vector3f source) {
 		this(source.x, source.y, source.z);

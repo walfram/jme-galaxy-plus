@@ -11,7 +11,7 @@ class ProductionTest {
 
 	@Test
 	void test_technology_production() {
-		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+		Planet planet = new ClassicHomeWorld(1L, new Coordinates(0.0, 0.0, 0.0));
 
 		Technology technology = new EnginesTechnology();
 		assertEquals(1.0, technology.value());
@@ -24,7 +24,7 @@ class ProductionTest {
 
 	@Test
 	void test_capital_production() {
-		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+		Planet planet = new ClassicHomeWorld(1L, new Coordinates(0.0, 0.0, 0.0));
 
 		Industry before = planet.industry();
 		assertEquals(1000.0, before.value());
@@ -38,7 +38,7 @@ class ProductionTest {
 
 	@Test
 	void test_materials_production() {
-		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+		Planet planet = new ClassicHomeWorld(1L, new Coordinates(0.0, 0.0, 0.0));
 
 		Materials materials = planet.materials();
 
@@ -52,7 +52,7 @@ class ProductionTest {
 
 	@Test
 	void test_population_production() {
-		Planet planet = new ClassicHomeWorld("test", new Coordinates(0.0, 0.0, 0.0));
+		Planet planet = new ClassicHomeWorld(1L, new Coordinates(0.0, 0.0, 0.0));
 
 		Colonists before = planet.colonists();
 		assertEquals(0.0, before.value());

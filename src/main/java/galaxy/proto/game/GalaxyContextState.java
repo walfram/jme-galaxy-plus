@@ -47,6 +47,7 @@ public class GalaxyContextState extends BaseAppState {
 		for (int raceIdx = 0; raceIdx < gameConfig.raceCount(); raceIdx++) {
 			Race race = new Race("race-id-%s".formatted(raceIdx), "race-%s".formatted(raceIdx), new ArrayList<>());
 			races.add(race);
+			logger.info("race = {}", race);
 		}
 
 		Generator random = new Generator();
@@ -56,6 +57,8 @@ public class GalaxyContextState extends BaseAppState {
 
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());
+
+		planets.forEach(p -> logger.info("planet = {}", p));
 
 		List<Vector3f> points = seedSource.points();
 		Geometry debug = new Geometry("debug-seed-points", new DebugPointMesh(points));

@@ -4,8 +4,13 @@ import galaxy.domain.planet.Planet;
 
 import java.util.List;
 
-public class ClassicGalaxy extends Galaxy {
+public class ClassicGalaxy implements Galaxy {
 	public ClassicGalaxy(List<Race> races, List<Planet> planets) {
-		super(races, planets);
+
+	}
+
+	@Override
+	public PlanetInfo planetInfo(Race race, Planet planet) {
+		return null;
 	}
 }

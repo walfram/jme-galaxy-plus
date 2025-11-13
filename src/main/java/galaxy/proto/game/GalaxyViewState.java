@@ -38,7 +38,7 @@ public class GalaxyViewState extends BaseAppState {
 		List<Planet> planets = getState(GalaxyContextState.class).planets();
 
 		planets.forEach(planet -> {
-			Geometry geometry = new Geometry(planet.id(), mesh);
+			Geometry geometry = new Geometry("p-%s".formatted(planet.id()), mesh);
 			geometry.setMaterial(material);
 			geometry.setLocalTranslation(planet.coordinates().asVector3f());
 

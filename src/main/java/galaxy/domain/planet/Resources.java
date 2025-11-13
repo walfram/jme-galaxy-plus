@@ -2,7 +2,7 @@ package galaxy.domain.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public record Resources(double value) {
+public record Resources(double value) implements PlanetProperty {
 
 	public Resources {
 		if (value < 0) {

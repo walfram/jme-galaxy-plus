@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -63,11 +64,12 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 		int planetIndex = 0;
 		Iterator<Race> raceSource = races.iterator();
+		AtomicLong idSource = new AtomicLong(0);
 
 		for (Vector3f origin : origins) {
 			Race race = raceSource.next();
 
-			ClassicHomeWorld hw = new ClassicHomeWorld("hw-%s".formatted(planetIndex++), new Coordinates(origin));
+			ClassicHomeWorld hw = new ClassicHomeWorld(idSource.incrementAndGet(), new Coordinates(origin));
 			planets.add(hw);
 			race.claim(hw);
 
@@ -76,7 +78,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			ClassicDaughterWorld dw1 = new ClassicDaughterWorld("dw-%s-1".formatted(planetIndex), new Coordinates(dw1Origin));
+			ClassicDaughterWorld dw1 = new ClassicDaughterWorld(idSource.incrementAndGet(), new Coordinates(dw1Origin));
 			planets.add(dw1);
 			race.claim(dw1);
 
@@ -85,7 +87,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			ClassicDaughterWorld dw2 = new ClassicDaughterWorld("dw-%s-2".formatted(planetIndex), new Coordinates(dw2Origin));
+			ClassicDaughterWorld dw2 = new ClassicDaughterWorld(idSource.incrementAndGet(), new Coordinates(dw2Origin));
 			planets.add(dw2);
 			race.claim(dw2);
 		}
@@ -109,7 +111,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 			// pick random point - use as planet origin
 			Vector3f picked = random.pick(seedSourceCopy);
-			Planet planet = template.createAtCoordinates(picked, random, planetNameSource);
+			Planet planet = template.createAtCoordinates(picked, random, idSource.incrementAndGet());
 			planets.add(planet);
 		}
 

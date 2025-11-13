@@ -5,7 +5,8 @@ import galaxy.domain.production.Production;
 
 public class Planet {
 
-	private final String id;
+	private final Long id;
+	private final String name;
 
 	private final Coordinates coordinates;
 
@@ -24,8 +25,22 @@ public class Planet {
 
 	private Production production;
 
-	public Planet(String id, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
+	public Planet(Long id, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
+		this(
+				id,
+				String.valueOf(id),
+				coordinates,
+				size,
+				resources,
+				population,
+				industry,
+				materials
+		);
+	}
+
+	public Planet(Long id, String name, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials) {
 		this.id = id;
+		this.name = name;
 		this.coordinates = coordinates;
 		this.size = size;
 		this.resources = resources;
@@ -34,7 +49,7 @@ public class Planet {
 		this.materials = materials;
 	}
 
-	public Planet(String id, Coordinates coordinates, Size size, Resources resources) {
+	public Planet(Long id, Coordinates coordinates, Size size, Resources resources) {
 		this(
 				id,
 				coordinates,
@@ -51,12 +66,12 @@ public class Planet {
 		return "Planet(%s, %s, %s, %s, %s, %s)".formatted(id, coordinates, size, resources, population, industry);
 	}
 
-	public String id() {
+	public Long id() {
 		return id;
 	}
 
 	public String name() {
-		return id;
+		return name;
 	}
 
 	public Size size() {
