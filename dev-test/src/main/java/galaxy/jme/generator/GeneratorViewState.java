@@ -48,7 +48,6 @@ public class GeneratorViewState extends BaseAppState {
 		Geometry geometry = new Geometry("debug-seed-points", new DebugPointMesh(seedSource.points()));
 		geometry.setMaterial(new UnshadedMaterial(getApplication().getAssetManager(), ColorRGBA.Yellow));
 		scene.attachChild(geometry);
-
 	}
 
 }
