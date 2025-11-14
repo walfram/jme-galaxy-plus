@@ -13,6 +13,7 @@ import java.util.Objects;
 public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	private TextFieldValueEditor<Integer> armsEditor;
+	private TextFieldValueEditor<Integer> seedCountEditor;
 	private TextFieldValueEditor<Double> radiusEditor;
 	private TextFieldValueEditor<Long> seedEditor;
 
@@ -26,6 +27,10 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 				s -> s != null ? Integer.parseInt(s) : 0
 		);
 		container.addChild(armsEditor.startEditing(8));
+
+		container.addChild(new Label("seed count"));
+		seedCountEditor = new TextFieldValueEditor<>(new ObjectToString(), new StringToInteger());
+		container.addChild(seedCountEditor.startEditing(16384));
 
 		container.addChild(new Label("radius (scale)"));
 		radiusEditor = ValueEditors.doubleEditor("%.02f");
@@ -42,6 +47,6 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	@Override
 	public SeedSource seedSource() {
-		return new SpiralSeedSource(armsEditor.getObject(), radiusEditor.getObject(), seedEditor.getObject());
+		return new SpiralSeedSource(armsEditor.getObject(), seedCountEditor.getObject(), radiusEditor.getObject(), seedEditor.getObject());
 	}
 }
