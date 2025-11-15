@@ -8,9 +8,7 @@ import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -19,7 +17,7 @@ public class SpiralSeedSource implements SeedSource {
 	private static final Logger logger = getLogger(SpiralSeedSource.class);
 
 	private final int arms;
-	private final int armChunks = 32;
+	private final int armChunks = 24;
 	private final int seedCount;
 	private final double radius;
 	private final long seed;
@@ -33,8 +31,6 @@ public class SpiralSeedSource implements SeedSource {
 
 	@Override
 	public List<Vector3f> points() {
-		List<Vector3f> pivots = new ArrayList<>(arms * armChunks);
-
 		Generator random = new Generator(seed);
 
 		float turns = 1.5f;
@@ -57,14 +53,9 @@ public class SpiralSeedSource implements SeedSource {
 				float x = currentR * FastMath.cos(rotatedTheta);
 				float z = currentR * FastMath.sin(rotatedTheta);
 
-				pivots.add(new Vector3f(x, 0, z));
 				armPivots.get(arm).add(new Vector3f(x, 0, z));
 			}
 		}
-
-		logger.debug("points size = {}", pivots.size());
-		Set<Vector3f> set = new HashSet<>(pivots);
-		logger.debug("points unique size = {}", set.size());
 
 		List<Vector3f> points = new ArrayList<>(seedCount);
 
