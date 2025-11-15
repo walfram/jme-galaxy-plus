@@ -21,8 +21,9 @@ public class GeneratorUiState extends BaseAppState {
 		title.setMaxWidth(256f);
 
 		container.addChild(new Button("simple")).addClickCommands(c -> useConfiguration(new SimpleSeedSourceConfiguration()));
-		container.addChild(new Button("spiral")).addClickCommands(c -> useConfiguration(new SpiralSeedSourceConfiguration()));
 		container.addChild(new Button("spherical")).addClickCommands(c -> useConfiguration(new SphericalSeedSourceConfiguration()));
+		container.addChild(new Button("spiral")).addClickCommands(c -> useConfiguration(new SpiralSeedSourceConfiguration()));
+		container.addChild(new Button("golden spiral")).addClickCommands(c -> useConfiguration(new GoldenSpiralSeedSourceConfiguration()));
 
 		gui.attachChild(container);
 		container.setLocalTranslation(0, app.getCamera().getHeight(), 0);
