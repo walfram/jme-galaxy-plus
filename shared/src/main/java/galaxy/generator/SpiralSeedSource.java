@@ -1,12 +1,16 @@
 package galaxy.generator;
 
-import com.google.common.collect.Iterators;
 import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import jme3utilities.math.MyVector3f;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -40,15 +44,21 @@ public class SpiralSeedSource implements SeedSource {
 
 		float phiOffset = FastMath.TWO_PI / arms;
 
+		List<List<Vector3f>> armPivots = new ArrayList<>(arms);
+
 		for (int arm = 0; arm < arms; arm++) {
 			float spiralOffset = phiOffset * arm;
+			armPivots.add(new ArrayList<>(armChunks));
+
 			for (int i = 0; i < armChunks; i++) {
 				float theta = ((float) i / (armChunks - 1)) * thetaMax;
 				float currentR = k * theta;
 				float rotatedTheta = theta + spiralOffset;
 				float x = currentR * FastMath.cos(rotatedTheta);
 				float z = currentR * FastMath.sin(rotatedTheta);
+
 				pivots.add(new Vector3f(x, 0, z));
+				armPivots.get(arm).add(new Vector3f(x, 0, z));
 			}
 		}
 
@@ -58,16 +68,37 @@ public class SpiralSeedSource implements SeedSource {
 
 		List<Vector3f> points = new ArrayList<>(seedCount);
 
-		Iterator<Vector3f> pivotSource = Iterators.cycle(pivots);
-		while (points.size() < seedCount) {
-			Vector3f pivot = pivotSource.next();
+		int windowSize = 2;
+		int subPoints = (seedCount / armPivots.size()) / windowSize;
 
-			float r = 25f * (float) (1.75f - (pivot.length() / radius));
+		for (List<Vector3f> arm: armPivots) {
 
-			Vector3f point = pivot.add(random.nextVector3f().mult(r));
-			points.add(point);
+			for (int i = 0; i < arm.size() - windowSize; i++) {
+				Vector3f from = arm.get(i);
+				Vector3f to = arm.get(i + 1);
+				Vector3f vector = to.subtract(from);
+
+				float invertedDistanceRatio = Math.max(0.25f, 1f - (float) (from.length() / radius));
+				logger.debug("from.length = {}, distance ratio = {}", from.length(), invertedDistanceRatio);
+
+				for (int j = 0; j < subPoints; j++) {
+					Vector3f p = new Vector3f();
+					MyVector3f.generateBasis(vector.clone(), p, new Vector3f());
+
+					float theta = random.nextFloat(0, FastMath.TWO_PI);
+
+					Vector3f rotated = new Quaternion().fromAngleAxis(theta, vector).mult(p);
+					rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * 40f));
+
+					Vector3f offset = vector.mult(random.nextFloat());
+					points.add(rotated.add(from.add(offset)));
+				}
+			}
+
 		}
 
+		logger.debug("points size = {}", points.size());
 		return points;
 	}
+
 }
