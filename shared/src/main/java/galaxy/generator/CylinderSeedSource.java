@@ -46,7 +46,7 @@ public class CylinderSeedSource implements SeedSource {
 			float theta = random.nextFloat(0, FastMath.TWO_PI);
 
 			Vector3f rotated = new Quaternion().fromAngleAxis(theta, vector).mult(p);
-			rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * 40f));
+			rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * radius));
 
 			Vector3f offset = vector.mult(random.nextFloat());
 			points.add(rotated.add(from.add(offset)));
