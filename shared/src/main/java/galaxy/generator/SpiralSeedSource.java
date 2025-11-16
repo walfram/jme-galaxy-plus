@@ -60,30 +60,16 @@ public class SpiralSeedSource implements SeedSource {
 		List<Vector3f> points = new ArrayList<>(seedCount);
 
 		int windowSize = 2;
-		int subPoints = (seedCount / armPivots.size()) / windowSize;
+		int subPoints = seedCount / (armPivots.size() * armChunks);
 
 		for (List<Vector3f> arm: armPivots) {
 
 			for (int i = 0; i < arm.size() - windowSize; i++) {
 				Vector3f from = arm.get(i);
 				Vector3f to = arm.get(i + 1);
-				Vector3f vector = to.subtract(from);
 
-				float invertedDistanceRatio = Math.max(0.25f, 1f - (float) (from.length() / radius));
-				logger.debug("from.length = {}, distance ratio = {}", from.length(), invertedDistanceRatio);
-
-				for (int j = 0; j < subPoints; j++) {
-					Vector3f p = new Vector3f();
-					MyVector3f.generateBasis(vector.clone(), p, new Vector3f());
-
-					float theta = random.nextFloat(0, FastMath.TWO_PI);
-
-					Vector3f rotated = new Quaternion().fromAngleAxis(theta, vector).mult(p);
-					rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * 40f));
-
-					Vector3f offset = vector.mult(random.nextFloat());
-					points.add(rotated.add(from.add(offset)));
-				}
+				CylinderSeedSource source = new CylinderSeedSource(subPoints, from, to, 20f, random);
+				points.addAll(source.points());
 			}
 
 		}

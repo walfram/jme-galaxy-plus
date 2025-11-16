@@ -3,6 +3,7 @@ package galaxy.generator;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
 import java.awt.*;
@@ -55,6 +56,9 @@ public class GoldenSpiralSeedSource implements SeedSource {
 			pivots.add(new Vector3f(x_i, 0, y_i));
 		}
 
+		int count = seedCount / (pivotCount * arms);
+		Generator random = new Generator(seed);
+
 		for (int arm = 0; arm < arms; arm++) {
 			Quaternion rotation = new Quaternion().fromAngleAxis(arm * (FastMath.TWO_PI / arms), Vector3f.UNIT_Y);
 
@@ -62,7 +66,12 @@ public class GoldenSpiralSeedSource implements SeedSource {
 					.map(rotation::mult)
 					.toList();
 
-			points.addAll(armPivots);
+			for (int i = 0; i < armPivots.size() - 2; i++) {
+				Vector3f from = armPivots.get(i);
+				Vector3f to = armPivots.get(i + 1);
+				SeedSource source = new CylinderSeedSource(count, from, to, 20f, random);
+				points.addAll(source.points());
+			}
 		}
 
 		return points;
