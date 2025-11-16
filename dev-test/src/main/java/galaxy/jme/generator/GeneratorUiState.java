@@ -5,9 +5,10 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.scene.Node;
 import com.simsilica.lemur.*;
-import com.simsilica.lemur.props.PropertyPanel;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.generator.SeedSource;
+import galaxy.generator.configuration.SeedSourceConfiguration;
+import galaxy.generator.configuration.impl.*;
 
 public class GeneratorUiState extends BaseAppState {
 

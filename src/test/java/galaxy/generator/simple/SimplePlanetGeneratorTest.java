@@ -3,7 +3,7 @@ package galaxy.generator.simple;
 import galaxy.domain.Fixtures;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
-import galaxy.generator.SimpleSeedSource;
+import galaxy.generator.sources.SimpleSeedSource;
 import jme3utilities.math.noise.Generator;
 import org.junit.jupiter.api.Test;
 

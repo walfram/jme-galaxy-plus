@@ -1,4 +1,4 @@
-package galaxy.jme.generator;
+package galaxy.generator.configuration.impl;
 
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
@@ -6,11 +6,14 @@ import com.simsilica.lemur.ValueEditors;
 import com.simsilica.lemur.style.ElementId;
 import com.simsilica.lemur.value.TextFieldValueEditor;
 import galaxy.generator.SeedSource;
-import galaxy.generator.SpiralSeedSource;
+import galaxy.generator.configuration.SeedSourceConfiguration;
+import galaxy.generator.sources.GoldenSpiralSeedSource;
+import galaxy.shared.functions.ObjectToString;
+import galaxy.shared.functions.StringToInteger;
 
 import java.util.Objects;
 
-public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
+public class GoldenSpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	private TextFieldValueEditor<Integer> armsEditor;
 	private TextFieldValueEditor<Integer> seedCountEditor;
@@ -19,7 +22,7 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	@Override
 	public void initControls(Container container) {
-		container.addChild(new Label("Spiral seed source configuration", new ElementId("title")));
+		container.addChild(new Label("Golden spiral seed source configuration", new ElementId("title")));
 
 		container.addChild(new Label("arms (races)"));
 		armsEditor = new TextFieldValueEditor<>(
@@ -47,6 +50,6 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	@Override
 	public SeedSource seedSource() {
-		return new SpiralSeedSource(armsEditor.getObject(), seedCountEditor.getObject(), radiusEditor.getObject(), seedEditor.getObject());
+		return new GoldenSpiralSeedSource(armsEditor.getObject(), seedCountEditor.getObject(), radiusEditor.getObject(), seedEditor.getObject());
 	}
 }

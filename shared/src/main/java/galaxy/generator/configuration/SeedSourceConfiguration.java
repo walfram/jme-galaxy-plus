@@ -1,4 +1,4 @@
-package galaxy.jme.generator;
+package galaxy.generator.configuration;
 
 import com.simsilica.lemur.Container;
 import galaxy.generator.SeedSource;

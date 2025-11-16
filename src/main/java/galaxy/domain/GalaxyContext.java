@@ -26,4 +26,19 @@ public class GalaxyContext implements Galaxy {
 
 		return new UnknownPlanet(planet);
 	}
+
+	@Override
+	public List<Race> races() {
+		return List.of();
+	}
+
+	@Override
+	public Race findRaceByName(String raceId) {
+		return null;
+	}
+
+	@Override
+	public Race findRaceById(long id) {
+		return null;
+	}
 }

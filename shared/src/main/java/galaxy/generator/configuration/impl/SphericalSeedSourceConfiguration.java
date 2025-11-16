@@ -1,4 +1,4 @@
-package galaxy.jme.generator;
+package galaxy.generator.configuration.impl;
 
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
@@ -6,7 +6,11 @@ import com.simsilica.lemur.ValueEditors;
 import com.simsilica.lemur.style.ElementId;
 import com.simsilica.lemur.value.TextFieldValueEditor;
 import galaxy.generator.SeedSource;
-import galaxy.generator.SphericalSeedSource;
+import galaxy.generator.configuration.SeedSourceConfiguration;
+import galaxy.generator.sources.SphericalSeedSource;
+import galaxy.shared.functions.ObjectToString;
+import galaxy.shared.functions.StringToInteger;
+import galaxy.shared.functions.StringToLong;
 
 public class SphericalSeedSourceConfiguration implements SeedSourceConfiguration {
 

@@ -1,6 +1,7 @@
-package galaxy.generator;
+package galaxy.generator.sources;
 
 import com.jme3.math.Vector3f;
+import galaxy.generator.SeedSource;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 

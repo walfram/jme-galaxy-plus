@@ -11,7 +11,7 @@ import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
-import galaxy.generator.SimpleSeedSource;
+import galaxy.generator.sources.SimpleSeedSource;
 import galaxy.generator.simple.SimplePlanetGenerator;
 import galaxy.proto.menu.GameConfig;
 import galaxy.shared.debug.DebugPointMesh;

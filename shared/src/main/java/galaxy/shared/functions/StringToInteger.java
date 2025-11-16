@@ -1,4 +1,4 @@
-package galaxy.jme.generator;
+package galaxy.shared.functions;
 
 import com.google.common.base.Function;
 
