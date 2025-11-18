@@ -16,13 +16,14 @@ public class SpiralSeedSource implements SeedSource {
 	private static final Logger logger = getLogger(SpiralSeedSource.class);
 
 	private final int arms;
-	private final int armChunks = 24;
+	private final int armPivots;
 	private final int seedCount;
 	private final double radius;
 	private final long seed;
 
-	public SpiralSeedSource(int arms, int seedCount, double radius, long seed) {
+	public SpiralSeedSource(int arms, int armPivots, int seedCount, double radius, long seed) {
 		this.arms = arms;
+		this.armPivots = armPivots;
 		this.seedCount = seedCount;
 		this.radius = radius;
 		this.seed = seed;
@@ -43,10 +44,10 @@ public class SpiralSeedSource implements SeedSource {
 
 		for (int arm = 0; arm < arms; arm++) {
 			float spiralOffset = phiOffset * arm;
-			armPivots.add(new ArrayList<>(armChunks));
+			armPivots.add(new ArrayList<>(this.armPivots));
 
-			for (int i = 0; i < armChunks; i++) {
-				float theta = ((float) i / (armChunks - 1)) * thetaMax;
+			for (int i = 0; i < this.armPivots; i++) {
+				float theta = ((float) i / (this.armPivots - 1)) * thetaMax;
 				float currentR = k * theta;
 				float rotatedTheta = theta + spiralOffset;
 				float x = currentR * FastMath.cos(rotatedTheta);
@@ -59,7 +60,7 @@ public class SpiralSeedSource implements SeedSource {
 		List<Vector3f> points = new ArrayList<>(seedCount);
 
 		int windowSize = 2;
-		int subPoints = seedCount / (armPivots.size() * armChunks);
+		int subPoints = seedCount / (armPivots.size() * this.armPivots);
 
 		for (List<Vector3f> arm: armPivots) {
 
@@ -67,8 +68,15 @@ public class SpiralSeedSource implements SeedSource {
 				Vector3f from = arm.get(i);
 				Vector3f to = arm.get(i + 1);
 
-				CylinderSeedSource source = new CylinderSeedSource(subPoints, from, to, 20f, random);
+				SeedSource source = new ConstrainedDistanceSeedSource(
+						new CylinderSeedSource(subPoints, from, to, 20f, (float) radius, random),
+						from, to, (float) radius, random
+				);
+
+//				SeedSource source = new CylinderSeedSource(subPoints, from, to, 10f, (float) radius, random);
+
 				points.addAll(source.points());
+
 			}
 
 		}

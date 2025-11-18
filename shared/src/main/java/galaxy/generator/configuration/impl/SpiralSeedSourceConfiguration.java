@@ -19,6 +19,7 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 	private TextFieldValueEditor<Integer> seedCountEditor;
 	private TextFieldValueEditor<Double> radiusEditor;
 	private TextFieldValueEditor<Long> seedEditor;
+	private TextFieldValueEditor<Integer> armPivotsEditor;
 
 	@Override
 	public void initControls(Container container) {
@@ -30,6 +31,13 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 				s -> s != null ? Integer.parseInt(s) : 0
 		);
 		container.addChild(armsEditor.startEditing(8));
+
+		container.addChild(new Label("arm pivots"));
+		armPivotsEditor = new TextFieldValueEditor<>(
+				o -> Objects.requireNonNull(o).toString(),
+				s -> s != null ? Integer.parseInt(s) : 0
+		);
+		container.addChild(armPivotsEditor.startEditing(128));
 
 		container.addChild(new Label("seed count"));
 		seedCountEditor = new TextFieldValueEditor<>(new ObjectToString(), new StringToInteger());
@@ -50,6 +58,12 @@ public class SpiralSeedSourceConfiguration implements SeedSourceConfiguration {
 
 	@Override
 	public SeedSource seedSource() {
-		return new SpiralSeedSource(armsEditor.getObject(), seedCountEditor.getObject(), radiusEditor.getObject(), seedEditor.getObject());
+		return new SpiralSeedSource(
+				armsEditor.getObject(),
+				armPivotsEditor.getObject(),
+				seedCountEditor.getObject(),
+				radiusEditor.getObject(),
+				seedEditor.getObject()
+		);
 	}
 }

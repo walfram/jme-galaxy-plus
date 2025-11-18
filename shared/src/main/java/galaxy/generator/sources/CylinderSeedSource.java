@@ -20,14 +20,16 @@ public class CylinderSeedSource implements SeedSource {
 	private final int seedCount;
 	private final Vector3f from;
 	private final Vector3f to;
-	private final float radius;
+	private final float cylinderRadius;
+	private final float maxDistanceFromCenter;
 	private final Generator random;
 
-	public CylinderSeedSource(int seedCount, Vector3f from, Vector3f vector3f, float radius, Generator random) {
+	public CylinderSeedSource(int seedCount, Vector3f from, Vector3f to, float cylinderRadius, float maxDistanceFromCenter, Generator random) {
 		this.seedCount = seedCount;
 		this.from = from;
-		to = vector3f;
-		this.radius = radius;
+		this.to = to;
+		this.cylinderRadius = cylinderRadius;
+		this.maxDistanceFromCenter = maxDistanceFromCenter;
 		this.random = random;
 	}
 
@@ -35,21 +37,21 @@ public class CylinderSeedSource implements SeedSource {
 	public List<Vector3f> points() {
 		List<Vector3f> points = new ArrayList<>(seedCount);
 
-		Vector3f vector = to.subtract(from);
+		Vector3f baseDirection = to.subtract(from);
 
-		float invertedDistanceRatio = Math.max(0.25f, 1f - (from.length() / radius));
-		logger.debug("from.length = {}, distance ratio = {}", from.length(), invertedDistanceRatio);
+		float invertedDistanceRatio = Math.max(0.125f, 1f - (from.length() / maxDistanceFromCenter));
 
 		for (int j = 0; j < seedCount; j++) {
 			Vector3f p = new Vector3f();
-			MyVector3f.generateBasis(vector.clone(), p, new Vector3f());
+			MyVector3f.generateBasis(baseDirection.clone(), p, new Vector3f());
 
 			float theta = random.nextFloat(0, FastMath.TWO_PI);
 
-			Vector3f rotated = new Quaternion().fromAngleAxis(theta, vector).mult(p);
-			rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * radius));
+			Vector3f rotated = new Quaternion().fromAngleAxis(theta, baseDirection).mult(p);
+//			rotated.multLocal(random.nextFloat(0, invertedDistanceRatio * cylinderRadius));
+			rotated.multLocal(random.nextFloat(0, cylinderRadius));
 
-			Vector3f offset = vector.mult(random.nextFloat());
+			Vector3f offset = baseDirection.mult(random.nextFloat());
 			points.add(rotated.add(from.add(offset)));
 		}
 

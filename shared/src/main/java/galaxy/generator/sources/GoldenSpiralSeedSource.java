@@ -69,7 +69,10 @@ public class GoldenSpiralSeedSource implements SeedSource {
 			for (int i = 0; i < armPivots.size() - 2; i++) {
 				Vector3f from = armPivots.get(i);
 				Vector3f to = armPivots.get(i + 1);
-				SeedSource source = new CylinderSeedSource(count, from, to, 20f, random);
+				SeedSource source = new ConstrainedDistanceSeedSource(
+						new CylinderSeedSource(count, from, to, 20f, (float) radius, random),
+						from, to, (float) radius, random
+				);
 				points.addAll(source.points());
 			}
 		}

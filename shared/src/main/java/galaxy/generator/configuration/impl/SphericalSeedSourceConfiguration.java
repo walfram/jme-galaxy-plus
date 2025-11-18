@@ -28,7 +28,7 @@ public class SphericalSeedSourceConfiguration implements SeedSourceConfiguration
 
 		container.addChild(new Label("radius (scale)"));
 		radiusEditor = ValueEditors.doubleEditor("%.02f");
-		radiusEditor.startEditing(128.0);
+		radiusEditor.startEditing(256.0);
 		container.addChild(radiusEditor.getEditor());
 
 		container.addChild(new Label("seed"));

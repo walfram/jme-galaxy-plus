@@ -62,6 +62,12 @@ public class CylinderSeedSourceConfiguration implements SeedSourceConfiguration 
 		Vector3f from = vector.mult((float) length).negate();
 		Vector3f to = vector.mult((float) length);
 
-		return new CylinderSeedSource(seedCountEditor.getObject(), from, to, radiusEditor.getObject().floatValue(), new Generator(seedEditor.getObject()));
+		return new CylinderSeedSource(
+				seedCountEditor.getObject(),
+				from,
+				to,
+				radiusEditor.getObject().floatValue(),
+				radiusEditor.getObject().floatValue(),
+				new Generator(seedEditor.getObject()));
 	}
 }

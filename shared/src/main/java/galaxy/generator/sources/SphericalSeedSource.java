@@ -9,12 +9,12 @@ import java.util.List;
 
 public class SphericalSeedSource implements SeedSource {
 	private final int seedCount;
-	private final double radius;
+	private final float radius;
 	private final long seed;
 
 	public SphericalSeedSource(int seedCount, double radius, long seed) {
 		this.seedCount = seedCount;
-		this.radius = radius;
+		this.radius = (float) radius;
 		this.seed = seed;
 	}
 
@@ -24,7 +24,7 @@ public class SphericalSeedSource implements SeedSource {
 		Generator random = new Generator(seed);
 
 		for (int i = 0; i < seedCount; i++) {
-			points.add(random.nextVector3f().mult((float) radius));
+			points.add(random.nextVector3f().mult(radius));
 		}
 
 		return points;

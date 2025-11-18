@@ -22,8 +22,8 @@ public class GeneratorViewState extends BaseAppState {
 		chaseCamera.setUpVector(Vector3f.UNIT_Y);
 		chaseCamera.setInvertVerticalAxis(true);
 
-		chaseCamera.setMaxDistance(512f);
-		chaseCamera.setDefaultDistance(256f);
+		chaseCamera.setMaxDistance(4096f);
+		chaseCamera.setDefaultDistance(512f);
 		chaseCamera.setZoomSensitivity(8f);
 	}
 
