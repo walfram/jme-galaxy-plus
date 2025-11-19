@@ -22,13 +22,13 @@ public class NewGameDialog extends Container {
 	public NewGameDialog(Button accept, Button cancel) {
 		super();
 
-		Label header = addChild(new Label("Configure game", new ElementId("header")));
+		Label header = addChild(new Label("Configure game", new ElementId("title")));
 		header.setMaxWidth(256f);
 
 		Container form = addChild(new Container());
 
 		form.addChild(new Label("Race count spinner"));
-		raceCount = form.addChild(new Spinner<>(new SequenceModels.ListSequence<>(IntStream.range(2, 128).boxed().toList(), 24)), 1);
+		raceCount = form.addChild(new Spinner<>(new SequenceModels.ListSequence<>(IntStream.range(2, 128).boxed().toList(), 8)), 1);
 		raceCountRef = raceCount.getModel().createReference();
 
 		form.addChild(new Label("Planets per race"));

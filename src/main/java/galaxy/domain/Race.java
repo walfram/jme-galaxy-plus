@@ -99,7 +99,7 @@ public class Race {
 		planet.updateOwner(this);
 	}
 
-	public Optional<Planet> planet(String planetId) {
+	public Optional<Planet> planet(Long planetId) {
 		return planets.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
 

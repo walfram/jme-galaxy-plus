@@ -18,7 +18,7 @@ public class PlanetInfoWidget extends Container {
 
 		setName(NAME);
 
-		addChild(new Label("Planet %s".formatted(planet.name()), new ElementId("header")));
+		addChild(new Label("Planet %s".formatted(planet.name()), new ElementId("title")));
 
 		Container body = addChild(new Container());
 

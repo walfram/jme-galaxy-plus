@@ -5,10 +5,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
-import com.simsilica.lemur.Axis;
-import com.simsilica.lemur.Button;
-import com.simsilica.lemur.Container;
-import com.simsilica.lemur.Label;
+import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.event.PopupState;
 import com.simsilica.lemur.style.ElementId;
@@ -56,7 +53,7 @@ public class MainGameState extends BaseAppState {
 	private void onExitClick(Button button) {
 		Container dialog = new Container();
 
-		Label header = dialog.addChild(new Label("Confirm", new ElementId("header")));
+		Label header = dialog.addChild(new Label("Confirm", new ElementId("title")));
 		header.setMaxWidth(256f);
 
 		dialog.addChild(new Label("Are you sure you want to exit?"));
@@ -68,13 +65,8 @@ public class MainGameState extends BaseAppState {
 		});
 		actions.addChild(new Button("no")).addClickCommands(cmd -> getState(PopupState.class).closePopup(dialog));
 
-		dialog.setLocalTranslation(
-				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
-				getApplication().getCamera().getHeight() * 0.5f + dialog.getPreferredSize().y * 0.5f,
-				0f
-		);
-
-		getState(PopupState.class).showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().centerInGui(dialog);
 	}
 
 	@Override

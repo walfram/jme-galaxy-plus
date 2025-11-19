@@ -58,7 +58,9 @@ public class GalaxyContextState extends BaseAppState {
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());
 
-		planets.forEach(p -> logger.info("planet = {}", p));
+		// assign players
+
+//		planets.forEach(p -> logger.info("planet = {}", p));
 
 		List<Vector3f> points = seedSource.points();
 		Geometry debug = new Geometry("debug-seed-points", new DebugPointMesh(points));
@@ -83,5 +85,10 @@ public class GalaxyContextState extends BaseAppState {
 	@Override
 	protected void onDisable() {
 		 ((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
+	}
+
+	public Race player() {
+		// TODO refactor
+		return races.get(0);
 	}
 }

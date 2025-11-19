@@ -18,10 +18,11 @@ public class MainMenuState extends BaseAppState {
 	protected void initialize(Application application) {
 		Container main = new Container();
 
-		Label header = main.addChild(new Label("jme galaxy+", new ElementId("header")));
+		Label header = main.addChild(new Label("jme galaxy+", new ElementId("title")));
 		header.setMaxWidth(320f);
 
 		main.addChild(new Button("new game")).addClickCommands(this::onStartNewGameClick);
+		main.addChild(new Button("load game")).addClickCommands(this::onLoadGameClick);
 		main.addChild(new Button("settings"));
 		main.addChild(new Button("exit")).addClickCommands(this::onExitClick);
 
@@ -31,6 +32,10 @@ public class MainMenuState extends BaseAppState {
 				application.getCamera().getHeight() / 2f + main.getPreferredSize().y / 2f,
 				0f
 		);
+	}
+
+	private void onLoadGameClick(Button button) {
+
 	}
 
 	private void onStartNewGameClick(Button button) {
@@ -45,19 +50,14 @@ public class MainMenuState extends BaseAppState {
 			getState(MainGameState.class).setEnabled(true);
 		});
 
-		newGameDialog.setLocalTranslation(
-				getApplication().getCamera().getWidth() * 0.5f - newGameDialog.getPreferredSize().x * 0.5f,
-				getApplication().getCamera().getHeight() * 0.5f + newGameDialog.getPreferredSize().y * 0.5f,
-				0f
-		);
-
 		GuiGlobals.getInstance().getPopupState().showModalPopup(newGameDialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().centerInGui(newGameDialog);
 	}
 
 	private void onExitClick(Button button) {
 		Container dialog = new Container();
 
-		Label header = dialog.addChild(new Label("Exit?", new ElementId("header")));
+		Label header = dialog.addChild(new Label("Exit?", new ElementId("title")));
 		header.setMaxWidth(256f);
 
 		dialog.addChild(new Label("Are you sure you want to exit?"));
@@ -66,13 +66,8 @@ public class MainMenuState extends BaseAppState {
 		actions.addChild(new Button("yes")).addClickCommands(cmd -> getApplication().stop(true));
 		actions.addChild(new Button("no")).addClickCommands(cmd -> GuiGlobals.getInstance().getPopupState().closePopup(dialog));
 
-		dialog.setLocalTranslation(
-				getApplication().getCamera().getWidth() * 0.5f - dialog.getPreferredSize().x * 0.5f,
-				getApplication().getCamera().getHeight() * 0.5f + dialog.getPreferredSize().y * 0.5f,
-				0f
-		);
-
 		GuiGlobals.getInstance().getPopupState().showModalPopup(dialog, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
+		GuiGlobals.getInstance().getPopupState().centerInGui(dialog);
 	}
 
 	@Override
