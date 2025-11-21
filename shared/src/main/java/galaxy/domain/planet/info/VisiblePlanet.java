@@ -4,6 +4,8 @@ import galaxy.domain.PlanetId;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetInfo;
 import galaxy.domain.planet.PlanetProperty;
+import galaxy.domain.planet.properties.Coordinates;
+import galaxy.domain.planet.properties.Size;
 
 import java.util.List;
 
@@ -27,5 +29,20 @@ public class VisiblePlanet implements PlanetInfo {
 				planet.effort(),
 				planet.production()
 		);
+	}
+
+	@Override
+	public Long id() {
+		return 0L;
+	}
+
+	@Override
+	public Coordinates coordinates() {
+		return null;
+	}
+
+	@Override
+	public Size size() {
+		return null;
 	}
 }

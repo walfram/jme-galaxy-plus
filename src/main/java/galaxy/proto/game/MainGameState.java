@@ -79,7 +79,7 @@ public class MainGameState extends BaseAppState {
 
 		((SimpleApplication) getApplication()).getGuiNode().attachChild(gameMenuNode);
 
-		states.add(new GalaxyContextState(gameConfig));
+		states.add(new SinglePlayerGalaxyState(gameConfig));
 		states.add(new GalaxyCameraState());
 		states.add(new GalaxyViewState());
 		states.add(new GalaxyUiState());

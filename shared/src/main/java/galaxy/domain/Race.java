@@ -99,8 +99,19 @@ public class Race {
 		planet.updateOwner(this);
 	}
 
-	public Optional<Planet> planet(Long planetId) {
+	public Optional<Planet> ownedPlanet(Long planetId) {
 		return planets.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
 
+	public Optional<Planet> visiblePlanet(Long planetId) {
+		return Optional.empty();
+	}
+
+	public Optional<Planet> visitedPlanet(Long planetId) {
+		return Optional.empty();
+	}
+
+	public List<Planet> ownedPlanets() {
+		return List.of();
+	}
 }

@@ -17,18 +17,18 @@ class PlayerTest {
 		Race race = Mockito.mock(Race.class);
 		Planet mockedPlanet = Mockito.mock(Planet.class);
 
-		when(race.planet(anyLong())).thenReturn(Optional.of(mockedPlanet));
+		when(race.ownedPlanet(anyLong())).thenReturn(Optional.of(mockedPlanet));
 
-		Player player = Mockito.mock(Player.class);
+		Race player = Mockito.mock(Race.class);
 
 		Long homeworldId = 1L;
-		Optional<Planet> planet = race.planet(homeworldId);
+		Optional<Planet> planet = race.ownedPlanet(homeworldId);
 
-		Command makeShipTemplate = Mockito.mock(Command.class);
-		player.exec(makeShipTemplate, planet.get());
+//		Command makeShipTemplate = Mockito.mock(Command.class);
+//		player.exec(makeShipTemplate, planet.get());
 
-		Command buildShip = Mockito.mock(Command.class);
-		player.exec(buildShip, planet.get());
+//		Command buildShip = Mockito.mock(Command.class);
+//		player.exec(buildShip, planet.get());
 	}
 
 }

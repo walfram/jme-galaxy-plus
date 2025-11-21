@@ -4,7 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import galaxy.proto.game.GalaxyCameraState;
-import galaxy.proto.game.GalaxyContextState;
+import galaxy.proto.game.SinglePlayerGalaxyState;
 import galaxy.proto.game.GalaxyUiState;
 import galaxy.proto.game.GalaxyViewState;
 import galaxy.proto.menu.GameConfig;
@@ -33,7 +33,7 @@ public class GalaxyDevMain extends SimpleApplication {
 
 		GameConfig gameConfig = new GameConfig(8, 10);
 
-		stateManager.attach(new GalaxyContextState(gameConfig));
+		stateManager.attach(new SinglePlayerGalaxyState(gameConfig));
 		stateManager.attach(new GalaxyCameraState());
 		stateManager.attach(new GalaxyViewState());
 		stateManager.attach(new GalaxyUiState());

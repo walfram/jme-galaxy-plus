@@ -7,11 +7,13 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import galaxy.domain.AiPlayer;
-import galaxy.domain.HumanPlayer;
-import galaxy.domain.Player;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
+import galaxy.domain.planet.PlanetInfo;
+import galaxy.domain.planet.info.OwnedPlanet;
+import galaxy.domain.planet.info.UnknownPlanet;
+import galaxy.domain.planet.info.VisiblePlanet;
+import galaxy.domain.planet.info.VisitedPlanet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
 import galaxy.generator.simple.SimplePlanetGenerator;
@@ -27,19 +29,20 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class GalaxyContextState extends BaseAppState {
+public class SinglePlayerGalaxyState extends BaseAppState {
 
-	private static final Logger logger = getLogger(GalaxyContextState.class);
+	private static final Logger logger = getLogger(SinglePlayerGalaxyState.class);
 
 	private final Node debugNode = new Node("galaxy-context-debug-node");
 
-	private final List<Player> players = new ArrayList<>(128);
+	private Race player;
+
 	private final List<Race> races = new ArrayList<>(128);
 	private final List<Planet> planets = new ArrayList<>(1024);
 
 	private final GameConfig gameConfig;
 
-	public GalaxyContextState(GameConfig gameConfig) {
+	public SinglePlayerGalaxyState(GameConfig gameConfig) {
 		this.gameConfig = gameConfig;
 	}
 
@@ -54,6 +57,8 @@ public class GalaxyContextState extends BaseAppState {
 			logger.info("race = {}", race);
 		}
 
+		player = races.getFirst();
+
 		Generator random = new Generator();
 		int seedCount = (int) (16384 * races.size() * 0.1);
 		double scale = 256 * races.size() * 0.1;
@@ -62,10 +67,6 @@ public class GalaxyContextState extends BaseAppState {
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());
 
-		// assign players
-		players.add(new HumanPlayer(races.getFirst()));
-		races.stream().skip(1).forEach(race -> players.add(new AiPlayer(race)));
-
 //		planets.forEach(p -> logger.info("planet = {}", p));
 
 		List<Vector3f> points = seedSource.points();
@@ -73,10 +74,6 @@ public class GalaxyContextState extends BaseAppState {
 		debug.setMaterial(new UnshadedMaterial(app.getAssetManager(), ColorRGBA.Red));
 		debug.getMaterial().setFloat("PointSize", 1f);
 //		debugNode.attachChild(debug);
-	}
-
-	public List<Planet> planets() {
-		return List.copyOf(planets);
 	}
 
 	@Override
@@ -94,7 +91,23 @@ public class GalaxyContextState extends BaseAppState {
 	}
 
 	public Race player() {
-		// TODO refactor
-		return races.get(0);
+		return player;
+	}
+
+	public List<PlanetInfo> planetList(Race race) {
+		return planets.stream()
+				.map(p -> {
+							if (race.ownedPlanet(p.id()).isPresent()) {
+								return new OwnedPlanet(p);
+							} else if (race.visiblePlanet(p.id()).isPresent()) {
+								return new VisiblePlanet(p);
+							} else if (race.visitedPlanet(p.id()).isPresent()) {
+								return new VisitedPlanet(p);
+							} else {
+								return new UnknownPlanet(p);
+							}
+						}
+				)
+				.toList();
 	}
 }

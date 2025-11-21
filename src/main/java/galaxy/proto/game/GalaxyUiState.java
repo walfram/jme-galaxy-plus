@@ -23,7 +23,7 @@ public class GalaxyUiState extends BaseAppState {
 		Label header = mainMenu.addChild(new Label("main menu", new ElementId("title")));
 		header.setMaxWidth(160f);
 
-		mainMenu.addChild(new Button("planets")).addClickCommands(this::showPlanetList);
+		mainMenu.addChild(new Button("my planets")).addClickCommands(this::showPlanetList);
 		mainMenu.addChild(new Button("ship designs"));
 		mainMenu.addChild(new Button("ships"));
 		mainMenu.addChild(new Button("routes"));
@@ -49,7 +49,7 @@ public class GalaxyUiState extends BaseAppState {
 		panel.addChild(new Label("Materials", new ElementId("title")), 7);
 		panel.addChild(new Label("Effort", new ElementId("title")), 8);
 
-		getState(GalaxyContextState.class).player().planets().forEach(planet -> {
+		getState(SinglePlayerGalaxyState.class).player().ownedPlanets().forEach(planet -> {
 			panel.addChild(new Label(String.valueOf(planet.id())));
 			panel.addChild(new Label(planet.name()), 1);
 			panel.addChild(new Label(new FormattedCoordinates(planet.coordinates()).value()), 2);

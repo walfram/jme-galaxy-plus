@@ -11,7 +11,8 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.simsilica.lemur.event.DefaultMouseListener;
 import com.simsilica.lemur.event.MouseEventControl;
-import galaxy.domain.planet.Planet;
+import galaxy.domain.Race;
+import galaxy.domain.planet.PlanetInfo;
 import galaxy.proto.controls.PlanetRefControl;
 import galaxy.shared.material.ShowNormalsMaterial;
 import jme3utilities.mesh.Icosphere;
@@ -35,7 +36,8 @@ public class GalaxyViewState extends BaseAppState {
 		Mesh mesh = new Icosphere(1, 1f);
 		Material material = new ShowNormalsMaterial(app.getAssetManager());
 
-		List<Planet> planets = getState(GalaxyContextState.class).planets();
+		Race player = getState(SinglePlayerGalaxyState.class).player();
+		List<PlanetInfo> planets = getState(SinglePlayerGalaxyState.class).planetList(player);
 
 		planets.forEach(planet -> {
 			Geometry geometry = new Geometry("p-%s".formatted(planet.id()), mesh);
@@ -63,7 +65,6 @@ public class GalaxyViewState extends BaseAppState {
 
 	@Override
 	protected void cleanup(Application app) {
-
 	}
 
 	@Override

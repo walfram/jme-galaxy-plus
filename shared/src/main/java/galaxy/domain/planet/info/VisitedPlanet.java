@@ -1,6 +1,5 @@
 package galaxy.domain.planet.info;
 
-import galaxy.domain.PlanetId;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetInfo;
 import galaxy.domain.planet.PlanetProperty;
@@ -9,19 +8,14 @@ import galaxy.domain.planet.properties.Size;
 
 import java.util.List;
 
-public class UnknownPlanet implements PlanetInfo {
-	private final Planet planet;
+public class VisitedPlanet implements PlanetInfo {
+	public VisitedPlanet(Planet source) {
 
-	public UnknownPlanet(Planet planet) {
-		this.planet = planet;
 	}
 
 	@Override
 	public List<PlanetProperty> properties() {
-		return List.of(
-				new PlanetId(planet.id()),
-				planet.coordinates()
-		);
+		return List.of();
 	}
 
 	@Override
