@@ -1,7 +1,8 @@
-package galaxy.domain.planet;
+package galaxy.domain.planet.properties;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jme3.math.Vector3f;
+import galaxy.domain.planet.PlanetProperty;
 
 public record Coordinates(double x, double y, double z) implements PlanetProperty {
 

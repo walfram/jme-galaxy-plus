@@ -2,10 +2,10 @@ package galaxy.domain.ship;
 
 import galaxy.domain.Fixtures;
 import galaxy.domain.Race;
-import galaxy.domain.planet.Effort;
-import galaxy.domain.planet.Industry;
+import galaxy.domain.planet.properties.Effort;
+import galaxy.domain.planet.properties.Industry;
 import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.Population;
+import galaxy.domain.planet.properties.Population;
 import galaxy.domain.production.Production;
 import galaxy.domain.production.ShipProduction;
 import galaxy.domain.technology.*;

@@ -6,9 +6,9 @@ import com.google.common.io.Resources;
 import galaxy.domain.Galaxy;
 import galaxy.domain.GalaxyContext;
 import galaxy.domain.Race;
-import galaxy.domain.planet.Coordinates;
+import galaxy.domain.planet.properties.Coordinates;
 import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.Size;
+import galaxy.domain.planet.properties.Size;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,7 @@ public class ContextTest {
 				planetNode.get("id").asLong(),
 				new Coordinates(planetNode.get("coordinates")),
 				new Size(planetNode.get("size").asDouble()),
-				new galaxy.domain.planet.Resources(planetNode.get("resources").asDouble())
+				new galaxy.domain.planet.properties.Resources(planetNode.get("resources").asDouble())
 		)));
 
 		assertEquals(40, planets.size());

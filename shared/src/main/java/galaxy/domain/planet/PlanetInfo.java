@@ -1,6 +1,4 @@
-package galaxy.domain;
-
-import galaxy.domain.planet.PlanetProperty;
+package galaxy.domain.planet;
 
 import java.util.List;
 

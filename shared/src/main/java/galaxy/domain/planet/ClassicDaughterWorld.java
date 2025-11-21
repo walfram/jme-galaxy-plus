@@ -1,5 +1,6 @@
 package galaxy.domain.planet;
 
+import galaxy.domain.planet.properties.*;
 import galaxy.domain.production.CapitalProduction;
 
 public class ClassicDaughterWorld extends Planet {

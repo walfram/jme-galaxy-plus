@@ -2,6 +2,7 @@ package galaxy.domain.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import galaxy.domain.planet.properties.*;
 import jme3utilities.math.noise.Generator;
 import org.junit.jupiter.api.Test;
 

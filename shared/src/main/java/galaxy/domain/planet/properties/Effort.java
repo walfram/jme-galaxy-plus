@@ -1,4 +1,6 @@
-package galaxy.domain.planet;
+package galaxy.domain.planet.properties;
+
+import galaxy.domain.planet.PlanetProperty;
 
 public record Effort(Industry industry, Population population) implements PlanetProperty {
 

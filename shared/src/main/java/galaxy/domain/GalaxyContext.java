@@ -1,6 +1,9 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.Planet;
+import galaxy.domain.planet.info.VisiblePlanet;
+import galaxy.domain.planet.PlanetInfo;
+import galaxy.domain.planet.info.UnknownPlanet;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ public class GalaxyContext implements Galaxy {
 	@Override
 	public PlanetInfo planetInfo(Race race, Planet planet) {
 		if (race.planets().contains(planet))
-			return new OwnedPlanet(planet);
+			return new VisiblePlanet(planet);
 
 //		if (race.monitoring(planet))
 //			return new VisiblePlanet(planet);

@@ -2,6 +2,7 @@ package galaxy.generator;
 
 import com.jme3.math.Vector3f;
 import galaxy.domain.planet.*;
+import galaxy.domain.planet.properties.*;
 import jme3utilities.math.noise.Generator;
 
 public record PlanetTemplate(

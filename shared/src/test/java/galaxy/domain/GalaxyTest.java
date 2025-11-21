@@ -1,6 +1,8 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.*;
+import galaxy.domain.planet.PlanetInfo;
+import galaxy.domain.planet.properties.Coordinates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

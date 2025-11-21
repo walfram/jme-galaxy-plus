@@ -1,6 +1,10 @@
 package galaxy.domain.production;
 
 import galaxy.domain.planet.*;
+import galaxy.domain.planet.properties.Colonists;
+import galaxy.domain.planet.properties.Coordinates;
+import galaxy.domain.planet.properties.Industry;
+import galaxy.domain.planet.properties.Materials;
 import galaxy.domain.technology.EnginesTechnology;
 import galaxy.domain.technology.Technology;
 import org.junit.jupiter.api.Test;

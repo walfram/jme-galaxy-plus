@@ -1,4 +1,4 @@
-package galaxy.domain.planet;
+package galaxy.domain.planet.properties;
 
 public record Colonists(Population population, Size size) {
 

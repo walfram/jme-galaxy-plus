@@ -1,6 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.*;
+import galaxy.domain.planet.properties.*;
 import galaxy.domain.ship.*;
 import galaxy.domain.technology.*;
 

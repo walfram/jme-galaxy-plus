@@ -4,7 +4,7 @@ import com.jme3.math.Vector3f;
 import galaxy.domain.Race;
 import galaxy.domain.planet.ClassicDaughterWorld;
 import galaxy.domain.planet.ClassicHomeWorld;
-import galaxy.domain.planet.Coordinates;
+import galaxy.domain.planet.properties.Coordinates;
 import galaxy.domain.planet.Planet;
 import galaxy.generator.*;
 import jme3utilities.math.noise.Generator;

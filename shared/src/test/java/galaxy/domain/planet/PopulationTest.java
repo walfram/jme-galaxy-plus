@@ -1,5 +1,6 @@
 package galaxy.domain.planet;
 
+import galaxy.domain.planet.properties.Population;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

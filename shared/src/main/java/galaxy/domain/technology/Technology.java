@@ -1,6 +1,6 @@
 package galaxy.domain.technology;
 
-import galaxy.domain.planet.Effort;
+import galaxy.domain.planet.properties.Effort;
 
 import java.util.Objects;
 

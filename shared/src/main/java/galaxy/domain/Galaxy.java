@@ -1,6 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.Planet;
+import galaxy.domain.planet.PlanetInfo;
 
 import java.util.List;
 

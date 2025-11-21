@@ -1,6 +1,7 @@
 package galaxy.domain.planet;
 
 import galaxy.domain.Race;
+import galaxy.domain.planet.properties.*;
 import galaxy.domain.production.Production;
 
 public class Planet {

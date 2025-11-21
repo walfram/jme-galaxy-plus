@@ -1,6 +1,7 @@
-package galaxy.domain.planet;
+package galaxy.domain.planet.properties;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.domain.planet.PlanetProperty;
 
 public final class Population implements PlanetProperty {
 
