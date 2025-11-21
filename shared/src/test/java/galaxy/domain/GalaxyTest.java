@@ -1,15 +1,11 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.*;
-import galaxy.domain.production.TechnologyProduction;
-import galaxy.domain.technology.EnginesTechnology;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
