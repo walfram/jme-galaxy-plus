@@ -9,6 +9,14 @@ repositories {
     mavenCentral()
 }
 
+subprojects {
+    // Set the build directory lazily using DirectoryProperty
+    layout.buildDirectory.set(file("${rootProject.projectDir}/build/${project.name}"))
+}
+
+// Optional: also set the root project's directory
+rootProject.layout.buildDirectory.set(file("${rootProject.projectDir}/build/root"))
+
 dependencies {
     // Core dependencies using bundles and individual accessors
     implementation libs.bundles.jme.base

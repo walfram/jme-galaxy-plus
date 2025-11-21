@@ -7,12 +7,15 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import galaxy.domain.AiPlayer;
+import galaxy.domain.HumanPlayer;
+import galaxy.domain.Player;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
-import galaxy.generator.sources.SimpleSeedSource;
 import galaxy.generator.simple.SimplePlanetGenerator;
+import galaxy.generator.sources.SimpleSeedSource;
 import galaxy.proto.menu.GameConfig;
 import galaxy.shared.debug.DebugPointMesh;
 import galaxy.shared.material.UnshadedMaterial;
@@ -30,6 +33,7 @@ public class GalaxyContextState extends BaseAppState {
 
 	private final Node debugNode = new Node("galaxy-context-debug-node");
 
+	private final List<Player> players = new ArrayList<>(128);
 	private final List<Race> races = new ArrayList<>(128);
 	private final List<Planet> planets = new ArrayList<>(1024);
 
@@ -59,6 +63,8 @@ public class GalaxyContextState extends BaseAppState {
 		planets.addAll(simple.planets());
 
 		// assign players
+		players.add(new HumanPlayer(races.getFirst()));
+		races.stream().skip(1).forEach(race -> players.add(new AiPlayer(race)));
 
 //		planets.forEach(p -> logger.info("planet = {}", p));
 
@@ -79,12 +85,12 @@ public class GalaxyContextState extends BaseAppState {
 
 	@Override
 	protected void onEnable() {
-		 ((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
+		((SimpleApplication) getApplication()).getRootNode().attachChild(debugNode);
 	}
 
 	@Override
 	protected void onDisable() {
-		 ((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
+		((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
 	}
 
 	public Race player() {

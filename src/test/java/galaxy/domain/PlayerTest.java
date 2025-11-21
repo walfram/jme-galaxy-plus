@@ -6,12 +6,18 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+
 class PlayerTest {
 
 	@Test
 	void test_player_initial_commands() {
 		// Race is wrapper for set of planets/ships/etc?
 		Race race = Mockito.mock(Race.class);
+		Planet mockedPlanet = Mockito.mock(Planet.class);
+
+		when(race.planet(anyLong())).thenReturn(Optional.of(mockedPlanet));
 
 		Player player = Mockito.mock(Player.class);
 
