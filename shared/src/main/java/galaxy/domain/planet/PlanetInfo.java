@@ -5,12 +5,26 @@ import galaxy.domain.planet.properties.Size;
 
 import java.util.List;
 
-public interface PlanetInfo {
-	List<PlanetProperty> properties();
+public abstract class PlanetInfo {
 
-	Long id();
+	protected final Planet source;
 
-	Coordinates coordinates();
+	public PlanetInfo(Planet source) {
+		this.source = source;
+	}
 
-	Size size();
+	public abstract List<PlanetProperty> properties();
+
+	public Long id() {
+		return source.id();
+	}
+
+	public Coordinates coordinates() {
+		return source.coordinates();
+	}
+
+	public Size size() {
+		return source.size();
+	}
+
 }

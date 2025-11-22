@@ -1,8 +1,11 @@
 package galaxy.domain.planet;
 
+import galaxy.domain.PlanetId;
 import galaxy.domain.Race;
 import galaxy.domain.planet.properties.*;
 import galaxy.domain.production.Production;
+
+import java.util.List;
 
 public class Planet {
 
@@ -131,4 +134,17 @@ public class Planet {
 		return production;
 	}
 
+	public List<PlanetProperty> properties() {
+		return List.of(
+				new PlanetId(id),
+				coordinates,
+				size,
+				resources,
+				industry,
+				materials,
+				population,
+				effort(),
+				production
+		);
+	}
 }
