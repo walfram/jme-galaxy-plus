@@ -10,6 +10,8 @@
 <!--    <logger name="com.simsilica.lemur.Container" level="TRACE" />-->
 <!--    <logger name="com.simsilica.lemur.style" level="TRACE" />-->
 
+    <logger name="galaxy" level="TRACE" />
+
     <!-- Root logger -->
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
