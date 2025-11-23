@@ -57,14 +57,14 @@ public class GalaxyViewState extends BaseAppState {
 
 			galaxyViewNode.attachChild(geometry);
 
-			MouseEventControl.addListenersToSpatial(geometry, new DefaultMouseListener() {
-				@Override
-				protected void click(MouseButtonEvent event, Spatial target, Spatial capture) {
-					logger.info("click on target={}, capture={}", target, capture);
-					getState(GalaxyCameraState.class).centerOn(capture);
-					getState(GalaxyUiState.class).showPlanetInfo(capture);
-				}
-			});
+//			MouseEventControl.addListenersToSpatial(geometry, new DefaultMouseListener() {
+//				@Override
+//				protected void click(MouseButtonEvent event, Spatial target, Spatial capture) {
+//					logger.info("click on target={}, capture={}", target, capture);
+//					getState(GalaxyCameraState.class).centerOn(capture);
+//					getState(GalaxyUiState.class).showPlanetInfo(capture);
+//				}
+//			});
 
 			planetCache.put(planet.id(), geometry);
 		});

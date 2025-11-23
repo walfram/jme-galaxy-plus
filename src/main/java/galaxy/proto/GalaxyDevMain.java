@@ -3,10 +3,7 @@ package galaxy.proto;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import galaxy.proto.game.GalaxyCameraState;
-import galaxy.proto.game.SinglePlayerGalaxyState;
-import galaxy.proto.game.GalaxyUiState;
-import galaxy.proto.game.GalaxyViewState;
+import galaxy.proto.game.*;
 import galaxy.proto.menu.GameConfig;
 import galaxy.shared.InitLemurState;
 import jme3utilities.MyCamera;
@@ -23,6 +20,7 @@ public class GalaxyDevMain extends SimpleApplication {
 		flyCam.setDragToRotate(true);
 		flyCam.setZoomSpeed(0f);
 		flyCam.setMoveSpeed(100f);
+		flyCam.setEnabled(false);
 
 		cam.setLocation(new Vector3f(113.60284f, 119.175354f, 514.4556f));
 		cam.setRotation(new Quaternion(-0.013032904f, 0.9867039f, -0.12545282f, -0.102504544f));
@@ -37,5 +35,6 @@ public class GalaxyDevMain extends SimpleApplication {
 		stateManager.attach(new GalaxyCameraState());
 		stateManager.attach(new GalaxyViewState());
 		stateManager.attach(new GalaxyUiState());
+		stateManager.attach(new InputManagementState());
 	}
 }
