@@ -4,7 +4,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.input.*;
-import jme3utilities.math.MyVector3f;
 import org.slf4j.Logger;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -23,6 +22,7 @@ public class InputManagementState extends BaseAppState {
 	private static final FunctionId FUNC_HIDE_CURSOR = new FunctionId(GROUP_CAMERA_MOVEMENT, "hide-cursor");
 	private static final FunctionId FUNC_CAMERA_ROTATE = new FunctionId(GROUP_CAMERA_MOVEMENT, "camera-rotate");
 	private static final FunctionId FUNC_CAMERA_PITCH = new FunctionId(GROUP_CAMERA_MOVEMENT, "camera-pitch");
+	private static final FunctionId FUNC_CAMERA_ZOOM = new FunctionId(GROUP_CAMERA_MOVEMENT, "zoom");
 
 	private boolean dragging = false;
 
@@ -49,11 +49,11 @@ public class InputManagementState extends BaseAppState {
 			}
 		}, FUNC_CAMERA_ROTATE, FUNC_CAMERA_PITCH);
 
+		inputMapper.map(FUNC_CAMERA_ZOOM, Axis.MOUSE_WHEEL);
+		inputMapper.addAnalogListener((func, value, tpf) -> getState(GalaxyCameraState.class).zoom(value, tpf), FUNC_CAMERA_ZOOM);
+
 		inputMapper.map(FUNC_TOGGLE_DRAG, Button.MOUSE_BUTTON1);
-		inputMapper.addStateListener((state, value, tpf) -> {
-			dragging = value != InputState.Off;
-			logger.debug("state = {}, value = {}, dragging = {}", state, value, dragging);
-		}, FUNC_TOGGLE_DRAG);
+		inputMapper.addStateListener((state, value, tpf) -> dragging = value != InputState.Off, FUNC_TOGGLE_DRAG);
 
 //		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_X, Button.MOUSE_BUTTON1);
 //		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_Y, Button.MOUSE_BUTTON1);

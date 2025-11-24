@@ -70,7 +70,7 @@ public class GalaxyViewState extends BaseAppState {
 		});
 
 		Planet playerHome = player.planets().stream().filter(p -> p.size().value() == 1000.0).findFirst().orElseThrow();
-		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.id()));
+		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.id()), 64f);
 	}
 
 	@Override
