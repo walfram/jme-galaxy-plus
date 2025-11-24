@@ -109,9 +109,9 @@ public class GalaxyCameraState extends BaseAppState {
 
 		Vector3f vector = location.subtract(target);
 
-		float angle = (float) (value * tpf);
+		float angle = -1f * (float) (value * tpf);
 
-		Quaternion rotation = new Quaternion().fromAngleNormalAxis(angle, Vector3f.UNIT_X);
+		Quaternion rotation = new Quaternion().fromAngleNormalAxis(angle, getApplication().getCamera().getLeft());
 		Vector3f rotated = rotation.mult(vector);
 
 		getApplication().getCamera().setLocation(rotated.add(target));
