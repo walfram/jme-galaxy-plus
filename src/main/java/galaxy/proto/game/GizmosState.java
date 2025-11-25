@@ -26,7 +26,10 @@ public class GizmosState extends BaseAppState {
 
 	private final Node gizmosNode = new Node("galaxy-view-gizmos-scene");
 
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	private Optional<CollisionResult> start = Optional.empty();
+
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	private Optional<CollisionResult> end = Optional.empty();
 
 	@Override
