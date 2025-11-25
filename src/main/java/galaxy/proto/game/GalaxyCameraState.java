@@ -6,6 +6,7 @@ import com.jme3.app.state.BaseAppState;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.simsilica.lemur.anim.AnimationState;
@@ -52,13 +53,16 @@ public class GalaxyCameraState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyViewDebugNode);
 	}
 
+	public void centerOn(Spatial spatial) {
+		 float distance = cameraTarget.getWorldTranslation().distance(getApplication().getCamera().getLocation());
+		 distance = FastMath.clamp(distance, CAMERA_MIN_DISTANCE, CAMERA_MAX_DISTANCE);
+		 centerOn(spatial, distance);
+	}
+
 	public void centerOn(Spatial target, float distance) {
 		if (currentAnimation != null) {
 			getState(AnimationState.class).cancel(currentAnimation);
 		}
-
-		// float distance = cameraTarget.getWorldTranslation().distance(getApplication().getCamera().getLocation());
-		// distance = FastMath.clamp(distance, CAMERA_MIN_DISTANCE, CAMERA_MAX_DISTANCE);
 
 		Vector3f offset = getApplication().getCamera().getDirection().mult(distance).negate();
 		Vector3f moveTo = target.getWorldTranslation().add(offset);

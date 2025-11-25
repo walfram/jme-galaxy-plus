@@ -15,8 +15,9 @@ public class InputManagementState extends BaseAppState {
 	private static final String GROUP_CAMERA_MOVEMENT = "camera-movement";
 	private static final String GROUP_MEASURE_DISTANCE = "measure-distance";
 
-	private static final FunctionId FUNC_TOGGLE_DRAG = new FunctionId("toggle-drag");
+	private static final FunctionId FUNC_CURSOR_HOVER = new FunctionId("cursor-hover");
 
+	private static final FunctionId FUNC_TOGGLE_DRAG = new FunctionId("toggle-drag");
 	private static final FunctionId FUNC_MEASURE_DISTANCE = new FunctionId("measure-distance");
 
 	private static final FunctionId FUNC_HIDE_CURSOR = new FunctionId(GROUP_CAMERA_MOVEMENT, "hide-cursor");
@@ -53,16 +54,30 @@ public class InputManagementState extends BaseAppState {
 		inputMapper.addAnalogListener((func, value, tpf) -> getState(GalaxyCameraState.class).zoom(value, tpf), FUNC_CAMERA_ZOOM);
 
 		inputMapper.map(FUNC_TOGGLE_DRAG, Button.MOUSE_BUTTON1);
-		inputMapper.addStateListener((state, value, tpf) -> dragging = value != InputState.Off, FUNC_TOGGLE_DRAG);
+		inputMapper.addStateListener((state, value, tpf) -> {
+			logger.debug("click!");
+			dragging = value != InputState.Off;
+			if (dragging) {
+				getState(GizmosState.class).markDragStart();
+			} else {
+				getState(GizmosState.class).markDragEnd();
+			}
+		}, FUNC_TOGGLE_DRAG);
 
-//		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_X, Button.MOUSE_BUTTON1);
-//		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_Y, Button.MOUSE_BUTTON1);
-//		inputMapper.addStateListener((state, value, tpf) -> {
-//			if (dragging) {
+		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_X, Button.MOUSE_BUTTON1);
+		inputMapper.map(FUNC_MEASURE_DISTANCE, Axis.MOUSE_Y, Button.MOUSE_BUTTON1);
+		inputMapper.addStateListener((state, value, tpf) -> {
+			if (dragging) {
 //				logger.debug("state = {}, value = {}", state, value);
-//			}
-//		}, FUNC_MEASURE_DISTANCE);
+				getState(GizmosState.class).notifyMeasureDistanceUpdate();
+			}
+		}, FUNC_MEASURE_DISTANCE);
 
+		inputMapper.map(FUNC_CURSOR_HOVER, Axis.MOUSE_X);
+		inputMapper.map(FUNC_CURSOR_HOVER, Axis.MOUSE_Y);
+		inputMapper.addAnalogListener((func, value, tpf) -> {
+			getState(GizmosState.class).notifyHover();
+		}, FUNC_CURSOR_HOVER);
 	}
 
 	@Override

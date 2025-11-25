@@ -3,18 +3,17 @@ package galaxy.proto.game;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
-import com.jme3.input.event.MouseButtonEvent;
+import com.jme3.collision.CollisionResult;
 import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.simsilica.lemur.event.DefaultMouseListener;
-import com.simsilica.lemur.event.MouseEventControl;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetInfo;
 import galaxy.proto.controls.PlanetRefControl;
+import galaxy.shared.CursorCollisions;
 import galaxy.shared.material.ShowNormalsMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
@@ -22,6 +21,7 @@ import org.slf4j.Logger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -57,15 +57,6 @@ public class GalaxyViewState extends BaseAppState {
 
 			galaxyViewNode.attachChild(geometry);
 
-//			MouseEventControl.addListenersToSpatial(geometry, new DefaultMouseListener() {
-//				@Override
-//				protected void click(MouseButtonEvent event, Spatial target, Spatial capture) {
-//					logger.info("click on target={}, capture={}", target, capture);
-//					getState(GalaxyCameraState.class).centerOn(capture);
-//					getState(GalaxyUiState.class).showPlanetInfo(capture);
-//				}
-//			});
-
 			planetCache.put(planet.id(), geometry);
 		});
 
@@ -87,5 +78,13 @@ public class GalaxyViewState extends BaseAppState {
 	protected void onDisable() {
 		logger.debug("Disabling galaxy view state");
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyViewNode);
+	}
+
+	public Optional<CollisionResult> cursorCollision() {
+		return new CursorCollisions(
+				galaxyViewNode,
+				getApplication().getInputManager(),
+				getApplication().getCamera()
+		).collisions();
 	}
 }

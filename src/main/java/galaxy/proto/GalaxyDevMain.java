@@ -36,5 +36,6 @@ public class GalaxyDevMain extends SimpleApplication {
 		stateManager.attach(new GalaxyViewState());
 		stateManager.attach(new GalaxyUiState());
 		stateManager.attach(new InputManagementState());
+		stateManager.attach(new GizmosState());
 	}
 }
