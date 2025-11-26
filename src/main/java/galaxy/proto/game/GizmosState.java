@@ -5,13 +5,15 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.collision.CollisionResult;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.debug.WireBox;
 import com.jme3.scene.shape.Line;
-import galaxy.shared.PlaneXZCursorCollisions;
+import com.jme3.scene.shape.Quad;
+import galaxy.shared.PlaneCursorCollisions;
 import galaxy.shared.material.UnshadedMaterial;
 import org.slf4j.Logger;
 
@@ -31,10 +33,19 @@ public class GizmosState extends BaseAppState {
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	private Optional<CollisionResult> end = Optional.empty();
+	private Geometry collisionFallback;
 
 	@Override
 	protected void initialize(Application app) {
+		float width = app.getCamera().getWidth();
+		float height = app.getCamera().getHeight();
 
+		collisionFallback = new Geometry("blocker", new Quad(width, height));
+		Material material = new UnshadedMaterial(app.getAssetManager(), ColorRGBA.Green);
+		collisionFallback.setMaterial(material);
+		collisionFallback.setLocalTranslation(0, 0, -32);
+
+		collisionFallback.setCullHint(Geometry.CullHint.Always);
 	}
 
 	@Override
@@ -45,11 +56,13 @@ public class GizmosState extends BaseAppState {
 	@Override
 	protected void onEnable() {
 		((SimpleApplication) getApplication()).getRootNode().attachChild(gizmosNode);
+		((SimpleApplication) getApplication()).getGuiNode().attachChild(collisionFallback);
 	}
 
 	@Override
 	protected void onDisable() {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(gizmosNode);
+		((SimpleApplication) getApplication()).getGuiNode().detachChild(collisionFallback);
 	}
 
 	public void markDragStart() {
@@ -77,25 +90,36 @@ public class GizmosState extends BaseAppState {
 		Optional<CollisionResult> to = getState(GalaxyViewState.class).cursorCollision();
 
 		if (to.isEmpty()) {
-			// TODO if planet below XZ - "no value present", must use something else...
-			to = new PlaneXZCursorCollisions(
+			to = new PlaneCursorCollisions(
 					getApplication().getInputManager(),
-					getApplication().getCamera()
-			).collisions();
+					getApplication().getCamera(),
+					PlaneCursorCollisions.Plane.XZ,
+					start.map(CollisionResult::getContactPoint).orElse(Vector3f.ZERO)
+			).collisions()
+					.or(() ->
+							new PlaneCursorCollisions(
+									getApplication().getInputManager(), getApplication().getCamera(),
+									PlaneCursorCollisions.Plane.XY,
+									start.map(CollisionResult::getContactPoint).orElse(Vector3f.ZERO)
+							).collisions()
+					)
+					.or(() ->
+							new PlaneCursorCollisions(
+									getApplication().getInputManager(), getApplication().getCamera(),
+									PlaneCursorCollisions.Plane.YZ,
+									start.map(CollisionResult::getContactPoint).orElse(Vector3f.ZERO)
+							).collisions()
+					);
 		}
 
 		if (start.isPresent()) {
 			CollisionResult from = start.get();
-//			logger.debug("from = {}, to = {}", from, to);
-
 			// TODO reuse mesh/geometry!
 			// gizmosNode.detachAllChildren();
 
 			Vector3f toWorldTranslation = to.map(cr ->
 					Optional.ofNullable(cr.getGeometry()).map(Geometry::getWorldTranslation).orElse(cr.getContactPoint())
 			).orElseThrow();
-
-			logger.debug("distance = {}", from.getGeometry().getWorldTranslation().distance(toWorldTranslation));
 
 			Geometry geometry = new Geometry(
 					"distance-line",

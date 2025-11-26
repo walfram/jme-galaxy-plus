@@ -13,6 +13,7 @@ import galaxy.proto.controls.PlanetRefControl;
 import galaxy.proto.widgets.DistanceWidget;
 import galaxy.proto.widgets.PlanetInfoWidget;
 import galaxy.proto.widgets.Window;
+import galaxy.shared.ConstrainedScreenCoordinates;
 import galaxy.shared.FormattedCoordinates;
 
 public class GalaxyUiState extends BaseAppState {
@@ -105,8 +106,10 @@ public class GalaxyUiState extends BaseAppState {
 //		uiNode.attachChild(distanceWgt);
 
 		Vector3f screenCoordinates = getApplication().getCamera().getScreenCoordinates(to.getWorldTranslation());
-
 		distanceWgt.setLocalTranslation(screenCoordinates);
+
+		new ConstrainedScreenCoordinates(getApplication().getCamera()).applyTo(distanceWgt);
+
 		GuiGlobals.getInstance().getPopupState().showPopup(distanceWgt);
 	}
 }
