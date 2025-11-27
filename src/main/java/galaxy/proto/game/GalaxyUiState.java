@@ -3,6 +3,7 @@ package galaxy.proto.game;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -40,7 +41,6 @@ public class GalaxyUiState extends BaseAppState {
 		Window container = new Window("Planet list");
 		container.setName("planet-list");
 
-		// new ElementId("container.table"),
 		Container panel = container.addChild(new Container( new ElementId("container.table"), "glass"));
 
 		panel.addChild(new Label("Id", new ElementId("title")));
@@ -53,6 +53,8 @@ public class GalaxyUiState extends BaseAppState {
 		panel.addChild(new Label("Materials", new ElementId("title")), 7);
 		panel.addChild(new Label("Effort", new ElementId("title")), 8);
 
+		panel.addChild(new Label("", new ElementId("title")), 9);
+
 		getState(SinglePlayerGalaxyState.class).player().ownedPlanets().forEach(planet -> {
 			panel.addChild(new Label(String.valueOf(planet.id())));
 			panel.addChild(new Label(planet.name()), 1);
@@ -63,13 +65,16 @@ public class GalaxyUiState extends BaseAppState {
 			panel.addChild(new Label("%.2f".formatted(planet.industry().value())), 6);
 			panel.addChild(new Label("%.2f".formatted(planet.materials().value())), 7);
 			panel.addChild(new Label("%.2f".formatted(planet.effort().value())), 8);
+
+			Container actions = panel.addChild(new Container(""), 9);
+			actions.addChild(new Button(">>")).addClickCommands(b -> getState(GalaxyCameraState.class).centerOn(planet));
 		});
 
 		uiNode.detachChildNamed(container.getName());
 		uiNode.attachChild(container);
 
 		GuiGlobals.getInstance().getPopupState().centerInGui(container);
-		GuiGlobals.getInstance().getPopupState().showModalPopup(container);
+		GuiGlobals.getInstance().getPopupState().showModalPopup(container, new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	@Override

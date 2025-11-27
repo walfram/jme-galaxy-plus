@@ -60,7 +60,7 @@ public class GalaxyViewState extends BaseAppState {
 			planetCache.put(planet.id(), geometry);
 		});
 
-		Planet playerHome = player.planets().stream().filter(p -> p.size().value() == 1000.0).findFirst().orElseThrow();
+		Planet playerHome = player.ownedPlanets().stream().filter(p -> p.size().value() == 1000.0).findFirst().orElseThrow();
 		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.id()), 64f);
 	}
 
@@ -87,4 +87,9 @@ public class GalaxyViewState extends BaseAppState {
 				getApplication().getCamera()
 		).collisions();
 	}
+
+	public Spatial spatialFor(Planet planet) {
+		return planetCache.get(planet.id());
+	}
+
 }

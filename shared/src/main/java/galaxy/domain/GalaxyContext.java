@@ -18,7 +18,7 @@ public class GalaxyContext implements Galaxy {
 
 	@Override
 	public PlanetInfo planetInfo(Race race, Planet planet) {
-		if (race.planets().contains(planet))
+		if (race.ownedPlanets().contains(planet))
 			return new VisiblePlanet(planet);
 
 //		if (race.monitoring(planet))

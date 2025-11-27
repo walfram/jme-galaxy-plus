@@ -13,6 +13,7 @@ import com.simsilica.lemur.anim.AnimationState;
 import com.simsilica.lemur.anim.CameraTweens;
 import com.simsilica.lemur.anim.Tween;
 import com.simsilica.lemur.anim.TweenAnimation;
+import galaxy.domain.planet.Planet;
 import galaxy.shared.debug.DebugGrid;
 import galaxy.shared.tween.CallbackTween;
 import jme3utilities.debug.AxesVisualizer;
@@ -53,6 +54,11 @@ public class GalaxyCameraState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyViewDebugNode);
 	}
 
+	public void centerOn(Planet planet) {
+		Spatial spatial = getState(GalaxyViewState.class).spatialFor(planet);
+		centerOn(spatial);
+	}
+
 	public void centerOn(Spatial spatial) {
 		 float distance = cameraTarget.getWorldTranslation().distance(getApplication().getCamera().getLocation());
 		 distance = FastMath.clamp(distance, CAMERA_MIN_DISTANCE, CAMERA_MAX_DISTANCE);
@@ -71,6 +77,7 @@ public class GalaxyCameraState extends BaseAppState {
 		Tween callback = new CallbackTween(() -> {
 			cameraTarget = target;
 			getApplication().getCamera().lookAt(target.getWorldTranslation(), Vector3f.UNIT_Y);
+			getState(GizmosState.class).updateCursor(target);
 		});
 
 		currentAnimation = getState(AnimationState.class).add(moveCamera, callback);

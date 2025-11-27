@@ -54,10 +54,6 @@ public class Race {
 		return technologies;
 	}
 
-	public List<Planet> planets() {
-		return List.copyOf(planets);
-	}
-
 	public List<Route> routes() {
 		return List.copyOf(routes);
 	}
@@ -112,6 +108,6 @@ public class Race {
 	}
 
 	public List<Planet> ownedPlanets() {
-		return List.of();
+		return List.copyOf(planets);
 	}
 }

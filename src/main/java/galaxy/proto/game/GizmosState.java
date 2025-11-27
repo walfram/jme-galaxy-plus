@@ -10,6 +10,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.debug.WireBox;
 import com.jme3.scene.shape.Line;
 import com.jme3.scene.shape.Quad;
@@ -136,15 +137,18 @@ public class GizmosState extends BaseAppState {
 	public void notifyHover() {
 		getState(GalaxyViewState.class).cursorCollision().ifPresent(cr -> {
 			Geometry geometry = cr.getGeometry();
-
-			BoundingBox bound = (BoundingBox) geometry.getWorldBound();
-
-			Geometry cursor = WireBox.makeGeometry(bound);
-			cursor.setName("cursor");
-			cursor.setMaterial(new UnshadedMaterial(getApplication().getAssetManager(), ColorRGBA.Red));
-
-			gizmosNode.detachChildNamed(cursor.getName());
-			gizmosNode.attachChild(cursor);
+			updateCursor(geometry);
 		});
+	}
+
+	public void updateCursor(Spatial target) {
+		BoundingBox bound = (BoundingBox) target.getWorldBound();
+
+		Geometry cursor = WireBox.makeGeometry(bound);
+		cursor.setName("cursor");
+		cursor.setMaterial(new UnshadedMaterial(getApplication().getAssetManager(), ColorRGBA.Red));
+
+		gizmosNode.detachChildNamed(cursor.getName());
+		gizmosNode.attachChild(cursor);
 	}
 }
