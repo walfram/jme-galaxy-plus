@@ -62,7 +62,8 @@ public class SinglePlayerGalaxyState extends BaseAppState {
 		Generator random = new Generator();
 		int seedCount = (int) (16384 * races.size() * 0.1);
 		double scale = 256 * races.size() * 0.1;
-		SeedSource seedSource = new SimpleSeedSource(seedCount, scale);
+		SeedSource seedSource = new SimpleSeedSource(seedCount, 160f);
+//		SeedSource seedSource = new GoldenSpiralSeedSource(gameConfig.raceCount(), 16384, 256, 42L);
 
 		PlanetGenerator simple = new SimplePlanetGenerator(random, races, gameConfig.planetsPerRace(), seedSource);
 		planets.addAll(simple.planets());

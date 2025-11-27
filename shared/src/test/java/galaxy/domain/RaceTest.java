@@ -20,7 +20,7 @@ class RaceTest {
 	void test_race_init() {
 		Race race = Fixtures.race();
 
-		assertEquals(3, race.planets().size());
+		assertEquals(3, race.ownedPlanets().size());
 
 		assertNotNull(race.technologies());
 		assertEquals(new EnginesTechnology(), race.technologies().engines());

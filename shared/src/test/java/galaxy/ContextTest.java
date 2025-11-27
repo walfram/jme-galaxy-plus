@@ -62,7 +62,7 @@ public class ContextTest {
 		List<Race> races = galaxy.races();
 
 		for (Race race: races) {
-			List<Planet> planets = race.planets();
+			List<Planet> planets = race.ownedPlanets();
 			assertNotNull(planets);
 			assertFalse(planets.isEmpty());
 		}

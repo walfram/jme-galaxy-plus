@@ -62,7 +62,8 @@ public class GalaxyViewState extends BaseAppState {
 			geometry.setLocalTranslation(planet.coordinates().asVector3f());
 
 			float planetSize = (float) planet.size().value();
-			float scale = Math.max(MIN_SCALE, planetSize * PLANET_SCALE);
+			// float scale = Math.max(MIN_SCALE, planetSize * PLANET_SCALE);
+			float scale = 1f + planetSize * PLANET_SCALE;
 			geometry.setLocalScale(scale);
 
 			geometry.addControl(new PlanetRefControl(planet));
