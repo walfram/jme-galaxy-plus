@@ -99,6 +99,10 @@ public class Race {
 		return planets.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
 
+	public List<Planet> ownedPlanets() {
+		return List.copyOf(planets);
+	}
+
 	public Optional<Planet> visiblePlanet(Long planetId) {
 		return Optional.empty();
 	}
@@ -107,7 +111,13 @@ public class Race {
 		return Optional.empty();
 	}
 
-	public List<Planet> ownedPlanets() {
-		return List.copyOf(planets);
+	public Optional<Object> friendlyPlanet(Long planetId) {
+		// TODO planet is owned by another race and diplomacy is PEACE
+		return Optional.empty();
+	}
+
+	public Optional<Object> hostilePlanet(Long planetId) {
+		// TODO planet is owned by another race and diplomacy is WAR
+		return Optional.empty();
 	}
 }
