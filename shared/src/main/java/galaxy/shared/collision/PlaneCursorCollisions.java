@@ -1,4 +1,4 @@
-package galaxy.shared;
+package galaxy.shared.collision;
 
 import com.jme3.bounding.BoundingBox;
 import com.jme3.collision.Collidable;

@@ -1,4 +1,4 @@
-package galaxy.shared;
+package galaxy.shared.collision;
 
 import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResult;

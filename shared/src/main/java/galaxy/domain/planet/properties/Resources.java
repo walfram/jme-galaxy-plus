@@ -14,4 +14,8 @@ public record Resources(double value) implements PlanetProperty {
 	public Resources(JsonNode source) {
 		this(source.doubleValue());
 	}
+
+	public String asString() {
+		return String.format("%.2f", value);
+	}
 }

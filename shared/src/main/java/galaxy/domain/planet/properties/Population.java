@@ -27,4 +27,7 @@ public final class Population implements PlanetProperty {
 		return value;
 	}
 
+	public String asString() {
+		return String.format("%.0f", value);
+	}
 }

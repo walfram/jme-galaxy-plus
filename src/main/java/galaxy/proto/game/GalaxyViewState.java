@@ -14,10 +14,8 @@ import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetInfo;
 import galaxy.proto.controls.PlanetRefControl;
-import galaxy.shared.CursorCollisions;
+import galaxy.shared.collision.CursorCollisions;
 import galaxy.shared.material.LightingMaterial;
-import galaxy.shared.material.ShowNormalsMaterial;
-import galaxy.shared.material.UnshadedMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 

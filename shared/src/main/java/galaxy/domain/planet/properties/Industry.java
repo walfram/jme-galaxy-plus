@@ -26,4 +26,8 @@ public final class Industry implements PlanetProperty {
 	public void update(double delta) {
 		this.value = Math.max(0.0, this.value + delta);
 	}
+
+	public String asString() {
+		return String.format("%.0f", value);
+	}
 }
