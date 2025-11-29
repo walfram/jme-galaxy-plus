@@ -37,7 +37,7 @@ public class GalaxyUiV2Main extends SimpleApplication {
 
 		stateManager.attach(new GalaxyViewState());
 		stateManager.attach(new ControlsState());
-
+		stateManager.attach(new GalaxyCameraState());
 		stateManager.attach(new GalaxyUiState());
 
 	}

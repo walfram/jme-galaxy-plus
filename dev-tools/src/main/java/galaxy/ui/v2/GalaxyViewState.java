@@ -13,6 +13,7 @@ import com.simsilica.event.EventBus;
 import galaxy.domain.planet.Planet;
 import galaxy.shared.collision.CursorCollisions;
 import galaxy.shared.material.UnshadedMaterial;
+import galaxy.ui.v2.events.CameraEvent;
 import galaxy.ui.v2.events.ControlsEvent;
 import galaxy.ui.v2.events.GuiEvent;
 import jme3utilities.mesh.Icosphere;
@@ -73,6 +74,10 @@ public class GalaxyViewState extends BaseAppState {
 
 		collisions
 				.map(CollisionResult::getGeometry)
+				.map(geometry -> {
+					EventBus.publish(CameraEvent.focusOn, new CameraEvent(geometry));
+					return geometry;
+				})
 				.map(g -> g.getControl(PlanetRef.class).planet())
 				.ifPresentOrElse(
 						p -> {

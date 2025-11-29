@@ -4,15 +4,13 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.simsilica.event.EventBus;
 import com.simsilica.lemur.GuiGlobals;
-import com.simsilica.lemur.input.Button;
-import com.simsilica.lemur.input.FunctionId;
-import com.simsilica.lemur.input.InputMapper;
-import com.simsilica.lemur.input.InputState;
+import com.simsilica.lemur.input.*;
 import galaxy.ui.v2.events.ControlsEvent;
 
 public class ControlsState extends BaseAppState {
 
 	private static final FunctionId FUNC_SELECT_PLANET = new FunctionId("select-planet");
+	private static final FunctionId FUNC_ROTATE_CAMERA = new FunctionId("rotate-camera");
 
 	@Override
 	protected void initialize(Application app) {
@@ -28,6 +26,9 @@ public class ControlsState extends BaseAppState {
 
 		// shift + click - calculate distance
 		// right-click + drag - rotate camera
+		//inputMapper.map(FUNC_ROTATE_CAMERA, Axis.MOUSE_X, KeyInput.KEY_LCONTROL);
+		//inputMapper.addAnalogListener((func, value, tpf) -> EventBus.publish(CameraEvents.rotateCamera, new CameraEvents(value, tpf)), FUNC_ROTATE_CAMERA);
+
 		// right-click + alt - drag camera
 	}
 
