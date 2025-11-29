@@ -3,25 +3,28 @@ package galaxy.ui.v2;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
-import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.simsilica.event.EventBus;
 import com.simsilica.lemur.*;
-import com.simsilica.lemur.component.SpringGridLayout;
-import com.simsilica.lemur.core.VersionedList;
+import com.simsilica.lemur.component.IconComponent;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.production.Production;
 import galaxy.ui.v2.events.GuiEvent;
+import org.slf4j.Logger;
 
-import java.util.List;
 import java.util.Optional;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class GalaxyUiState extends BaseAppState {
 
+	private static final Logger logger = getLogger(GalaxyUiState.class);
+
 	private static final String PLANET_INFO_WIDGET = "planet-info";
 	private static final String SELECT_PRODUCTION_WIDGET = "select-production";
+	private static final String MY_PLANET_LIST_WIDGET = "my-planet-list";
 
 	private final Node gui = new Node("gui");
 
@@ -35,11 +38,17 @@ public class GalaxyUiState extends BaseAppState {
 
 		container.addChild(new Label(getState(GalaxyContextState.class).player().name(), new ElementId("title")));
 
-		Container buttons = container.addChild(new Container(new SpringGridLayout(Axis.X, Axis.Y)));
+		Button btnMyPlanets = container.addChild(new Button(""));
+		btnMyPlanets.setIcon(new IconComponent("icons/Stars.png", 0.125f, 4f, 4f, 0f, false));
+		btnMyPlanets.addClickCommands(b -> showPlanetList());
 
-		buttons.addChild(new Button("My planets"));
-		buttons.addChild(new Button("Ship designs"));
-		buttons.addChild(new Button("Ship groups"));
+		Button btnShipDesigns = container.addChild(new Button(""));
+		btnShipDesigns.setIcon(new IconComponent("icons/Wrench.png", 0.125f, 4f, 4f, 0f, false));
+		btnShipDesigns.addClickCommands(b -> showShipDesigns());
+
+		Button btnShipGroups = container.addChild(new Button(""));
+		btnShipGroups.setIcon(new IconComponent("icons/SpaceShip.png", 0.125f, 4f, 4f, 0f, false));
+		btnShipGroups.addClickCommands(b -> showShipGroups());
 
 		gui.attachChild(container);
 		container.setLocalTranslation(5, getApplication().getCamera().getHeight() - 5, 0);
@@ -64,19 +73,64 @@ public class GalaxyUiState extends BaseAppState {
 		((SimpleApplication) getApplication()).getGuiNode().detachChild(gui);
 	}
 
+	private void showShipGroups() {
+		logger.debug("Ship groups");
+	}
+
+	private void showShipDesigns() {
+		logger.debug("Ship designs");
+	}
+
+	private void showPlanetList() {
+		Container container = new Container();
+
+		container.addChild(new Label("My planet list", new ElementId("title")));
+
+		Container p = container.addChild(new Container());
+
+		p.addChild(new Label("Id"));
+		p.addChild(new Label("Name"), 1);
+		p.addChild(new Label("Size"), 2);
+		p.addChild(new Label("Resources"), 3);
+		p.addChild(new Label("Population"), 4);
+		p.addChild(new Label("Industry"), 5);
+
+		for (Planet planet : getState(GalaxyContextState.class).player().ownedPlanets()) {
+			p.addChild(new Label(String.valueOf(planet.id())));
+			p.addChild(new Label(planet.name()), 1);
+			p.addChild(new Label("%.2f".formatted(planet.size().value())), 2);
+			p.addChild(new Label("%.2f".formatted(planet.resources().value())), 3);
+			p.addChild(new Label("%.2f".formatted(planet.population().value())), 4);
+			p.addChild(new Label("%.2f".formatted(planet.industry().value())), 5);
+		}
+
+		container.addChild(new Button("Close")).addClickCommands(b -> GuiGlobals.getInstance().getPopupState().closePopup(container));
+
+		container.setName(MY_PLANET_LIST_WIDGET);
+		gui.detachChildNamed(container.getName());
+
+		GuiGlobals.getInstance().getPopupState().centerInGui(container);
+		GuiGlobals.getInstance().getPopupState().showModalPopup(container);
+	}
+
 	protected void chooseProduction(GuiEvent guiEvent) {
 		Container container = new Container();
 
 		container.addChild(new Label("Choose production on %s".formatted(guiEvent.planet().name()), new ElementId("title")));
 
-		VersionedList<String> model = VersionedList.wrap(
-				List.of("", "capital", "materials", "technology", "ship", "science")
-		);
-
-		Selector<String> selector = container.addChild(new Selector<>(model));
-
 		String currentProduction = Optional.ofNullable(guiEvent.planet().production()).map(Production::toString).orElse("");
-		selector.setSelectedItem(currentProduction);
+
+		container.addChild(new Label("Current production"));
+		container.addChild(new Label(currentProduction));
+
+		container.addChild(new Button("no production"));
+
+		container.addChild(new Button("capital"));
+		container.addChild(new Button("materials"));
+		container.addChild(new Button("industry"));
+		container.addChild(new Button("technology"));
+		container.addChild(new Button("science"));
+		container.addChild(new Button("ships"));
 
 		container.setName(SELECT_PRODUCTION_WIDGET);
 		gui.detachChildNamed(container.getName());

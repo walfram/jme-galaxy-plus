@@ -120,4 +120,8 @@ public class Race {
 		// TODO planet is owned by another race and diplomacy is WAR
 		return Optional.empty();
 	}
+
+	public void addShipTemplate(ShipTemplate template) {
+		shipTemplates.add(template);
+	}
 }

@@ -4,7 +4,7 @@ import galaxy.domain.planet.Planet;
 
 public class MaterialsProduction extends Production {
 
-	protected MaterialsProduction(Planet planet) {
+	public MaterialsProduction(Planet planet) {
 		super(planet);
 	}
 

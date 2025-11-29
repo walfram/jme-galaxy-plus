@@ -32,7 +32,8 @@ public class GalaxyCameraState extends BaseAppState {
 
 		chaseCamera.setInvertVerticalAxis(true);
 
-		chaseCamera.setToggleRotationTrigger(new KeyTrigger(KeyInput.KEY_LMENU));
+		// chaseCamera.setToggleRotationTrigger(new KeyTrigger(KeyInput.KEY_LMENU));
+		chaseCamera.setToggleRotationTrigger(new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
 	}
 
 	@Override
