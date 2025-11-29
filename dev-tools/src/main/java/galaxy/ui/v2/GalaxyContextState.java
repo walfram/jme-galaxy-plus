@@ -2,6 +2,7 @@ package galaxy.ui.v2;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.math.FastMath;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.generator.PlanetGenerator;
@@ -18,6 +19,8 @@ public class GalaxyContextState extends BaseAppState {
 	private final List<Race> races = new ArrayList<>();
 	private final List<Planet> planets = new ArrayList<>();
 
+	private Race player;
+
 	@Override
 	protected void initialize(Application app) {
 		List<Race> _races = new ArrayList<>(10);
@@ -32,6 +35,9 @@ public class GalaxyContextState extends BaseAppState {
 		PlanetGenerator generator = new SimplePlanetGenerator(new Generator(42), _races, 15, seedSource);
 
 		planets.addAll(generator.planets());
+
+		int randomIdx = FastMath.nextRandomInt(0, races.size() - 1);
+		player = races.get(randomIdx);
 	}
 
 	@Override
@@ -50,8 +56,15 @@ public class GalaxyContextState extends BaseAppState {
 		return List.copyOf(races);
 	}
 
+	public Race player() {
+		return player;
+	}
+
 	public List<Planet> planets() {
 		return List.copyOf(planets);
 	}
 
+	public boolean canChangeProduction(Planet planet) {
+		return player.ownedPlanet(planet.id()).isPresent();
+	}
 }

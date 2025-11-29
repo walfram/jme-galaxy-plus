@@ -19,6 +19,8 @@ import galaxy.ui.v2.events.GuiEvent;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -28,6 +30,8 @@ public class GalaxyViewState extends BaseAppState {
 	private static final Logger logger = getLogger(GalaxyViewState.class);
 
 	private final Node galaxyNode = new Node("galaxy-node");
+
+	private final Map<Planet, Geometry> cache = new HashMap<>();
 
 	@Override
 	protected void initialize(Application app) {
@@ -47,6 +51,8 @@ public class GalaxyViewState extends BaseAppState {
 			geometry.scale(scale);
 
 			galaxyNode.attachChild(geometry);
+
+			cache.put(planet, geometry);
 		}
 	}
 
@@ -60,6 +66,11 @@ public class GalaxyViewState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().attachChild(galaxyNode);
 
 		EventBus.addListener(this, ControlsEvent.selectPlanet);
+
+		getApplication().enqueue(() -> {
+			Planet planet = getState(GalaxyContextState.class).player().ownedPlanets().getFirst();
+			EventBus.publish(CameraEvent.focusOn, new CameraEvent(cache.get(planet)));
+		});
 	}
 
 	@Override

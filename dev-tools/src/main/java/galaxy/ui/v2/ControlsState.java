@@ -10,7 +10,6 @@ import galaxy.ui.v2.events.ControlsEvent;
 public class ControlsState extends BaseAppState {
 
 	private static final FunctionId FUNC_SELECT_PLANET = new FunctionId("select-planet");
-	private static final FunctionId FUNC_ROTATE_CAMERA = new FunctionId("rotate-camera");
 
 	@Override
 	protected void initialize(Application app) {

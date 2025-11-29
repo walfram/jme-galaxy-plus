@@ -10,6 +10,7 @@ import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.input.controls.Trigger;
 import com.jme3.math.Vector3f;
 import com.simsilica.event.EventBus;
+import galaxy.domain.planet.Planet;
 import galaxy.ui.v2.events.CameraEvent;
 import galaxy.ui.v2.events.ControlsEvent;
 

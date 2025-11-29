@@ -8,4 +8,6 @@ public record GuiEvent(Planet planet) {
 	public static final EventType<GuiEvent> planetSelected = EventType.create("showPlanetInfo", GuiEvent.class);
 	public static final EventType<GuiEvent> planetUnselected = EventType.create("hidePlanetInfo", GuiEvent.class);
 
+	public static final EventType<GuiEvent> chooseProduction = EventType.create("chooseProduction", GuiEvent.class);
+
 }
