@@ -16,6 +16,7 @@ import galaxy.shared.material.UnshadedMaterial;
 import galaxy.ui.v2.events.CameraEvent;
 import galaxy.ui.v2.events.ControlsEvent;
 import galaxy.ui.v2.events.GuiEvent;
+import galaxy.ui.v2.events.PlanetSelectEvent;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 
@@ -66,6 +67,7 @@ public class GalaxyViewState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().attachChild(galaxyNode);
 
 		EventBus.addListener(this, ControlsEvent.selectPlanet);
+		EventBus.addListener(this, PlanetSelectEvent.selectPlanet);
 
 		getApplication().enqueue(() -> {
 			Planet planet = getState(GalaxyContextState.class).player().ownedPlanets().getFirst();
@@ -76,6 +78,11 @@ public class GalaxyViewState extends BaseAppState {
 	@Override
 	protected void onDisable() {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyNode);
+	}
+
+	protected void selectPlanet(PlanetSelectEvent event) {
+		Geometry geometry = cache.get(event.planet());
+		EventBus.publish(CameraEvent.focusOn, new CameraEvent(geometry));
 	}
 
 	protected void selectPlanet(ControlsEvent event) {

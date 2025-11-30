@@ -38,6 +38,9 @@ public class GalaxyContextState extends BaseAppState {
 
 		int randomIdx = FastMath.nextRandomInt(0, races.size() - 1);
 		player = races.get(randomIdx);
+
+		// add more planets to player for debug
+		planets.stream().filter(p -> p.owner() == null).limit(24).forEach(p -> player.claim(p));
 	}
 
 	@Override

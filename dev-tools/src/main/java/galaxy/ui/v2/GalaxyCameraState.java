@@ -3,16 +3,12 @@ package galaxy.ui.v2;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.input.ChaseCamera;
-import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
-import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
-import com.jme3.input.controls.Trigger;
 import com.jme3.math.Vector3f;
 import com.simsilica.event.EventBus;
-import galaxy.domain.planet.Planet;
 import galaxy.ui.v2.events.CameraEvent;
-import galaxy.ui.v2.events.ControlsEvent;
+import galaxy.ui.v2.events.ChaseCameraEvent;
 
 public class GalaxyCameraState extends BaseAppState {
 
@@ -34,19 +30,34 @@ public class GalaxyCameraState extends BaseAppState {
 
 		// chaseCamera.setToggleRotationTrigger(new KeyTrigger(KeyInput.KEY_LMENU));
 		chaseCamera.setToggleRotationTrigger(new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
+
+		EventBus.addListener(this, ChaseCameraEvent.enable);
+		EventBus.addListener(this, ChaseCameraEvent.disable);
+
+		EventBus.addListener(this, CameraEvent.focusOn);
 	}
 
 	@Override
 	protected void cleanup(Application app) {
 	}
 
+	protected void enable(ChaseCameraEvent event) {
+		onEnable();
+	}
+
+	protected void disable(ChaseCameraEvent event) {
+		onDisable();
+	}
+
 	@Override
 	protected void onEnable() {
-		EventBus.addListener(this, CameraEvent.focusOn);
+		chaseCamera.setEnabled(true);
 	}
 
 	@Override
 	protected void onDisable() {
+//		EventBus.removeListener(this, CameraEvent.focusOn);
+		chaseCamera.setEnabled(false);
 	}
 
 	protected void focusOn(CameraEvent event) {

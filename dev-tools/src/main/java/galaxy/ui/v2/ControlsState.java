@@ -4,7 +4,10 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.simsilica.event.EventBus;
 import com.simsilica.lemur.GuiGlobals;
-import com.simsilica.lemur.input.*;
+import com.simsilica.lemur.input.Button;
+import com.simsilica.lemur.input.FunctionId;
+import com.simsilica.lemur.input.InputMapper;
+import com.simsilica.lemur.input.InputState;
 import galaxy.ui.v2.events.ControlsEvent;
 
 public class ControlsState extends BaseAppState {

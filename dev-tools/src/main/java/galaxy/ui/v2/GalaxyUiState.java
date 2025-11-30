@@ -7,11 +7,16 @@ import com.jme3.scene.Node;
 import com.simsilica.event.EventBus;
 import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.IconComponent;
+import com.simsilica.lemur.core.VersionedList;
+import com.simsilica.lemur.list.DefaultCellRenderer;
+import com.simsilica.lemur.style.BaseStyles;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.production.Production;
+import galaxy.ui.v2.events.ChaseCameraEvent;
 import galaxy.ui.v2.events.GuiEvent;
+import galaxy.ui.v2.events.PlanetSelectEvent;
 import org.slf4j.Logger;
 
 import java.util.Optional;
@@ -40,6 +45,7 @@ public class GalaxyUiState extends BaseAppState {
 
 		Button btnMyPlanets = container.addChild(new Button(""));
 		btnMyPlanets.setIcon(new IconComponent("icons/Stars.png", 0.125f, 4f, 4f, 0f, false));
+		btnMyPlanets.addClickCommands(b -> EventBus.publish(ChaseCameraEvent.disable, new ChaseCameraEvent()));
 		btnMyPlanets.addClickCommands(b -> showPlanetList());
 
 		Button btnShipDesigns = container.addChild(new Button(""));
@@ -84,27 +90,46 @@ public class GalaxyUiState extends BaseAppState {
 	private void showPlanetList() {
 		Container container = new Container();
 
-		container.addChild(new Label("My planet list", new ElementId("title")));
+		Label title = container.addChild(new Label("My planet list", new ElementId("title")));
+		title.setMaxWidth(256);
 
-		Container p = container.addChild(new Container());
+//		Container p = container.addChild(new Container());
+//		p.addChild(new Label("Id"));
+//		p.addChild(new Label("Name"), 1);
+//		p.addChild(new Label("Size"), 2);
+//		p.addChild(new Label("Resources"), 3);
+//		p.addChild(new Label("Population"), 4);
+//		p.addChild(new Label("Industry"), 5);
+//
+//		for (Planet planet : getState(GalaxyContextState.class).player().ownedPlanets()) {
+//			p.addChild(new Label(String.valueOf(planet.id())));
+//			p.addChild(new Label(planet.name()), 1);
+//			p.addChild(new Label("%.2f".formatted(planet.size().value())), 2);
+//			p.addChild(new Label("%.2f".formatted(planet.resources().value())), 3);
+//			p.addChild(new Label("%.2f".formatted(planet.population().value())), 4);
+//			p.addChild(new Label("%.2f".formatted(planet.industry().value())), 5);
+//		}
 
-		p.addChild(new Label("Id"));
-		p.addChild(new Label("Name"), 1);
-		p.addChild(new Label("Size"), 2);
-		p.addChild(new Label("Resources"), 3);
-		p.addChild(new Label("Population"), 4);
-		p.addChild(new Label("Industry"), 5);
+		VersionedList<Planet> model = VersionedList.wrap( getState(GalaxyContextState.class).player().ownedPlanets() );
 
-		for (Planet planet : getState(GalaxyContextState.class).player().ownedPlanets()) {
-			p.addChild(new Label(String.valueOf(planet.id())));
-			p.addChild(new Label(planet.name()), 1);
-			p.addChild(new Label("%.2f".formatted(planet.size().value())), 2);
-			p.addChild(new Label("%.2f".formatted(planet.resources().value())), 3);
-			p.addChild(new Label("%.2f".formatted(planet.population().value())), 4);
-			p.addChild(new Label("%.2f".formatted(planet.industry().value())), 5);
-		}
+		DefaultCellRenderer<Planet> renderer = new DefaultCellRenderer<>();
+		renderer.setTransform(planet -> "id: %s, name: %s, size %.2f, resources: %.2f, population: %.2f, industry: %.2f".formatted(
+				planet.id(), planet.name(), planet.size().value(), planet.resources().value(), planet.population().value(), planet.industry().value()
+		));
 
-		container.addChild(new Button("Close")).addClickCommands(b -> GuiGlobals.getInstance().getPopupState().closePopup(container));
+		// TODO replace ListBox with a custom component or configure to support GridPanel with more then 1 column etc
+		ListBox<Planet> planetList = new ListBox<>(model, renderer, BaseStyles.GLASS);
+		planetList.setVisibleItems(20);
+		planetList.addClickCommands(
+				src -> logger.debug("clicked {}", src.getSelectedItem()),
+				src -> EventBus.publish(GuiEvent.planetSelected, new GuiEvent((Planet) src.getSelectedItem())),
+				src -> EventBus.publish(PlanetSelectEvent.selectPlanet, new PlanetSelectEvent((Planet) src.getSelectedItem()))
+		);
+		container.addChild(planetList);
+
+		Button close = container.addChild(new Button("Close"));
+		close.addClickCommands(b -> GuiGlobals.getInstance().getPopupState().closePopup(container));
+		close.addClickCommands(b -> EventBus.publish(ChaseCameraEvent.enable, new ChaseCameraEvent()));
 
 		container.setName(MY_PLANET_LIST_WIDGET);
 		gui.detachChildNamed(container.getName());
@@ -148,6 +173,12 @@ public class GalaxyUiState extends BaseAppState {
 		Container panel = container.addChild(new Container(""));
 
 		Planet planet = guiEvent.planet();
+
+		panel.addChild(new Label("Id"));
+		panel.addChild(new Label(String.valueOf(planet.id())), 1);
+
+		panel.addChild(new Label("Name"));
+		panel.addChild(new Label(planet.name()), 1);
 
 		panel.addChild(new Label("Owner"));
 		panel.addChild(new Label(Optional.ofNullable(planet.owner()).map(Race::name).orElse("uninhabited")), 1);
