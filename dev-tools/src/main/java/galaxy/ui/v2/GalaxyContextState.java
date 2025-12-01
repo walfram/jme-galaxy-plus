@@ -67,7 +67,4 @@ public class GalaxyContextState extends BaseAppState {
 		return List.copyOf(planets);
 	}
 
-	public boolean canChangeProduction(Planet planet) {
-		return player.ownedPlanet(planet.id()).isPresent();
-	}
 }

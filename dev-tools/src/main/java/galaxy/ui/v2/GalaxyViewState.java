@@ -10,9 +10,12 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.simsilica.event.EventBus;
+import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
+import galaxy.domain.planet.PlanetInfo;
 import galaxy.shared.collision.CursorCollisions;
-import galaxy.shared.material.UnshadedMaterial;
+import galaxy.shared.material.LightingMaterial;
+import galaxy.shared.mesh.FlatShadedMesh;
 import galaxy.ui.v2.events.CameraEvent;
 import galaxy.ui.v2.events.ControlsEvent;
 import galaxy.ui.v2.events.GuiEvent;
@@ -32,16 +35,26 @@ public class GalaxyViewState extends BaseAppState {
 
 	private final Node galaxyNode = new Node("galaxy-node");
 
-	private final Map<Planet, Geometry> cache = new HashMap<>();
+	private final Map<Planet, Geometry> planetCache = new HashMap<>();
+	private final Map<Object, Material> materialCache = new HashMap<>();
 
 	@Override
 	protected void initialize(Application app) {
-		Mesh mesh = new Icosphere(1, 1);
+		Mesh mesh = new FlatShadedMesh(new Icosphere(1, 1));
 
-		Material material = new UnshadedMaterial(app.getAssetManager(), ColorRGBA.Gray);
+		// Material material = new LightingMaterial(app.getAssetManager(), ColorRGBA.Gray);
+		materialCache.put(PlanetKey.OWNED, new LightingMaterial(app.getAssetManager(), ColorRGBA.Green));
+		materialCache.put(PlanetKey.FRIENDLY, new LightingMaterial(app.getAssetManager(), ColorRGBA.Yellow));
+		materialCache.put(PlanetKey.HOSTILE, new LightingMaterial(app.getAssetManager(), ColorRGBA.Red));
+		materialCache.put(PlanetKey.VISITED, new LightingMaterial(app.getAssetManager(), ColorRGBA.LightGray));
+		materialCache.put(PlanetKey.UNKNOWN, new LightingMaterial(app.getAssetManager(), ColorRGBA.Gray));
+
+		Race player = getState(GalaxyContextState.class).player();
 
 		for (Planet planet : getState(GalaxyContextState.class).planets()) {
 			Geometry geometry = new Geometry(planet.name(), mesh);
+
+			Material material = resolveMaterial(player, planet);
 
 			geometry.setMaterial(material);
 			geometry.setLocalTranslation(planet.coordinates().asVector3f());
@@ -53,8 +66,24 @@ public class GalaxyViewState extends BaseAppState {
 
 			galaxyNode.attachChild(geometry);
 
-			cache.put(planet, geometry);
+			planetCache.put(planet, geometry);
 		}
+	}
+
+	private Material resolveMaterial(Race race, Planet planet) {
+		if (race.ownedPlanet(planet.id()).isPresent())
+			return materialCache.get(PlanetKey.OWNED);
+
+		if (race.friendlyPlanet(planet.id()).isPresent())
+			return materialCache.get(PlanetKey.FRIENDLY);
+
+		if (race.hostilePlanet(planet.id()).isPresent())
+			return materialCache.get(PlanetKey.HOSTILE);
+
+		if (race.visitedPlanet(planet.id()).isPresent())
+			return materialCache.get(PlanetKey.VISITED);
+
+		return materialCache.get(PlanetKey.UNKNOWN);
 	}
 
 	@Override
@@ -71,7 +100,7 @@ public class GalaxyViewState extends BaseAppState {
 
 		getApplication().enqueue(() -> {
 			Planet planet = getState(GalaxyContextState.class).player().ownedPlanets().getFirst();
-			EventBus.publish(CameraEvent.focusOn, new CameraEvent(cache.get(planet)));
+			EventBus.publish(CameraEvent.focusOn, new CameraEvent(planetCache.get(planet)));
 		});
 	}
 
@@ -80,11 +109,13 @@ public class GalaxyViewState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyNode);
 	}
 
+	@SuppressWarnings("unused")
 	protected void selectPlanet(PlanetSelectEvent event) {
-		Geometry geometry = cache.get(event.planet());
+		Geometry geometry = planetCache.get(event.planet());
 		EventBus.publish(CameraEvent.focusOn, new CameraEvent(geometry));
 	}
 
+	@SuppressWarnings("unused")
 	protected void selectPlanet(ControlsEvent event) {
 		Optional<CollisionResult> collisions = new CursorCollisions(
 				galaxyNode, getApplication().getInputManager(), getApplication().getCamera()
@@ -107,6 +138,10 @@ public class GalaxyViewState extends BaseAppState {
 							EventBus.publish(GuiEvent.planetUnselected, new GuiEvent(null));
 						}
 				);
+	}
+
+	private enum PlanetKey {
+		OWNED, FRIENDLY, HOSTILE, VISITED, UNKNOWN
 	}
 
 }

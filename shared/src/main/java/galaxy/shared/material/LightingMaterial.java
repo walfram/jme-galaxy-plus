@@ -15,6 +15,7 @@ public class LightingMaterial extends Material {
 		this(assetManager);
 		setColor("Diffuse", color);
 		setColor("Ambient", color);
+		setColor("Specular", color);
 		setBoolean("UseMaterialColors", true);
 	}
 

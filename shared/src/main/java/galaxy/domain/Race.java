@@ -124,4 +124,8 @@ public class Race {
 	public void addShipTemplate(ShipTemplate template) {
 		shipTemplates.add(template);
 	}
+
+	public boolean canChangeProduction(Planet planet) {
+		return ownedPlanet(planet.id()).isPresent();
+	}
 }

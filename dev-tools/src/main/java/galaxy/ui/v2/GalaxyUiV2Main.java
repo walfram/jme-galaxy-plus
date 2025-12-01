@@ -1,6 +1,9 @@
 package galaxy.ui.v2;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.DirectionalLight;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import galaxy.shared.InitLemurState;
@@ -30,6 +33,9 @@ public class GalaxyUiV2Main extends SimpleApplication {
 		AxesVisualizer axesVisualizer = new AxesVisualizer(assetManager, 256, 1);
 		rootNode.addControl(axesVisualizer);
 		axesVisualizer.setEnabled(true);
+
+		rootNode.addLight(new AmbientLight(ColorRGBA.White.mult(0.5f)));
+		rootNode.addLight(new DirectionalLight(Vector3f.UNIT_XYZ.negate().normalize(), ColorRGBA.White.mult(0.5f)));
 
 		stateManager.attach(new InitLemurState());
 
