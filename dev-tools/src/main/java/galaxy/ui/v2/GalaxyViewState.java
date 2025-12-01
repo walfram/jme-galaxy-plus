@@ -12,14 +12,14 @@ import com.jme3.scene.Node;
 import com.simsilica.event.EventBus;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.PlanetInfo;
 import galaxy.shared.collision.CursorCollisions;
 import galaxy.shared.material.LightingMaterial;
 import galaxy.shared.mesh.FlatShadedMesh;
-import galaxy.ui.v2.events.CameraEvent;
-import galaxy.ui.v2.events.ControlsEvent;
-import galaxy.ui.v2.events.GuiEvent;
-import galaxy.ui.v2.events.PlanetSelectEvent;
+import galaxy.ui.v2.events.game.DiplomacyEvent;
+import galaxy.ui.v2.events.ui.CameraEvent;
+import galaxy.ui.v2.events.ui.ControlsEvent;
+import galaxy.ui.v2.events.ui.GuiEvent;
+import galaxy.ui.v2.events.ui.PlanetSelectEvent;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 
@@ -98,6 +98,8 @@ public class GalaxyViewState extends BaseAppState {
 		EventBus.addListener(this, ControlsEvent.selectPlanet);
 		EventBus.addListener(this, PlanetSelectEvent.selectPlanet);
 
+		EventBus.addListener(this, DiplomacyEvent.changeDiplomacy);
+
 		getApplication().enqueue(() -> {
 			Planet planet = getState(GalaxyContextState.class).player().ownedPlanets().getFirst();
 			EventBus.publish(CameraEvent.focusOn, new CameraEvent(planetCache.get(planet)));
@@ -107,6 +109,16 @@ public class GalaxyViewState extends BaseAppState {
 	@Override
 	protected void onDisable() {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyNode);
+	}
+
+	@SuppressWarnings("unused")
+	protected void changeDiplomacy(DiplomacyEvent event) {
+		Race player = getState(GalaxyContextState.class).player();
+
+		for (Planet other : event.to().ownedPlanets()) {
+			planetCache.get(other).setMaterial(resolveMaterial(player, other));
+		}
+
 	}
 
 	@SuppressWarnings("unused")

@@ -2,6 +2,7 @@ package galaxy.domain.ship;
 
 import galaxy.domain.Fixtures;
 import galaxy.domain.Race;
+import galaxy.domain.ShipTemplateFixtures;
 import galaxy.domain.planet.properties.Effort;
 import galaxy.domain.planet.properties.Industry;
 import galaxy.domain.planet.Planet;
@@ -11,9 +12,41 @@ import galaxy.domain.production.ShipProduction;
 import galaxy.domain.technology.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ShipTest {
+
+	@Test
+	void test_ship_sending_to_another_planet() {
+		Race race = Fixtures.race();
+
+		Planet a = Fixtures.planetA();
+		Planet b = Fixtures.planetB();
+
+		Ship ship = ShipTemplateFixtures.drone().build(race.technologies(), race, a);
+
+		assertEquals(a, ship.location());
+
+		ship.flyTo(b);
+
+		assertNull(ship.location());
+	}
+
+	@Test
+	void test_ship_has_owner_and_created_at_planet() {
+		Race race = Fixtures.race();
+		Planet planet = Fixtures.homeworld();
+
+		Ship ship = ShipTemplateFixtures.battleship().build(race.technologies(), race, planet);
+
+		Race shipOwner = ship.owner();
+		assertNotNull(shipOwner);
+		assertEquals(race, shipOwner);
+
+		Planet current = ship.location();
+		assertNotNull(current);
+		assertEquals(planet, current);
+	}
 
 	@Test
 	void test_updating_race_technologies_does_not_affect_ship_technologies() {
@@ -26,7 +59,7 @@ public class ShipTest {
 		assertEquals(1.0, technologies.cargo().value());
 
 		ShipTemplate droneTemplate = Fixtures.droneTemplate();
-		Ship ship = droneTemplate.build(technologies);
+		Ship ship = droneTemplate.build(technologies, race, null);
 
 		assertEquals(1.0, ship.engines().techLevel());
 		assertEquals(1.0, ship.weapons().techLevel());
@@ -54,12 +87,12 @@ public class ShipTest {
 	void test_ship_speed() {
 		ShipTemplate droneTemplate = Fixtures.droneTemplate();
 
-		Ship drone = droneTemplate.build(new Technologies());
+		Ship drone = droneTemplate.build(new Technologies(), null, null);
 		assertEquals(20.0, drone.speed());
 
 		Ship fastDrone = droneTemplate.build(new Technologies(
 				new EnginesTechnology(2.0), new WeaponsTechnology(), new ShieldsTechnology(), new CargoTechnology()
-		));
+		), null, null);
 		assertEquals(40.0, fastDrone.speed());
 	}
 

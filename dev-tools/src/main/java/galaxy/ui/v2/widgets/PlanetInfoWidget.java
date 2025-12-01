@@ -8,7 +8,7 @@ import com.simsilica.lemur.style.ElementId;
 import galaxy.domain.Race;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.production.Production;
-import galaxy.ui.v2.events.GuiEvent;
+import galaxy.ui.v2.events.ui.GuiEvent;
 
 import java.util.Optional;
 

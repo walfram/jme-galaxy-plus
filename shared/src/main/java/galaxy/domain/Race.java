@@ -86,7 +86,7 @@ public class Race {
 		List<Ship> group = new ArrayList<>(count);
 
 		for (int i = 0; i < count; i++) {
-			group.add(shipTemplate.build(technologies()));
+			group.add(shipTemplate.build(technologies(), this, planet));
 		}
 
 		ships.addAll(group);

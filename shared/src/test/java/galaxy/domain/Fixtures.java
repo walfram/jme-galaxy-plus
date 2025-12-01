@@ -71,7 +71,7 @@ public final class Fixtures {
 				new ShieldsTemplate(43.0), new CargoTemplate(1.0)
 		).build(new Technologies(
 				new EnginesTechnology(4.34), new WeaponsTechnology(3.5), new ShieldsTechnology(3.91), new CargoTechnology(2.09)
-		));
+		), null, null);
 	}
 
 	public static Ship battleStation() {
@@ -81,7 +81,18 @@ public final class Fixtures {
 				new WeaponsTemplate(3, 30),
 				new ShieldsTemplate(100),
 				new CargoTemplate(0)
-		).build(new Technologies());
+		).build(new Technologies(), null, null);
 	}
 
+	public static Planet planetA() {
+		return new Planet(
+				42L, new Coordinates(1, 1, 1), new Size(100), new Resources(100), new Population(100), new Industry(100), new Materials(100)
+		);
+	}
+
+	public static Planet planetB() {
+		return new Planet(
+				43L, new Coordinates(2, 2, 2), new Size(100), new Resources(100), new Population(100), new Industry(100), new Materials(100)
+		);
+	}
 }

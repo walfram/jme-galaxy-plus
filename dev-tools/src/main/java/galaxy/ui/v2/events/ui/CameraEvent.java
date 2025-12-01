@@ -1,4 +1,4 @@
-package galaxy.ui.v2.events;
+package galaxy.ui.v2.events.ui;
 
 import com.jme3.scene.Geometry;
 import com.simsilica.event.EventType;

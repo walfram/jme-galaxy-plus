@@ -17,7 +17,7 @@ class DefenceTest {
 				new ShieldsTemplate(8),
 				new CargoTemplate(0)
 		);
-		Ship large = largeTemplate.build(new Technologies());
+		Ship large = largeTemplate.build(new Technologies(), null, null);
 
 		ShipTemplate smallTemplate = new ShipTemplate(
 				"small",
@@ -26,7 +26,7 @@ class DefenceTest {
 				new ShieldsTemplate(1),
 				new CargoTemplate(0)
 		);
-		Ship small = smallTemplate.build(new Technologies());
+		Ship small = smallTemplate.build(new Technologies(), null, null);
 
 		double largeDefence = new Defence(large).value();
 		double smallDefence = new Defence(small).value();
@@ -44,7 +44,7 @@ class DefenceTest {
 				new CargoTemplate(0.0)
 		);
 
-		Ship ship = template.build(new Technologies());
+		Ship ship = template.build(new Technologies(), null, null);
 		double shields = new Defence(ship).value();
 
 		assertEquals(10.0, shields);

@@ -2,7 +2,7 @@ package galaxy.domain;
 
 import galaxy.domain.ship.*;
 
-public class ShipTemplates {
+public class ShipTemplateFixtures {
 
 	public static ShipTemplate drone() {
 		return new ShipTemplate(

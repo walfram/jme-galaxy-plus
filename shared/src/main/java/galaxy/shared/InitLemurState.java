@@ -11,8 +11,8 @@ public class InitLemurState extends BaseAppState {
 	protected void initialize(Application application) {
 		GuiGlobals.initialize(application);
 
-//		BaseStyles.loadGlassStyle();
-		BaseStyles.loadStyleResources("glass-styles-extended.groovy");
+		BaseStyles.loadGlassStyle();
+//		BaseStyles.loadStyleResources("glass-styles-extended.groovy");
 		GuiGlobals.getInstance().getStyles().setDefaultStyle(BaseStyles.GLASS);
 	}
 

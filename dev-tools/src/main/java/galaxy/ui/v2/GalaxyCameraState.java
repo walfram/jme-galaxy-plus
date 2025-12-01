@@ -7,8 +7,8 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.math.Vector3f;
 import com.simsilica.event.EventBus;
-import galaxy.ui.v2.events.CameraEvent;
-import galaxy.ui.v2.events.ChaseCameraEvent;
+import galaxy.ui.v2.events.ui.CameraEvent;
+import galaxy.ui.v2.events.ui.ChaseCameraEvent;
 
 public class GalaxyCameraState extends BaseAppState {
 

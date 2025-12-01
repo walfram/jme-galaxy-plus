@@ -7,9 +7,9 @@ import com.simsilica.lemur.list.DefaultCellRenderer;
 import com.simsilica.lemur.style.BaseStyles;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.domain.planet.Planet;
-import galaxy.ui.v2.events.ChaseCameraEvent;
-import galaxy.ui.v2.events.GuiEvent;
-import galaxy.ui.v2.events.PlanetSelectEvent;
+import galaxy.ui.v2.events.ui.ChaseCameraEvent;
+import galaxy.ui.v2.events.ui.GuiEvent;
+import galaxy.ui.v2.events.ui.PlanetSelectEvent;
 import org.slf4j.Logger;
 
 import java.util.List;

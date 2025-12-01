@@ -12,8 +12,8 @@ import com.simsilica.lemur.Label;
 import com.simsilica.lemur.component.IconComponent;
 import com.simsilica.lemur.style.ElementId;
 import galaxy.domain.planet.Planet;
-import galaxy.ui.v2.events.ChaseCameraEvent;
-import galaxy.ui.v2.events.GuiEvent;
+import galaxy.ui.v2.events.ui.ChaseCameraEvent;
+import galaxy.ui.v2.events.ui.GuiEvent;
 import galaxy.ui.v2.widgets.PlanetInfoWidget;
 import galaxy.ui.v2.widgets.PlanetListWidget;
 import galaxy.ui.v2.widgets.PlanetProductionWidget;
@@ -88,7 +88,7 @@ public class GalaxyUiState extends BaseAppState {
 		gui.detachChildNamed(container.getName());
 
 		GuiGlobals.getInstance().getPopupState().centerInGui(container);
-		GuiGlobals.getInstance().getPopupState().showPopup(container);
+		GuiGlobals.getInstance().getPopupState().showModalPopup(container);
 	}
 
 	private void showShipGroups() {

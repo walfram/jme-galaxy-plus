@@ -8,7 +8,7 @@ import com.simsilica.lemur.input.Button;
 import com.simsilica.lemur.input.FunctionId;
 import com.simsilica.lemur.input.InputMapper;
 import com.simsilica.lemur.input.InputState;
-import galaxy.ui.v2.events.ControlsEvent;
+import galaxy.ui.v2.events.ui.ControlsEvent;
 
 public class ControlsState extends BaseAppState {
 
