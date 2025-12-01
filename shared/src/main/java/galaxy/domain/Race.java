@@ -23,6 +23,8 @@ public class Race {
 	private final List<ShipTemplate> shipTemplates = new ArrayList<>(128);
 	private final List<Ship> ships = new ArrayList<>(1024);
 
+	private final Diplomacy diplomacy = new Diplomacy(List.of());
+
 	public Race(String id, String name) {
 		this(id, name, List.of());
 	}
@@ -127,5 +129,9 @@ public class Race {
 
 	public boolean canChangeProduction(Planet planet) {
 		return ownedPlanet(planet.id()).isPresent();
+	}
+
+	public DiplomaticStatus statusWith(Race other) {
+		return diplomacy.status(other);
 	}
 }

@@ -55,7 +55,7 @@ public class GalaxyContextState extends BaseAppState {
 	protected void onDisable() {
 	}
 
-	public List<Race> races() {
+	public List<Race> allRaces() {
 		return List.copyOf(races);
 	}
 
@@ -67,4 +67,7 @@ public class GalaxyContextState extends BaseAppState {
 		return List.copyOf(planets);
 	}
 
+	public List<Race> otherRaces() {
+		return races.stream().filter(race -> !race.equals(player)).toList();
+	}
 }

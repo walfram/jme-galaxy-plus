@@ -17,6 +17,7 @@ import galaxy.ui.v2.events.GuiEvent;
 import galaxy.ui.v2.widgets.PlanetInfoWidget;
 import galaxy.ui.v2.widgets.PlanetListWidget;
 import galaxy.ui.v2.widgets.PlanetProductionWidget;
+import galaxy.ui.v2.widgets.RaceListWidget;
 import org.slf4j.Logger;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -50,6 +51,10 @@ public class GalaxyUiState extends BaseAppState {
 		btnShipGroups.setIcon(new IconComponent("icons/SpaceShip.png", 0.125f, 4f, 4f, 0f, false));
 		btnShipGroups.addClickCommands(b -> showShipGroups());
 
+		Button btnRaces = container.addChild(new Button(""));
+		btnRaces.setIcon(new IconComponent("icons/Hand.png", 0.125f, 4f, 4f, 0f, false));
+		btnRaces.addClickCommands(b -> showRaces());
+
 		gui.attachChild(container);
 		container.setLocalTranslation(5, getApplication().getCamera().getHeight() - 5, 0);
 	}
@@ -71,6 +76,19 @@ public class GalaxyUiState extends BaseAppState {
 	@Override
 	protected void onDisable() {
 		((SimpleApplication) getApplication()).getGuiNode().detachChild(gui);
+	}
+
+	private void showRaces() {
+		logger.debug("Races");
+		Container container = new RaceListWidget(
+				getState( GalaxyContextState.class ).player(),
+				getState( GalaxyContextState.class ).otherRaces()
+		);
+
+		gui.detachChildNamed(container.getName());
+
+		GuiGlobals.getInstance().getPopupState().centerInGui(container);
+		GuiGlobals.getInstance().getPopupState().showPopup(container);
 	}
 
 	private void showShipGroups() {
