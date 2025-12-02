@@ -17,6 +17,42 @@ public class ContextTest {
 		galaxy = mock(Galaxy.class);
 	}
 
+
+	@Test
+	void test_colonizing() {
+		Race race = mock(Race.class);
+		Planet planet = mock(Planet.class);
+
+		Race ownerBefore = galaxy.ownerOf(planet);
+		assertNull(ownerBefore);
+
+		Ship ship = mock(Ship.class);
+
+		galaxy.claimPlanet(race, planet, ship);
+
+		Race ownerAfter = galaxy.ownerOf(planet);
+		assertNotNull(ownerAfter);
+		assertEquals(race, ownerAfter);
+	}
+
+	@Test
+	void test_race_diplomacy() {
+		Race raceFoo = mock(Race.class);
+		Race raceBar = mock(Race.class);
+
+		Diplomacy war = galaxy.diplomacyStatus(raceFoo, raceBar);
+		assertEquals(Diplomacy.WAR, war);
+
+		Diplomacy peace = galaxy.declare(raceFoo, raceBar, Diplomacy.PEACE);
+		assertEquals(Diplomacy.PEACE, peace);
+
+		Diplomacy status = galaxy.diplomacyStatus(raceFoo, raceBar);
+		assertEquals(Diplomacy.PEACE, status);
+
+		Diplomacy diplomacy = galaxy.diplomacyStatus(raceBar, raceFoo);
+		assertEquals(Diplomacy.WAR, diplomacy);
+	}
+
 	@Test
 	void test_ship_upgrade() {
 		Race race = mock(Race.class);

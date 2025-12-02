@@ -44,4 +44,12 @@ public interface Galaxy {
 	List<Ship> transfer(Race from, Race to, List<Ship> ships);
 
 	List<Ship> upgrade(Race race, Planet planet, List<Ship> ships);
+
+	Diplomacy diplomacyStatus(Race from, Race to);
+
+	Diplomacy declare(Race from, Race to, Diplomacy diplomacy);
+
+	Race ownerOf(Planet planet);
+
+	void claimPlanet(Race race, Planet planet, Ship ship);
 }
