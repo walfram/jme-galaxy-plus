@@ -2,3 +2,4 @@ rootProject.name = 'jme-galaxy-plus'
 
 include 'shared'
 include 'dev-tools'
+include 'dev-domain'

@@ -25,6 +25,8 @@ public class Race {
 
 	private final Diplomacy diplomacy = new Diplomacy(List.of());
 
+	private final List<Planet> visited = new ArrayList<>(128);
+
 	public Race(String id, String name) {
 		this(id, name, List.of());
 	}
@@ -106,11 +108,15 @@ public class Race {
 	}
 
 	public Optional<Planet> visiblePlanet(Long planetId) {
-		return Optional.empty();
+		return ships.stream()
+				.map(Ship::location)
+				.filter(Objects::nonNull)
+				.filter(location -> location.id().equals(planetId))
+				.findFirst();
 	}
 
 	public Optional<Planet> visitedPlanet(Long planetId) {
-		return Optional.empty();
+		return visited.stream().filter(planet -> planet.id().equals(planetId)).findFirst();
 	}
 
 	public Optional<Object> friendlyPlanet(Long planetId) {
@@ -134,4 +140,9 @@ public class Race {
 	public DiplomaticStatus statusWith(Race other) {
 		return diplomacy.status(other);
 	}
+
+	public void markPlanetVisited(Planet location) {
+		visited.add(location);
+	}
+
 }

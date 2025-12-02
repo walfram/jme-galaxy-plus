@@ -11,7 +11,6 @@ public final class Ship {
 	private final Weapons weapons;
 	private final Shields shields;
 	private final Cargo cargo;
-
 	public Ship(Engines engines, Weapons weapons, Shields shields, Cargo cargo, Race owner, Planet location) {
 		this.engines = engines;
 		this.weapons = weapons;
@@ -21,8 +20,11 @@ public final class Ship {
 		this.location = location;
 	}
 
+
 	private Race owner;
+
 	private Planet location;
+	private Planet destination;
 	private boolean flying = false;
 
 	public double speed() {
@@ -50,8 +52,20 @@ public final class Ship {
 	}
 
 	public void flyTo(Planet destination) {
-		location = null;
+		this.location = null;
+		this.destination = destination;
 		flying = true;
+	}
+
+	public boolean isFlying() {
+		return flying;
+	}
+
+	public void arriveAtDestination() {
+		this.location = destination;
+		this.destination = null;
+		flying = false;
+		owner.markPlanetVisited(location);
 	}
 
 	public Engines engines() {
@@ -93,9 +107,5 @@ public final class Ship {
 				"weapons=" + weapons + ", " +
 				"shields=" + shields + ", " +
 				"cargo=" + cargo + ']';
-	}
-
-	public boolean isFlying() {
-		return flying;
 	}
 }
