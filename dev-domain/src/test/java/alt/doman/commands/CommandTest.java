@@ -12,6 +12,60 @@ import static org.mockito.Mockito.mock;
 class CommandTest {
 
 	@Test
+	void test_produce_materials() {
+		Race race = new Race("foo");
+		Planet planet = new Planet(0, null, null, null);
+
+		Galaxy galaxy = new Galaxy();
+		assertEquals(0, galaxy.productionQueueSize());
+		assertNull(planet.production());
+
+		Command command = new ProduceMaterials(race, planet);
+		command.invoke(galaxy);
+
+		assertNotNull(planet.production());
+
+		assertEquals(1, galaxy.productionQueueSize());
+	}
+
+	@Test
+	void test_upgrade_science() {
+		Race race = new Race("foo");
+		Planet planet = new Planet(0, null, null, null);
+		Science science = mock(Science.class);
+
+		Galaxy galaxy = new Galaxy();
+		assertEquals(0, galaxy.productionQueueSize());
+
+		assertNull(planet.production());
+
+		Command command = new ResearchScience(race, planet, science);
+		command.invoke(galaxy);
+
+		assertNotNull(planet.production());
+		assertEquals(1, galaxy.productionQueueSize());
+	}
+
+	@Test
+	void test_upgrade_technology_level() {
+		Race race = new Race("foo");
+		Planet planet = new Planet(0, null, null, null);
+		Technology technology = Technology.ENGINES;
+
+		Galaxy galaxy = new Galaxy();
+		assertEquals(0, galaxy.productionQueueSize());
+
+		assertNull(planet.production());
+
+		Command command = new ResearchTechnology(race, planet, technology);
+		command.invoke(galaxy);
+
+		assertNotNull(planet.production());
+
+		assertEquals(1, galaxy.productionQueueSize());
+	}
+
+	@Test
 	void test_send_ships() {
 		Race race = new Race("foo");
 
@@ -25,7 +79,7 @@ class CommandTest {
 				new Ship(shipTemplate, technologyLevel, race, a)
 		);
 
-		for (Ship ship: ships) {
+		for (Ship ship : ships) {
 			assertEquals(a, ship.location());
 			assertNull(ship.destination());
 		}
@@ -40,7 +94,7 @@ class CommandTest {
 
 		assertTrue(a.ships().isEmpty());
 
-		for (Ship ship: ships) {
+		for (Ship ship : ships) {
 			assertNull(ship.location());
 			assertEquals(b, ship.destination());
 		}
@@ -55,8 +109,12 @@ class CommandTest {
 		Galaxy galaxy = new Galaxy();
 		assertEquals(0, galaxy.productionQueueSize());
 
+		assertNull(planet.production());
+
 		Command buildShips = new BuildShips(race, planet, shipTemplate);
 		buildShips.invoke(galaxy);
+
+		assertNotNull(planet.production());
 
 		assertEquals(1, galaxy.productionQueueSize());
 	}

@@ -1,5 +1,6 @@
 package alt.doman.planet;
 
+import alt.doman.Production;
 import alt.doman.Race;
 import alt.doman.Ship;
 
@@ -18,6 +19,7 @@ public class Planet {
 	private double materials = 0;
 	private double effort = 0;
 	private Race owner;
+	private Production production;
 
 	private final List<Ship> ships = new ArrayList<>();
 
@@ -50,6 +52,14 @@ public class Planet {
 
 	public List<Ship> ships() {
 		return List.copyOf(ships);
+	}
+
+	public Production production() {
+		return production;
+	}
+
+	public void updateProduction(Production production) {
+		this.production = production;
 	}
 
 }
