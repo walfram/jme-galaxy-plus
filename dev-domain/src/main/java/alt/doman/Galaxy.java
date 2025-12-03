@@ -4,16 +4,13 @@ import java.util.List;
 
 public interface Galaxy {
 	List<Race> races();
-
 	List<Planet> planets();
 
-	List<Planet> planetsOwned(Race race);
+	List<Planet> racePlanets(Race race);
 
 	List<Planet> planetsAll(Race race);
 
-	List<Ship> ships(Race race);
-
-	List<Planet> visiblePlanets(Race race);
+	List<Planet> knownPlanets(Race race);
 
 	List<Planet> unknownPlanets(Race race);
 
@@ -21,35 +18,16 @@ public interface Galaxy {
 
 	List<Planet> hostilePlanets(Race race);
 
-	List<Planet> visitedPlanets(Race race);
-
-	void createShipTemplate(Race race, ShipTemplate template);
-
 	List<ShipTemplate> shipTemplates(Race race);
 
-	List<Ship> buildShips(Race race, Planet planet, ShipTemplate shipTemplate);
+	List<Ship> ships(Race race);
+	List<Ship> shipsAtPlanet(Race race, Planet planet);
 
-	double technologyLevel(Race race, Technology technology);
-
-	double research(Race race, Planet planet, Technology tech);
-
-	Science research(Race race, Planet planet, Science science);
-
-	List<Ship> shipsAt(Race race, Planet planet);
-
-	List<Ship> sendShips(Race race, Planet from, Planet to, List<Ship> ships);
-
-	void produce(Race race, Planet planet, Production production);
-
-	List<Ship> transfer(Race from, Race to, List<Ship> ships);
-
-	List<Ship> upgrade(Race race, Planet planet, List<Ship> ships);
+	TechnologyLevel technologyLevel(Race race);
+	List<Science> sciences(Race race);
 
 	Diplomacy diplomacyStatus(Race from, Race to);
 
-	Diplomacy declare(Race from, Race to, Diplomacy diplomacy);
+	void execute(Command command);
 
-	Race ownerOf(Planet planet);
-
-	void claimPlanet(Race race, Planet planet, Ship ship);
 }

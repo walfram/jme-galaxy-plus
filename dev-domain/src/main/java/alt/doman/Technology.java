@@ -1,4 +1,7 @@
 package alt.doman;
 
-public interface Technology {
+public enum Technology {
+
+	ENGINES, WEAPONS, SHIELDS, CARGO;
+
 }

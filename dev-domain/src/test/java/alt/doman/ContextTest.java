@@ -23,16 +23,15 @@ public class ContextTest {
 		Race race = mock(Race.class);
 		Planet planet = mock(Planet.class);
 
-		Race ownerBefore = galaxy.ownerOf(planet);
-		assertNull(ownerBefore);
+		List<Planet> owned = galaxy.racePlanets(race);
+		assertEquals(1, owned.size());
 
 		Ship ship = mock(Ship.class);
 
-		galaxy.claimPlanet(race, planet, ship);
+		Command unloadColonists = mock(Command.class);
+		galaxy.execute(unloadColonists);
 
-		Race ownerAfter = galaxy.ownerOf(planet);
-		assertNotNull(ownerAfter);
-		assertEquals(race, ownerAfter);
+		assertEquals(2, owned.size());
 	}
 
 	@Test
@@ -43,8 +42,8 @@ public class ContextTest {
 		Diplomacy war = galaxy.diplomacyStatus(raceFoo, raceBar);
 		assertEquals(Diplomacy.WAR, war);
 
-		Diplomacy peace = galaxy.declare(raceFoo, raceBar, Diplomacy.PEACE);
-		assertEquals(Diplomacy.PEACE, peace);
+		Command changeDiplomacy = mock(Command.class);
+		galaxy.execute(changeDiplomacy);
 
 		Diplomacy status = galaxy.diplomacyStatus(raceFoo, raceBar);
 		assertEquals(Diplomacy.PEACE, status);
@@ -58,13 +57,14 @@ public class ContextTest {
 		Race race = mock(Race.class);
 		Planet planet = mock(Planet.class);
 
-		List<Ship> ships = galaxy.shipsAt(race, planet);
+		List<Ship> ships = galaxy.shipsAtPlanet(race, planet);
+		List<TechnologyLevel> shipTechLevelsBefore = ships.stream().map(Ship::technologyLevel).toList();
 
-		List<Ship> upgraded = galaxy.upgrade(race, planet, ships);
+		Command upgradeShips = mock(Command.class);
+		galaxy.execute(upgradeShips);
 
-		assertNotNull(upgraded);
-		assertFalse(upgraded.isEmpty());
-		assertEquals(ships.size(), upgraded.size());
+		List<TechnologyLevel> shipTechLevelsAfter = ships.stream().map(Ship::technologyLevel).toList();
+		assertNotEquals(shipTechLevelsBefore, shipTechLevelsAfter);
 	}
 
 	@Test
@@ -73,34 +73,35 @@ public class ContextTest {
 		Race raceFoo = mock(Race.class);
 		Race raceBar = mock(Race.class);
 
-		List<Ship> shipsFooBefore = galaxy.shipsAt(raceFoo, planet);
+		List<Ship> shipsFooBefore = galaxy.shipsAtPlanet(raceFoo, planet);
 		assertNotNull(shipsFooBefore);
 		assertFalse(shipsFooBefore.isEmpty());
 
-		List<Ship> shipsBarBefore = galaxy.shipsAt(raceBar, planet);
+		List<Ship> shipsBarBefore = galaxy.shipsAtPlanet(raceBar, planet);
 		assertNotNull(shipsBarBefore);
 		assertTrue(shipsBarBefore.isEmpty());
 
-		List<Ship> transferred = galaxy.transfer(raceFoo, raceBar, shipsFooBefore);
-		assertNotNull(transferred);
-		assertFalse(transferred.isEmpty());
+//		List<Ship> transferred = galaxy.transfer(raceFoo, raceBar, shipsFooBefore);
+//		assertNotNull(transferred);
+//		assertFalse(transferred.isEmpty());
 
-		List<Ship> shipsBarAfter = galaxy.shipsAt(raceBar, planet);
+		Command transferShips = mock(Command.class);
+		galaxy.execute(transferShips);
+
+		List<Ship> shipsBarAfter = galaxy.shipsAtPlanet(raceBar, planet);
 		assertNotNull(shipsBarAfter);
 		assertFalse(shipsBarAfter.isEmpty());
-
-		assertEquals(transferred, shipsBarAfter);
 	}
 
 	@Test
 	void test_race_production() {
 		Race race = mock(Race.class);
 		Planet planet = mock(Planet.class);
-		Production production = mock(Production.class);
 
-		assertFalse(production.ready());
-		assertDoesNotThrow(() -> galaxy.produce(race, planet, production));
-		assertTrue(production.ready());
+		Command capitalProduction = mock(Command.class);
+		galaxy.execute(capitalProduction);
+
+		// TODO check production status
 	}
 
 	@Test
@@ -110,15 +111,15 @@ public class ContextTest {
 		Planet from = mock(Planet.class);
 		Planet to = mock(Planet.class);
 
-		List<Ship> ships = galaxy.shipsAt(race, from);
+		List<Ship> ships = galaxy.shipsAtPlanet(race, from);
 		assertNotNull(ships);
 		assertFalse(ships.isEmpty());
 
-		List<Ship> sent = galaxy.sendShips(race, from, to, ships);
-		assertNotNull(sent);
-		assertFalse(sent.isEmpty());
+		Command sendShips = mock(Command.class);
+		galaxy.execute(sendShips);
 
-		assertEquals(ships, sent);
+		assertTrue(ships.isEmpty());
+
 		// TODO check all ships' status "in flight"?
 	}
 
@@ -128,23 +129,37 @@ public class ContextTest {
 		Planet planet = mock(Planet.class);
 		Science science = mock(Science.class);
 
-		Science researched = galaxy.research(race, planet, science);
-		assertNotNull(researched);
-		assertNotEquals(science, researched);
+		TechnologyLevel before = galaxy.technologyLevel(race);
+		assertEquals(1.0, before.level(Technology.ENGINES));
+
+		List<Science> sciences = galaxy.sciences(race);
+		assertTrue(sciences.isEmpty());
+
+		Command research = mock(Command.class);
+		galaxy.execute(research);
+
+		assertFalse(sciences.isEmpty());
+
+		TechnologyLevel after = galaxy.technologyLevel(race);
+		assertEquals(1.1, after.level(Technology.ENGINES));
 	}
 
 	@Test
 	void test_race_research_tech() {
 		Race race = mock(Race.class);
 		Planet planet = mock(Planet.class);
-		Technology tech = mock(Technology.class);
 
-		double level = galaxy.technologyLevel(race, tech);
-		assertEquals(1.0, level);
+		TechnologyLevel before = galaxy.technologyLevel(race);
+		assertEquals(1.0, before.level(Technology.ENGINES));
 
 		// TODO use effort 500 == 0.1 difference
-		double upgraded = galaxy.research(race, planet, tech);
-		assertEquals(1.1, upgraded);
+		// double upgraded = galaxy.research(race, planet, tech);
+		Command research = mock(Command.class);
+		galaxy.execute(research);
+
+		TechnologyLevel after = galaxy.technologyLevel(race);
+
+		assertEquals(1.1, after.level(Technology.ENGINES));
 	}
 
 	@Test
@@ -153,7 +168,12 @@ public class ContextTest {
 		Planet planet = mock(Planet.class);
 		ShipTemplate shipTemplate = mock(ShipTemplate.class);
 
-		List<Ship> ships = galaxy.buildShips(race, planet, shipTemplate);
+		Command buildShips = mock(Command.class);
+
+		galaxy.execute(buildShips);
+
+		List<Ship> ships = galaxy.shipsAtPlanet(race, planet);
+
 		assertNotNull(ships);
 		assertFalse(ships.isEmpty());
 	}
@@ -163,7 +183,8 @@ public class ContextTest {
 		Race race = mock(Race.class);
 
 		ShipTemplate template = mock(ShipTemplate.class);
-		galaxy.createShipTemplate(race, template);
+		Command createShipTemplate = mock(Command.class);
+		galaxy.execute(createShipTemplate);
 
 		List<ShipTemplate> templates = galaxy.shipTemplates(race);
 		assertNotNull(templates);
@@ -174,7 +195,7 @@ public class ContextTest {
 	void test_planet_visibility() {
 		Race race = mock(Race.class);
 
-		List<Planet> visible = galaxy.visiblePlanets(race);
+		List<Planet> visible = galaxy.knownPlanets(race);
 		assertNotNull(visible);
 		assertFalse(visible.isEmpty());
 
@@ -189,10 +210,6 @@ public class ContextTest {
 		List<Planet> hostile = galaxy.hostilePlanets(race);
 		assertNotNull(hostile);
 		assertFalse(hostile.isEmpty());
-
-		List<Planet> visited = galaxy.visitedPlanets(race);
-		assertNotNull(visited);
-		assertFalse(visited.isEmpty());
 
 		List<Planet> all = galaxy.planetsAll(race);
 		assertNotNull(all);
@@ -210,7 +227,7 @@ public class ContextTest {
 	@Test
 	void test_race_have_planets() {
 		Race race = mock(Race.class);
-		List<Planet> planets = galaxy.planetsOwned(race);
+		List<Planet> planets = galaxy.racePlanets(race);
 		assertNotNull(planets);
 		assertFalse(planets.isEmpty());
 	}
