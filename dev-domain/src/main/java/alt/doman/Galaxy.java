@@ -1,33 +1,24 @@
 package alt.doman;
 
+import alt.doman.planet.Planet;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
-public interface Galaxy {
-	List<Race> races();
-	List<Planet> planets();
+public class Galaxy {
 
-	List<Planet> racePlanets(Race race);
+	// use add/poll to poll for FIFO
+	private final Deque<Production> productions = new ArrayDeque<>();
 
-	List<Planet> planetsAll(Race race);
+	public void addProduction(Production production) {
+		productions.add(production);
+	}
 
-	List<Planet> knownPlanets(Race race);
+	public int productionQueueSize() {
+		return productions.size();
+	}
 
-	List<Planet> unknownPlanets(Race race);
-
-	List<Planet> friendlyPlanets(Race race);
-
-	List<Planet> hostilePlanets(Race race);
-
-	List<ShipTemplate> shipTemplates(Race race);
-
-	List<Ship> ships(Race race);
-	List<Ship> shipsAtPlanet(Race race, Planet planet);
-
-	TechnologyLevel technologyLevel(Race race);
-	List<Science> sciences(Race race);
-
-	Diplomacy diplomacyStatus(Race from, Race to);
-
-	void execute(Command command);
-
+	public void notifyShipsMove(Race race, Planet from, Planet to, List<Ship> ships) {
+	}
 }

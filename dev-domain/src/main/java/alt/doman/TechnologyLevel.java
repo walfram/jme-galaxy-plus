@@ -22,6 +22,10 @@ public class TechnologyLevel {
 		this.levels.putAll(levels);
 	}
 
+	public TechnologyLevel(TechnologyLevel other) {
+		this(other.levels);
+	}
+
 	public double level(Technology technology) {
 		return levels.getOrDefault(technology, 0.0);
 	}
