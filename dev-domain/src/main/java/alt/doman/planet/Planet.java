@@ -6,6 +6,7 @@ import alt.doman.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Planet {
 
@@ -28,6 +29,18 @@ public class Planet {
 		this.size = size;
 		this.resources = resources;
 		this.coordinates = coordinates;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		Planet planet = (Planet) o;
+		return id == planet.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
 	}
 
 	public double industry() {

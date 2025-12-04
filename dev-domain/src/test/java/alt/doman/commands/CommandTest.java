@@ -16,7 +16,7 @@ class CommandTest {
 		Race race = new Race("foo");
 		Planet planet = new Planet(0, null, null, null);
 
-		Galaxy galaxy = new Galaxy();
+		Galaxy galaxy = new Galaxy(List.of(), List.of());
 		assertEquals(0, galaxy.productionQueueSize());
 		assertNull(planet.production());
 
@@ -34,7 +34,7 @@ class CommandTest {
 		Planet planet = new Planet(0, null, null, null);
 		Science science = mock(Science.class);
 
-		Galaxy galaxy = new Galaxy();
+		Galaxy galaxy = new Galaxy(List.of(), List.of());
 		assertEquals(0, galaxy.productionQueueSize());
 
 		assertNull(planet.production());
@@ -52,7 +52,7 @@ class CommandTest {
 		Planet planet = new Planet(0, null, null, null);
 		Technology technology = Technology.ENGINES;
 
-		Galaxy galaxy = new Galaxy();
+		Galaxy galaxy = new Galaxy(List.of(), List.of());
 		assertEquals(0, galaxy.productionQueueSize());
 
 		assertNull(planet.production());
@@ -87,7 +87,7 @@ class CommandTest {
 		assertFalse(a.ships().isEmpty());
 		assertTrue(b.ships().isEmpty());
 
-		Galaxy galaxy = new Galaxy();
+		Galaxy galaxy = new Galaxy(List.of(), List.of());
 
 		Command command = new SendShips(race, a, b, ships);
 		command.invoke(galaxy);
@@ -106,7 +106,7 @@ class CommandTest {
 		Planet planet = new Planet(0, null, null, null);
 		ShipTemplate shipTemplate = mock(ShipTemplate.class);
 
-		Galaxy galaxy = new Galaxy();
+		Galaxy galaxy = new Galaxy(List.of(), List.of());
 		assertEquals(0, galaxy.productionQueueSize());
 
 		assertNull(planet.production());
