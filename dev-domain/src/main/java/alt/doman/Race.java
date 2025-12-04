@@ -28,6 +28,10 @@ public class Race {
 		return Objects.hashCode(name);
 	}
 
+	public void updateDiplomacy(Race other, Diplomacy diplomacy) {
+		this.diplomacy.put(other, diplomacy);
+	}
+
 	public Diplomacy diplomacyStatus(Race other) {
 		return diplomacy.computeIfAbsent(other, k -> Diplomacy.WAR);
 	}

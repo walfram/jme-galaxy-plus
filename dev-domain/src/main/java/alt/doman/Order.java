@@ -1,5 +1,5 @@
 package alt.doman;
 
-public interface Command {
+public interface Order {
 	void invoke(Galaxy galaxy);
 }

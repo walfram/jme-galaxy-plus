@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-class CommandTest {
+class OrderTest {
 
 	@Test
 	void test_produce_materials() {
@@ -20,8 +20,8 @@ class CommandTest {
 		assertEquals(0, galaxy.productionQueueSize());
 		assertNull(planet.production());
 
-		Command command = new ProduceMaterials(race, planet);
-		command.invoke(galaxy);
+		Order order = new ProduceMaterials(race, planet);
+		order.invoke(galaxy);
 
 		assertNotNull(planet.production());
 
@@ -39,8 +39,8 @@ class CommandTest {
 
 		assertNull(planet.production());
 
-		Command command = new ResearchScience(race, planet, science);
-		command.invoke(galaxy);
+		Order order = new ResearchScience(race, planet, science);
+		order.invoke(galaxy);
 
 		assertNotNull(planet.production());
 		assertEquals(1, galaxy.productionQueueSize());
@@ -57,8 +57,8 @@ class CommandTest {
 
 		assertNull(planet.production());
 
-		Command command = new ResearchTechnology(race, planet, technology);
-		command.invoke(galaxy);
+		Order order = new ResearchTechnology(race, planet, technology);
+		order.invoke(galaxy);
 
 		assertNotNull(planet.production());
 
@@ -89,8 +89,8 @@ class CommandTest {
 
 		Galaxy galaxy = new Galaxy(List.of(), List.of());
 
-		Command command = new SendShips(race, a, b, ships);
-		command.invoke(galaxy);
+		Order order = new SendShips(race, a, b, ships);
+		order.invoke(galaxy);
 
 		assertTrue(a.ships().isEmpty());
 
@@ -111,7 +111,7 @@ class CommandTest {
 
 		assertNull(planet.production());
 
-		Command buildShips = new BuildShips(race, planet, shipTemplate);
+		Order buildShips = new BuildShips(race, planet, shipTemplate);
 		buildShips.invoke(galaxy);
 
 		assertNotNull(planet.production());
@@ -127,10 +127,10 @@ class CommandTest {
 
 		ShipTemplate template = mock(ShipTemplate.class);
 
-		Command command = new CreateShipTemplate(race, template);
+		Order order = new CreateShipTemplate(race, template);
 		Galaxy galaxy = mock(Galaxy.class);
 
-		command.invoke(galaxy);
+		order.invoke(galaxy);
 
 		assertFalse(race.shipTemplates().isEmpty());
 		assertEquals(1, race.shipTemplates().size());
@@ -144,10 +144,10 @@ class CommandTest {
 		Race race = new Race("foo");
 		assertTrue(race.planets().isEmpty());
 
-		Command command = new AssignPlanet(race, planet);
+		Order order = new AssignPlanet(race, planet);
 
 		Galaxy galaxy = mock(Galaxy.class);
-		command.invoke(galaxy);
+		order.invoke(galaxy);
 
 		assertFalse(race.planets().isEmpty());
 		assertEquals(1, race.planets().size());

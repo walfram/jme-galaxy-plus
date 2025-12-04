@@ -1,6 +1,6 @@
 package alt.doman.commands;
 
-import alt.doman.Command;
+import alt.doman.Order;
 import alt.doman.Galaxy;
 import alt.doman.Race;
 import alt.doman.Ship;
@@ -8,18 +8,7 @@ import alt.doman.planet.Planet;
 
 import java.util.List;
 
-public class SendShips implements Command {
-	private final Race race;
-	private final Planet from;
-	private final Planet to;
-	private final List<Ship> ships;
-
-	public SendShips(Race race, Planet from, Planet to, List<Ship> ships) {
-		this.race = race;
-		this.from = from;
-		this.to = to;
-		this.ships = ships;
-	}
+public record SendShips(Race race, Planet from, Planet to, List<Ship> ships) implements Order {
 
 	@Override
 	public void invoke(Galaxy galaxy) {
@@ -28,4 +17,5 @@ public class SendShips implements Command {
 			ship.updateDestination(to);
 		}
 	}
+
 }
