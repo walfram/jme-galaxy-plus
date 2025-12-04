@@ -51,4 +51,11 @@ public class GalaxyTest {
 		assertEquals(4, unknown);
 	}
 
+	@Test
+	void when_planet_is_lost_then_it_is_removed_from_race() {
+		// race "foo" has ships at race "bar"'s planet
+		// ships bomb planet to 0
+		// race "bar" loses planet
+	}
+
 }

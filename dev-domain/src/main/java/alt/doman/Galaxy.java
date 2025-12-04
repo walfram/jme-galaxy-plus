@@ -14,6 +14,7 @@ public class Galaxy {
 
 	// use add/poll to poll for FIFO
 	private final Deque<Production> productions = new ArrayDeque<>();
+
 	private final List<Race> races;
 	private final List<Planet> planets;
 
@@ -49,6 +50,32 @@ public class Galaxy {
 		combined.addAll(unknown);
 
 		return combined;
+	}
+
+	public void updateState(double tpf) {
+		// diplomacy change
+
+		// run combats
+		// run bombings
+
+		// load/unload
+		// upgrade ships
+		// send ships to hyperspace
+
+		// rotes are assigned --> load/unload and send to hyperspace
+
+		// move ships in hyperspace
+		// arrive at planets if applicable
+		// run combats
+		// run bombings
+
+		// production is executed
+
+		// population growth
+
+		// auto-unload ???
+
+		//
 	}
 
 }
