@@ -1,5 +1,6 @@
 package alt.doman;
 
+import alt.doman.phases.*;
 import alt.doman.planet.Planet;
 import alt.doman.planet.PlanetView;
 import alt.doman.planet.UnknownPlanet;
@@ -17,6 +18,22 @@ public class Galaxy {
 
 	private final List<Race> races;
 	private final List<Planet> planets;
+
+	private final List<Phase> phases = List.of(
+			new CombantPhase(),
+			new BombingPhase(),
+
+			new LoadPhase(),
+			new UpgradePhase(),
+			new FlightPhase(),
+
+			new CombantPhase(),
+			new BombingPhase(),
+
+			new ProductionPhase(),
+			new PopulationPhase(),
+			new UnloadPhase()
+	);
 
 	public Galaxy(List<Race> races, List<Planet> planets) {
 		this.races = races;
@@ -53,29 +70,9 @@ public class Galaxy {
 	}
 
 	public void updateState(double tpf) {
-		// diplomacy change
-
-		// run combats
-		// run bombings
-
-		// load/unload
-		// upgrade ships
-		// send ships to hyperspace
-
-		// rotes are assigned --> load/unload and send to hyperspace
-
-		// move ships in hyperspace
-		// arrive at planets if applicable
-		// run combats
-		// run bombings
-
-		// production is executed
-
-		// population growth
-
-		// auto-unload ???
-
-		//
+		for (Phase phase : phases) {
+			phase.run(this);
+		}
 	}
 
 }

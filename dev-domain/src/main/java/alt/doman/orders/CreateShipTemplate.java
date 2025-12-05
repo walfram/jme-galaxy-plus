@@ -1,4 +1,4 @@
-package alt.doman.commands;
+package alt.doman.orders;
 
 import alt.doman.Order;
 import alt.doman.Galaxy;
