@@ -5,7 +5,7 @@ import alt.doman.Phase;
 
 public class BombingPhase implements Phase {
 	@Override
-	public void run(Galaxy galaxy) {
+	public void run(Galaxy galaxy, double tpf) {
 
 	}
 }

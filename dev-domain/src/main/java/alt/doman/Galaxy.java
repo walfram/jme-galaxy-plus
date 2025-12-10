@@ -71,7 +71,7 @@ public class Galaxy {
 
 	public void updateState(double tpf) {
 		for (Phase phase : phases) {
-			phase.run(this);
+			phase.run(this, tpf);
 		}
 	}
 
