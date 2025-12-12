@@ -2,6 +2,8 @@ package alt.doman;
 
 import alt.doman.planet.Planet;
 
+import java.util.List;
+
 public class Ship {
 	private final ShipTemplate shipTemplate;
 	private final TechnologyLevel technologyLevel;
@@ -16,7 +18,8 @@ public class Ship {
 		this.technologyLevel = new TechnologyLevel(technologyLevel);
 		this.owner = owner;
 		this.location = location;
-		location.addShips(this);
+		this.location.addShips(this);
+		this.owner.addShips(List.of(this));
 	}
 
 	public TechnologyLevel technologyLevel() {

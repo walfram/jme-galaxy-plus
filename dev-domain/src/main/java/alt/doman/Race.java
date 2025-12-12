@@ -12,6 +12,8 @@ public class Race {
 	private final List<Planet> planets = new ArrayList<>();
 	private final List<ShipTemplate> shipTemplates = new ArrayList<>();
 
+	private final List<Ship> ships = new ArrayList<>();
+
 	public Race(String name) {
 		this.name = name;
 	}
@@ -57,4 +59,7 @@ public class Race {
 		shipTemplates.add(shipTemplate);
 	}
 
+	public void addShips(List<Ship> ships) {
+		this.ships.addAll(ships);
+	}
 }

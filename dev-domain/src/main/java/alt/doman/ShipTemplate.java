@@ -1,4 +1,4 @@
 package alt.doman;
 
-public interface ShipTemplate {
+public record ShipTemplate() {
 }

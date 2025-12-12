@@ -54,8 +54,18 @@ public class GalaxyTest {
 	@Test
 	void when_planet_is_lost_then_it_is_removed_from_race() {
 		// race "foo" has ships at race "bar"'s planet
+		Race foo = galaxy.race("foo");
+		Race bar = galaxy.race("bar");
+
+		assertEquals(1, bar.planets().size());
+
+		Ship ship = new Ship(new ShipTemplate(), new TechnologyLevel(), foo, bar.planets().getFirst());
+
 		// ships bomb planet to 0
+		galaxy.updateState(128f);
+
 		// race "bar" loses planet
+		assertEquals(0, bar.planets().size());
 	}
 
 }
