@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/dev-domain" />
             <option value="$PROJECT_DIR$/dev-domain-2" />
             <option value="$PROJECT_DIR$/dev-tools" />
             <option value="$PROJECT_DIR$/shared" />

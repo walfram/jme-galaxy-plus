@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.List;
 
 public interface Context {
-	int shipCount(String race);
+	long shipCount(String team);
 
-	int planetCount(String race);
+	long planetCount(String team);
 
 	List<Entity> query(Collection<Class<? extends Component>> components);
+
+	void remove(Collection<Entity> discarded);
 }

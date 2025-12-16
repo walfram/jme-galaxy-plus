@@ -5,23 +5,28 @@ import com.google.common.collect.MutableClassToInstanceMap;
 
 public final class Entity {
 
-	private final ClassToInstanceMap<Component> properties = MutableClassToInstanceMap.create();
+	private final ClassToInstanceMap<Component> components = MutableClassToInstanceMap.create();
 
-	public Entity(Component... props) {
-		for (Component prop: props) {
-			properties.put(prop.getClass(), prop);
+	public Entity(Component... components) {
+		for (Component prop: components) {
+			this.components.put(prop.getClass(), prop);
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Entity(%s)".formatted(components.values());
+	}
+
 	public <T extends Component> T prop(Class<T> clazz) {
-		return properties.getInstance(clazz);
+		return components.getInstance(clazz);
 	}
 
 	public boolean has(Class<? extends Component> clazz) {
-		return properties.containsKey(clazz);
+		return components.containsKey(clazz);
 	}
 
 	public void add(Component prop) {
-		properties.put(prop.getClass(), prop);
+		components.put(prop.getClass(), prop);
 	}
 }
