@@ -2,6 +2,7 @@ package galaxy.domain;
 
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
+import galaxy.domain.planet.Population;
 
 public final class Entity {
 
@@ -28,5 +29,9 @@ public final class Entity {
 
 	public void add(Component prop) {
 		components.put(prop.getClass(), prop);
+	}
+
+	public void remove(Class<? extends Component> clazz) {
+		components.remove(clazz);
 	}
 }

@@ -1,8 +1,8 @@
 package galaxy.domain.phase;
 
 import galaxy.domain.*;
-import galaxy.domain.ship.ShipId;
-import galaxy.domain.ship.ShipState;
+import galaxy.domain.shared.BattleGroups;
+import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.Weapons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,19 +24,7 @@ public class CombatPhase implements Phase {
 
 	@Override
 	public void execute(double tpf) {
-		List<Entity> ships = galaxy.query(List.of(ShipId.class, ShipState.InOrbit.class));
-
-		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new HashMap<>();
-
-		for (Entity ship : ships) {
-			PlanetRef planetRef = ship.prop(PlanetRef.class);
-			TeamRef teamRef = ship.prop(TeamRef.class);
-
-			battleGroups
-					.computeIfAbsent(planetRef, p -> new HashMap<>())
-					.computeIfAbsent(teamRef, t -> new ArrayList<>())
-					.add(ship);
-		}
+		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new BattleGroups(galaxy).filter();
 
 		logger.debug("battle groups {}", battleGroups.size());
 		logger.debug("battle groups at planets {}", battleGroups.keySet().stream().map(PlanetRef::value).sorted().toList());

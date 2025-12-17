@@ -1,6 +1,6 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.PlanetId;
+import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
 
 import java.util.ArrayList;
@@ -12,8 +12,12 @@ public class ClassicGalaxy implements Context {
 
 	private final List<Entity> entities = new ArrayList<>();
 
-	public ClassicGalaxy(Entity... entities) {
-		this.entities.addAll(List.of(entities));
+	public ClassicGalaxy(Entity... source) {
+		this(List.of(source));
+	}
+
+	public ClassicGalaxy(List<Entity> source) {
+		this.entities.addAll(source);
 	}
 
 	@Override
@@ -27,7 +31,7 @@ public class ClassicGalaxy implements Context {
 	@Override
 	public long planetCount(String team) {
 		return entities.stream()
-				.filter(e -> e.has(PlanetId.class))
+				.filter(e -> e.has(PlanetRef.class))
 				.filter(e -> Objects.equals(new TeamRef(team), e.prop(TeamRef.class)))
 				.count();
 	}

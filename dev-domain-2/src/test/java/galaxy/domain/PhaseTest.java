@@ -1,10 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.phase.*;
-import galaxy.domain.planet.Colonists;
-import galaxy.domain.planet.Materials;
-import galaxy.domain.planet.PlanetId;
-import galaxy.domain.planet.Population;
+import galaxy.domain.planet.*;
 import galaxy.domain.ship.*;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +12,7 @@ public class PhaseTest {
 	@Test
 	void test_cargo_unload_phase() {
 		Entity ship = new Entity(new PlanetRef("foo"), new TeamRef("foo"));
-		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"));
+		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet(), new Materials(0));
 
 		Context galaxy = new ClassicGalaxy(ship, planet);
 
@@ -30,25 +27,25 @@ public class PhaseTest {
 	@Test
 	void test_population_growth_phase() {
 		// should this be production ?
-		Entity foo = new Entity(new PlanetRef("foo"), new TeamRef("foo"));
-		Entity bar = new Entity(new PlanetRef("bar"), new TeamRef("bar"));
+		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Colonists(0));
+		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Population(0));
 
-		Context galaxy = new ClassicGalaxy(foo);
+		Context galaxy = new ClassicGalaxy(planetFoo, planetBar);
 
-		assertEquals(0.0, foo.prop(Colonists.class).value());
-		assertEquals(900.0, bar.prop(Population.class).value());
+		assertEquals(0.0, planetFoo.prop(Colonists.class).value());
+		assertEquals(900.0, planetBar.prop(Population.class).value());
 
 		Phase population = new PopulationGrowthPhase(galaxy);
 		population.execute(1.0);
 
-		assertEquals(100.0, foo.prop(Colonists.class).value());
-		assertEquals(1000.0, bar.prop(Population.class).value());
+		assertEquals(100.0, planetFoo.prop(Colonists.class).value());
+		assertEquals(1000.0, planetBar.prop(Population.class).value());
 	}
 
 	@Test
 	void test_production_phase() {
 		// MAT, CAP, Research, Population growth ????
-		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"));
+		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Materials(0));
 
 		Context galaxy = new ClassicGalaxy(planet);
 		assertEquals(0.0, planet.prop(Materials.class).value());
@@ -112,11 +109,12 @@ public class PhaseTest {
 	@Test
 	void test_bombing_phase() {
 		// only on planets, races are hostile, a victim does not have ships on planet
-		Entity a = new Entity(new PlanetId("bar"), new TeamRef("foo"));
+		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
+		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
 
-		Entity b = new Entity(new PlanetId("bar"), new TeamRef("bar"));
+		Entity ship = new Entity(new ShipId(), new ShipState.InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
 
-		Context galaxy = new ClassicGalaxy(a, b);
+		Context galaxy = new ClassicGalaxy(planetFoo, planetBar, ship);
 
 		assertEquals(1, galaxy.planetCount("bar"));
 
@@ -129,10 +127,10 @@ public class PhaseTest {
 	@Test
 	void test_combat_phase() {
 		// only on planets, races are hostile, at least one ship has weapons
-		Entity a = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new ShipState.InOrbit(), new Weapons(1, 1));
-		Entity b = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new ShipState.InOrbit());
+		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new ShipState.InOrbit(), new Weapons(1, 1));
+		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new ShipState.InOrbit());
 
-		Context galaxy = new ClassicGalaxy(a, b);
+		Context galaxy = new ClassicGalaxy(shipA, shipB);
 
 		assertEquals(1, galaxy.shipCount("foo"));
 		assertEquals(1, galaxy.shipCount("bar"));

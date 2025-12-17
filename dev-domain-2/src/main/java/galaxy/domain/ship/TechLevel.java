@@ -2,14 +2,10 @@ package galaxy.domain.ship;
 
 import galaxy.domain.Component;
 
-public class TechLevel implements Component {
+public record TechLevel(double engines, double weapons, double shields, double cargo) implements Component {
 
-	private double engines = 1.0;
-	private double weapons = 1.0;
-	private double shields = 1.0;
-	private double cargo = 1.0;
-
-	public double engines() {
-		return engines;
+	public TechLevel() {
+		this(1.0, 1.0, 1.0, 1.0);
 	}
+
 }
