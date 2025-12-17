@@ -2,7 +2,6 @@ package galaxy.domain;
 
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
-import galaxy.domain.planet.Population;
 
 public final class Entity {
 

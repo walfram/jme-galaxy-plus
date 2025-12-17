@@ -20,7 +20,7 @@ public class BattleGroups {
 	}
 
 	public Map<PlanetRef, Map<TeamRef, List<Entity>>> filter() {
-		List<Entity> ships = galaxy.query(List.of(ShipId.class, ShipState.InOrbit.class));
+		List<Entity> ships = galaxy.query(List.of(ShipId.class, ShipState.InOrbit.getClass()));
 
 		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new HashMap<>();
 

@@ -59,16 +59,16 @@ public class PhaseTest {
 	@Test
 	void test_flight_phase() {
 		// updates ships positions in space
-		Entity ship = new Entity(new FlightOrder(), new ShipState.InOrbit());
+		Entity ship = new Entity(new FlightOrder(), ShipState.InOrbit);
 
 		Context galaxy = new ClassicGalaxy(ship);
 
-		assertEquals(new ShipState.InOrbit(), ship.prop(ShipState.class));
+		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
 
 		Phase phase = new FlightPhase(galaxy);
 		phase.execute(1.0);
 
-		assertEquals(new ShipState.InFlight(), ship.prop(ShipState.class));
+		assertEquals(ShipState.Launched, ship.prop(ShipState.class));
 	}
 
 	@Test
@@ -78,16 +78,16 @@ public class PhaseTest {
 
 		Context galaxy = new ClassicGalaxy(ship);
 
-		assertEquals(new ShipState.InOrbit(), ship.prop(ShipState.class));
+		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
 		assertEquals(1.0, ship.prop(TechLevel.class).engines());
 
 		Phase upgrade = new UpgradePhase(galaxy);
 		upgrade.execute(0.5);
 
-		assertEquals(new ShipState.InUpgrade(), ship.prop(ShipState.class));
+		assertEquals(ShipState.InUpgrade, ship.prop(ShipState.class));
 		upgrade.execute(0.5);
 
-		assertEquals(new ShipState.InOrbit(), ship.prop(ShipState.class));
+		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
 		assertEquals(1.1, ship.prop(TechLevel.class).engines());
 	}
 
@@ -112,7 +112,7 @@ public class PhaseTest {
 		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
 		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
 
-		Entity ship = new Entity(new ShipId(), new ShipState.InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
+		Entity ship = new Entity(new ShipId(), ShipState.InOrbit, new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
 
 		Context galaxy = new ClassicGalaxy(planetFoo, planetBar, ship);
 
@@ -127,8 +127,8 @@ public class PhaseTest {
 	@Test
 	void test_combat_phase() {
 		// only on planets, races are hostile, at least one ship has weapons
-		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new ShipState.InOrbit(), new Weapons(1, 1));
-		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new ShipState.InOrbit());
+		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), ShipState.InOrbit, new Weapons(1, 1));
+		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), ShipState.InOrbit);
 
 		Context galaxy = new ClassicGalaxy(shipA, shipB);
 
