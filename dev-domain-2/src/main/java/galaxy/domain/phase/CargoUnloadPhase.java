@@ -3,6 +3,7 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
+import galaxy.domain.TeamRef;
 import galaxy.domain.order.CargoUnloadOrder;
 import galaxy.domain.planet.*;
 import galaxy.domain.ship.Cargo;
@@ -34,7 +35,8 @@ public class CargoUnloadPhase implements Phase {
 						ShipId.class,
 						CargoUnloadOrder.class,
 						CargoHold.class,
-						PlanetRef.class
+						PlanetRef.class,
+						TeamRef.class
 				)
 		);
 		logger.debug("ships to unload {}", shipsToUnload.size());
@@ -42,14 +44,28 @@ public class CargoUnloadPhase implements Phase {
 		Map<PlanetRef, Entity> planets = galaxy.planets();
 
 		for (Entity ship : shipsToUnload) {
-			PlanetRef destination = ship.prop(CargoUnloadOrder.class).destination();
-			PlanetRef currentPlanet = ship.prop(PlanetRef.class);
+			PlanetRef destinationPlanetRef = ship.prop(CargoUnloadOrder.class).destination();
+			PlanetRef currentPlanetRef = ship.prop(PlanetRef.class);
 
-			if (Objects.equals(destination, currentPlanet)) {
+			Entity planet = planets.get(currentPlanetRef);
+
+			TeamRef shipTeam = ship.prop(TeamRef.class);
+			TeamRef planetTeam = planet.prop(TeamRef.class);
+
+			if (!Objects.equals(shipTeam, planetTeam)) {
+				logger.debug(
+						"ship {} cannot unload at {} (team mismatch: ship={}, planet={})",
+						ship.prop(ShipId.class),
+						currentPlanetRef,
+						shipTeam,
+						planetTeam
+				);
+				continue;
+			}
+
+			if (Objects.equals(destinationPlanetRef, currentPlanetRef)) {
 				CargoHold cargoHold = ship.prop(CargoHold.class);
-				logger.debug("unloading {} at {}", cargoHold, destination);
-
-				Entity planet = planets.get(currentPlanet);
+				logger.debug("unloading {} at {}", cargoHold, destinationPlanetRef);
 
 				switch (cargoHold.cargo()) {
 					case Materials -> planet.put(new Materials(cargoHold.amount() + planet.prop(Materials.class).value()));

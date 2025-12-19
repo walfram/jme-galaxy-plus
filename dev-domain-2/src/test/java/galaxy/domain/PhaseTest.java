@@ -96,7 +96,6 @@ public class PhaseTest {
 
 	@Test
 	void test_cargo_loading_phase() {
-		// CAP, MAT, COL, EMPTY -- ???
 		Entity ship = new Entity(new ShipId(), new CargoLoadOrder(Cargo.Colonists, 100.0), new CargoHold(Cargo.Empty, 0));
 
 		Context galaxy = new ClassicGalaxy(ship);
