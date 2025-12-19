@@ -13,7 +13,13 @@ public class PhaseTest {
 
 	@Test
 	void test_cargo_unload_phase() {
-		Entity ship = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new CargoUnloadOrder(new PlanetRef("foo")), new CargoHold(Cargo.Materials, 100.0));
+		Entity ship = new Entity(
+				new PlanetRef("foo"),
+				new TeamRef("foo"),
+				new ShipId(),
+				new CargoUnloadOrder(new PlanetRef("foo")),
+				new CargoHold(Cargo.Materials, 100.0, 100.0)
+		);
 		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet(), new Materials(0));
 
 		Context galaxy = new ClassicGalaxy(ship, planet);
@@ -96,17 +102,31 @@ public class PhaseTest {
 
 	@Test
 	void test_cargo_loading_phase() {
-		Entity ship = new Entity(new ShipId(), new CargoLoadOrder(Cargo.Colonists, 100.0), new CargoHold(Cargo.Empty, 0));
+		Entity ship = new Entity(
+				new PlanetRef("foo"),
+				new TeamRef("foo"),
+				new ShipId(),
+				new CargoLoadOrder(new PlanetRef("foo"), Cargo.Colonists, 100.0),
+				new CargoHold(Cargo.Empty, 100.0, 0));
 
-		Context galaxy = new ClassicGalaxy(ship);
+		Entity planet = new Entity(
+				new PlanetRef("foo"),
+				new Planet(),
+				new TeamRef("foo"),
+				new Population(1000.0)
+		);
+
+		Context galaxy = new ClassicGalaxy(ship, planet);
 
 		assertEquals(0.0, ship.prop(CargoHold.class).amount());
 
-		Phase loading = new LoadingPhase(galaxy);
+		Phase loading = new CargoLoadingPhase(galaxy);
 		loading.execute(1.0);
 
 		assertEquals(100.0, ship.prop(CargoHold.class).amount());
 		assertEquals(Cargo.Colonists, ship.prop(CargoHold.class).cargo());
+
+		assertEquals(900.0, planet.prop(Population.class).value());
 	}
 
 	@Test

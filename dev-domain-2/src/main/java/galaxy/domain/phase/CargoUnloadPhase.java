@@ -74,7 +74,7 @@ public class CargoUnloadPhase implements Phase {
 							planet.put(new Population(planet.prop(Population.class).value() + cargoHold.amount() * COLONISTS_PACK_RATIO));
 				}
 
-				ship.put(new CargoHold(Cargo.Empty, 0));
+				ship.put(new CargoHold(Cargo.Empty, 100.0, 0));
 				ship.remove(CargoUnloadOrder.class);
 			}
 		}
