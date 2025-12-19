@@ -1,7 +1,12 @@
 package galaxy.domain;
 
+import galaxy.domain.order.FlightOrder;
+import galaxy.domain.order.LoadCargoOrder;
+import galaxy.domain.order.ProductionOrder;
+import galaxy.domain.order.UpgradeShipOrder;
 import galaxy.domain.phase.*;
 import galaxy.domain.planet.*;
+import galaxy.domain.production.MaterialsProduction;
 import galaxy.domain.ship.*;
 import org.junit.jupiter.api.Test;
 
@@ -45,9 +50,10 @@ public class PhaseTest {
 	@Test
 	void test_production_phase() {
 		// MAT, CAP, Research, Population growth ????
-		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Materials(0));
+		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet(), new Materials(0), new ProductionOrder(new MaterialsProduction()));
+		Entity team = new Entity(new Team("foo"), new TeamRef("foo"));
 
-		Context galaxy = new ClassicGalaxy(planet);
+		Context galaxy = new ClassicGalaxy(planet, team);
 		assertEquals(0.0, planet.prop(Materials.class).value());
 
 		Phase phase = new ProductionPhase(galaxy);

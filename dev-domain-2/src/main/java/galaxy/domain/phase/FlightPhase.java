@@ -3,7 +3,7 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
-import galaxy.domain.ship.FlightOrder;
+import galaxy.domain.order.FlightOrder;
 import galaxy.domain.ship.ShipState;
 
 import java.util.List;

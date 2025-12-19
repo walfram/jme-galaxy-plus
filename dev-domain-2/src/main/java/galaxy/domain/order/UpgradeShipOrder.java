@@ -1,4 +1,4 @@
-package galaxy.domain.ship;
+package galaxy.domain.order;
 
 import galaxy.domain.Component;
 
