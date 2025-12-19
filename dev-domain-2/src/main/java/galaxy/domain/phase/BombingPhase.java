@@ -4,11 +4,10 @@ import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
 import galaxy.domain.TeamRef;
-import galaxy.domain.shared.BattleGroups;
 import galaxy.domain.planet.Industry;
-import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.planet.Population;
+import galaxy.domain.shared.BattleGroups;
 import galaxy.domain.shared.CalculatedBombing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class BombingPhase implements Phase {
 
@@ -33,11 +31,7 @@ public class BombingPhase implements Phase {
 		// find battle groups
 		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new BattleGroups(galaxy).filter();
 
-		List<Entity> planets = galaxy.query(List.of(PlanetRef.class, Planet.class));
-		Map<PlanetRef, Entity> planetCache = planets.stream().collect(Collectors.toMap(
-				e -> e.prop(PlanetRef.class),
-				e -> e
-		));
+		Map<PlanetRef, Entity> planetCache = galaxy.planets();
 
 		// bomb!
 		for (PlanetRef planetRef : battleGroups.keySet()) {
@@ -75,8 +69,8 @@ public class BombingPhase implements Phase {
 					break;
 				} else {
 					Industry industry = targetPlanet.prop(Industry.class);
-					targetPlanet.add(new Population(population.value() - bombing));
-					targetPlanet.add(new Industry(industry.value() - bombing));
+					targetPlanet.put(new Population(population.value() - bombing));
+					targetPlanet.put(new Industry(industry.value() - bombing));
 					logger.debug("team {} dealt bombing damage {} to {}: {}", attacker, bombing, planetRef, targetPlanet);
 				}
 			}

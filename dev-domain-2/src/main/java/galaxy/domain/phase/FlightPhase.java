@@ -19,7 +19,7 @@ public class FlightPhase implements Phase {
 	public void execute(double tpf) {
 		List<Entity> launched = galaxy.query(List.of(ShipState.Launched.getClass(), FlightOrder.class));
 		launched.forEach(ship -> {
-			ship.add(ShipState.InFlight);
+			ship.put(ShipState.InFlight);
 		});
 
 		List<Entity> inFlight = galaxy.query(List.of(ShipState.InFlight.getClass(), FlightOrder.class));
@@ -30,7 +30,7 @@ public class FlightPhase implements Phase {
 
 		List<Entity> readyToLaunch = galaxy.query(List.of(ShipState.InOrbit.getClass(), FlightOrder.class));
 		readyToLaunch.forEach(ship -> {
-			ship.add(ShipState.Launched);
+			ship.put(ShipState.Launched);
 		});
 	}
 }

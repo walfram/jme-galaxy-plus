@@ -10,6 +10,6 @@ public record ModifyTeamTechnology(double delta) implements ProductionResult {
 	public void update(ProductionContext context) {
 		Entity planet = context.planet();
 		Materials updated = new Materials(planet.prop(Materials.class).value() + delta);
-		planet.add(updated);
+		planet.put(updated);
 	}
 }

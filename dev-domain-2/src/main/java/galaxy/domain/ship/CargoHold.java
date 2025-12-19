@@ -1,9 +1,7 @@
 package galaxy.domain.ship;
 
 import galaxy.domain.Component;
+import galaxy.domain.Entity;
 
-public record CargoHold() implements Component {
-	public double value() {
-		return 0;
-	}
+public record CargoHold(Cargo cargo, double amount) implements Component {
 }

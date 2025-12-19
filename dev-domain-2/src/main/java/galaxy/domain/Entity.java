@@ -26,7 +26,7 @@ public final class Entity {
 		return components.containsKey(clazz);
 	}
 
-	public void add(Component prop) {
+	public void put(Component prop) {
 		components.put(prop.getClass(), prop);
 	}
 

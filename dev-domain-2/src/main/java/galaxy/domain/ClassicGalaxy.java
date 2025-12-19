@@ -1,12 +1,11 @@
 package galaxy.domain;
 
+import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClassicGalaxy implements Context {
 
@@ -44,6 +43,16 @@ public class ClassicGalaxy implements Context {
 	@Override
 	public void remove(Collection<Entity> discarded) {
 		entities.removeAll(discarded);
+	}
+
+	@Override
+	public Map<PlanetRef, Entity> planets() {
+		List<Entity> planets = query(List.of(PlanetRef.class, Planet.class));
+
+		return planets.stream().collect(Collectors.toMap(
+				e -> e.prop(PlanetRef.class),
+				e -> e
+		));
 	}
 
 }
