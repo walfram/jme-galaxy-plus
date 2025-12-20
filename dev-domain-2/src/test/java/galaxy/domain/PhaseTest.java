@@ -7,7 +7,7 @@ import galaxy.domain.production.MaterialsProduction;
 import galaxy.domain.ship.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PhaseTest {
 
@@ -34,20 +34,19 @@ public class PhaseTest {
 
 	@Test
 	void test_population_growth_phase() {
-		// should this be production ?
-		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Colonists(0));
-		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Population(0));
+		Entity planetFoo = new Entity(new Planet(), new PlanetRef("foo"), new TeamRef("foo"), new Population(100));
+		Entity planetBar = new Entity(new Planet(), new PlanetRef("bar"), new TeamRef("bar"), new Population(200));
 
 		Context galaxy = new ClassicGalaxy(planetFoo, planetBar);
 
-		assertEquals(0.0, planetFoo.prop(Colonists.class).value());
-		assertEquals(900.0, planetBar.prop(Population.class).value());
+		assertEquals(100.0, planetFoo.prop(Population.class).value());
+		assertEquals(200.0, planetBar.prop(Population.class).value());
 
 		Phase population = new PopulationGrowthPhase(galaxy);
 		population.execute(1.0);
 
-		assertEquals(100.0, planetFoo.prop(Colonists.class).value());
-		assertEquals(1000.0, planetBar.prop(Population.class).value());
+		assertEquals(108.0, planetFoo.prop(Population.class).value());
+		assertEquals(216.0, planetBar.prop(Population.class).value());
 	}
 
 	@Test
@@ -140,11 +139,14 @@ public class PhaseTest {
 		Context galaxy = new ClassicGalaxy(planetFoo, planetBar, ship);
 
 		assertEquals(1, galaxy.planetCount("bar"));
+		assertTrue(planetBar.has(Population.class));
 
 		Phase phase = new BombingPhase(galaxy);
 		phase.execute(1.0);
 
 		assertEquals(0, galaxy.planetCount("bar"));
+
+		assertFalse(planetBar.has(Population.class));
 	}
 
 	@Test

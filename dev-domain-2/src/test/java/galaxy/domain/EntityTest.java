@@ -1,5 +1,6 @@
 package galaxy.domain;
 
+import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,8 @@ class EntityTest {
 				new Entity(new PlanetRef("bar"), new TeamRef("bar"), new ShipId()),
 				new Entity(new PlanetRef("bar"), new TeamRef("foo"), new ShipId()),
 
-				new Entity(new TeamRef("foo"), new PlanetRef("foo")),
-				new Entity(new TeamRef("bar"), new PlanetRef("bar"))
+				new Entity(new TeamRef("foo"), new PlanetRef("foo"), new Planet()),
+				new Entity(new TeamRef("bar"), new PlanetRef("bar"), new Planet())
 		);
 	}
 
@@ -36,10 +37,10 @@ class EntityTest {
 		assertEquals(6, byRace.size());
 
 		List<Entity> byPlanet = entities.stream()
-				.filter(e -> e.has(PlanetRef.class))
+				.filter(e -> e.has(Planet.class))
 				.toList();
 
-		assertEquals(4, byPlanet.size());
+		assertEquals(2, byPlanet.size());
 
 		List<Entity> byShipId = entities.stream()
 				.filter(e -> e.has(ShipId.class))
@@ -51,7 +52,7 @@ class EntityTest {
 				.filter(e -> e.has(PlanetRef.class))
 				.toList();
 
-		assertEquals(2, byPlanetRef.size());
+		assertEquals(6, byPlanetRef.size());
 	}
 
 }
