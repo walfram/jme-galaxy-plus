@@ -18,4 +18,6 @@ public interface Context {
 	Map<PlanetRef, Entity> planets();
 
 	Entity createPlanet();
+
+	Map<TeamRef, Entity> teams();
 }

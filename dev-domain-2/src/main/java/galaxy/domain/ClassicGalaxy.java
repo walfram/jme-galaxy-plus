@@ -68,4 +68,14 @@ public class ClassicGalaxy implements Context {
 		return entity;
 	}
 
+	@Override
+	public Map<TeamRef, Entity> teams() {
+		List<Entity> teams = query(List.of(TeamRef.class, Team.class));
+
+		return teams.stream().collect(Collectors.toMap(
+				e -> e.prop(TeamRef.class),
+				e -> e
+		));
+	}
+
 }

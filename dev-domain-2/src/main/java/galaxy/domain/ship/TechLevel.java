@@ -8,4 +8,8 @@ public record TechLevel(double engines, double weapons, double shields, double c
 		this(1.0, 1.0, 1.0, 1.0);
 	}
 
+	public TechLevel(TechLevel other) {
+		this(other.engines, other.weapons, other.shields, other.cargo);
+	}
+
 }

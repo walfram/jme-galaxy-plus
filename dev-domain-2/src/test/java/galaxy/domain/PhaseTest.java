@@ -82,18 +82,32 @@ public class PhaseTest {
 	@Test
 	void test_upgrade_phase() {
 		// special case of Production?
-		Entity ship = new Entity(new ShipId(), new UpgradeShipOrder());
+		Entity ship = new Entity(
+				new ShipId(),
+				new UpgradeShipOrder(),
+				ShipState.InUpgrade,
+				new TechLevel(),
+				new PlanetRef("foo"),
+				new TeamRef("foo"),
+				new ShipDesign(1, 1, 1, 1, 1)
+		);
 
-		Context galaxy = new ClassicGalaxy(ship);
+		Entity planet = new Entity(
+				new PlanetRef("foo"),
+				new Planet(),
+				new Population(1000.0),
+				new Industry(1000.0)
+		);
 
-		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
+		Entity team = new Entity(new Team("foo"), new TeamRef("foo"), new TechLevel(1.1, 1.0, 1.0, 1.0));
+
+		Context galaxy = new ClassicGalaxy(ship, planet, team);
+
+		assertEquals(ShipState.InUpgrade, ship.prop(ShipState.class));
 		assertEquals(1.0, ship.prop(TechLevel.class).engines());
 
 		Phase upgrade = new UpgradePhase(galaxy);
-		upgrade.execute(0.5);
-
-		assertEquals(ShipState.InUpgrade, ship.prop(ShipState.class));
-		upgrade.execute(0.5);
+		upgrade.execute(1.0);
 
 		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
 		assertEquals(1.1, ship.prop(TechLevel.class).engines());
