@@ -5,10 +5,12 @@ import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class ClassicGalaxy implements Context {
 
+	private final AtomicLong idGenerator = new AtomicLong(0);
 	private final List<Entity> entities = new ArrayList<>();
 
 	public ClassicGalaxy(Entity... source) {
@@ -53,6 +55,17 @@ public class ClassicGalaxy implements Context {
 				e -> e.prop(PlanetRef.class),
 				e -> e
 		));
+	}
+
+	@Override
+	public Entity createPlanet() {
+		Entity entity = new Entity();
+
+		entity.put(new PlanetRef(idGenerator.incrementAndGet()));
+		entity.put(new Planet());
+
+		entities.add(entity);
+		return entity;
 	}
 
 }

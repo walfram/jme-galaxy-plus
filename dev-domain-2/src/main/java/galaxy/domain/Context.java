@@ -17,4 +17,5 @@ public interface Context {
 
 	Map<PlanetRef, Entity> planets();
 
+	Entity createPlanet();
 }
