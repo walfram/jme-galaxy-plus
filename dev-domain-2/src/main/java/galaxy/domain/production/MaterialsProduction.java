@@ -1,5 +1,6 @@
 package galaxy.domain.production;
 
+import galaxy.domain.production.result.ModifyPlanetMaterials;
 import galaxy.domain.production.result.ModifyTeamTechnology;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class MaterialsProduction implements Production {
 	@Override
 	public List<ProductionResult> complete(ProductionContext context) {
 		return List.of(
-				new ModifyTeamTechnology(100.0)
+				new ModifyPlanetMaterials(100.0)
 		);
 	}
 }

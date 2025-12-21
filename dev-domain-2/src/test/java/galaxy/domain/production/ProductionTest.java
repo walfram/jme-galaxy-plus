@@ -2,6 +2,7 @@ package galaxy.domain.production;
 
 import galaxy.domain.Entity;
 import galaxy.domain.production.result.SpawnShips;
+import galaxy.domain.ship.ShipDesign;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,11 +19,13 @@ class ProductionTest {
 
 		ProductionContext context = new ProductionContext(planet, team);
 
-		Production production = new ShipProduction();
+		ShipDesign design = new ShipDesign(1, 1, 1, 1, 1);
+
+		Production production = new ShipProduction(5, design);
 		List<ProductionResult> results = production.complete(context);
 
-		Object blueprint = "";
-		assertTrue(results.contains(new SpawnShips(3, blueprint)));
+		SpawnShips spawnShips = new SpawnShips(5, design);
+		assertTrue(results.contains(spawnShips));
 	}
 
 }
