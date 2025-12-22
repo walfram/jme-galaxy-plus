@@ -4,6 +4,7 @@ import galaxy.domain.*;
 import galaxy.domain.shared.BattleGroups;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.Weapons;
+import galaxy.domain.team.TeamRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

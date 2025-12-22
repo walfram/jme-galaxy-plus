@@ -1,55 +1,40 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.*;
+import galaxy.domain.planet.Planet;
+import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.random.RandomGenerator;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BootstrapTest {
 
 	@Test
 	void test_bootstrap_galaxy() {
-		Context galaxy = new ClassicGalaxy();
-
-		int teams = 10;
+		int teamCount = 10;
 		int planetRatio = 10;
 
-		int planetCount = teams * planetRatio;
-		int homeWorlds = teams * 3;
-		int otherWorlds = planetCount - homeWorlds;
+		Context galaxy = new ClassicGalaxyBootstrap(teamCount, planetRatio).create();
 
-		for (int i = 0; i < teams; i++) {
-			Entity team = galaxy.createTeam("team-%s".formatted(i));
-
-			Entity origin = galaxy.createHomeWorld();
-			origin.put(new TeamRef(team.prop(Team.class).teamRef()));
-			assertTrue(origin.has(Planet.class));
-
-			Entity alpha = galaxy.createDaughterWorld();
-			alpha.put(new TeamRef(team.prop(Team.class).teamRef()));
-
-			Entity beta = galaxy.createDaughterWorld();
-			beta.put(new TeamRef(team.prop(Team.class).teamRef()));
-		}
-
-		RandomGenerator sizeSource = RandomGenerator.getDefault();
-		RandomGenerator resourcesSource = RandomGenerator.getDefault();
-
-		while (otherWorlds > 0) {
-			Entity planet = galaxy.createPlanet();
-			planet.put(new Position());
-			planet.put(new Size(sizeSource.nextDouble(0.1, 2500.0)));
-			planet.put(new Resources(resourcesSource.nextDouble(0.1, 25.0)));
-			otherWorlds--;
-		}
+		int planetCount = teamCount * planetRatio;
+		int homeWorlds = teamCount * 3;
 
 		assertEquals(planetCount, galaxy.planets().size());
-
 		assertEquals(homeWorlds, galaxy.query(List.of(Planet.class, TeamRef.class)).size());
+
+		Map<TeamRef, Entity> teams = galaxy.teams();
+		assertEquals(teamCount, teams.size());
+
+		for (TeamRef teamRef : teams.keySet()) {
+			List<PlanetView> planets = galaxy.galaxyView(teamRef);
+
+			assertEquals(planetCount, planets.size());
+			assertEquals(3, planets.stream().filter(pv -> pv.visibility() == PlanetVisibility.OWNED).count());
+			assertEquals(planetCount - 3, planets.stream().filter(pv -> pv.visibility() == PlanetVisibility.UNKNOWN).count());
+		}
+
 	}
 
 }

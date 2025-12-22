@@ -2,7 +2,7 @@ package galaxy.domain.shared;
 
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
-import galaxy.domain.TeamRef;
+import galaxy.domain.team.TeamRef;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
 import galaxy.domain.ship.ShipState;

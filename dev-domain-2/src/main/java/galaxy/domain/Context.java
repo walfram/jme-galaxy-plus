@@ -1,6 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.PlanetRef;
+import galaxy.domain.team.TeamRef;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,13 +18,16 @@ public interface Context {
 
 	Map<PlanetRef, Entity> planets();
 
-	Entity createPlanet();
-
 	Map<TeamRef, Entity> teams();
 
 	Entity createTeam(String name);
 
-	Entity createHomeWorld();
+	Entity createHomeWorld(TeamRef teamRef);
 
-	Entity createDaughterWorld();
+	Entity createDaughterWorld(TeamRef teamRef);
+
+	Entity createUninhabitedPlanet();
+
+	List<PlanetView> galaxyView(TeamRef teamRef);
+
 }

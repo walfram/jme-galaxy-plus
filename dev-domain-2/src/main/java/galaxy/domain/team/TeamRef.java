@@ -1,4 +1,6 @@
-package galaxy.domain;
+package galaxy.domain.team;
+
+import galaxy.domain.Component;
 
 public record TeamRef(String value) implements Component {
 

@@ -3,7 +3,7 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
-import galaxy.domain.TeamRef;
+import galaxy.domain.team.TeamRef;
 import galaxy.domain.order.CargoLoadOrder;
 import galaxy.domain.planet.Industry;
 import galaxy.domain.planet.Materials;

@@ -5,6 +5,8 @@ import galaxy.domain.phase.*;
 import galaxy.domain.planet.*;
 import galaxy.domain.production.MaterialsProduction;
 import galaxy.domain.ship.*;
+import galaxy.domain.team.Team;
+import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

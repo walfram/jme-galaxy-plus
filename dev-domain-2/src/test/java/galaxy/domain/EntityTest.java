@@ -3,6 +3,7 @@ package galaxy.domain;
 import galaxy.domain.planet.Planet;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
+import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
