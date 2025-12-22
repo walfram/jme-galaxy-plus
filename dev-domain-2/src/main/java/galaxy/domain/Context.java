@@ -28,6 +28,7 @@ public interface Context {
 
 	Entity createUninhabitedPlanet();
 
-	List<PlanetView> galaxyView(TeamRef teamRef);
+	TeamGalaxyView galaxyView(TeamRef teamRef);
 
+	Entity createEntity();
 }

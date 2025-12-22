@@ -16,7 +16,7 @@ public class ClassicGalaxy implements Context {
 
 	private static final Logger logger = getLogger(ClassicGalaxy.class);
 
-	private final AtomicLong idGenerator = new AtomicLong(0);
+	private final AtomicLong planetIdSource = new AtomicLong(0);
 	private final List<Entity> entities = new ArrayList<>();
 	private final Map<TeamRef, TeamGalaxyView> galaxyViews = new HashMap<>();
 
@@ -67,7 +67,7 @@ public class ClassicGalaxy implements Context {
 	private Entity createPlanet() {
 		Entity entity = new Entity();
 
-		entity.put(new PlanetRef(idGenerator.incrementAndGet()));
+		entity.put(new PlanetRef(planetIdSource.incrementAndGet()));
 		entity.put(new Planet());
 
 		entities.add(entity);
@@ -147,8 +147,15 @@ public class ClassicGalaxy implements Context {
 	}
 
 	@Override
-	public List<PlanetView> galaxyView(TeamRef teamRef) {
-		return galaxyViews.get(teamRef).viewGalaxy(planets().values());
+	public TeamGalaxyView galaxyView(TeamRef teamRef) {
+		return galaxyViews.get(teamRef);
+	}
+
+	@Override
+	public Entity createEntity() {
+		Entity entity = new Entity();
+		entities.add(entity);
+		return entity;
 	}
 
 }

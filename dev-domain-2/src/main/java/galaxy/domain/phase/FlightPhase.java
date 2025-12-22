@@ -1,10 +1,10 @@
 package galaxy.domain.phase;
 
-import galaxy.domain.Context;
-import galaxy.domain.Entity;
-import galaxy.domain.Phase;
+import galaxy.domain.*;
 import galaxy.domain.order.FlightOrder;
+import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipState;
+import galaxy.domain.team.TeamRef;
 
 import java.util.List;
 
@@ -24,9 +24,19 @@ public class FlightPhase implements Phase {
 
 		List<Entity> inFlight = galaxy.query(List.of(ShipState.InFlight.getClass(), FlightOrder.class));
 		inFlight.forEach(ship -> {
-			// update position
+			// TODO update position
 			// check if at destination
+			PlanetRef planetRef = ship.prop(FlightOrder.class).to();
+			ship.remove(FlightOrder.class);
+
+			ship.put(ShipState.InOrbit);
+			ship.put(planetRef);
+
+			TeamGalaxyView teamGalaxyView = galaxy.galaxyView(ship.prop(TeamRef.class));
+			teamGalaxyView.updateVisibility(planetRef, PlanetVisibility.ORBITING);
 		});
+
+		// Given planet and ships - visibility cannot change to "visited" until all ships departed
 
 		List<Entity> readyToLaunch = galaxy.query(List.of(ShipState.InOrbit.getClass(), FlightOrder.class));
 		readyToLaunch.forEach(ship -> {

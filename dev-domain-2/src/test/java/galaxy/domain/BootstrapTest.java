@@ -28,11 +28,11 @@ public class BootstrapTest {
 		assertEquals(teamCount, teams.size());
 
 		for (TeamRef teamRef : teams.keySet()) {
-			List<PlanetView> planets = galaxy.galaxyView(teamRef);
+			TeamGalaxyView teamGalaxyView = galaxy.galaxyView(teamRef);
 
-			assertEquals(planetCount, planets.size());
-			assertEquals(3, planets.stream().filter(pv -> pv.visibility() == PlanetVisibility.OWNED).count());
-			assertEquals(planetCount - 3, planets.stream().filter(pv -> pv.visibility() == PlanetVisibility.UNKNOWN).count());
+			assertEquals(planetCount, teamGalaxyView.size());
+			assertEquals(3, teamGalaxyView.planets(PlanetVisibility.OWNED).size());
+			assertEquals(planetCount - 3, teamGalaxyView.planets(PlanetVisibility.UNKNOWN).size());
 		}
 
 	}

@@ -69,7 +69,7 @@ public class PhaseTest {
 	@Test
 	void test_flight_phase() {
 		// updates ships positions in space
-		Entity ship = new Entity(new FlightOrder(), ShipState.InOrbit);
+		Entity ship = new Entity(new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar")), ShipState.InOrbit);
 
 		Context galaxy = new ClassicGalaxy(ship);
 
