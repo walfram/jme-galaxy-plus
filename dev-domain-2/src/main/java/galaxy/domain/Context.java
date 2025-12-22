@@ -20,4 +20,10 @@ public interface Context {
 	Entity createPlanet();
 
 	Map<TeamRef, Entity> teams();
+
+	Entity createTeam(String name);
+
+	Entity createHomeWorld();
+
+	Entity createDaughterWorld();
 }

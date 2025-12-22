@@ -1,7 +1,6 @@
 package galaxy.domain;
 
-import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.PlanetRef;
+import galaxy.domain.planet.*;
 import galaxy.domain.ship.ShipId;
 
 import java.util.*;
@@ -76,6 +75,45 @@ public class ClassicGalaxy implements Context {
 				e -> e.prop(TeamRef.class),
 				e -> e
 		));
+	}
+
+	@Override
+	public Entity createTeam(String name) {
+		Entity team = new Entity();
+
+		team.put(new Team(name));
+
+		entities.add(team);
+
+		return team;
+	}
+
+	@Override
+	public Entity createHomeWorld() {
+		Entity planet = createPlanet();
+
+		planet.put(new Position());
+		planet.put(new Size(1000.0));
+		planet.put(new Resources(10.0));
+		planet.put(new HomeWorldTag());
+		planet.put(new Population(1000.0));
+		planet.put(new Industry(1000.0));
+
+		return planet;
+	}
+
+	@Override
+	public Entity createDaughterWorld() {
+		Entity planet = createPlanet();
+
+		planet.put(new Position());
+		planet.put(new Size(500.0));
+		planet.put(new Resources(10.0));
+		planet.put(new DaughterWorld());
+		planet.put(new Population(500.0));
+		planet.put(new Industry(500.0));
+
+		return planet;
 	}
 
 }
