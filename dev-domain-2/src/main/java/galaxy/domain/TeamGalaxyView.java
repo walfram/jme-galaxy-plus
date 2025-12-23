@@ -22,7 +22,6 @@ public final class TeamGalaxyView {
 
 //	public List<PlanetView> viewGalaxy(Collection<Entity> planets) {
 //		return planets.stream().map(e -> new PlanetView(e, galaxyView.get(e.prop(PlanetRef.class)))).toList();
-
 //	}
 
 	public List<PlanetView> planets(PlanetVisibility planetVisibility) {
