@@ -1,6 +1,8 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.PlanetRef;
+import galaxy.domain.ship.ShipDesign;
+import galaxy.domain.ship.TechLevel;
 import galaxy.domain.team.TeamRef;
 
 import java.util.Collection;
@@ -31,4 +33,7 @@ public interface Context {
 	TeamGalaxyView galaxyView(TeamRef teamRef);
 
 	Entity createEntity();
+
+	Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevel techLevel);
+
 }

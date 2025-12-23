@@ -1,7 +1,10 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.*;
+import galaxy.domain.ship.ShipDesign;
 import galaxy.domain.ship.ShipId;
+import galaxy.domain.ship.TechLevel;
+import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.slf4j.Logger;
@@ -156,6 +159,24 @@ public class ClassicGalaxy implements Context {
 		Entity entity = new Entity();
 		entities.add(entity);
 		return entity;
+	}
+
+	@Override
+	public Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevel techLevel) {
+		Entity ship = new Entity();
+
+		ship.put(planetRef);
+		ship.put(teamRef);
+		ship.put(shipDesign);
+		ship.put(techLevel);
+
+		// TODO add Engines, Weapons, Shields, Cargo
+
+		ship.put(new ShipId());
+		ship.put(new InOrbit());
+
+		entities.add(ship);
+		return ship;
 	}
 
 }

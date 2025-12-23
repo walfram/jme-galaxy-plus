@@ -5,6 +5,9 @@ import galaxy.domain.phase.*;
 import galaxy.domain.planet.*;
 import galaxy.domain.production.MaterialsProduction;
 import galaxy.domain.ship.*;
+import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.ship.state.InUpgrade;
+import galaxy.domain.ship.state.Launched;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
@@ -68,17 +71,22 @@ public class PhaseTest {
 
 	@Test
 	void test_flight_phase() {
-		// updates ships positions in space
-		Entity ship = new Entity(new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar")), ShipState.InOrbit);
+		Context galaxy = new ClassicGalaxy();
 
-		Context galaxy = new ClassicGalaxy(ship);
+		Entity team = galaxy.createTeam("foo");
+		Entity from = galaxy.createHomeWorld(team.prop(Team.class).teamRef());
+		Entity to = galaxy.createUninhabitedPlanet();
 
-		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
+		// new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar"))
+		Entity ship = galaxy.createShip(from.prop(PlanetRef.class), team.prop(Team.class).teamRef(), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		assertTrue(ship.has(InOrbit.class));
+
+		ship.put(new FlightOrder(from.prop(PlanetRef.class), to.prop(PlanetRef.class)));
 
 		Phase phase = new FlightPhase(galaxy);
 		phase.execute(1.0);
 
-		assertEquals(ShipState.Launched, ship.prop(ShipState.class));
+		assertTrue(ship.has(Launched.class));
 	}
 
 	@Test
@@ -87,7 +95,7 @@ public class PhaseTest {
 		Entity ship = new Entity(
 				new ShipId(),
 				new UpgradeShipOrder(),
-				ShipState.InUpgrade,
+				new InUpgrade(),
 				new TechLevel(),
 				new PlanetRef("foo"),
 				new TeamRef("foo"),
@@ -105,13 +113,13 @@ public class PhaseTest {
 
 		Context galaxy = new ClassicGalaxy(ship, planet, team);
 
-		assertEquals(ShipState.InUpgrade, ship.prop(ShipState.class));
+		assertTrue(ship.has(InUpgrade.class));
 		assertEquals(1.0, ship.prop(TechLevel.class).engines());
 
 		Phase upgrade = new UpgradePhase(galaxy);
 		upgrade.execute(1.0);
 
-		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
+		assertTrue(ship.has(InOrbit.class));
 		assertEquals(1.1, ship.prop(TechLevel.class).engines());
 	}
 
@@ -150,7 +158,7 @@ public class PhaseTest {
 		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
 		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
 
-		Entity ship = new Entity(new ShipId(), ShipState.InOrbit, new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
+		Entity ship = new Entity(new ShipId(), new InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
 
 		Context galaxy = new ClassicGalaxy(planetFoo, planetBar, ship);
 
@@ -168,8 +176,8 @@ public class PhaseTest {
 	@Test
 	void test_combat_phase() {
 		// only on planets, races are hostile, at least one ship has weapons
-		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), ShipState.InOrbit, new Weapons(1, 1));
-		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), ShipState.InOrbit);
+		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new InOrbit(), new Weapons(1, 1));
+		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new InOrbit());
 
 		Context galaxy = new ClassicGalaxy(shipA, shipB);
 

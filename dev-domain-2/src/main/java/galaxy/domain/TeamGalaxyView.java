@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO ships in planet orbit contribute to planet visibility
 public final class TeamGalaxyView {
 
 	private final Map<PlanetRef, PlanetView> galaxyView = new HashMap<>();

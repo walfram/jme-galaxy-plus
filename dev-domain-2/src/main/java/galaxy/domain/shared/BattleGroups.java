@@ -2,10 +2,10 @@ package galaxy.domain.shared;
 
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
+import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.team.TeamRef;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
-import galaxy.domain.ship.ShipState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class BattleGroups {
 	}
 
 	public Map<PlanetRef, Map<TeamRef, List<Entity>>> filter() {
-		List<Entity> ships = galaxy.query(List.of(ShipId.class, ShipState.InOrbit.getClass()));
+		List<Entity> ships = galaxy.query(List.of(ShipId.class, InOrbit.class));
 
 		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new HashMap<>();
 

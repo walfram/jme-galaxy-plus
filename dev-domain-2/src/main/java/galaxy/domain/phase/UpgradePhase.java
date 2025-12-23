@@ -3,6 +3,8 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
+import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.ship.state.InUpgrade;
 import galaxy.domain.team.TeamRef;
 import galaxy.domain.order.UpgradeShipOrder;
 import galaxy.domain.planet.Effort;
@@ -11,7 +13,6 @@ import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.planet.Population;
 import galaxy.domain.ship.ShipDesign;
 import galaxy.domain.ship.ShipId;
-import galaxy.domain.ship.ShipState;
 import galaxy.domain.ship.TechLevel;
 import org.slf4j.Logger;
 
@@ -35,7 +36,7 @@ public class UpgradePhase implements Phase {
 		List<Entity> shipsToUpgrade = galaxy.query(List.of(
 				ShipId.class,
 				UpgradeShipOrder.class,
-				ShipState.InUpgrade.getClass(),
+				InUpgrade.class,
 				PlanetRef.class,
 				TeamRef.class
 		));
@@ -70,7 +71,7 @@ public class UpgradePhase implements Phase {
 			ship.put(new TechLevel(teamTechLevel));
 
 			ship.remove(UpgradeShipOrder.class);
-			ship.put(ShipState.InOrbit);
+			ship.put(new InOrbit());
 		}
 	}
 

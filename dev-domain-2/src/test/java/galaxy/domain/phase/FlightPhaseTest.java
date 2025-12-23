@@ -3,13 +3,15 @@ package galaxy.domain.phase;
 import galaxy.domain.*;
 import galaxy.domain.order.FlightOrder;
 import galaxy.domain.planet.PlanetRef;
-import galaxy.domain.ship.ShipState;
+import galaxy.domain.ship.ShipDesign;
+import galaxy.domain.ship.TechLevel;
+import galaxy.domain.ship.state.InFlight;
+import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.team.Team;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FlightPhaseTest {
 
@@ -23,16 +25,14 @@ class FlightPhaseTest {
 		PlanetView source = galaxyView.planets(PlanetVisibility.OWNED).stream().findFirst().orElseThrow();
 		PlanetView target = galaxyView.planets(PlanetVisibility.UNKNOWN).stream().findFirst().orElseThrow();
 
-		Entity ship = galaxy.createEntity();
-		ship.put(source.planetRef());
-		ship.put(team.prop(Team.class).teamRef());
+		Entity ship = galaxy.createShip(source.planetRef(), team.prop(Team.class).teamRef(), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
 		ship.put(new FlightOrder(source.planetRef(), target.planetRef()));
-		ship.put(ShipState.InFlight);
+		ship.put(new InFlight());
 
 		Phase phase = new FlightPhase(galaxy);
 		phase.execute(1.0);
 
-		assertEquals(ShipState.InOrbit, ship.prop(ShipState.class));
+		assertTrue(ship.has(InOrbit.class));
 		assertEquals(target.planetRef(), ship.prop(PlanetRef.class));
 
 		assertEquals(PlanetVisibility.ORBITING, target.visibility());
