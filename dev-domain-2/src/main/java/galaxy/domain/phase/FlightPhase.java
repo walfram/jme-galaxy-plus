@@ -34,9 +34,6 @@ public class FlightPhase implements Phase {
 
 			ship.put(new InOrbit());
 			ship.put(planetRef);
-
-			GalaxyView galaxyView = galaxy.team(ship.prop(TeamRef.class)).prop(GalaxyView.class);
-			galaxyView.changeVisibility(planetRef, PlanetVisibility.ORBITING);
 		});
 
 		List<Entity> readyToLaunch = galaxy.query(List.of(InOrbit.class, FlightOrder.class));

@@ -35,8 +35,6 @@ class FlightPhaseTest {
 
 		assertTrue(ship.has(InOrbit.class));
 		assertEquals(target.planetRef(), ship.prop(PlanetRef.class));
-
-		assertEquals(PlanetVisibility.ORBITING, target.visibility());
 	}
 
 	@Test
