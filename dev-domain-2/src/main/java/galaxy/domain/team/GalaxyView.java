@@ -1,0 +1,32 @@
+package galaxy.domain.team;
+
+import galaxy.domain.Component;
+import galaxy.domain.Entity;
+import galaxy.domain.PlanetView;
+import galaxy.domain.PlanetVisibility;
+import galaxy.domain.planet.PlanetRef;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+public class GalaxyView implements Component {
+
+	private final Map<PlanetRef, PlanetView> galaxyView = new HashMap<>();
+
+	public void changeVisibility(Entity planet, PlanetVisibility planetVisibility) {
+		galaxyView.put(planet.prop(PlanetRef.class), new PlanetView(planet, planetVisibility));
+	}
+
+	public void changeVisibility(PlanetRef planetRef, PlanetVisibility planetVisibility) {
+		galaxyView.get(planetRef).updateVisibility(planetVisibility);
+	}
+
+	public int size() {
+		return galaxyView.size();
+	}
+
+	public Collection<PlanetView> planets(PlanetVisibility planetVisibility) {
+		return galaxyView.values().stream().filter(pv -> pv.visibility().equals(planetVisibility)).toList();
+	}
+}

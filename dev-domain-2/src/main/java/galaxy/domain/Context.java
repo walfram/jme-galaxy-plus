@@ -24,16 +24,18 @@ public interface Context {
 
 	Entity createTeam(String name);
 
-	Entity createHomeWorld(TeamRef teamRef);
+	Entity createHomeWorld(Entity team);
 
-	Entity createDaughterWorld(TeamRef teamRef);
+	Entity createDaughterWorld(Entity team);
 
 	Entity createUninhabitedPlanet();
-
-	TeamGalaxyView galaxyView(TeamRef teamRef);
 
 	Entity createEntity();
 
 	Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevel techLevel);
+
+	Entity team(TeamRef teamRef);
+
+	Entity planet(PlanetRef planetRef);
 
 }

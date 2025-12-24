@@ -1,6 +1,7 @@
 package galaxy.domain.team;
 
 import galaxy.domain.Component;
+import galaxy.domain.Entity;
 
 public record TeamRef(String value) implements Component {
 

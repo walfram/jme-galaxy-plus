@@ -5,6 +5,7 @@ import galaxy.domain.ship.ShipDesign;
 import galaxy.domain.ship.ShipId;
 import galaxy.domain.ship.TechLevel;
 import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.slf4j.Logger;
@@ -21,7 +22,6 @@ public class ClassicGalaxy implements Context {
 
 	private final AtomicLong planetIdSource = new AtomicLong(0);
 	private final List<Entity> entities = new ArrayList<>();
-	private final Map<TeamRef, TeamGalaxyView> galaxyViews = new HashMap<>();
 
 	public ClassicGalaxy(Entity... source) {
 		this(List.of(source));
@@ -91,16 +91,17 @@ public class ClassicGalaxy implements Context {
 	@Override
 	public Entity createTeam(String name) {
 		Entity team = new Entity();
-		team.put(new Team(name));
-		entities.add(team);
 
-		galaxyViews.put(new TeamRef( team.prop(Team.class).teamRef() ), new TeamGalaxyView());
+		team.put(new Team(name));
+		team.put(new GalaxyView());
+
+		entities.add(team);
 
 		return team;
 	}
 
 	@Override
-	public Entity createHomeWorld(TeamRef teamRef) {
+	public Entity createHomeWorld(Entity team) {
 		Entity planet = createPlanet();
 
 		planet.put(new Position());
@@ -110,11 +111,14 @@ public class ClassicGalaxy implements Context {
 		planet.put(new Population(1000.0));
 		planet.put(new Industry(1000.0));
 
-		return updateVisibility(teamRef, planet);
+		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
+		planet.put(new TeamRef(team.prop(Team.class).teamRef()));
+
+		return planet;
 	}
 
 	@Override
-	public Entity createDaughterWorld(TeamRef teamRef) {
+	public Entity createDaughterWorld(Entity team) {
 		Entity planet = createPlanet();
 
 		planet.put(new Position());
@@ -124,34 +128,15 @@ public class ClassicGalaxy implements Context {
 		planet.put(new Population(500.0));
 		planet.put(new Industry(500.0));
 
-		return updateVisibility(teamRef, planet);
-	}
-
-	private Entity updateVisibility(TeamRef teamRef, Entity planet) {
-		planet.put(new TeamRef(teamRef.value()));
-
-		galaxyViews.get(teamRef).updateVisibility(planet, PlanetVisibility.OWNED);
-		galaxyViews.keySet().stream()
-				.filter(tr -> !Objects.equals(teamRef, tr))
-				.forEach(tr -> galaxyViews.get(tr).updateVisibility(planet, PlanetVisibility.UNKNOWN));
+		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
+		planet.put(new TeamRef(team.prop(Team.class).teamRef()));
 
 		return planet;
 	}
 
 	@Override
 	public Entity createUninhabitedPlanet() {
-		Entity uninhabited = createPlanet();
-
-		for (TeamRef teamRef : teams().keySet()) {
-			galaxyViews.get(teamRef).updateVisibility(uninhabited, PlanetVisibility.UNKNOWN);
-		}
-
-		return uninhabited;
-	}
-
-	@Override
-	public TeamGalaxyView galaxyView(TeamRef teamRef) {
-		return galaxyViews.get(teamRef);
+		return createPlanet();
 	}
 
 	@Override
@@ -177,6 +162,22 @@ public class ClassicGalaxy implements Context {
 
 		entities.add(ship);
 		return ship;
+	}
+
+	@Override
+	public Entity team(TeamRef teamRef) {
+		return entities.stream()
+				.filter(e -> e.has(Team.class))
+				.filter(e -> Objects.equals(teamRef, e.prop(Team.class).teamRef()))
+				.findFirst().orElseThrow();
+	}
+
+	@Override
+	public Entity planet(PlanetRef planetRef) {
+		return entities.stream()
+				.filter(e -> e.has(PlanetRef.class))
+				.filter(e -> Objects.equals(planetRef, e.prop(PlanetRef.class)))
+				.findFirst().orElseThrow();
 	}
 
 }

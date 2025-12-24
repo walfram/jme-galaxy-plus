@@ -12,9 +12,31 @@ import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class PhaseTest {
+
+	@Test
+	void test_phase_order() {
+		Context galaxy = mock(Context.class);
+
+		List<Phase> phases = List.of(
+				new CombatPhase(galaxy),
+				new CargoLoadingPhase(galaxy),
+				new FlightPhase(galaxy),
+				new CombatPhase(galaxy),
+				new BombingPhase(galaxy),
+				new UpgradePhase(galaxy),
+				new ProductionPhase(galaxy),
+				new CargoUnloadPhase(galaxy),
+				new PopulationGrowthPhase(galaxy),
+
+				new VisibilityChangePhase(galaxy)
+		);
+	}
 
 	@Test
 	void test_cargo_unload_phase() {
@@ -74,7 +96,7 @@ public class PhaseTest {
 		Context galaxy = new ClassicGalaxy();
 
 		Entity team = galaxy.createTeam("foo");
-		Entity from = galaxy.createHomeWorld(team.prop(Team.class).teamRef());
+		Entity from = galaxy.createHomeWorld(team);
 		Entity to = galaxy.createUninhabitedPlanet();
 
 		// new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar"))

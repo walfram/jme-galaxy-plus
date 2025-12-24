@@ -7,6 +7,7 @@ import galaxy.domain.ship.ShipDesign;
 import galaxy.domain.ship.TechLevel;
 import galaxy.domain.ship.state.InFlight;
 import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.Team;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class FlightPhaseTest {
 		Context galaxy = new ClassicGalaxyBootstrap(10, 10).create();
 
 		Entity team = galaxy.teams().values().stream().findFirst().orElseThrow();
-		TeamGalaxyView galaxyView = galaxy.galaxyView(team.prop(Team.class).teamRef());
+		GalaxyView galaxyView = team.prop(GalaxyView.class);
 
 		PlanetView source = galaxyView.planets(PlanetVisibility.OWNED).stream().findFirst().orElseThrow();
 		PlanetView target = galaxyView.planets(PlanetVisibility.UNKNOWN).stream().findFirst().orElseThrow();

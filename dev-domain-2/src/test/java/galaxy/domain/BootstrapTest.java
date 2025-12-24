@@ -1,6 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.Planet;
+import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
 
@@ -27,12 +28,12 @@ public class BootstrapTest {
 		Map<TeamRef, Entity> teams = galaxy.teams();
 		assertEquals(teamCount, teams.size());
 
-		for (TeamRef teamRef : teams.keySet()) {
-			TeamGalaxyView teamGalaxyView = galaxy.galaxyView(teamRef);
+		for (Entity team : teams.values()) {
+			GalaxyView galaxyView = team.prop(GalaxyView.class);
 
-			assertEquals(planetCount, teamGalaxyView.size());
-			assertEquals(3, teamGalaxyView.planets(PlanetVisibility.OWNED).size());
-			assertEquals(planetCount - 3, teamGalaxyView.planets(PlanetVisibility.UNKNOWN).size());
+			assertEquals(planetCount, galaxyView.size());
+			assertEquals(3, galaxyView.planets(PlanetVisibility.OWNED).size());
+			assertEquals(planetCount - 3, galaxyView.planets(PlanetVisibility.UNKNOWN).size());
 		}
 
 	}
