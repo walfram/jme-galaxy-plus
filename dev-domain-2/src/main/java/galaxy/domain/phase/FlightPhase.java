@@ -6,8 +6,6 @@ import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.state.InFlight;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.ship.state.Launched;
-import galaxy.domain.team.GalaxyView;
-import galaxy.domain.team.TeamRef;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class FlightPhase implements Phase {
 		inFlight.forEach(ship -> {
 			// TODO update position
 			// check if at destination
-			PlanetRef planetRef = ship.prop(FlightOrder.class).to();
+			PlanetRef planetRef = ship.prop(FlightOrder.class).destination();
 			ship.remove(FlightOrder.class);
 
 			ship.put(new InOrbit());

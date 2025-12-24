@@ -34,6 +34,9 @@ public class BootstrapTest {
 			assertEquals(planetCount, galaxyView.size());
 			assertEquals(3, galaxyView.planets(PlanetVisibility.OWNED).size());
 			assertEquals(planetCount - 3, galaxyView.planets(PlanetVisibility.UNKNOWN).size());
+
+			// TODO check initial Diplomacy == WAR
+			// TODO check ship count == 0
 		}
 
 	}

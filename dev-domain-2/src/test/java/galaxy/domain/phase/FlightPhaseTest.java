@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FlightPhaseTest {
 
 	@Test
-	void test_when_ship_arrives_at_destination_then_planet_visibility_is_updated() {
+	void test_ship_arrives_at_destination() {
 		Context galaxy = new ClassicGalaxyBootstrap(10, 10).create();
 
 		Entity team = galaxy.teams().values().stream().findFirst().orElseThrow();
@@ -38,7 +38,12 @@ class FlightPhaseTest {
 	}
 
 	@Test
-	void test_when_ships_leave_other_planet_then_planet_visibility_is_reduced() {
+	void test_ship_is_in_flight() {
+
+	}
+
+	@Test
+	void test_ship_is_launched() {
 
 	}
 
