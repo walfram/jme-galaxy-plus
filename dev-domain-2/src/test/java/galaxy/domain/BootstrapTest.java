@@ -1,14 +1,16 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.Planet;
-import galaxy.domain.team.GalaxyView;
-import galaxy.domain.team.TeamRef;
+import galaxy.domain.ship.ShipId;
+import galaxy.domain.team.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BootstrapTest {
 
@@ -28,6 +30,9 @@ public class BootstrapTest {
 		Map<TeamRef, Entity> teams = galaxy.teams();
 		assertEquals(teamCount, teams.size());
 
+		List<Entity> ships = galaxy.query(List.of(ShipId.class));
+		assertTrue(ships.isEmpty());
+
 		for (Entity team : teams.values()) {
 			GalaxyView galaxyView = team.prop(GalaxyView.class);
 
@@ -35,8 +40,14 @@ public class BootstrapTest {
 			assertEquals(3, galaxyView.planets(PlanetVisibility.OWNED).size());
 			assertEquals(planetCount - 3, galaxyView.planets(PlanetVisibility.UNKNOWN).size());
 
-			// TODO check initial Diplomacy == WAR
-			// TODO check ship count == 0
+			Diplomacy diplomacy = team.prop(Diplomacy.class);
+			for (Entity otherTeam: teams.values()) {
+				if (Objects.equals(team, otherTeam)) {
+					continue;
+				}
+
+				assertEquals(DiplomaticStatus.WAR, diplomacy.statusWith(otherTeam));
+			}
 		}
 
 	}

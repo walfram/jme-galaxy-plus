@@ -5,6 +5,7 @@ import galaxy.domain.ship.ShipDesign;
 import galaxy.domain.ship.ShipId;
 import galaxy.domain.ship.TechLevel;
 import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.team.Diplomacy;
 import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
@@ -94,6 +95,7 @@ public class ClassicGalaxy implements Context {
 
 		team.put(new Team(name));
 		team.put(new GalaxyView());
+		team.put(new Diplomacy());
 
 		entities.add(team);
 
