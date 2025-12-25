@@ -6,6 +6,8 @@ import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.state.InFlight;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.ship.state.Launched;
+import galaxy.domain.team.GalaxyView;
+import galaxy.domain.team.TeamRef;
 
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class FlightPhase implements Phase {
 
 			ship.put(new InOrbit());
 			ship.put(planetRef);
+
+			galaxy.team(ship.prop(TeamRef.class)).prop(GalaxyView.class).changeVisibility(planetRef, PlanetVisibility.ORBITING);
 		});
 
 		List<Entity> readyToLaunch = galaxy.query(List.of(InOrbit.class, FlightOrder.class));
