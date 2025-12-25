@@ -8,7 +8,6 @@ import galaxy.domain.ship.*;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.ship.state.InUpgrade;
 import galaxy.domain.ship.state.Launched;
-import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
@@ -177,10 +176,6 @@ public class PhaseTest {
 
 	@Test
 	void test_bombing_phase() {
-//		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
-//		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
-//		Entity ship = new Entity(new ShipId(), new InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
-
 		Context galaxy = new ClassicGalaxy();
 
 		Entity teamFoo = galaxy.createTeam("foo");
@@ -192,8 +187,6 @@ public class PhaseTest {
 		assertEquals(1, galaxy.planetCount("bar"));
 		assertTrue(planetBar.has(Population.class));
 
-		assertEquals(PlanetVisibility.OWNED, teamBar.prop(GalaxyView.class).visibility(planetBar));
-
 		Phase phase = new BombingPhase(galaxy);
 		phase.execute(1.0);
 
@@ -202,8 +195,6 @@ public class PhaseTest {
 		assertFalse(planetBar.has(TeamRef.class));
 		assertFalse(planetBar.has(Population.class));
 		assertFalse(planetBar.has(Industry.class));
-
-		assertEquals(PlanetVisibility.VISITED, teamBar.prop(GalaxyView.class).visibility(planetBar));
 	}
 
 	@Test

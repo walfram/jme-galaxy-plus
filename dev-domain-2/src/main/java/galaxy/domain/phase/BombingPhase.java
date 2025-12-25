@@ -3,14 +3,12 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
-import galaxy.domain.PlanetVisibility;
-import galaxy.domain.team.GalaxyView;
-import galaxy.domain.team.TeamRef;
 import galaxy.domain.planet.Industry;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.planet.Population;
 import galaxy.domain.shared.BattleGroups;
 import galaxy.domain.shared.CalculatedBombing;
+import galaxy.domain.team.TeamRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,8 +67,6 @@ public class BombingPhase implements Phase {
 					targetPlanet.remove(TeamRef.class);
 					targetPlanet.remove(Industry.class);
 					logger.debug("team {} wiped planet {}: {}", attacker, planetRef, targetPlanet);
-					// TODO not sure this belongs here
-					galaxy.team(teamRef).prop(GalaxyView.class).changeVisibility(targetPlanet, PlanetVisibility.VISITED);
 					break;
 				} else {
 					Industry industry = targetPlanet.prop(Industry.class);
