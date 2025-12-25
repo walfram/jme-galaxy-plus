@@ -3,6 +3,8 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
+import galaxy.domain.PlanetVisibility;
+import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.TeamRef;
 import galaxy.domain.planet.Industry;
 import galaxy.domain.planet.PlanetRef;
@@ -65,7 +67,10 @@ public class BombingPhase implements Phase {
 				if ((population.value() - bombing) <= 0) {
 					targetPlanet.remove(Population.class);
 					targetPlanet.remove(TeamRef.class);
+					targetPlanet.remove(Industry.class);
 					logger.debug("team {} wiped planet {}: {}", attacker, planetRef, targetPlanet);
+					// TODO not sure this belongs here
+					galaxy.team(teamRef).prop(GalaxyView.class).changeVisibility(targetPlanet, PlanetVisibility.VISITED);
 					break;
 				} else {
 					Industry industry = targetPlanet.prop(Industry.class);

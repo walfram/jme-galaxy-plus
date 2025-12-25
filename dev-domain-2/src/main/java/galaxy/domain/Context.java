@@ -2,6 +2,7 @@ package galaxy.domain;
 
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipDesign;
+import galaxy.domain.ship.ShipId;
 import galaxy.domain.ship.TechLevel;
 import galaxy.domain.team.TeamRef;
 
@@ -37,5 +38,7 @@ public interface Context {
 	Entity team(TeamRef teamRef);
 
 	Entity planet(PlanetRef planetRef);
+
+	Map<ShipId, Entity> ships();
 
 }

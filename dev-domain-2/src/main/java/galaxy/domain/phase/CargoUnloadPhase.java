@@ -70,6 +70,8 @@ public class CargoUnloadPhase implements Phase {
 				switch (cargoHold.cargo()) {
 					case Materials -> planet.put(new Materials(cargoHold.amount() + planet.prop(Materials.class).value()));
 					case Capital -> planet.put(new Industry(planet.prop(Industry.class).value() + cargoHold.amount()));
+
+					// TODO this is special case - changes planet ownership
 					case Colonists ->
 							planet.put(new Population(planet.prop(Population.class).value() + cargoHold.amount() * COLONISTS_PACK_RATIO));
 				}

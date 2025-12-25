@@ -23,8 +23,8 @@ class FlightPhaseTest {
 		Entity team = galaxy.teams().values().stream().findFirst().orElseThrow();
 		GalaxyView galaxyView = team.prop(GalaxyView.class);
 
-		PlanetView source = galaxyView.planets(PlanetVisibility.OWNED).stream().findFirst().orElseThrow();
-		PlanetView target = galaxyView.planets(PlanetVisibility.UNKNOWN).stream().findFirst().orElseThrow();
+		PlanetView source = galaxyView.knownPlanets(PlanetVisibility.OWNED).stream().findFirst().orElseThrow();
+		PlanetView target = galaxyView.knownPlanets(PlanetVisibility.UNKNOWN).stream().findFirst().orElseThrow();
 
 		Entity ship = galaxy.createShip(source.planetRef(), team.prop(Team.class).teamRef(), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
 		ship.put(new FlightOrder(source.planetRef(), target.planetRef()));

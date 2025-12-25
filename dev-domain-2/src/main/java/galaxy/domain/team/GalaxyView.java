@@ -22,11 +22,15 @@ public class GalaxyView implements Component {
 		galaxyView.get(planetRef).updateVisibility(planetVisibility);
 	}
 
-	public int size() {
+	public int knownGalaxySize() {
 		return galaxyView.size();
 	}
 
-	public Collection<PlanetView> planets(PlanetVisibility planetVisibility) {
+	public Collection<PlanetView> knownPlanets(PlanetVisibility planetVisibility) {
 		return galaxyView.values().stream().filter(pv -> pv.visibility().equals(planetVisibility)).toList();
+	}
+
+	public PlanetVisibility visibility(Entity planet) {
+		return galaxyView.get(planet.prop(PlanetRef.class)).visibility();
 	}
 }

@@ -36,9 +36,9 @@ public class BootstrapTest {
 		for (Entity team : teams.values()) {
 			GalaxyView galaxyView = team.prop(GalaxyView.class);
 
-			assertEquals(planetCount, galaxyView.size());
-			assertEquals(3, galaxyView.planets(PlanetVisibility.OWNED).size());
-			assertEquals(planetCount - 3, galaxyView.planets(PlanetVisibility.UNKNOWN).size());
+			assertEquals(planetCount, galaxyView.knownGalaxySize());
+			assertEquals(3, galaxyView.knownPlanets(PlanetVisibility.OWNED).size());
+			assertEquals(planetCount - 3, galaxyView.knownPlanets(PlanetVisibility.UNKNOWN).size());
 
 			Diplomacy diplomacy = team.prop(Diplomacy.class);
 			for (Entity otherTeam: teams.values()) {
@@ -49,7 +49,6 @@ public class BootstrapTest {
 				assertEquals(DiplomaticStatus.WAR, diplomacy.statusWith(otherTeam));
 			}
 		}
-
 	}
 
 }

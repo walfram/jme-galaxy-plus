@@ -8,6 +8,7 @@ import galaxy.domain.ship.*;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.ship.state.InUpgrade;
 import galaxy.domain.ship.state.Launched;
+import galaxy.domain.team.GalaxyView;
 import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 import org.junit.jupiter.api.Test;
@@ -176,23 +177,33 @@ public class PhaseTest {
 
 	@Test
 	void test_bombing_phase() {
-		// only on planets, races are hostile, a victim does not have ships on planet
-		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
-		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
+//		Entity planetFoo = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet());
+//		Entity planetBar = new Entity(new PlanetRef("bar"), new TeamRef("bar"), new Planet(), new Population(100.0), new Industry(100.0));
+//		Entity ship = new Entity(new ShipId(), new InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
 
-		Entity ship = new Entity(new ShipId(), new InOrbit(), new TeamRef("foo"), new PlanetRef("bar"), new Weapons(1, 100), new TechLevel());
+		Context galaxy = new ClassicGalaxy();
 
-		Context galaxy = new ClassicGalaxy(planetFoo, planetBar, ship);
+		Entity teamFoo = galaxy.createTeam("foo");
+		Entity teamBar = galaxy.createTeam("bar");
+		Entity planetBar = galaxy.createHomeWorld(teamBar);
+
+		galaxy.createShip(planetBar.prop(PlanetRef.class), teamFoo.prop(Team.class).teamRef(), new ShipDesign(100, 100, 100, 1, 0), new TechLevel());
 
 		assertEquals(1, galaxy.planetCount("bar"));
 		assertTrue(planetBar.has(Population.class));
+
+		assertEquals(PlanetVisibility.OWNED, teamBar.prop(GalaxyView.class).visibility(planetBar));
 
 		Phase phase = new BombingPhase(galaxy);
 		phase.execute(1.0);
 
 		assertEquals(0, galaxy.planetCount("bar"));
 
+		assertFalse(planetBar.has(TeamRef.class));
 		assertFalse(planetBar.has(Population.class));
+		assertFalse(planetBar.has(Industry.class));
+
+		assertEquals(PlanetVisibility.VISITED, teamBar.prop(GalaxyView.class).visibility(planetBar));
 	}
 
 	@Test

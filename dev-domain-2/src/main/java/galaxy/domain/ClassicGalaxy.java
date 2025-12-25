@@ -1,9 +1,7 @@
 package galaxy.domain;
 
 import galaxy.domain.planet.*;
-import galaxy.domain.ship.ShipDesign;
-import galaxy.domain.ship.ShipId;
-import galaxy.domain.ship.TechLevel;
+import galaxy.domain.ship.*;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.team.Diplomacy;
 import galaxy.domain.team.GalaxyView;
@@ -158,6 +156,21 @@ public class ClassicGalaxy implements Context {
 		ship.put(techLevel);
 
 		// TODO add Engines, Weapons, Shields, Cargo
+		if (shipDesign.engines() >= 1) {
+			ship.put(new Engines(shipDesign.engines()));
+		}
+
+		if (shipDesign.guns() >= 1 && shipDesign.caliber() >= 1) {
+			ship.put(new Weapons(shipDesign.guns(), shipDesign.caliber()));
+		}
+
+		if (shipDesign.shields() >= 1) {
+			ship.put(new Shields(shipDesign.shields()));
+		}
+
+		if (shipDesign.cargo() >= 1) {
+			ship.put(new CargoHold(Cargo.Empty, 0, 0));
+		}
 
 		ship.put(new ShipId());
 		ship.put(new InOrbit());
@@ -180,6 +193,12 @@ public class ClassicGalaxy implements Context {
 				.filter(e -> e.has(PlanetRef.class))
 				.filter(e -> Objects.equals(planetRef, e.prop(PlanetRef.class)))
 				.findFirst().orElseThrow();
+	}
+
+	@Override
+	public Map<ShipId, Entity> ships() {
+		List<Entity> ships = query(List.of(ShipId.class));
+		return ships.stream().collect(Collectors.toMap(e -> e.prop(ShipId.class), e -> e));
 	}
 
 }
