@@ -199,11 +199,15 @@ public class PhaseTest {
 
 	@Test
 	void test_combat_phase() {
-		// only on planets, races are hostile, at least one ship has weapons
-		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(1), new InOrbit(), new Weapons(1, 1));
-		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(2), new InOrbit());
+		Context galaxy = new ClassicGalaxy();
 
-		Context galaxy = new ClassicGalaxy(shipA, shipB);
+		Entity foo = galaxy.createTeam("foo");
+		Entity bar = galaxy.createTeam("bar");
+
+		Entity planet = galaxy.createUninhabitedPlanet();
+
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevel());
 
 		assertEquals(1, galaxy.shipCount("foo"));
 		assertEquals(1, galaxy.shipCount("bar"));
