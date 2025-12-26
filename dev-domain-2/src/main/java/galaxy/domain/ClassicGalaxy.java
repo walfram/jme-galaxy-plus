@@ -172,7 +172,7 @@ public class ClassicGalaxy implements Context {
 		}
 
 		if (shipDesign.cargo() >= 1) {
-			ship.put(new CargoHold(Cargo.Empty, 0, 0));
+			ship.put(new CargoHold(Cargo.Empty, shipDesign.cargo(), 0));
 		}
 
 		ship.put(new ShipId(shipIdSource.incrementAndGet()));

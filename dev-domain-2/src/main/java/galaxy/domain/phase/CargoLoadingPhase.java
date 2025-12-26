@@ -3,12 +3,9 @@ package galaxy.domain.phase;
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
 import galaxy.domain.Phase;
+import galaxy.domain.planet.*;
 import galaxy.domain.team.TeamRef;
 import galaxy.domain.order.CargoLoadOrder;
-import galaxy.domain.planet.Industry;
-import galaxy.domain.planet.Materials;
-import galaxy.domain.planet.PlanetRef;
-import galaxy.domain.planet.Population;
 import galaxy.domain.ship.Cargo;
 import galaxy.domain.ship.CargoHold;
 import galaxy.domain.ship.ShipId;
@@ -109,8 +106,8 @@ public class CargoLoadingPhase implements Phase {
 	private double availableCargo(Entity planet, Cargo cargo) {
 		return switch (cargo) {
 			case Materials -> planet.prop(Materials.class).value();
-			case Capital   -> planet.prop(Industry.class).value();
-			case Colonists -> planet.prop(Population.class).value();
+			case Capital   -> planet.prop(Capital.class).value();
+			case Colonists -> planet.prop(Colonists.class).value();
 			default        -> 0;
 		};
 	}
@@ -123,12 +120,12 @@ public class CargoLoadingPhase implements Phase {
 							planet.prop(Materials.class).value() - amount
 					));
 			case Capital ->
-					planet.put(new Industry(
-							planet.prop(Industry.class).value() - amount
+					planet.put(new Capital(
+							planet.prop(Capital.class).value() - amount
 					));
 			case Colonists ->
-					planet.put(new Population(
-							planet.prop(Population.class).value() - amount
+					planet.put(new Colonists(
+							planet.prop(Colonists.class).value() - amount
 					));
 		}
 	}

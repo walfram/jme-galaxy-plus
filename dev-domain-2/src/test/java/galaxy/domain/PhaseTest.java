@@ -163,12 +163,12 @@ public class PhaseTest {
 
 		Context galaxy = new ClassicGalaxy(ship, planet);
 
-		assertEquals(0.0, ship.prop(CargoHold.class).amount());
+		assertEquals(0.0, ship.prop(CargoHold.class).loadedAmount());
 
 		Phase loading = new CargoLoadingPhase(galaxy);
 		loading.execute(1.0);
 
-		assertEquals(100.0, ship.prop(CargoHold.class).amount());
+		assertEquals(100.0, ship.prop(CargoHold.class).loadedAmount());
 		assertEquals(Cargo.Colonists, ship.prop(CargoHold.class).cargo());
 
 		assertEquals(900.0, planet.prop(Population.class).value());
