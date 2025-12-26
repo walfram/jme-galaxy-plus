@@ -62,6 +62,7 @@ public class CombatPhase implements Phase {
 					computeTeamTargets(battleGroup, teamTargets, right, left);
 				}
 			}
+
 			logger.debug("teamTargets at {}: {}", planetRef, teamTargets.size());
 			if (teamTargets.isEmpty()) {
 				logger.debug("there are no enemies at {}, skipping", planetRef);
@@ -71,6 +72,7 @@ public class CombatPhase implements Phase {
 			List<Entity> armedShips = teamTargets.values().stream()
 					.flatMap(Collection::stream)
 					.filter(ship -> ship.has(Weapons.class))
+					.distinct()
 					.collect(Collectors.toCollection(ArrayList::new));
 
 			int shotsFired = 0;
@@ -93,7 +95,7 @@ public class CombatPhase implements Phase {
 
 				int targetIdx = generator.nextInt(targetShips.size());
 				Entity target = targetShips.get(targetIdx);
-				teamTargets.get(attackingTeam).remove(target);
+				teamTargets.values().forEach(targets -> targets.remove(target));
 
 				// shoot, remove target
 				logger.debug("ship {} attacked {} and won", attacker, target);
@@ -102,6 +104,9 @@ public class CombatPhase implements Phase {
 				shotsFired++;
 				destroyed.add(target);
 			}
+
+			// TODO increase planet's materials by weight of destroyed ships
+			// TODO mark as Destroyed? use tpf for battle?
 
 			galaxy.remove(destroyed);
 
@@ -132,58 +137,4 @@ public class CombatPhase implements Phase {
 		}
 	}
 
-//	@Override
-//	public void execute(double tpf) {
-//		Map<PlanetRef, Map<TeamRef, List<Entity>>> battleGroups = new BattleGroups(galaxy).filter();
-//
-//		logger.debug("battle groups {}", battleGroups.size());
-//		logger.debug("battle groups at planets {}", battleGroups.keySet().stream().map(PlanetRef::value).sorted().toList());
-//
-//		for (PlanetRef planetRef : battleGroups.keySet()) {
-//			Map<TeamRef, List<Entity>> teamShips = battleGroups.get(planetRef);
-//			logger.debug("battle group at planet {}: {}", planetRef, teamShips.keySet());
-//
-//			int shipCount = teamShips.values().stream().mapToInt(Collection::size).sum();
-//			List<Entity> discarded = new ArrayList<>(shipCount);
-//			List<Entity> destroyed = new ArrayList<>(shipCount);
-//
-//			int shotsFired = 0;
-//			while (
-//					teamShips.values().stream()
-//							.flatMap(Collection::stream)
-//							.anyMatch(e -> e.has(Weapons.class) && !discarded.contains(e))
-//			) {
-//				List<Entity> allShips = teamShips.values().stream().flatMap(Collection::stream).toList();
-//				List<Entity> withWeapons = teamShips.values().stream()
-//						.flatMap(Collection::stream)
-//						.filter(e -> e.has(Weapons.class))
-//						.filter(e -> !discarded.contains(e))
-//						.toList();
-//
-//				Entity attacker = withWeapons.get(generator.nextInt(withWeapons.size()));
-//
-//				TeamRef attackingTeam = attacker.prop(TeamRef.class);
-//				List<Entity> enemyShips = allShips.stream()
-//						.filter(e -> !Objects.equals(attackingTeam, e.prop(TeamRef.class)))
-//						.filter(e -> attackingTeam.isHostileTo(e.prop(TeamRef.class)))
-//						.toList();
-//
-//				Entity target = enemyShips.get(generator.nextInt(enemyShips.size()));
-//
-//				logger.debug("ship {} attacked {} and won", attacker, target);
-//
-//				discarded.add(attacker);
-//				battleGroups.get(planetRef).get(target.prop(TeamRef.class)).remove(target);
-//				destroyed.add(target);
-//				shotsFired++;
-//			}
-//
-//			// TODO increase planet's materials by weight of destroyed ships
-//			// TODO mark as Destroyed? use tpf for battle?
-//			galaxy.remove(destroyed);
-//
-//			logger.debug("shots fired at {}: {}", planetRef, shotsFired);
-//		}
-//
-//	}
 }
