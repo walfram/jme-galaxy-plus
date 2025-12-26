@@ -21,11 +21,11 @@ class EntityTest {
 	@BeforeEach
 	void beforeEach() {
 		entities = List.of(
-				new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new InOrbit()),
-				new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new Launched()),
+				new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(1), new InOrbit()),
+				new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(2), new Launched()),
 
-				new Entity(new PlanetRef("bar"), new TeamRef("bar"), new ShipId(), new InFlight()),
-				new Entity(new PlanetRef("bar"), new TeamRef("foo"), new ShipId()),
+				new Entity(new PlanetRef("bar"), new TeamRef("bar"), new ShipId(3), new InFlight()),
+				new Entity(new PlanetRef("bar"), new TeamRef("foo"), new ShipId(4)),
 
 				new Entity(new TeamRef("foo"), new PlanetRef("foo"), new Planet()),
 				new Entity(new TeamRef("bar"), new PlanetRef("bar"), new Planet())

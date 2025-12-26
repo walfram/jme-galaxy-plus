@@ -14,4 +14,12 @@ public class Diplomacy implements Component {
 		return status.computeIfAbsent(otherTeam.prop(TeamRef.class), k -> DiplomaticStatus.WAR);
 	}
 
+	public void declare(DiplomaticStatus status, Entity otherTeam) {
+		this.status.put(otherTeam.prop(TeamRef.class), status);
+	}
+
+	public boolean isAtWarWith(Entity other) {
+		return statusWith(other) == DiplomaticStatus.WAR;
+	}
+
 }

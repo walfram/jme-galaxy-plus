@@ -2,10 +2,10 @@ package galaxy.domain.shared;
 
 import galaxy.domain.Context;
 import galaxy.domain.Entity;
-import galaxy.domain.ship.state.InOrbit;
-import galaxy.domain.team.TeamRef;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.ShipId;
+import galaxy.domain.ship.state.InOrbit;
+import galaxy.domain.team.TeamRef;
 
 import java.util.ArrayList;
 import java.util.HashMap;

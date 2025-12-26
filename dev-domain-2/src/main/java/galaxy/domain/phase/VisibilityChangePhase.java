@@ -7,7 +7,6 @@ import galaxy.domain.PlanetVisibility;
 import galaxy.domain.planet.PlanetRef;
 import galaxy.domain.ship.state.InOrbit;
 import galaxy.domain.team.GalaxyView;
-import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 
 import java.util.Collection;
@@ -35,7 +34,7 @@ public class VisibilityChangePhase implements Phase {
 						.filter(ship -> Objects.equals(ship.prop(PlanetRef.class), planet.prop(PlanetRef.class)))
 						.anyMatch(ship -> ship.has(InOrbit.class));
 
-				if (Objects.equals(team.prop(Team.class).teamRef(),  planet.prop(TeamRef.class))) {
+				if (Objects.equals(team.prop(TeamRef.class),  planet.prop(TeamRef.class))) {
 					team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
 				} else if (hasOrbitingShips) {
 					team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.ORBITING);

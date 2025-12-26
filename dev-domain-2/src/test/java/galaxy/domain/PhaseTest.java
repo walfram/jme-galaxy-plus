@@ -43,7 +43,7 @@ public class PhaseTest {
 		Entity ship = new Entity(
 				new PlanetRef("foo"),
 				new TeamRef("foo"),
-				new ShipId(),
+				new ShipId(1),
 				new CargoUnloadOrder(new PlanetRef("foo")),
 				new CargoHold(Cargo.Materials, 100.0, 100.0)
 		);
@@ -80,7 +80,7 @@ public class PhaseTest {
 	void test_production_phase() {
 		// MAT, CAP, Research, Population growth ????
 		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet(), new Materials(0), new ProductionOrder(new MaterialsProduction()));
-		Entity team = new Entity(new Team("foo"), new TeamRef("foo"));
+		Entity team = new Entity(new Team(), new TeamRef("foo"));
 
 		Context galaxy = new ClassicGalaxy(planet, team);
 		assertEquals(0.0, planet.prop(Materials.class).value());
@@ -100,7 +100,7 @@ public class PhaseTest {
 		Entity to = galaxy.createUninhabitedPlanet();
 
 		// new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar"))
-		Entity ship = galaxy.createShip(from.prop(PlanetRef.class), team.prop(Team.class).teamRef(), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		Entity ship = galaxy.createShip(from.prop(PlanetRef.class), team.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
 		assertTrue(ship.has(InOrbit.class));
 
 		ship.put(new FlightOrder(from.prop(PlanetRef.class), to.prop(PlanetRef.class)));
@@ -115,7 +115,7 @@ public class PhaseTest {
 	void test_upgrade_phase() {
 		// special case of Production?
 		Entity ship = new Entity(
-				new ShipId(),
+				new ShipId(1),
 				new UpgradeShipOrder(),
 				new InUpgrade(),
 				new TechLevel(),
@@ -131,7 +131,7 @@ public class PhaseTest {
 				new Industry(1000.0)
 		);
 
-		Entity team = new Entity(new Team("foo"), new TeamRef("foo"), new TechLevel(1.1, 1.0, 1.0, 1.0));
+		Entity team = new Entity(new Team(), new TeamRef("foo"), new TechLevel(1.1, 1.0, 1.0, 1.0));
 
 		Context galaxy = new ClassicGalaxy(ship, planet, team);
 
@@ -150,7 +150,7 @@ public class PhaseTest {
 		Entity ship = new Entity(
 				new PlanetRef("foo"),
 				new TeamRef("foo"),
-				new ShipId(),
+				new ShipId(1),
 				new CargoLoadOrder(new PlanetRef("foo"), Cargo.Colonists, 100.0),
 				new CargoHold(Cargo.Empty, 100.0, 0));
 
@@ -182,7 +182,7 @@ public class PhaseTest {
 		Entity teamBar = galaxy.createTeam("bar");
 		Entity planetBar = galaxy.createHomeWorld(teamBar);
 
-		galaxy.createShip(planetBar.prop(PlanetRef.class), teamFoo.prop(Team.class).teamRef(), new ShipDesign(100, 100, 100, 1, 0), new TechLevel());
+		galaxy.createShip(planetBar.prop(PlanetRef.class), teamFoo.prop(TeamRef.class), new ShipDesign(100, 100, 100, 1, 0), new TechLevel());
 
 		assertEquals(1, galaxy.planetCount("bar"));
 		assertTrue(planetBar.has(Population.class));
@@ -200,8 +200,8 @@ public class PhaseTest {
 	@Test
 	void test_combat_phase() {
 		// only on planets, races are hostile, at least one ship has weapons
-		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(), new InOrbit(), new Weapons(1, 1));
-		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(), new InOrbit());
+		Entity shipA = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new ShipId(1), new InOrbit(), new Weapons(1, 1));
+		Entity shipB = new Entity(new PlanetRef("foo"), new TeamRef("bar"), new ShipId(2), new InOrbit());
 
 		Context galaxy = new ClassicGalaxy(shipA, shipB);
 

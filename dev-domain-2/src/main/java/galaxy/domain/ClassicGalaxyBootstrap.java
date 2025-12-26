@@ -4,7 +4,6 @@ import galaxy.domain.planet.Position;
 import galaxy.domain.planet.Resources;
 import galaxy.domain.planet.Size;
 import galaxy.domain.team.GalaxyView;
-import galaxy.domain.team.Team;
 import galaxy.domain.team.TeamRef;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class ClassicGalaxyBootstrap {
 			TeamRef teamRef = planet.prop(TeamRef.class);
 
 			for (Entity team: teams) {
-				if (Objects.equals(teamRef, team.prop(Team.class).teamRef())) {
+				if (Objects.equals(teamRef, team.prop(TeamRef.class))) {
 					// planet is owned by this team
 					continue;
 				}

@@ -20,6 +20,8 @@ public class ClassicGalaxy implements Context {
 	private static final Logger logger = getLogger(ClassicGalaxy.class);
 
 	private final AtomicLong planetIdSource = new AtomicLong(0);
+	private final AtomicLong shipIdSource = new AtomicLong(0);
+
 	private final List<Entity> entities = new ArrayList<>();
 
 	public ClassicGalaxy(Entity... source) {
@@ -82,7 +84,7 @@ public class ClassicGalaxy implements Context {
 		List<Entity> teams = query(List.of(Team.class));
 
 		return teams.stream().collect(Collectors.toMap(
-				e -> e.prop(Team.class).teamRef(),
+				e -> e.prop(TeamRef.class),
 				e -> e
 		));
 	}
@@ -91,7 +93,8 @@ public class ClassicGalaxy implements Context {
 	public Entity createTeam(String name) {
 		Entity team = new Entity();
 
-		team.put(new Team(name));
+		team.put(new Team());
+		team.put(new TeamRef(name));
 		team.put(new GalaxyView());
 		team.put(new Diplomacy());
 
@@ -112,7 +115,7 @@ public class ClassicGalaxy implements Context {
 		planet.put(new Industry(1000.0));
 
 		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
-		planet.put(new TeamRef(team.prop(Team.class).teamRef()));
+		planet.put(new TeamRef(team.prop(TeamRef.class)));
 
 		return planet;
 	}
@@ -129,7 +132,7 @@ public class ClassicGalaxy implements Context {
 		planet.put(new Industry(500.0));
 
 		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
-		planet.put(new TeamRef(team.prop(Team.class).teamRef()));
+		planet.put(new TeamRef(team.prop(TeamRef.class)));
 
 		return planet;
 	}
@@ -172,7 +175,7 @@ public class ClassicGalaxy implements Context {
 			ship.put(new CargoHold(Cargo.Empty, 0, 0));
 		}
 
-		ship.put(new ShipId());
+		ship.put(new ShipId(shipIdSource.incrementAndGet()));
 		ship.put(new InOrbit());
 
 		entities.add(ship);
@@ -183,7 +186,7 @@ public class ClassicGalaxy implements Context {
 	public Entity team(TeamRef teamRef) {
 		return entities.stream()
 				.filter(e -> e.has(Team.class))
-				.filter(e -> Objects.equals(teamRef, e.prop(Team.class).teamRef()))
+				.filter(e -> Objects.equals(teamRef, e.prop(TeamRef.class)))
 				.findFirst().orElseThrow();
 	}
 
