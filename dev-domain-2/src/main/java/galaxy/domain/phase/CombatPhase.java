@@ -107,6 +107,7 @@ public class CombatPhase implements Phase {
 
 			// TODO increase planet's materials by weight of destroyed ships
 			// TODO mark as Destroyed? use tpf for battle?
+			// TODO battle log
 
 			galaxy.remove(destroyed);
 
