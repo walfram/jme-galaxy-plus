@@ -139,7 +139,11 @@ public class ClassicGalaxy implements Context {
 
 	@Override
 	public Entity createUninhabitedPlanet() {
-		return createPlanet();
+		Entity planet = createPlanet();
+
+		teams().values().forEach(team -> team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.UNKNOWN));
+
+		return planet;
 	}
 
 	@Override
