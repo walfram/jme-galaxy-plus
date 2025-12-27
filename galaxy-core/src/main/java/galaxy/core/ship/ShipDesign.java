@@ -24,4 +24,8 @@ public record ShipDesign(double engines, int guns, double caliber, double shield
 	public double cargoWeight() {
 		return cargo;
 	}
+
+	public double weight() {
+		return enginesWeight() + weaponsWeight() + shieldsWeight() + cargoWeight();
+	}
 }
