@@ -4,8 +4,8 @@ import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.planet.Planet;
-import galaxy.domain.production.Production;
+import domain.planet.Planet;
+import domain.production.Production;
 
 import java.util.Optional;
 

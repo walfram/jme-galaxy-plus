@@ -5,9 +5,9 @@ import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.Race;
-import galaxy.domain.planet.Planet;
-import galaxy.domain.production.Production;
+import domain.Race;
+import domain.planet.Planet;
+import domain.production.Production;
 import galaxy.ui.v2.events.ui.GuiEvent;
 
 import java.util.Optional;

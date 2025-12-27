@@ -1,6 +1,6 @@
 package galaxy.shared;
 
-import galaxy.domain.planet.properties.Coordinates;
+import domain.planet.properties.Coordinates;
 
 public class FormattedCoordinates {
 	private final Coordinates coordinates;

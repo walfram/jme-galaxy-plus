@@ -3,13 +3,11 @@ package galaxy.proto.widgets;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.Race;
-import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.PlanetInfo;
-import galaxy.domain.production.Production;
+import domain.Race;
+import domain.planet.Planet;
+import domain.planet.PlanetInfo;
+import domain.production.Production;
 import galaxy.shared.FormattedCoordinates;
-
-import java.util.Optional;
 
 public class PlanetInfoWidget extends Container {
 	public static final String NAME = "planet-info-widget";

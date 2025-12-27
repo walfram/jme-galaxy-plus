@@ -1,6 +1,6 @@
 package galaxy.ui.v2;
 
-import galaxy.domain.planet.Planet;
+import domain.planet.Planet;
 import jme3utilities.SimpleControl;
 
 public class PlanetRef extends SimpleControl {

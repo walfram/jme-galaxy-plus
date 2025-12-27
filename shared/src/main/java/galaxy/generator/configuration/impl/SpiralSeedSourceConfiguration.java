@@ -8,8 +8,8 @@ import com.simsilica.lemur.value.TextFieldValueEditor;
 import galaxy.generator.SeedSource;
 import galaxy.generator.configuration.SeedSourceConfiguration;
 import galaxy.generator.sources.SpiralSeedSource;
-import galaxy.shared.functions.ObjectToString;
-import galaxy.shared.functions.StringToInteger;
+import shared.functions.ObjectToString;
+import shared.functions.StringToInteger;
 
 import java.util.Objects;
 

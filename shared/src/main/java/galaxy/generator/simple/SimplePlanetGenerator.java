@@ -1,11 +1,11 @@
 package galaxy.generator.simple;
 
 import com.jme3.math.Vector3f;
-import galaxy.domain.Race;
-import galaxy.domain.planet.ClassicDaughterWorld;
-import galaxy.domain.planet.ClassicHomeWorld;
-import galaxy.domain.planet.properties.Coordinates;
-import galaxy.domain.planet.Planet;
+import domain.Race;
+import domain.planet.ClassicDaughterWorld;
+import domain.planet.ClassicHomeWorld;
+import domain.planet.properties.Coordinates;
+import domain.planet.Planet;
 import galaxy.generator.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package galaxy.ui.v2.events.ui;
 
 import com.simsilica.event.EventType;
-import galaxy.domain.planet.Planet;
+import domain.planet.Planet;
 
 public record GuiEvent(Planet planet) {
 

@@ -8,9 +8,9 @@ import com.simsilica.lemur.value.TextFieldValueEditor;
 import galaxy.generator.SeedSource;
 import galaxy.generator.configuration.SeedSourceConfiguration;
 import galaxy.generator.sources.SimpleSeedSource;
-import galaxy.shared.functions.ObjectToString;
-import galaxy.shared.functions.StringToInteger;
-import galaxy.shared.functions.StringToLong;
+import shared.functions.ObjectToString;
+import shared.functions.StringToInteger;
+import shared.functions.StringToLong;
 
 public class SimpleSeedSourceConfiguration implements SeedSourceConfiguration {
 

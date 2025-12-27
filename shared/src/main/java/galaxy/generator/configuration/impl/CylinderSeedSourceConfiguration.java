@@ -10,8 +10,8 @@ import com.simsilica.lemur.value.TextFieldValueEditor;
 import galaxy.generator.SeedSource;
 import galaxy.generator.configuration.SeedSourceConfiguration;
 import galaxy.generator.sources.CylinderSeedSource;
-import galaxy.shared.functions.ObjectToString;
-import galaxy.shared.functions.StringToInteger;
+import shared.functions.ObjectToString;
+import shared.functions.StringToInteger;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.math.noise.Generator;
 

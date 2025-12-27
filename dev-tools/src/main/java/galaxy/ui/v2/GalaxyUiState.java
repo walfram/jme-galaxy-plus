@@ -11,7 +11,7 @@ import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.component.IconComponent;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.planet.Planet;
+import domain.planet.Planet;
 import galaxy.ui.v2.events.ui.ChaseCameraEvent;
 import galaxy.ui.v2.events.ui.GuiEvent;
 import galaxy.ui.v2.widgets.PlanetInfoWidget;

@@ -6,7 +6,7 @@ import com.simsilica.lemur.core.VersionedList;
 import com.simsilica.lemur.list.DefaultCellRenderer;
 import com.simsilica.lemur.style.BaseStyles;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.planet.Planet;
+import domain.planet.Planet;
 import galaxy.ui.v2.events.ui.ChaseCameraEvent;
 import galaxy.ui.v2.events.ui.GuiEvent;
 import galaxy.ui.v2.events.ui.PlanetSelectEvent;

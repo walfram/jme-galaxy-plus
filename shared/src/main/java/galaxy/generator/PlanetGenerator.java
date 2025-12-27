@@ -1,6 +1,6 @@
 package galaxy.generator;
 
-import galaxy.domain.planet.Planet;
+import domain.planet.Planet;
 
 import java.util.List;
 

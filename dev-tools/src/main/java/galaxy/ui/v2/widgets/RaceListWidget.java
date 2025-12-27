@@ -4,9 +4,9 @@ import com.simsilica.event.EventBus;
 import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.domain.Diplomacy;
-import galaxy.domain.DiplomaticStatus;
-import galaxy.domain.Race;
+import domain.Diplomacy;
+import domain.DiplomaticStatus;
+import domain.Race;
 import galaxy.ui.v2.events.game.DiplomacyEvent;
 import org.slf4j.Logger;
 

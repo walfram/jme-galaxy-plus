@@ -10,12 +10,12 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import galaxy.domain.Race;
-import galaxy.domain.planet.Planet;
-import galaxy.domain.planet.PlanetInfo;
+import domain.Race;
+import domain.planet.Planet;
+import domain.planet.PlanetInfo;
 import galaxy.proto.controls.PlanetRefControl;
-import galaxy.shared.collision.CursorCollisions;
-import galaxy.shared.material.LightingMaterial;
+import shared.collision.CursorCollisions;
+import shared.material.LightingMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 

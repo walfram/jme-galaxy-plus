@@ -6,8 +6,8 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import galaxy.shared.InitLemurState;
-import galaxy.shared.debug.DebugGrid;
+import shared.InitLemurState;
+import shared.debug.DebugGrid;
 import jme3utilities.MyCamera;
 import jme3utilities.debug.AxesVisualizer;
 

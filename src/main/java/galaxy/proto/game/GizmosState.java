@@ -14,8 +14,8 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.debug.WireBox;
 import com.jme3.scene.shape.Line;
 import com.jme3.scene.shape.Quad;
-import galaxy.shared.collision.PlaneCursorCollisions;
-import galaxy.shared.material.UnshadedMaterial;
+import shared.collision.PlaneCursorCollisions;
+import shared.material.UnshadedMaterial;
 import org.slf4j.Logger;
 
 import java.util.Objects;

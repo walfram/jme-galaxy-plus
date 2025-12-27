@@ -9,8 +9,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import galaxy.generator.SeedSource;
-import galaxy.shared.debug.DebugPointMesh;
-import galaxy.shared.material.UnshadedMaterial;
+import shared.debug.DebugPointMesh;
+import shared.material.UnshadedMaterial;
 
 public class GeneratorViewState extends BaseAppState {
 

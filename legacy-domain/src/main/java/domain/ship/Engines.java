@@ -1,0 +1,22 @@
+package domain.ship;
+
+import domain.technology.EnginesTechnology;
+
+public record Engines(EnginesTemplate template, EnginesTechnology technology) {
+
+	public Engines {
+		technology = new EnginesTechnology(technology);
+	}
+
+	public double value() {
+		return template.value();
+	}
+
+	public double techLevel() {
+		return technology.value();
+	}
+
+	public double weight() {
+		return template.weight();
+	}
+}

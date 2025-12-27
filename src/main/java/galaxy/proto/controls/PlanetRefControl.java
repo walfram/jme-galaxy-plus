@@ -1,6 +1,6 @@
 package galaxy.proto.controls;
 
-import galaxy.domain.planet.PlanetInfo;
+import domain.planet.PlanetInfo;
 import jme3utilities.SimpleControl;
 
 public class PlanetRefControl extends SimpleControl {
