@@ -35,6 +35,9 @@ dependencies {
 
     implementation project(":shared")
 
+    // TODO temporary here
+    implementation project(":legacy-domain")
+
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)
     // Test dependencies (junit-jupiter gets its version from the BOM)

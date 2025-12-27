@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static domain.Const.COLONISTS_PACK_RATIO;
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class CargoUnloadPhase implements Phase {
 
 	private static final Logger logger = getLogger(CargoUnloadPhase.class);
-	private static final double COLONISTS_PACK_RATIO = 8.0;
 
 	private final Context galaxy;
 

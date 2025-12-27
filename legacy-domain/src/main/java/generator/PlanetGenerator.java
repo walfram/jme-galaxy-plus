@@ -1,4 +1,4 @@
-package galaxy.generator;
+package generator;
 
 import domain.planet.Planet;
 

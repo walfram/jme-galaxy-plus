@@ -1,4 +1,4 @@
-package galaxy.generator.simple;
+package generator.simple;
 
 import com.jme3.math.Vector3f;
 import domain.Race;
@@ -7,6 +7,8 @@ import domain.planet.ClassicHomeWorld;
 import domain.planet.properties.Coordinates;
 import domain.planet.Planet;
 import galaxy.generator.*;
+import generator.PlanetGenerator;
+import generator.PlanetTemplate;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
@@ -39,7 +41,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 		this.seedSource = seedSource;
 	}
 
-	int planetCount() {
+	public int planetCount() {
 		return races.size() * planetRatio;
 	}
 

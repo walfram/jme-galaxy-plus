@@ -23,6 +23,8 @@ dependencies {
     // Test dependencies (junit-jupiter gets its version from the BOM)
     testImplementation libs.junit.jupiter
     testImplementation libs.mockito.core
+
+    implementation project(":shared")
 }
 
 test {

@@ -1,9 +1,9 @@
-package galaxy.generator;
+package generator;
 
-import com.jme3.material.Materials;
 import com.jme3.math.Vector3f;
 import domain.planet.*;
-import jme3utilities.math.Population;
+import domain.planet.properties.*;
+import galaxy.generator.Weighted;
 import jme3utilities.math.noise.Generator;
 
 public record PlanetTemplate(

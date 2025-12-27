@@ -1,4 +1,4 @@
-package galaxy.generator.simple;
+package generator.simple;
 
 import galaxy.generator.PlanetNameSource;
 

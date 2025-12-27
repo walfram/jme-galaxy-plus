@@ -5,10 +5,10 @@ import com.jme3.app.state.BaseAppState;
 import com.jme3.math.FastMath;
 import domain.Race;
 import domain.planet.Planet;
-import galaxy.generator.PlanetGenerator;
 import galaxy.generator.SeedSource;
-import galaxy.generator.simple.SimplePlanetGenerator;
 import galaxy.generator.sources.SphericalSeedSource;
+import generator.PlanetGenerator;
+import generator.simple.SimplePlanetGenerator;
 import jme3utilities.math.noise.Generator;
 
 import java.util.ArrayList;

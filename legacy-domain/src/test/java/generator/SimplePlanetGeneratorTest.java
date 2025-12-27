@@ -1,9 +1,10 @@
-package galaxy.generator.simple;
+package generator;
 
 import domain.Fixtures;
 import domain.Race;
 import domain.planet.Planet;
 import galaxy.generator.sources.SimpleSeedSource;
+import generator.simple.SimplePlanetGenerator;
 import jme3utilities.math.noise.Generator;
 import org.junit.jupiter.api.Test;
 

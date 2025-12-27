@@ -9,6 +9,7 @@ import domain.technology.CargoTechnology;
 import domain.technology.EnginesTechnology;
 import domain.technology.ShieldsTechnology;
 import domain.technology.WeaponsTechnology;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GalaxyCommandsTest {
 
 	@Test
+	@Disabled("deprecated")
 	public void when_race_visits_hostile_planet_then_it_is_visible_as_hostile() {
 		Planet fooPlanet = new Planet(1L, new Coordinates(0, 0, 0), new Size(1000f), new Resources(10f));
 		Race fooRace = new Race("foo", "foo");

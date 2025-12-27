@@ -3,13 +3,12 @@ package domain.phase;
 import domain.Context;
 import domain.Entity;
 import domain.Phase;
-import domain.planet.Planet;
-import domain.planet.PlanetRef;
-import domain.planet.Population;
+import domain.planet.*;
 import org.slf4j.Logger;
 
 import java.util.List;
 
+import static domain.Const.COLONISTS_RATIO;
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class PopulationGrowthPhase implements Phase {
@@ -32,16 +31,28 @@ public class PopulationGrowthPhase implements Phase {
 		logger.debug("populated planets {}", populatedPlanets.size());
 
 		for (Entity planet : populatedPlanets) {
-			double value = planet.prop(Population.class).value();
+			double currentPopulation = planet.prop(Population.class).value();
 
-			if (value == 0) {
+			if (currentPopulation == 0) {
 				logger.debug("population of {} is zero, skipping growth", planet);
 				continue;
 			}
 
-			double delta = value * 0.08;
+			double maxPopulation = planet.prop(Size.class).value();
+
+			double delta = currentPopulation * 0.08;
 			logger.debug("growing population of {} by {}%", planet, delta);
-			planet.put(new Population(value + delta));
+
+			double updatedPopulation = currentPopulation + delta;
+
+			if (maxPopulation - updatedPopulation < 0.0) {
+				planet.put(new Population(maxPopulation));
+				double colonists = planet.has(Colonists.class) ? planet.prop(Colonists.class).value() : 0.0;
+				colonists += (updatedPopulation - maxPopulation) / COLONISTS_RATIO;
+				planet.put(new Colonists(colonists));
+			} else {
+				planet.put(new Population(updatedPopulation));
+			}
 		}
 	}
 }

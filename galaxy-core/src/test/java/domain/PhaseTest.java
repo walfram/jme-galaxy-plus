@@ -61,8 +61,8 @@ public class PhaseTest {
 
 	@Test
 	void test_population_growth_phase() {
-		Entity planetFoo = new Entity(new Planet(), new PlanetRef("foo"), new TeamRef("foo"), new Population(100));
-		Entity planetBar = new Entity(new Planet(), new PlanetRef("bar"), new TeamRef("bar"), new Population(200));
+		Entity planetFoo = new Entity(new Planet(), new PlanetRef("foo"), new TeamRef("foo"), new Population(100), new Size(1000));
+		Entity planetBar = new Entity(new Planet(), new PlanetRef("bar"), new TeamRef("bar"), new Population(200), new Size(1000));
 
 		Context galaxy = new ClassicGalaxy(planetFoo, planetBar);
 
@@ -158,7 +158,8 @@ public class PhaseTest {
 				new PlanetRef("foo"),
 				new Planet(),
 				new TeamRef("foo"),
-				new Population(1000.0)
+				new Population(1000.0),
+				new Colonists(200)
 		);
 
 		Context galaxy = new ClassicGalaxy(ship, planet);
@@ -171,7 +172,8 @@ public class PhaseTest {
 		assertEquals(100.0, ship.prop(CargoHold.class).loadedAmount());
 		assertEquals(Cargo.Colonists, ship.prop(CargoHold.class).cargo());
 
-		assertEquals(900.0, planet.prop(Population.class).value());
+		assertEquals(1000.0, planet.prop(Population.class).value());
+		assertEquals(100.0, planet.prop(Colonists.class).value());
 	}
 
 	@Test
@@ -207,7 +209,7 @@ public class PhaseTest {
 		Entity planet = galaxy.createUninhabitedPlanet();
 
 		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
 
 		assertEquals(1, galaxy.shipCount("foo"));
 		assertEquals(1, galaxy.shipCount("bar"));
