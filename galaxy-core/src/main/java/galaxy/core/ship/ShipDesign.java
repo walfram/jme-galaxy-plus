@@ -28,4 +28,8 @@ public record ShipDesign(double engines, int guns, double caliber, double shield
 	public double weight() {
 		return enginesWeight() + weaponsWeight() + shieldsWeight() + cargoWeight();
 	}
+
+	public double cargoCapacity() {
+		return ( cargoWeight() + (cargoWeight() * cargoWeight()) / 20.0 );
+	}
 }
