@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation libs.logback.classic
+    implementation libs.guava
+
+    implementation project(":galaxy-core")
+}
+
+test {
+    useJUnitPlatform()
+}

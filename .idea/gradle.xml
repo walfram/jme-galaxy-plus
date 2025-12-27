@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/dev-tools" />
+            <option value="$PROJECT_DIR$/galaxy-bot" />
             <option value="$PROJECT_DIR$/galaxy-core" />
             <option value="$PROJECT_DIR$/legacy-domain" />
             <option value="$PROJECT_DIR$/shared" />
