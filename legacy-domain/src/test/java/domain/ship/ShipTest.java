@@ -126,4 +126,22 @@ public class ShipTest {
 		assertEquals(99, race.ships().size());
 	}
 
+	@Test
+	void test_building_battleship_on_homeworld() {
+		Race race = Fixtures.race();
+		Planet hw = Fixtures.homeworld();
+
+		hw.materials().update(10.0);
+
+		ShipTemplate battleship = ShipTemplateFixtures.battleshipAlt();
+		assertEquals(90.0, battleship.weight());
+
+		Production production = new ShipProduction(race, hw, battleship);
+		production.execute();
+
+		assertEquals(1, race.ships().size());
+
+		assertEquals(9.10891089108911, hw.massFromPrevTurn());
+	}
+
 }

@@ -1,6 +1,9 @@
 package galaxy.core;
 
 import galaxy.core.derived.Speed;
+import galaxy.core.planet.Effort;
+import galaxy.core.planet.Industry;
+import galaxy.core.planet.Population;
 import galaxy.core.ship.ShipDesign;
 import galaxy.core.ship.TechLevel;
 import org.junit.jupiter.api.Test;
@@ -127,6 +130,48 @@ public class GalaxyMathTest {
 		Speed speed = new Speed(design, new TechLevel());
 		assertEquals(20.0, speed.value());
 		assertEquals(20.0, speed.valueLoaded());
+	}
+
+	@Test
+	void test_speed_colonizer() {
+		ShipDesign design = new ShipDesign(10, 0, 0, 0, 1);
+		Speed speed = new Speed(design, new TechLevel(1, 1, 1, 1));
+		assertEquals(10.0, speed.value());
+		assertEquals(10.0, speed.valueLoaded());
+	}
+
+	@Test
+	void test_effort() {
+		Effort effort_1000_500 = new Effort(new Population(1000.0), new Industry(500.0));
+		assertEquals(625.0, effort_1000_500.value());
+
+		Effort effort_500_200 = new Effort(new Population(500.0), new Industry(200.0));
+		assertEquals(275.0, effort_500_200.value());
+	}
+
+	@Test
+		// no materials, production output = 99.0099
+	void test_production_math() {
+		double effort = 1000.0;
+		double resources = 10.0;
+
+		double weight = ShipFixtures.battleShipAlt().weight();
+
+		double resourceRatio = 1.0 / resources;
+
+		double shipCost = weight * 10.0;
+		double materialCost = weight * resourceRatio;
+
+		double costPerUnit = shipCost + materialCost;
+
+		double shipsPerTurn = effort / costPerUnit;
+		assertEquals(1.1001100110011002, shipsPerTurn);
+
+		int ships = (int) Math.floor(shipsPerTurn);
+		assertEquals(1, ships);
+
+		double remainder = costPerUnit * (shipsPerTurn - ships);
+		assertEquals(9.10891089108911, remainder);
 	}
 
 }

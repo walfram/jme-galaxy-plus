@@ -94,6 +94,16 @@ public class ShipTemplateFixtures {
 		);
 	}
 
+	public static ShipTemplate battleshipAlt() {
+		return new ShipTemplate(
+				"battleship alt",
+				new EnginesTemplate(25.0),
+				new WeaponsTemplate(1, 30.0),
+				new ShieldsTemplate(35.0),
+				new CargoTemplate(0.0)
+		);
+	}
+
 	public static ShipTemplate battleStation() {
 		return new ShipTemplate(
 				"battleStation",

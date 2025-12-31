@@ -40,6 +40,10 @@ public class ShipFixtures {
 		return new ShipDesign(33.00, 3, 25.00, 16.00, 1.00);
 	}
 
+	public static ShipDesign battleShipAlt() {
+		return new ShipDesign(25, 1, 30, 35, 0);
+	}
+
 	public static ShipDesign battleStation() {
 		return new ShipDesign(99.00, 1, 50.00, 49.00, 0.00);
 	}

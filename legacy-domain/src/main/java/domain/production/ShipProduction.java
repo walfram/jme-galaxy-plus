@@ -46,6 +46,7 @@ public class ShipProduction extends Production {
 			race.addShipGroup(count, shipTemplate, planet);
 		}
 
-		planet.setMassFromPrevTurn(Math.max(0.0, produced - shipMass * (double) count));
+		double b = produced - shipMass * (double) count;
+		planet.setMassFromPrevTurn(Math.max(0.0, b));
 	}
 }
