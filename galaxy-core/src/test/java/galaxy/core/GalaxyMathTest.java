@@ -135,9 +135,13 @@ public class GalaxyMathTest {
 	@Test
 	void test_speed_colonizer() {
 		ShipDesign design = new ShipDesign(10, 0, 0, 0, 1);
+
+		assertEquals(1, design.cargoWeight());
+		assertEquals(11, design.weight());
+
 		Speed speed = new Speed(design, new TechLevel(1, 1, 1, 1));
-		assertEquals(10.0, speed.value());
-		assertEquals(10.0, speed.valueLoaded());
+		assertEquals(18.18181818181818, speed.value());
+		assertEquals(16.59751037344398, speed.valueLoaded());
 	}
 
 	@Test

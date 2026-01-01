@@ -56,7 +56,7 @@ class ProductionTest {
 		assertTrue(results.contains(new SpawnShips(1, design, planet)));
 
 		double remainderMass = planet.prop(MassFromPreviousTurn.class).value();
-		assertEquals(9.10891089108911, remainderMass);
+		assertEquals(9.009900990099013, remainderMass);
 	}
 
 	@Test

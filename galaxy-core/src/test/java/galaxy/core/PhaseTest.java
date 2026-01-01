@@ -78,8 +78,17 @@ public class PhaseTest {
 
 	@Test
 	void test_production_phase() {
-		// MAT, CAP, Research, Population growth ????
-		Entity planet = new Entity(new PlanetRef("foo"), new TeamRef("foo"), new Planet(), new Materials(0), new ProductionOrder(new MaterialsProduction()));
+		Entity planet = new Entity(
+				new PlanetRef("foo"),
+				new TeamRef("foo"),
+				new Planet(),
+				new Population(1000.0),
+				new Industry(1000.0),
+				new Resources(10.0),
+				new Materials(0),
+				new ProductionOrder(new MaterialsProduction())
+		);
+
 		Entity team = new Entity(new Team(), new TeamRef("foo"));
 
 		Context galaxy = new ClassicGalaxy(planet, team);
@@ -88,7 +97,7 @@ public class PhaseTest {
 		Phase phase = new ProductionPhase(galaxy);
 		phase.execute(1.0);
 
-		assertEquals(100.0, planet.prop(Materials.class).value());
+		assertEquals(10000.0, planet.prop(Materials.class).value());
 	}
 
 	@Test
