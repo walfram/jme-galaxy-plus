@@ -149,13 +149,15 @@ public class GalaxyMathTest {
 		assertEquals(275.0, effort_500_200.value());
 	}
 
+	// no materials, production output = 99.0099
 	@Test
-		// no materials, production output = 99.0099
-	void test_production_math() {
+	void test_production_math_no_materials() {
 		double effort = 1000.0;
 		double resources = 10.0;
+		double materials = 0.0;
 
 		double weight = ShipFixtures.battleShipAlt().weight();
+		// battleShipAlt().weight() == 90.0
 
 		double resourceRatio = 1.0 / resources;
 
@@ -163,15 +165,72 @@ public class GalaxyMathTest {
 		double materialCost = weight * resourceRatio;
 
 		double costPerUnit = shipCost + materialCost;
+		assertEquals(909.0, costPerUnit);
 
 		double shipsPerTurn = effort / costPerUnit;
 		assertEquals(1.1001100110011002, shipsPerTurn);
 
-		int ships = (int) Math.floor(shipsPerTurn);
-		assertEquals(1, ships);
+//		int ships = (int) Math.floor(shipsPerTurn);
+//		assertEquals(1, ships);
 
-		double remainder = costPerUnit * (shipsPerTurn - ships);
-		assertEquals(9.10891089108911, remainder);
+		double produced;
+		double extra = effort - (materials * 10.0); // SHIP_COST is 10.0
+
+		if (extra > 0.0) {
+			// Stockpile is too small! We must mine.
+			produced = materials + (extra * resources) / (10.0 * resources + 1.0);
+		} else {
+			// Stockpile is large! No mining needed.
+			produced = effort / 10.0;
+		}
+
+		int count = (int) Math.floor(produced / weight);
+		assertEquals(1, count);
+
+		double massReminder = produced - weight * count;
+		assertEquals(9.009900990099013, massReminder);
+	}
+
+	@Test
+	void test_production_math_with_materials() {
+		double effort = 1000.0;
+		double resources = 10.0;
+
+		double materials = 1000.0;
+
+		double weight = ShipFixtures.battleShipAlt().weight();
+		// battleShipAlt().weight() == 90.0
+
+		double resourceRatio = 1.0 / resources;
+
+		double shipCost = weight * 10.0;
+		double materialCost = weight * resourceRatio;
+
+		double costPerUnit = shipCost + materialCost;
+		assertEquals(909.0, costPerUnit);
+
+		double shipsPerTurn = effort / costPerUnit;
+		assertEquals(1.1001100110011002, shipsPerTurn);
+
+//		int ships = (int) Math.floor(shipsPerTurn);
+//		assertEquals(1, ships);
+
+		double produced;
+		double extra = effort - (materials * 10.0);
+
+		if (extra > 0.0) {
+			// Stockpile is too small! We must mine.
+			produced = materials + (extra * resources) / (10.0 * resources + 1.0);
+		} else {
+			// Stockpile is large! No mining needed.
+			produced = effort / 10.0;
+		}
+
+		int count = (int) Math.floor(produced / weight);
+		assertEquals(1, count);
+
+		double massReminder = produced - weight * count;
+		assertEquals(10.0, massReminder);
 	}
 
 }
