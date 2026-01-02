@@ -97,6 +97,7 @@ public class ClassicGalaxy implements Context {
 		team.put(new TeamRef(name));
 		team.put(new GalaxyView());
 		team.put(new Diplomacy());
+		team.put(new TechLevels());
 
 		entities.add(team);
 
@@ -154,13 +155,13 @@ public class ClassicGalaxy implements Context {
 	}
 
 	@Override
-	public Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevel techLevel) {
+	public Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevels techLevels) {
 		Entity ship = new Entity();
 
 		ship.put(planetRef);
 		ship.put(teamRef);
 		ship.put(shipDesign);
-		ship.put(techLevel);
+		ship.put(techLevels);
 
 		// TODO add Engines, Weapons, Shields, Cargo
 		if (shipDesign.engines() >= 1) {

@@ -3,7 +3,6 @@ package galaxy.core;
 import galaxy.core.planet.PlanetRef;
 import galaxy.core.ship.ShipDesign;
 import galaxy.core.ship.ShipId;
-import galaxy.core.ship.TechLevel;
 import galaxy.core.team.TeamRef;
 
 import java.util.Collection;
@@ -33,7 +32,7 @@ public interface Context {
 
 	Entity createEntity();
 
-	Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevel techLevel);
+	Entity createShip(PlanetRef planetRef, TeamRef teamRef, ShipDesign shipDesign, TechLevels techLevels);
 
 	Entity team(TeamRef teamRef);
 

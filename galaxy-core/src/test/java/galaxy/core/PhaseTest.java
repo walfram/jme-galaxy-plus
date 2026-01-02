@@ -109,7 +109,7 @@ public class PhaseTest {
 		Entity to = galaxy.createUninhabitedPlanet();
 
 		// new FlightOrder(new PlanetRef("foo"), new PlanetRef("bar"))
-		Entity ship = galaxy.createShip(from.prop(PlanetRef.class), team.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		Entity ship = galaxy.createShip(from.prop(PlanetRef.class), team.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevels());
 		assertTrue(ship.has(InOrbit.class));
 
 		ship.put(new FlightOrder(from.prop(PlanetRef.class), to.prop(PlanetRef.class)));
@@ -127,7 +127,7 @@ public class PhaseTest {
 				new ShipId(1),
 				new UpgradeShipOrder(),
 				new InUpgrade(),
-				new TechLevel(),
+				new TechLevels(),
 				new PlanetRef("foo"),
 				new TeamRef("foo"),
 				new ShipDesign(1, 1, 1, 1, 1)
@@ -140,18 +140,18 @@ public class PhaseTest {
 				new Industry(1000.0)
 		);
 
-		Entity team = new Entity(new Team(), new TeamRef("foo"), new TechLevel(1.1, 1.0, 1.0, 1.0));
+		Entity team = new Entity(new Team(), new TeamRef("foo"), new TechLevels(1.1, 1.0, 1.0, 1.0));
 
 		Context galaxy = new ClassicGalaxy(ship, planet, team);
 
 		assertTrue(ship.has(InUpgrade.class));
-		assertEquals(1.0, ship.prop(TechLevel.class).engines());
+		assertEquals(1.0, ship.prop(TechLevels.class).engines());
 
 		Phase upgrade = new UpgradePhase(galaxy);
 		upgrade.execute(1.0);
 
 		assertTrue(ship.has(InOrbit.class));
-		assertEquals(1.1, ship.prop(TechLevel.class).engines());
+		assertEquals(1.1, ship.prop(TechLevels.class).engines());
 	}
 
 	@Test
@@ -193,7 +193,7 @@ public class PhaseTest {
 		Entity teamBar = galaxy.createTeam("bar");
 		Entity planetBar = galaxy.createHomeWorld(teamBar);
 
-		galaxy.createShip(planetBar.prop(PlanetRef.class), teamFoo.prop(TeamRef.class), new ShipDesign(100, 100, 100, 1, 0), new TechLevel());
+		galaxy.createShip(planetBar.prop(PlanetRef.class), teamFoo.prop(TeamRef.class), new ShipDesign(100, 100, 100, 1, 0), new TechLevels());
 
 		assertEquals(1, galaxy.planetCount("bar"));
 		assertTrue(planetBar.has(Population.class));
@@ -217,8 +217,8 @@ public class PhaseTest {
 
 		Entity planet = galaxy.createUninhabitedPlanet();
 
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 1, 1, 0, 0), new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevels());
 
 		assertEquals(1, galaxy.shipCount("foo"));
 		assertEquals(1, galaxy.shipCount("bar"));

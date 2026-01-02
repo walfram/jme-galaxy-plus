@@ -4,7 +4,7 @@ import galaxy.core.*;
 import galaxy.core.order.FlightOrder;
 import galaxy.core.planet.PlanetRef;
 import galaxy.core.ship.ShipDesign;
-import galaxy.core.ship.TechLevel;
+import galaxy.core.TechLevels;
 import galaxy.core.ship.state.InFlight;
 import galaxy.core.ship.state.InOrbit;
 import galaxy.core.ship.state.Launched;
@@ -27,7 +27,7 @@ class FlightPhaseTest {
 		PlanetView source = galaxyView.knownPlanets(PlanetVisibility.OWNED).stream().findFirst().orElseThrow();
 		PlanetView target = galaxyView.knownPlanets(PlanetVisibility.UNKNOWN).stream().findFirst().orElseThrow();
 
-		Entity ship = galaxy.createShip(source.planetRef(), team.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		Entity ship = galaxy.createShip(source.planetRef(), team.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevels());
 		ship.put(new FlightOrder(source.planetRef(), target.planetRef()));
 
 		Phase phase = new FlightPhase(galaxy);
@@ -48,7 +48,7 @@ class FlightPhaseTest {
 		Entity homeWorld = galaxy.createHomeWorld(foo);
 		Entity unknownWorld = galaxy.createUninhabitedPlanet();
 
-		Entity ship = galaxy.createShip(homeWorld.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		Entity ship = galaxy.createShip(homeWorld.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevels());
 		ship.put(new FlightOrder(homeWorld.prop(PlanetRef.class), unknownWorld.prop(PlanetRef.class)));
 
 		Phase phase = new FlightPhase(galaxy);
@@ -67,7 +67,7 @@ class FlightPhaseTest {
 		Entity homeWorld = galaxy.createHomeWorld(foo);
 		Entity planet = galaxy.createUninhabitedPlanet();
 
-		Entity ship = galaxy.createShip(homeWorld.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevel());
+		Entity ship = galaxy.createShip(homeWorld.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(1, 0, 0, 0, 0), new TechLevels());
 		ship.put(new FlightOrder(homeWorld.prop(PlanetRef.class), planet.prop(PlanetRef.class)));
 
 		assertTrue(ship.has(InOrbit.class));

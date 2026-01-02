@@ -11,7 +11,7 @@ import galaxy.core.planet.PlanetRef;
 import galaxy.core.ship.Cargo;
 import galaxy.core.ship.CargoHold;
 import galaxy.core.ship.ShipDesign;
-import galaxy.core.ship.TechLevel;
+import galaxy.core.TechLevels;
 import galaxy.core.team.TeamRef;
 import org.junit.jupiter.api.Test;
 
@@ -34,10 +34,10 @@ class CargoLoadingPhaseTest {
 
 		Entity bar = galaxy.createTeam("bar");
 
-		Entity barShipAtFooHomeWorld = galaxy.createShip(fooHomeWorld.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevel());
+		Entity barShipAtFooHomeWorld = galaxy.createShip(fooHomeWorld.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevels());
 		barShipAtFooHomeWorld.put(new CargoLoadOrder(fooHomeWorld.prop(PlanetRef.class), Cargo.Materials, 10));
 
-		Entity barShipAtUnknownPlanet = galaxy.createShip(unknownWorld.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevel());
+		Entity barShipAtUnknownPlanet = galaxy.createShip(unknownWorld.prop(PlanetRef.class), bar.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevels());
 		barShipAtUnknownPlanet.put(new CargoLoadOrder(unknownWorld.prop(PlanetRef.class), Cargo.Materials, 10));
 
 		Phase phase = new CargoLoadingPhase(galaxy);
@@ -58,7 +58,7 @@ class CargoLoadingPhaseTest {
 		Entity planet = galaxy.createHomeWorld(foo);
 		planet.put(new Colonists(100));
 
-		Entity ship = galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevel());
+		Entity ship = galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), new ShipDesign(10, 0, 0, 0, 10), new TechLevels());
 		assertTrue(ship.has(CargoHold.class));
 		assertEquals(10, ship.prop(CargoHold.class).capacity());
 

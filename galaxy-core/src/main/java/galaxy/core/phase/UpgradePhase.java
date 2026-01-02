@@ -13,7 +13,7 @@ import galaxy.core.planet.PlanetRef;
 import galaxy.core.planet.Population;
 import galaxy.core.ship.ShipDesign;
 import galaxy.core.ship.ShipId;
-import galaxy.core.ship.TechLevel;
+import galaxy.core.TechLevels;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -47,28 +47,28 @@ public class UpgradePhase implements Phase {
 		Map<PlanetRef, Entity> planets = galaxy.planets();
 
 		for (Entity ship : shipsToUpgrade) {
-			TechLevel shipTechLevel = ship.prop(TechLevel.class);
+			TechLevels shipTechLevels = ship.prop(TechLevels.class);
 			// UpgradeShipOrder order = ship.prop(UpgradeShipOrder.class);
 
 			Entity planet = planets.get(ship.prop(PlanetRef.class));
 			Effort effort = new Effort(planet.prop(Population.class), planet.prop(Industry.class));
 
 			Entity team = teams.get(ship.prop(TeamRef.class));
-			TechLevel teamTechLevel = team.prop(TechLevel.class);
+			TechLevels teamTechLevels = team.prop(TechLevels.class);
 
 			ShipDesign design = ship.prop(ShipDesign.class);
 
 			double fullCostPerShip =
 					10.0 * (
-							(1.0 - shipTechLevel.engines() / teamTechLevel.engines()) * design.enginesWeight() +
-									(1.0 - shipTechLevel.weapons() / teamTechLevel.weapons()) * design.weaponsWeight() +
-									(1.0 - shipTechLevel.shields() / teamTechLevel.shields()) * design.shieldsWeight() +
-									(1.0 - shipTechLevel.cargo() / teamTechLevel.cargo()) * design.cargoWeight()
+							(1.0 - shipTechLevels.engines() / teamTechLevels.engines()) * design.enginesWeight() +
+									(1.0 - shipTechLevels.weapons() / teamTechLevels.weapons()) * design.weaponsWeight() +
+									(1.0 - shipTechLevels.shields() / teamTechLevels.shields()) * design.shieldsWeight() +
+									(1.0 - shipTechLevels.cargo() / teamTechLevels.cargo()) * design.cargoWeight()
 					);
 			// TODO more calculations...
 			logger.debug("full cost per ship = {}, planet effort = {}", fullCostPerShip, effort);
 
-			ship.put(new TechLevel(teamTechLevel));
+			ship.put(new TechLevels(teamTechLevels));
 
 			ship.remove(UpgradeShipOrder.class);
 			ship.put(new InOrbit());

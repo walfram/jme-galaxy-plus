@@ -6,7 +6,7 @@ import galaxy.core.Entity;
 import galaxy.core.Phase;
 import galaxy.core.planet.PlanetRef;
 import galaxy.core.ship.ShipDesign;
-import galaxy.core.ship.TechLevel;
+import galaxy.core.TechLevels;
 import galaxy.core.ship.Weapons;
 import galaxy.core.team.Diplomacy;
 import galaxy.core.team.DiplomaticStatus;
@@ -31,11 +31,11 @@ class CombatPhaseTest {
 		Entity planet = galaxy.createUninhabitedPlanet();
 
 		ShipDesign fooDesign = new ShipDesign(1, 1, 1, 0, 0);
-		Entity shipFoo = galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
+		Entity shipFoo = galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
 		assertTrue(shipFoo.has(Weapons.class));
 
 		ShipDesign barDesign = new ShipDesign(1, 1, 1, 0, 0);
-		Entity shipBar = galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
+		Entity shipBar = galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
 		assertTrue(shipBar.has(Weapons.class));
 
 		assertEquals(2, galaxy.ships().size());
@@ -59,14 +59,14 @@ class CombatPhaseTest {
 		Entity planet = galaxy.createUninhabitedPlanet();
 
 		ShipDesign fooDesign = new ShipDesign(1, 1, 1, 0, 0);
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
 
 		ShipDesign barDesign = new ShipDesign(1, 1, 1, 0, 0);
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
 
 		assertEquals(6, galaxy.ships().size());
 
@@ -89,14 +89,14 @@ class CombatPhaseTest {
 		Entity planet = galaxy.createUninhabitedPlanet();
 
 		ShipDesign fooDesign = new ShipDesign(1, 0, 0, 0, 0);
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), fooDesign, new TechLevels());
 
 		ShipDesign barDesign = new ShipDesign(1, 0, 0, 0, 0);
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), barDesign, new TechLevels());
 
 		assertEquals(6, galaxy.ships().size());
 
@@ -124,17 +124,17 @@ class CombatPhaseTest {
 
 		ShipDesign design = new ShipDesign(1, 1, 1, 0, 0);
 
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
 
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
 
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
 
 		assertEquals(3, galaxy.shipCount("foo"));
 		assertEquals(3, galaxy.shipCount("bar"));
@@ -165,17 +165,17 @@ class CombatPhaseTest {
 
 		ShipDesign design = new ShipDesign(1, 1, 1, 0, 0);
 
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), foo.prop(TeamRef.class), design, new TechLevels());
 
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), bar.prop(TeamRef.class), design, new TechLevels());
 
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
-		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevel());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
+		galaxy.createShip(planet.prop(PlanetRef.class), baz.prop(TeamRef.class), design, new TechLevels());
 
 		assertEquals(9, galaxy.ships().size());
 

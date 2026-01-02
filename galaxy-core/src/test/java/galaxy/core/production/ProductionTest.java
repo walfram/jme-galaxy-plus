@@ -1,12 +1,10 @@
 package galaxy.core.production;
 
-import galaxy.core.ClassicGalaxy;
-import galaxy.core.Context;
-import galaxy.core.Entity;
-import galaxy.core.ShipFixtures;
+import galaxy.core.*;
 import galaxy.core.planet.MassFromPreviousTurn;
 import galaxy.core.planet.Materials;
 import galaxy.core.production.result.ModifyPlanetMaterials;
+import galaxy.core.production.result.ModifyTeamTechnology;
 import galaxy.core.production.result.SpawnShips;
 import galaxy.core.ship.ShipDesign;
 import org.junit.jupiter.api.Test;
@@ -17,6 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProductionTest {
+
+	@Test
+	void test_technology_production() {
+		Context galaxy = new ClassicGalaxy();
+		Entity team = galaxy.createTeam("foo");
+		Entity planet = galaxy.createHomeWorld(team);
+
+		assertEquals(new TechLevels(), team.prop(TechLevels.class));
+
+		Production production = new TechnologyProduction(Technology.ENGINES);
+
+		List<ProductionResult> results = production.complete(new ProductionContext(planet, team));
+		assertTrue(results.contains(new ModifyTeamTechnology(team, Technology.ENGINES, 0.2)));
+
+		results.getFirst().update(new ProductionContext(planet, team));
+
+		assertEquals(new TechLevels(1.2, 1.0, 1.0, 1.0), team.prop(TechLevels.class));
+	}
 
 	@Test
 	void test_materials_production() {

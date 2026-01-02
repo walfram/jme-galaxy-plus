@@ -1,24 +1,24 @@
 package galaxy.core.derived;
 
 import galaxy.core.ship.ShipDesign;
-import galaxy.core.ship.TechLevel;
+import galaxy.core.TechLevels;
 
 import static galaxy.core.Const.BASE_SPEED;
 
 public class Speed {
 	private final ShipDesign design;
-	private final TechLevel techLevel;
+	private final TechLevels techLevels;
 
-	public Speed(ShipDesign design, TechLevel techLevel) {
+	public Speed(ShipDesign design, TechLevels techLevels) {
 		this.design = design;
-		this.techLevel = techLevel;
+		this.techLevels = techLevels;
 	}
 
 	public double value() {
-		return BASE_SPEED * techLevel.engines() * (design.enginesWeight() / (design.weight()));
+		return BASE_SPEED * techLevels.engines() * (design.enginesWeight() / (design.weight()));
 	}
 
 	public double valueLoaded() {
-		return BASE_SPEED * techLevel.engines() * (design.enginesWeight() / (design.weight() + design.cargoCapacity()));
+		return BASE_SPEED * techLevels.engines() * (design.enginesWeight() / (design.weight() + design.cargoCapacity()));
 	}
 }
