@@ -1,10 +1,10 @@
 package generator.simple;
 
-import galaxy.generator.WeightedDistribution;
 import generator.PlanetTemplate;
-import jme3utilities.math.noise.Generator;
+import generator.WeightedDistribution;
 
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 public class SimplePlanetDistribution implements WeightedDistribution<PlanetTemplate> {
 
@@ -17,7 +17,7 @@ public class SimplePlanetDistribution implements WeightedDistribution<PlanetTemp
 	);
 
 	@Override
-	public PlanetTemplate pick(Generator random) {
+	public PlanetTemplate pick(RandomGenerator random) {
 		double sum = templates.stream().mapToDouble(PlanetTemplate::weight).sum();
 
 		double e = random.nextDouble(sum);

@@ -1,9 +1,8 @@
 package generator;
 
 import com.jme3.math.Vector3f;
-import domain.planet.*;
+import domain.planet.Planet;
 import domain.planet.properties.*;
-import galaxy.generator.Weighted;
 import jme3utilities.math.noise.Generator;
 
 public record PlanetTemplate(
@@ -12,6 +11,7 @@ public record PlanetTemplate(
 		double frequency,
 		double minDistance
 ) implements Weighted {
+
 	@Override
 	public double weight() {
 		return frequency;

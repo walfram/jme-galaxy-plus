@@ -1,6 +1,6 @@
 package generator.simple;
 
-import galaxy.generator.PlanetNameSource;
+import generator.PlanetNameSource;
 
 public class SizeSuffixNameSource implements PlanetNameSource {
 

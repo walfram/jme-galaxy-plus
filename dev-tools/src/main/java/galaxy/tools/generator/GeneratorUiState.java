@@ -6,9 +6,8 @@ import com.jme3.app.state.BaseAppState;
 import com.jme3.scene.Node;
 import com.simsilica.lemur.*;
 import com.simsilica.lemur.style.ElementId;
-import galaxy.generator.SeedSource;
-import galaxy.generator.configuration.SeedSourceConfiguration;
-import galaxy.generator.configuration.impl.*;
+import generator.SeedSource;
+import generator.configuration.SeedSourceConfiguration;
 
 public class GeneratorUiState extends BaseAppState {
 
@@ -21,11 +20,11 @@ public class GeneratorUiState extends BaseAppState {
 		Label title = container.addChild(new Label("galaxy type", new ElementId("title")));
 		title.setMaxWidth(256f);
 
-		container.addChild(new Button("simple")).addClickCommands(c -> useConfiguration(new SimpleSeedSourceConfiguration()));
-		container.addChild(new Button("spherical")).addClickCommands(c -> useConfiguration(new SphericalSeedSourceConfiguration()));
-		container.addChild(new Button("spiral")).addClickCommands(c -> useConfiguration(new SpiralSeedSourceConfiguration()));
-		container.addChild(new Button("golden spiral")).addClickCommands(c -> useConfiguration(new GoldenSpiralSeedSourceConfiguration()));
-		container.addChild(new Button("cylinder")).addClickCommands(c -> useConfiguration(new CylinderSeedSourceConfiguration()));
+		container.addChild(new Button("simple")).addClickCommands(c -> useConfiguration(new generator.configuration.impl.SimpleSeedSourceConfiguration()));
+		container.addChild(new Button("spherical")).addClickCommands(c -> useConfiguration(new generator.configuration.impl.SphericalSeedSourceConfiguration()));
+		container.addChild(new Button("spiral")).addClickCommands(c -> useConfiguration(new generator.configuration.impl.SpiralSeedSourceConfiguration()));
+		container.addChild(new Button("golden spiral")).addClickCommands(c -> useConfiguration(new generator.configuration.impl.GoldenSpiralSeedSourceConfiguration()));
+		container.addChild(new Button("cylinder")).addClickCommands(c -> useConfiguration(new generator.configuration.impl.CylinderSeedSourceConfiguration()));
 
 		gui.attachChild(container);
 		container.setLocalTranslation(0, app.getCamera().getHeight(), 0);

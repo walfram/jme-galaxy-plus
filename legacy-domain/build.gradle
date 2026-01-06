@@ -18,6 +18,8 @@ dependencies {
     implementation libs.bundles.jme.base
     implementation libs.heart
 
+    implementation libs.bundles.simsilica.ui
+
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)
     // Test dependencies (junit-jupiter gets its version from the BOM)

@@ -1,7 +1,7 @@
-package galaxy.generator.configuration;
+package generator.configuration;
 
 import com.simsilica.lemur.Container;
-import galaxy.generator.SeedSource;
+import generator.SeedSource;
 
 public interface SeedSourceConfiguration {
 	void initControls(Container container);

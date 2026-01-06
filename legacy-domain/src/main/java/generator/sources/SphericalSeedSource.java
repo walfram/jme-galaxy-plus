@@ -1,7 +1,7 @@
-package galaxy.generator.sources;
+package generator.sources;
 
 import com.jme3.math.Vector3f;
-import galaxy.generator.SeedSource;
+import generator.SeedSource;
 import jme3utilities.math.noise.Generator;
 
 import java.util.ArrayList;

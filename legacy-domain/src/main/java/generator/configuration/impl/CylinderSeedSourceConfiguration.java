@@ -1,4 +1,4 @@
-package galaxy.generator.configuration.impl;
+package generator.configuration.impl;
 
 import com.jme3.math.Vector3f;
 import com.simsilica.lemur.Container;
@@ -7,9 +7,9 @@ import com.simsilica.lemur.TextField;
 import com.simsilica.lemur.ValueEditors;
 import com.simsilica.lemur.style.ElementId;
 import com.simsilica.lemur.value.TextFieldValueEditor;
-import galaxy.generator.SeedSource;
-import galaxy.generator.configuration.SeedSourceConfiguration;
-import galaxy.generator.sources.CylinderSeedSource;
+import generator.SeedSource;
+import generator.configuration.SeedSourceConfiguration;
+import generator.sources.CylinderSeedSource;
 import shared.functions.ObjectToString;
 import shared.functions.StringToInteger;
 import jme3utilities.math.MyVector3f;

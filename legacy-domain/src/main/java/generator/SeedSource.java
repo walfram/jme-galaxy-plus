@@ -1,4 +1,4 @@
-package galaxy.generator;
+package generator;
 
 import com.jme3.math.Vector3f;
 

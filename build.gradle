@@ -33,10 +33,8 @@ dependencies {
     implementation libs.jackson.databind
     implementation libs.reflections
 
+    implementation project(":galaxy-core")
     implementation project(":shared")
-
-    // TODO temporary here
-    implementation project(":legacy-domain")
 
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)

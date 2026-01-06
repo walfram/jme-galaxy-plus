@@ -6,9 +6,7 @@ import domain.planet.ClassicDaughterWorld;
 import domain.planet.ClassicHomeWorld;
 import domain.planet.properties.Coordinates;
 import domain.planet.Planet;
-import galaxy.generator.*;
-import generator.PlanetGenerator;
-import generator.PlanetTemplate;
+import generator.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 

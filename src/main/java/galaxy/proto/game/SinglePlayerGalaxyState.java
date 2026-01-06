@@ -18,7 +18,7 @@ import galaxy.generator.SeedSource;
 import galaxy.generator.sources.SimpleSeedSource;
 import galaxy.proto.menu.GameConfig;
 import generator.PlanetGenerator;
-import generator.simple.SimplePlanetGenerator;
+import galaxy.generator.simple.SimplePlanetGenerator;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 import shared.debug.DebugPointMesh;
