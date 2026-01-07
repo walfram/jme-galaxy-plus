@@ -108,7 +108,7 @@ public class ClassicGalaxy implements Context {
 	public Entity createHomeWorld(Entity team) {
 		Entity planet = createPlanet();
 
-		planet.put(new Position());
+		planet.put(new Coordinates(0, 0, 0));
 		planet.put(new Size(1000.0));
 		planet.put(new Resources(10.0));
 		planet.put(new HomeWorldTag());
@@ -125,7 +125,7 @@ public class ClassicGalaxy implements Context {
 	public Entity createDaughterWorld(Entity team) {
 		Entity planet = createPlanet();
 
-		planet.put(new Position());
+		planet.put(new Coordinates(0, 0, 0));
 		planet.put(new Size(500.0));
 		planet.put(new Resources(10.0));
 		planet.put(new DaughterWorld());

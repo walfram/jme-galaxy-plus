@@ -1,6 +1,8 @@
 package galaxy.core;
 
+import galaxy.core.planet.Coordinates;
 import galaxy.core.planet.PlanetRef;
+import galaxy.core.planet.Size;
 
 public final class PlanetView {
 
@@ -16,11 +18,22 @@ public final class PlanetView {
 		return visibility;
 	}
 
+	public Coordinates coordinates() {
+		return planet.prop(Coordinates.class);
+	}
+
 	public PlanetRef planetRef() {
 		return planet.prop(PlanetRef.class);
 	}
 
 	public void updateVisibility(PlanetVisibility planetVisibility) {
 		this.visibility = planetVisibility;
+	}
+
+	public double size() {
+		return switch(visibility) {
+			case VISITED, ORBITING, OWNED -> planet.prop(Size.class).value();
+			default -> 1.0;
+		};
 	}
 }

@@ -7,24 +7,17 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import domain.Race;
-import domain.planet.Planet;
-import domain.planet.PlanetInfo;
-import domain.planet.info.OwnedPlanet;
-import domain.planet.info.UnknownPlanet;
-import domain.planet.info.VisiblePlanet;
-import domain.planet.info.VisitedPlanet;
-import galaxy.generator.SeedSource;
-import galaxy.generator.sources.SimpleSeedSource;
+import galaxy.core.Entity;
+import galaxy.core.PlanetView;
+import galaxy.core.team.GalaxyView;
 import galaxy.proto.menu.GameConfig;
-import generator.PlanetGenerator;
-import galaxy.generator.simple.SimplePlanetGenerator;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 import shared.debug.DebugPointMesh;
 import shared.material.UnshadedMaterial;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -35,10 +28,10 @@ public class SinglePlayerGalaxyState extends BaseAppState {
 
 	private final Node debugNode = new Node("galaxy-context-debug-node");
 
-	private Race player;
+	private Entity player;
 
-	private final List<Race> races = new ArrayList<>(128);
-	private final List<Planet> planets = new ArrayList<>(1024);
+	private final List<Entity> races = new ArrayList<>(128);
+	private final List<Entity> planets = new ArrayList<>(1024);
 
 	private final GameConfig gameConfig;
 
@@ -91,24 +84,15 @@ public class SinglePlayerGalaxyState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(debugNode);
 	}
 
-	public Race player() {
+	public Entity player() {
 		return player;
 	}
 
-	public List<PlanetInfo> planetList(Race race) {
-		return planets.stream()
-				.map(p -> {
-							if (race.ownedPlanet(p.id()).isPresent()) {
-								return new OwnedPlanet(p);
-							} else if (race.visiblePlanet(p.id()).isPresent()) {
-								return new VisiblePlanet(p);
-							} else if (race.visitedPlanet(p.id()).isPresent()) {
-								return new VisitedPlanet(p);
-							} else {
-								return new UnknownPlanet(p);
-							}
-						}
-				)
-				.toList();
+	public Collection<PlanetView> galaxyView(Entity race) {
+		return race.prop(GalaxyView.class).asCollection();
+	}
+
+	public Collection<PlanetView> ownedPlanets() {
+		return player.prop(GalaxyView.class).ownedPlanets();
 	}
 }

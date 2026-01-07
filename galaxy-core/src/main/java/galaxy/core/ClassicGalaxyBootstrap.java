@@ -1,6 +1,6 @@
 package galaxy.core;
 
-import galaxy.core.planet.Position;
+import galaxy.core.planet.Coordinates;
 import galaxy.core.planet.Resources;
 import galaxy.core.planet.Size;
 import galaxy.core.team.GalaxyView;
@@ -44,7 +44,7 @@ public class ClassicGalaxyBootstrap {
 		int otherWorlds = planetCount - homeWorlds;
 		while (otherWorlds > 0) {
 			Entity planet = galaxy.createUninhabitedPlanet();
-			planet.put(new Position());
+			planet.put(new Coordinates(0, 0, 0));
 			planet.put(new Size(sizeSource.nextDouble(0.1, 2500.0)));
 			planet.put(new Resources(resourcesSource.nextDouble(0.1, 25.0)));
 			otherWorlds--;

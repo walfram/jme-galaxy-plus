@@ -6,23 +6,23 @@ import com.jme3.app.state.BaseAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import domain.Race;
-import domain.planet.Planet;
-import domain.planet.PlanetInfo;
+import galaxy.core.Entity;
+import galaxy.core.PlanetView;
+import galaxy.core.planet.Coordinates;
+import galaxy.core.planet.Planet;
+import galaxy.core.planet.PlanetRef;
 import galaxy.proto.controls.PlanetRefControl;
 import shared.collision.CursorCollisions;
 import shared.material.LightingMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -35,31 +35,35 @@ public class GalaxyViewState extends BaseAppState {
 
 	private final Node galaxyViewNode = new Node("galaxy-view-node");
 
-	private final Map<Long, Spatial> planetCache = new HashMap<>(1024);
-
-	private final Map<PlanetKey, Material> materialCache = new HashMap<>();
+	private final Map<PlanetRef, Spatial> planetCache = new HashMap<>(1024);
+	private final Map<MaterialCacheKey, Material> materialCache = new HashMap<>();
 
 	@Override
 	protected void initialize(Application app) {
 		Mesh mesh = new Icosphere(1, 1f);
 
-		materialCache.put(PlanetKey.OWNED, new LightingMaterial(app.getAssetManager(), ColorRGBA.Green));
-		materialCache.put(PlanetKey.FRIENDLY, new LightingMaterial(app.getAssetManager(), ColorRGBA.Yellow));
-		materialCache.put(PlanetKey.HOSTILE, new LightingMaterial(app.getAssetManager(), ColorRGBA.Red));
-		materialCache.put(PlanetKey.VISITED, new LightingMaterial(app.getAssetManager(), ColorRGBA.LightGray));
-		materialCache.put(PlanetKey.UNKNOWN, new LightingMaterial(app.getAssetManager(), ColorRGBA.Gray));
+		materialCache.put(MaterialCacheKey.OWNED, new LightingMaterial(app.getAssetManager(), ColorRGBA.Green));
+		materialCache.put(MaterialCacheKey.FRIENDLY, new LightingMaterial(app.getAssetManager(), ColorRGBA.Yellow));
+		materialCache.put(MaterialCacheKey.HOSTILE, new LightingMaterial(app.getAssetManager(), ColorRGBA.Red));
+		materialCache.put(MaterialCacheKey.VISITED, new LightingMaterial(app.getAssetManager(), ColorRGBA.LightGray));
+		materialCache.put(MaterialCacheKey.UNKNOWN, new LightingMaterial(app.getAssetManager(), ColorRGBA.Gray));
 
-		Race player = getState(SinglePlayerGalaxyState.class).player();
-		List<PlanetInfo> planets = getState(SinglePlayerGalaxyState.class).planetList(player);
+		Entity player = getState(SinglePlayerGalaxyState.class).player();
+		Collection<PlanetView> planets = getState(SinglePlayerGalaxyState.class).galaxyView(player);
 
 		planets.forEach(planet -> {
-			Geometry geometry = new Geometry("p-%s".formatted(planet.id()), mesh);
+			Geometry geometry = new Geometry("p-%s".formatted(planet.planetRef()), mesh);
 
 			geometry.setMaterial(resolveMaterial(player, planet));
 
-			geometry.setLocalTranslation(planet.coordinates().asVector3f());
+			Coordinates coordinates = planet.coordinates();
+			geometry.setLocalTranslation(new Vector3f(
+					(float) coordinates.x(),
+					(float) coordinates.y(),
+					(float) coordinates.z()
+			));
 
-			float planetSize = (float) planet.size().value();
+			float planetSize = (float) planet.size();
 			// float scale = Math.max(MIN_SCALE, planetSize * PLANET_SCALE);
 			float scale = 1f + planetSize * PLANET_SCALE;
 			geometry.setLocalScale(scale);
@@ -68,27 +72,20 @@ public class GalaxyViewState extends BaseAppState {
 
 			galaxyViewNode.attachChild(geometry);
 
-			planetCache.put(planet.id(), geometry);
+			planetCache.put(planet.planetRef(), geometry);
 		});
 
 		Planet playerHome = player.ownedPlanets().stream().filter(p -> p.size().value() == 1000.0).findFirst().orElseThrow();
 		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.id()), 64f);
 	}
 
-	private Material resolveMaterial(Race race, PlanetInfo planet) {
-		if (race.ownedPlanet(planet.id()).isPresent())
-			return materialCache.get(PlanetKey.OWNED);
-
-		if (race.friendlyPlanet(planet.id()).isPresent())
-			return materialCache.get(PlanetKey.FRIENDLY);
-
-		if (race.hostilePlanet(planet.id()).isPresent())
-			return materialCache.get(PlanetKey.HOSTILE);
-
-		if (race.visitedPlanet(planet.id()).isPresent())
-			return materialCache.get(PlanetKey.VISITED);
-
-		return materialCache.get(PlanetKey.UNKNOWN);
+	private Material resolveMaterial(Entity race, PlanetView planet) {
+		// TODO use diplomatic status too
+		return switch (planet.visibility()) {
+			case VISITED, ORBITING -> materialCache.get(MaterialCacheKey.VISITED);
+			case OWNED -> materialCache.get(MaterialCacheKey.OWNED);
+			default -> materialCache.get(MaterialCacheKey.UNKNOWN);
+		};
 	}
 
 	@Override
@@ -115,11 +112,11 @@ public class GalaxyViewState extends BaseAppState {
 		).collisions();
 	}
 
-	public Spatial spatialFor(Planet planet) {
-		return planetCache.get(planet.id());
+	public Spatial spatialFor(Entity planet) {
+		return planetCache.get(planet.prop(PlanetRef.class));
 	}
 
-	private enum PlanetKey {
+	private enum MaterialCacheKey {
 		OWNED, FRIENDLY, HOSTILE, VISITED, UNKNOWN
 	}
 

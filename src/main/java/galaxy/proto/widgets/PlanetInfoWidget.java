@@ -3,21 +3,18 @@ package galaxy.proto.widgets;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.style.ElementId;
-import domain.Race;
-import domain.planet.Planet;
-import domain.planet.PlanetInfo;
-import domain.production.Production;
+import galaxy.core.PlanetView;
 import galaxy.shared.FormattedCoordinates;
 
 public class PlanetInfoWidget extends Container {
 	public static final String NAME = "planet-info-widget";
 
-	public PlanetInfoWidget(PlanetInfo planet) {
+	public PlanetInfoWidget(PlanetView planet) {
 		super();
 
 		setName(NAME);
 
-		addChild(new Label("Planet ID %s".formatted(planet.id()), new ElementId("title")));
+		addChild(new Label("Planet ID %s".formatted(planet.planetRef()), new ElementId("title")));
 
 		Container body = addChild(new Container());
 
@@ -28,7 +25,7 @@ public class PlanetInfoWidget extends Container {
 		body.addChild(new Label(new FormattedCoordinates(planet.coordinates()).value()), 1);
 
 		body.addChild(new Label("Size"));
-		body.addChild(new Label("%.2f".formatted(planet.size().value())), 1);
+		body.addChild(new Label("%.2f".formatted(planet.size())), 1);
 
 //		body.addChild(new Label("Resources"));
 //		body.addChild(new Label("%.2f".formatted(planet.resources().value())), 1);

@@ -33,4 +33,12 @@ public class GalaxyView implements Component {
 	public PlanetVisibility visibility(Entity planet) {
 		return galaxyView.get(planet.prop(PlanetRef.class)).visibility();
 	}
+
+	public Collection<PlanetView> asCollection() {
+		return galaxyView.values();
+	}
+
+	public Collection<PlanetView> ownedPlanets() {
+		return galaxyView.values().stream().filter(pv -> pv.visibility() == PlanetVisibility.OWNED).toList();
+	}
 }

@@ -1,16 +1,16 @@
 package galaxy.proto.controls;
 
-import domain.planet.PlanetInfo;
+import galaxy.core.PlanetView;
 import jme3utilities.SimpleControl;
 
 public class PlanetRefControl extends SimpleControl {
-	private final PlanetInfo planet;
+	private final PlanetView planet;
 
-	public PlanetRefControl(PlanetInfo planet) {
+	public PlanetRefControl(PlanetView planet) {
 		this.planet = planet;
 	}
 
-	public PlanetInfo planet() {
+	public PlanetView planet() {
 		return planet;
 	}
 
