@@ -14,15 +14,18 @@ import com.jme3.scene.Spatial;
 import galaxy.core.Entity;
 import galaxy.core.PlanetView;
 import galaxy.core.planet.Coordinates;
-import galaxy.core.planet.Planet;
 import galaxy.core.planet.PlanetRef;
+import galaxy.core.team.GalaxyView;
 import galaxy.proto.controls.PlanetRefControl;
-import shared.collision.CursorCollisions;
-import shared.material.LightingMaterial;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
+import shared.collision.CursorCollisions;
+import shared.material.LightingMaterial;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -75,8 +78,8 @@ public class GalaxyViewState extends BaseAppState {
 			planetCache.put(planet.planetRef(), geometry);
 		});
 
-		Planet playerHome = player.ownedPlanets().stream().filter(p -> p.size().value() == 1000.0).findFirst().orElseThrow();
-		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.id()), 64f);
+		PlanetView playerHome = player.prop(GalaxyView.class).ownedPlanets().stream().filter(p -> p.size() == 1000.0).findFirst().orElseThrow();
+		getState(GalaxyCameraState.class).centerOn(planetCache.get(playerHome.planetRef()), 64f);
 	}
 
 	private Material resolveMaterial(Entity race, PlanetView planet) {
@@ -112,8 +115,8 @@ public class GalaxyViewState extends BaseAppState {
 		).collisions();
 	}
 
-	public Spatial spatialFor(Entity planet) {
-		return planetCache.get(planet.prop(PlanetRef.class));
+	public Spatial spatialFor(PlanetRef planetRef) {
+		return planetCache.get(planetRef);
 	}
 
 	private enum MaterialCacheKey {

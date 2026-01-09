@@ -18,10 +18,10 @@ public class DistanceWidget extends Container {
 
 		Container panel = addChild(new Container());
 		panel.addChild(new Label("from"));
-		panel.addChild(new Label(from.getControl(PlanetRefControl.class).planet().id().toString()), 1);
+		panel.addChild(new Label(from.getControl(PlanetRefControl.class).planet().planetRef().toString()), 1);
 
 		panel.addChild(new Label("to"));
-		panel.addChild(new Label(to.getControl(PlanetRefControl.class).planet().id().toString()), 1);
+		panel.addChild(new Label(to.getControl(PlanetRefControl.class).planet().planetRef().toString()), 1);
 
 		addChild(new Label(new FormattedDistance(from.getWorldTranslation(), to.getWorldTranslation()).value()));
 	}

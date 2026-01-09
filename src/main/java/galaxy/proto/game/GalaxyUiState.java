@@ -59,12 +59,12 @@ public class GalaxyUiState extends BaseAppState {
 			panel.addChild(new Label(String.valueOf(planet.planetRef())));
 			panel.addChild(new Label(planet.planetRef().value()), 1);
 			panel.addChild(new Label(new FormattedCoordinates(planet.coordinates()).value()), 2);
-			panel.addChild(new Label("%.2f".formatted(planet.size().value())), 3);
-			panel.addChild(new Label("%.2f".formatted(planet.resources().value())), 4);
-			panel.addChild(new Label("%.2f".formatted(planet.population().value())), 5);
-			panel.addChild(new Label("%.2f".formatted(planet.industry().value())), 6);
-			panel.addChild(new Label("%.2f".formatted(planet.materials().value())), 7);
-			panel.addChild(new Label("%.2f".formatted(planet.effort().value())), 8);
+			panel.addChild(new Label("%.2f".formatted(planet.size())), 3);
+			panel.addChild(new Label("%.2f".formatted(planet.resources())), 4);
+			panel.addChild(new Label("%.2f".formatted(planet.population())), 5);
+			panel.addChild(new Label("%.2f".formatted(planet.industry())), 6);
+			panel.addChild(new Label("%.2f".formatted(planet.materials())), 7);
+			panel.addChild(new Label("%.2f".formatted(planet.effort())), 8);
 
 			Container actions = panel.addChild(new Container(""), 9);
 			actions.addChild(new Button(">>")).addClickCommands(b -> getState(GalaxyCameraState.class).centerOn(planet));

@@ -13,6 +13,7 @@ import com.simsilica.lemur.anim.CameraTweens;
 import com.simsilica.lemur.anim.Tween;
 import com.simsilica.lemur.anim.TweenAnimation;
 import galaxy.core.Entity;
+import galaxy.core.PlanetView;
 import shared.debug.DebugGrid;
 import shared.tween.CallbackTween;
 import jme3utilities.debug.AxesVisualizer;
@@ -53,8 +54,8 @@ public class GalaxyCameraState extends BaseAppState {
 		((SimpleApplication) getApplication()).getRootNode().detachChild(galaxyViewDebugNode);
 	}
 
-	public void centerOn(Entity planet) {
-		Spatial spatial = getState(GalaxyViewState.class).spatialFor(planet);
+	public void centerOn(PlanetView planet) {
+		Spatial spatial = getState(GalaxyViewState.class).spatialFor(planet.planetRef());
 		centerOn(spatial);
 	}
 
