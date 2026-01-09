@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform(libs.junit.bom.platform)
+    // Test dependencies (junit-jupiter gets its version from the BOM)
+    testImplementation libs.junit.jupiter
+    testImplementation libs.mockito.core
+
+    implementation libs.logback.classic
+
+    implementation libs.bundles.jme.base
+    implementation libs.heart
+
+    implementation libs.bundles.simsilica.ui
+}
+
+test {
+    useJUnitPlatform()
+}

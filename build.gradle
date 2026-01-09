@@ -34,6 +34,7 @@ dependencies {
     implementation libs.reflections
 
     implementation project(":galaxy-core")
+    implementation project(":galaxy-generator")
     implementation project(":shared")
 
     // Platform/BOM dependency

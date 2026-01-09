@@ -26,8 +26,7 @@ dependencies {
 
     implementation project(":shared")
 
-    // TODO temporary here
-    implementation project(":legacy-domain")
+    implementation project(":galaxy-generator")
 
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)

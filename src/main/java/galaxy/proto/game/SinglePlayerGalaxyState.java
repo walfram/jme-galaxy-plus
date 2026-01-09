@@ -10,7 +10,13 @@ import com.jme3.scene.Node;
 import galaxy.core.Entity;
 import galaxy.core.PlanetView;
 import galaxy.core.team.GalaxyView;
+import galaxy.core.team.Team;
+import galaxy.core.team.TeamRef;
 import galaxy.proto.menu.GameConfig;
+import generator.PlanetGenerator;
+import generator.SeedSource;
+import generator.simple.SimplePlanetGenerator;
+import generator.sources.SimpleSeedSource;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 import shared.debug.DebugPointMesh;
@@ -45,7 +51,10 @@ public class SinglePlayerGalaxyState extends BaseAppState {
 		logger.info("game config = {}", gameConfig);
 
 		for (int raceIdx = 0; raceIdx < gameConfig.raceCount(); raceIdx++) {
-			Race race = new Race("race-id-%s".formatted(raceIdx), "race-%s".formatted(raceIdx), new ArrayList<>());
+			Entity race = new Entity(
+					new Team(), new TeamRef("race-id-%s".formatted(raceIdx), new GalaxyView())
+			);
+					//Race(, "race-%s".formatted(raceIdx), new ArrayList<>());
 			races.add(race);
 			logger.info("race = {}", race);
 		}
