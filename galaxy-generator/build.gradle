@@ -21,6 +21,9 @@ dependencies {
     implementation libs.heart
 
     implementation libs.bundles.simsilica.ui
+
+    implementation project(":galaxy-core")
+    implementation project(":shared")
 }
 
 test {

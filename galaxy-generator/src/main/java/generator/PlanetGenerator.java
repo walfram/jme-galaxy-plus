@@ -1,9 +1,10 @@
 package generator;
 
-import domain.planet.Planet;
+import galaxy.core.Entity;
 
 import java.util.List;
 
+@Deprecated
 public interface PlanetGenerator {
-	List<Planet> planets();
+	List<Entity> planets();
 }

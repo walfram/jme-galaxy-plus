@@ -1,11 +1,10 @@
 package generator.simple;
 
 import com.jme3.math.Vector3f;
-import domain.Race;
-import domain.planet.ClassicDaughterWorld;
-import domain.planet.ClassicHomeWorld;
-import domain.planet.properties.Coordinates;
-import domain.planet.Planet;
+import galaxy.core.Entity;
+import galaxy.core.planet.Coordinates;
+import galaxy.core.planet.Planet;
+import galaxy.core.planet.PlanetRef;
 import generator.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
@@ -17,6 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@Deprecated
 public class SimplePlanetGenerator implements PlanetGenerator {
 
 	private static final Logger logger = getLogger(SimplePlanetGenerator.class);
@@ -27,12 +27,12 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 	private final Generator random;
 
-	private final List<Race> races;
+	private final List<Entity> races;
 	private final int planetRatio;
 
 	private final SeedSource seedSource;
 
-	public SimplePlanetGenerator(Generator random, List<Race> races, int planetRatio, SeedSource seedSource) {
+	public SimplePlanetGenerator(Generator random, List<Entity> races, int planetRatio, SeedSource seedSource) {
 		this.random = random;
 		this.races = races;
 		this.planetRatio = planetRatio;
@@ -44,7 +44,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 	}
 
 	@Override
-	public List<Planet> planets() {
+	public List<Entity> planets() {
 		List<Vector3f> origins = new ArrayList<>(races.size());
 
 		List<Vector3f> seed = new ArrayList<>(seedSource.points());
@@ -60,36 +60,36 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 		logger.debug("planet origins: {}", origins.size());
 
-		List<Planet> planets = new ArrayList<>(planetCount());
+		List<Entity> planets = new ArrayList<>(planetCount());
 
 		int planetIndex = 0;
-		Iterator<Race> raceSource = races.iterator();
+		Iterator<Entity> raceSource = races.iterator();
 		AtomicLong idSource = new AtomicLong(0);
 
 		for (Vector3f origin : origins) {
-			Race race = raceSource.next();
+			Entity race = raceSource.next();
 
-			ClassicHomeWorld hw = new ClassicHomeWorld(idSource.incrementAndGet(), new Coordinates(origin));
+			Entity hw = new Entity(new PlanetRef(idSource.incrementAndGet()), new Planet(), new Coordinates(origin.x, origin.y, origin.z));
 			planets.add(hw);
-			race.claim(hw);
+			// race.claim(hw);
 
 			Vector3f dw1Origin = random
 					.nextUnitVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			ClassicDaughterWorld dw1 = new ClassicDaughterWorld(idSource.incrementAndGet(), new Coordinates(dw1Origin));
+			Entity dw1 = new Entity(new PlanetRef(idSource.incrementAndGet()), new Planet(), new Coordinates(dw1Origin.x, dw1Origin.y, dw1Origin.z));
 			planets.add(dw1);
-			race.claim(dw1);
+			// race.claim(dw1);
 
 			Vector3f dw2Origin = random
 					.nextUnitVector3f()
 					.multLocal((float) random.nextDouble(DISTANCE_DW_MIN, DISTANCE_DW_MAX))
 					.addLocal(origin);
 
-			ClassicDaughterWorld dw2 = new ClassicDaughterWorld(idSource.incrementAndGet(), new Coordinates(dw2Origin));
+			Entity dw2 = new Entity(new PlanetRef(idSource.incrementAndGet()), new Planet(), new Coordinates(dw2Origin.x, dw2Origin.y, dw2Origin.z));
 			planets.add(dw2);
-			race.claim(dw2);
+			// race.claim(dw2);
 		}
 
 		PlanetNameSource planetNameSource = new SizeSuffixNameSource();
@@ -100,7 +100,10 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 			PlanetTemplate template = distribution.pick(random);
 
 			// convert existing planets to List<Vector3f>
-			List<Vector3f> coordinates = planets.stream().map(planet -> planet.coordinates().asVector3f()).toList();
+			List<Vector3f> coordinates = planets.stream()
+					.map(planet -> planet.prop(Coordinates.class))
+					.map(c -> new Vector3f((float) c.x(), (float) c.y(), (float) c.z()))
+					.toList();
 
 			// copy seedSource
 			List<Vector3f> seedSourceCopy = new ArrayList<>(seedSource.points());
@@ -111,7 +114,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 			// pick random point - use as planet origin
 			Vector3f picked = random.pick(seedSourceCopy);
-			Planet planet = template.createAtCoordinates(picked, random, idSource.incrementAndGet());
+			Entity planet = template.createAtCoordinates(picked, random, idSource.incrementAndGet());
 			planets.add(planet);
 		}
 

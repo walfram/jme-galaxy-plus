@@ -55,7 +55,7 @@ public class GalaxyUiState extends BaseAppState {
 
 		panel.addChild(new Label("", new ElementId("title")), 9);
 
-		getState(SinglePlayerGalaxyState.class).ownedPlanets().forEach(planet -> {
+		getState(SinglePlayerGalaxyState.class).playerOwnedPlanets().forEach(planet -> {
 			panel.addChild(new Label(String.valueOf(planet.planetRef())));
 			panel.addChild(new Label(planet.planetRef().value()), 1);
 			panel.addChild(new Label(new FormattedCoordinates(planet.coordinates()).value()), 2);

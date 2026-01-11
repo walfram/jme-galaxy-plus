@@ -1,8 +1,8 @@
 package generator;
 
 import com.jme3.math.Vector3f;
-import domain.planet.Planet;
-import domain.planet.properties.*;
+import galaxy.core.Entity;
+import galaxy.core.planet.*;
 import jme3utilities.math.noise.Generator;
 
 public record PlanetTemplate(
@@ -17,11 +17,16 @@ public record PlanetTemplate(
 		return frequency;
 	}
 
-	public Planet createAtCoordinates(Vector3f coordinates, Generator random, Long id) {
+	public Entity createAtCoordinates(Vector3f coordinates, Generator random, Long id) {
 		double size = random.nextDouble(minSize, maxSize);
-		return new Planet(
-				id,
-				new Coordinates(coordinates),
+		return new Entity(
+				new Planet(),
+				new PlanetRef(id),
+				new Coordinates(
+						coordinates.x,
+						coordinates.y,
+						coordinates.z
+				),
 				new Size(size),
 				new Resources(random.nextDouble(minResources, maxResources)),
 				new Population(0),

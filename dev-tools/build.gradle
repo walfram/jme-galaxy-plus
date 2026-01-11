@@ -24,9 +24,8 @@ dependencies {
     implementation libs.jackson.databind
     implementation libs.reflections
 
-    implementation project(":shared")
-
     implementation project(":galaxy-generator")
+    implementation project(":shared")
 
     // Platform/BOM dependency
     testImplementation platform(libs.junit.bom.platform)
