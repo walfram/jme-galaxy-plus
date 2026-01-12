@@ -6,7 +6,7 @@ import generator.WeightedDistribution;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-public class SimplePlanetDistribution implements WeightedDistribution<PlanetTemplate> {
+public class ClassicPlanetDistribution implements WeightedDistribution<PlanetTemplate> {
 
 	private final List<PlanetTemplate> templates = List.of(
 			new PlanetTemplate(2000, 2500, 0.05, 3, 6, 20),

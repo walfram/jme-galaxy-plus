@@ -3,12 +3,14 @@ package galaxy.core;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
 
+import java.util.List;
+
 public final class Entity {
 
 	private final ClassToInstanceMap<Component> components = MutableClassToInstanceMap.create();
 
 	public Entity(Component... components) {
-		for (Component prop: components) {
+		for (Component prop : components) {
 			this.components.put(prop.getClass(), prop);
 		}
 	}
@@ -26,8 +28,14 @@ public final class Entity {
 		return components.containsKey(clazz);
 	}
 
-	public void put(Component prop) {
-		components.put(prop.getClass(), prop);
+	public void put(Component component) {
+		components.put(component.getClass(), component);
+	}
+
+	public void putAll(List<Component> components) {
+		for (Component c : components) {
+			put(c);
+		}
 	}
 
 	public void remove(Class<? extends Component> clazz) {

@@ -1,6 +1,7 @@
 package generator.simple;
 
 import com.jme3.math.Vector3f;
+import galaxy.core.Component;
 import galaxy.core.Entity;
 import galaxy.core.planet.Coordinates;
 import galaxy.core.planet.Planet;
@@ -93,7 +94,7 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 		}
 
 		PlanetNameSource planetNameSource = new SizeSuffixNameSource();
-		WeightedDistribution<PlanetTemplate> distribution = new SimplePlanetDistribution();
+		WeightedDistribution<PlanetTemplate> distribution = new ClassicPlanetDistribution();
 		int remaining = planetCount() - planets.size();
 
 		for (int i = 0; i < remaining; i++) {
@@ -114,7 +115,9 @@ public class SimplePlanetGenerator implements PlanetGenerator {
 
 			// pick random point - use as planet origin
 			Vector3f picked = random.pick(seedSourceCopy);
-			Entity planet = template.createAtCoordinates(picked, random, idSource.incrementAndGet());
+			List<Component> components = template.planetComponents(picked, random);
+			Entity planet = new Entity(components.toArray(Component[]::new));
+
 			planets.add(planet);
 		}
 

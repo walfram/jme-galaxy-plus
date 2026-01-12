@@ -1,9 +1,13 @@
 package generator;
 
 import com.jme3.math.Vector3f;
-import galaxy.core.Entity;
-import galaxy.core.planet.*;
+import galaxy.core.Component;
+import galaxy.core.planet.Coordinates;
+import galaxy.core.planet.Resources;
+import galaxy.core.planet.Size;
 import jme3utilities.math.noise.Generator;
+
+import java.util.List;
 
 public record PlanetTemplate(
 		double minSize, double maxSize,
@@ -17,21 +21,16 @@ public record PlanetTemplate(
 		return frequency;
 	}
 
-	public Entity createAtCoordinates(Vector3f coordinates, Generator random, Long id) {
+	public List<Component> planetComponents(Vector3f coordinates, Generator random) {
 		double size = random.nextDouble(minSize, maxSize);
-		return new Entity(
-				new Planet(),
-				new PlanetRef(id),
+		return List.of(
 				new Coordinates(
 						coordinates.x,
 						coordinates.y,
 						coordinates.z
 				),
 				new Size(size),
-				new Resources(random.nextDouble(minResources, maxResources)),
-				new Population(0),
-				new Industry(0),
-				new Materials(0)
+				new Resources(random.nextDouble(minResources, maxResources))
 		);
 	}
 }

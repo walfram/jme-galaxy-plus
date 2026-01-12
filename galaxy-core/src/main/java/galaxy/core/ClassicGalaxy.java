@@ -74,6 +74,10 @@ public class ClassicGalaxy implements Context {
 		entity.put(new PlanetRef(planetIdSource.incrementAndGet()));
 		entity.put(new Planet());
 
+		entity.put(new Population(0));
+		entity.put(new Industry(0));
+		entity.put(new Materials(0));
+
 		entities.add(entity);
 
 		return entity;
@@ -118,7 +122,17 @@ public class ClassicGalaxy implements Context {
 		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
 		planet.put(new TeamRef(team.prop(TeamRef.class)));
 
+		updateOtherTeamsVisibility(team, planet);
+
 		return planet;
+	}
+
+	private void updateOtherTeamsVisibility(Entity team, Entity planet) {
+		for (Entity otherTeam: teams().values()) {
+			if (!Objects.equals(team, otherTeam)) {
+				otherTeam.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.UNKNOWN);
+			}
+		}
 	}
 
 	@Override
@@ -128,12 +142,14 @@ public class ClassicGalaxy implements Context {
 		planet.put(new Coordinates(0, 0, 0));
 		planet.put(new Size(500.0));
 		planet.put(new Resources(10.0));
-		planet.put(new DaughterWorld());
+		planet.put(new DaughterWorldTag());
 		planet.put(new Population(500.0));
 		planet.put(new Industry(500.0));
 
 		team.prop(GalaxyView.class).changeVisibility(planet, PlanetVisibility.OWNED);
 		planet.put(new TeamRef(team.prop(TeamRef.class)));
+
+		updateOtherTeamsVisibility(team, planet);
 
 		return planet;
 	}
