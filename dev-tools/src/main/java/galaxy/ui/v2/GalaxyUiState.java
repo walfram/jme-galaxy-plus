@@ -11,7 +11,9 @@ import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.component.IconComponent;
 import com.simsilica.lemur.style.ElementId;
-import domain.planet.Planet;
+import galaxy.core.PlanetView;
+import galaxy.core.team.GalaxyView;
+import galaxy.core.team.TeamRef;
 import galaxy.ui.v2.events.ui.ChaseCameraEvent;
 import galaxy.ui.v2.events.ui.GuiEvent;
 import galaxy.ui.v2.widgets.PlanetInfoWidget;
@@ -36,7 +38,7 @@ public class GalaxyUiState extends BaseAppState {
 	protected void initialize(Application app) {
 		Container container = new Container();
 
-		container.addChild(new Label(getState(GalaxyContextState.class).player().name(), new ElementId("title")));
+		container.addChild(new Label(getState(GalaxyContextState.class).player().prop(TeamRef.class).value(), new ElementId("title")));
 
 		Button btnMyPlanets = container.addChild(new Button(""));
 		btnMyPlanets.setIcon(new IconComponent("icons/Stars.png", 0.125f, 4f, 4f, 0f, false));
@@ -101,7 +103,7 @@ public class GalaxyUiState extends BaseAppState {
 
 	private void showPlanetList() {
 		Container container = new PlanetListWidget(
-				getState(GalaxyContextState.class).player().ownedPlanets()
+				getState(GalaxyContextState.class).player().prop(GalaxyView.class).ownedPlanets()
 		);
 
 		gui.detachChildNamed(container.getName());
@@ -112,7 +114,7 @@ public class GalaxyUiState extends BaseAppState {
 
 	@SuppressWarnings("unused")
 	protected void chooseProduction(GuiEvent guiEvent) {
-		Planet planet = guiEvent.planet();
+		PlanetView planet = guiEvent.planet();
 		Container container = new PlanetProductionWidget(planet);
 
 		gui.detachChildNamed(container.getName());
@@ -123,7 +125,7 @@ public class GalaxyUiState extends BaseAppState {
 
 	@SuppressWarnings("unused")
 	protected void showPlanetInfo(GuiEvent guiEvent) {
-		Planet planet = guiEvent.planet();
+		PlanetView planet = guiEvent.planet();
 		Container container = new PlanetInfoWidget(
 				getState(GalaxyContextState.class).player(),
 				planet

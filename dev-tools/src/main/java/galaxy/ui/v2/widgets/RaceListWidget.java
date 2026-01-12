@@ -4,9 +4,10 @@ import com.simsilica.event.EventBus;
 import com.simsilica.lemur.*;
 import com.simsilica.lemur.component.SpringGridLayout;
 import com.simsilica.lemur.style.ElementId;
-import domain.Diplomacy;
-import domain.DiplomaticStatus;
-import domain.Race;
+import galaxy.core.Entity;
+import galaxy.core.team.Diplomacy;
+import galaxy.core.team.DiplomaticStatus;
+import galaxy.core.team.TeamRef;
 import galaxy.ui.v2.events.game.DiplomacyEvent;
 import org.slf4j.Logger;
 
@@ -21,11 +22,11 @@ public class RaceListWidget extends Container {
 	private static final Logger logger = getLogger(RaceListWidget.class);
 	private static final String NAME = "race-list-widget";
 
-	private final Map<Race, Label> labels = new HashMap<>();
-	private final Map<Race, Button> warButtons = new HashMap<>();
-	private final Map<Race, Button> peaceButtons = new HashMap<>();
+	private final Map<Entity, Label> labels = new HashMap<>();
+	private final Map<Entity, Button> warButtons = new HashMap<>();
+	private final Map<Entity, Button> peaceButtons = new HashMap<>();
 
-	public RaceListWidget(Race player, List<Race> others) {
+	public RaceListWidget(Entity player, List<Entity> others) {
 		super();
 
 		Label title = addChild(new Label("Diplomatic status", new ElementId("title")));
@@ -33,10 +34,10 @@ public class RaceListWidget extends Container {
 
 		Container p = addChild(new Container(new SpringGridLayout(Axis.Y, Axis.X, FillMode.Even, FillMode.First), ""));
 
-		for (Race other : others) {
-			p.addChild(new Label(other.name()));
+		for (Entity other : others) {
+			p.addChild(new Label(other.prop(TeamRef.class).value()));
 
-			DiplomaticStatus status = player.statusWith(other);
+			DiplomaticStatus status = player.prop(Diplomacy.class).statusWith(other);
 			Label label = p.addChild(new Label(status.name()), 1);
 			labels.put(other, label);
 

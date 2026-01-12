@@ -6,13 +6,15 @@ import com.simsilica.lemur.core.VersionedList;
 import com.simsilica.lemur.list.DefaultCellRenderer;
 import com.simsilica.lemur.style.BaseStyles;
 import com.simsilica.lemur.style.ElementId;
-import domain.planet.Planet;
+import galaxy.core.Entity;
+import galaxy.core.PlanetView;
+import galaxy.core.planet.*;
 import galaxy.ui.v2.events.ui.ChaseCameraEvent;
 import galaxy.ui.v2.events.ui.GuiEvent;
 import galaxy.ui.v2.events.ui.PlanetSelectEvent;
 import org.slf4j.Logger;
 
-import java.util.List;
+import java.util.Collection;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -21,7 +23,7 @@ public class PlanetListWidget extends Container {
 	private static final Logger logger = getLogger(PlanetListWidget.class);
 	private static final String NAME = "my-planet-list";
 
-	public PlanetListWidget(List<Planet> planets) {
+	public PlanetListWidget(Collection<PlanetView> planets) {
 		Label title = addChild(new Label("My planet list", new ElementId("title")));
 		title.setMaxWidth(256);
 
@@ -42,20 +44,25 @@ public class PlanetListWidget extends Container {
 //			p.addChild(new Label("%.2f".formatted(planet.industry().value())), 5);
 //		}
 
-		VersionedList<Planet> model = VersionedList.wrap( planets );
+		VersionedList<PlanetView> model = VersionedList.wrap( planets.stream().toList() );
 
-		DefaultCellRenderer<Planet> renderer = new DefaultCellRenderer<>();
+		DefaultCellRenderer<PlanetView> renderer = new DefaultCellRenderer<>();
 		renderer.setTransform(planet -> "id: %s, name: %s, size %.2f, resources: %.2f, population: %.2f, industry: %.2f".formatted(
-				planet.id(), planet.name(), planet.size().value(), planet.resources().value(), planet.population().value(), planet.industry().value()
+				planet.planetRef().value(),
+				planet.planetRef().value(),
+				planet.size(),
+				planet.resources(),
+				planet.population(),
+				planet.industry()
 		));
 
 		// TODO replace ListBox with a custom component or configure to support GridPanel with more then 1 column etc
-		ListBox<Planet> planetList = new ListBox<>(model, renderer, BaseStyles.GLASS);
+		ListBox<PlanetView> planetList = new ListBox<>(model, renderer, BaseStyles.GLASS);
 		planetList.setVisibleItems(20);
 		planetList.addClickCommands(
 				src -> logger.debug("clicked {}", src.getSelectedItem()),
-				src -> EventBus.publish(GuiEvent.planetSelected, new GuiEvent((Planet) src.getSelectedItem())),
-				src -> EventBus.publish(PlanetSelectEvent.selectPlanet, new PlanetSelectEvent((Planet) src.getSelectedItem()))
+				src -> EventBus.publish(GuiEvent.planetSelected, new GuiEvent((PlanetView) src.getSelectedItem())),
+				src -> EventBus.publish(PlanetSelectEvent.selectPlanet, new PlanetSelectEvent((PlanetView) src.getSelectedItem()))
 		);
 		addChild(planetList);
 

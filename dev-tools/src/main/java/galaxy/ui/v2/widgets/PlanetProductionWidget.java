@@ -4,21 +4,18 @@ import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.Label;
 import com.simsilica.lemur.style.ElementId;
-import domain.planet.Planet;
-import domain.production.Production;
-
-import java.util.Optional;
+import galaxy.core.PlanetView;
 
 public class PlanetProductionWidget extends Container {
 
 	private static final String NAME = "select-production";
 
-	public PlanetProductionWidget(Planet planet) {
+	public PlanetProductionWidget(PlanetView planet) {
 		super();
 
-		addChild(new Label("Choose production on %s".formatted(planet.name()), new ElementId("title")));
+		addChild(new Label("Choose production on %s".formatted(planet.planetRef()), new ElementId("title")));
 
-		String currentProduction = Optional.ofNullable(planet.production()).map(Production::toString).orElse("");
+		String currentProduction = "TODO"; // Optional.ofNullable(planet.production()).map(Production::toString).orElse("");
 
 		addChild(new Label("Current production"));
 		addChild(new Label(currentProduction));
