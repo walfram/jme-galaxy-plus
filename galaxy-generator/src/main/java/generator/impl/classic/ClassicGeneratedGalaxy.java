@@ -1,4 +1,4 @@
-package generator;
+package generator.impl.classic;
 
 import com.jme3.math.Vector3f;
 import galaxy.core.ClassicGalaxy;
@@ -6,7 +6,10 @@ import galaxy.core.Component;
 import galaxy.core.Context;
 import galaxy.core.Entity;
 import galaxy.core.planet.Coordinates;
-import generator.simple.ClassicPlanetDistribution;
+import generator.GeneratedGalaxy;
+import generator.PlanetTemplate;
+import generator.SeedSource;
+import generator.WeightedDistribution;
 import jme3utilities.math.noise.Generator;
 
 import java.util.ArrayList;

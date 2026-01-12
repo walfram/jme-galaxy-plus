@@ -52,7 +52,7 @@ public class GalaxyViewState extends BaseAppState {
 		materialCache.put(MaterialCacheKey.UNKNOWN, new LightingMaterial(app.getAssetManager(), ColorRGBA.Gray));
 
 		Entity player = getState(SinglePlayerGalaxyState.class).player();
-		Collection<PlanetView> planets = getState(SinglePlayerGalaxyState.class).playerGalaxyView(player);
+		Collection<PlanetView> planets = getState(SinglePlayerGalaxyState.class).playerGalaxyView();
 
 		planets.forEach(planet -> {
 			Geometry geometry = new Geometry("p-%s".formatted(planet.planetRef()), mesh);

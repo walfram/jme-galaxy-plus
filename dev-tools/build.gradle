@@ -24,6 +24,7 @@ dependencies {
     implementation libs.jackson.databind
     implementation libs.reflections
 
+    implementation project(":galaxy-core")
     implementation project(":galaxy-generator")
     implementation project(":shared")
 

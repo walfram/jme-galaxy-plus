@@ -1,4 +1,4 @@
-package generator.simple;
+package generator.impl.classic;
 
 import generator.PlanetTemplate;
 import generator.WeightedDistribution;

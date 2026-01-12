@@ -21,9 +21,9 @@ public class GeneratedGalaxyTest {
 		int teamCount = 10;
 		int planetRatio = 10;
 		SeedSource seedSource = new SimpleSeedSource(32768, 192.0);
-		long seed = 42l;
+		long seed = 42L;
 
-		GeneratedGalaxy generatedGalaxy = new ClassicGeneratedGalaxy(teamCount, planetRatio, seedSource, seed);
+		GeneratedGalaxy generatedGalaxy = new generator.impl.classic.ClassicGeneratedGalaxy(teamCount, planetRatio, seedSource, seed);
 		Context galaxy = generatedGalaxy.generate();
 
 		assertEquals(10, galaxy.teams().size());
