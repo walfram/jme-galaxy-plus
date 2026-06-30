@@ -1,49 +1,14 @@
-plugins {
-    id 'java'
-}
-
 group = 'dev'
 version = '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
 subprojects {
-    // Set the build directory lazily using DirectoryProperty
     layout.buildDirectory.set(file("${rootProject.projectDir}/build/${project.name}"))
 }
 
-// Optional: also set the root project's directory
 rootProject.layout.buildDirectory.set(file("${rootProject.projectDir}/build/root"))
-
-dependencies {
-    // Core dependencies using bundles and individual accessors
-    implementation libs.bundles.jme.base
-    runtimeOnly libs.jme.awt.dialogs
-
-    implementation libs.groovy.all
-    implementation libs.bundles.simsilica.ui
-
-    implementation libs.heart
-    implementation libs.minie
-
-    implementation libs.logback.classic
-    implementation libs.guava
-    implementation libs.jackson.databind
-    implementation libs.reflections
-
-    implementation project(":galaxy-core")
-    implementation project(":galaxy-generator")
-    implementation project(":shared")
-
-    // Platform/BOM dependency
-    testImplementation platform(libs.junit.bom.platform)
-    // Test dependencies (junit-jupiter gets its version from the BOM)
-    testImplementation libs.junit.jupiter
-    testImplementation libs.mockito.core
-}
-
-test {
-    useJUnitPlatform()
-}

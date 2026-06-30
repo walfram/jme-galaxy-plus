@@ -1,23 +1,23 @@
 [versions]
 # Core Dependencies
-jmonkeyengine = "3.8.1-stable"
-groovy        = "3.0.23"
+jmonkeyengine = "3.9.0-stable"
+groovy        = "3.0.25"
 lemur         = "1.16.0"
 lemur-props   = "1.2.0"
 lemur-proto   = "1.13.0"
 sio2          = "1.8.0"
-heart         = "9.2.0"
-minie         = "9.0.1"
+heart         = "9.3.0"
+minie         = "9.0.3"
 
 # Logging, Utility, and JSON
-logback       = "1.5.19"
-guava         = "33.4.0-jre"
-jackson       = "2.18.2"
+logback       = "1.5.37"
+guava         = "33.6.0-jre"
+jackson       = "2.22.0"
 reflections   = "0.10.2"
 
 # Test Dependencies
-junit-bom     = "5.11.4"
-mockito       = "5.15.2"
+junit-bom     = "6.1.0"
+mockito       = "5.23.0"
 
 
 [libraries]
@@ -50,6 +50,7 @@ reflections     = { group = "org.reflections", name = "reflections", version.ref
 # --- Testing ---
 junit-bom-platform = { group = "org.junit", name = "junit-bom", version.ref = "junit-bom" }
 junit-jupiter     = { group = "org.junit.jupiter", name = "junit-jupiter" } # Version is omitted, as it's managed by the BOM
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit-bom" }
 mockito-core      = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 
 

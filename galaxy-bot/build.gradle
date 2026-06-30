@@ -17,6 +17,7 @@ dependencies {
 
     testImplementation platform(libs.junit.bom.platform)
     testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
     testImplementation libs.mockito.core
 }
 

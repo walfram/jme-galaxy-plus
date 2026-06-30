@@ -1,0 +1,35 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation libs.bundles.jme.base
+    runtimeOnly libs.jme.awt.dialogs
+
+    implementation libs.groovy.all
+    implementation libs.bundles.simsilica.ui
+
+    implementation libs.heart
+    implementation libs.minie
+
+    implementation libs.logback.classic
+    implementation libs.guava
+    implementation libs.jackson.databind
+    implementation libs.reflections
+
+    implementation project(":galaxy-core")
+    implementation project(":galaxy-generator")
+    implementation project(":shared")
+
+    testImplementation platform(libs.junit.bom.platform)
+    testImplementation libs.junit.jupiter
+    testImplementation libs.mockito.core
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = "your.package.Main"
+}

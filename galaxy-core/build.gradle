@@ -10,10 +10,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation 'org.mockito:mockito-core:5.20.0'
+    testImplementation platform(libs.junit.bom.platform)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
+    testImplementation libs.mockito.core
 
     implementation libs.guava
     implementation libs.logback.classic

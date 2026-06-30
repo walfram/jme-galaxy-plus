@@ -7,5 +7,6 @@ include 'galaxy-bot'
 include 'shared'
 include 'dev-tools'
 
-
 include 'galaxy-generator'
+
+include 'galaxy-app'
