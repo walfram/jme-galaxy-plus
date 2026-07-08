@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/galaxy-app" />
             <option value="$PROJECT_DIR$/galaxy-bot" />
             <option value="$PROJECT_DIR$/galaxy-core" />
+            <option value="$PROJECT_DIR$/galaxy-domain" />
             <option value="$PROJECT_DIR$/galaxy-generator" />
             <option value="$PROJECT_DIR$/legacy-domain" />
             <option value="$PROJECT_DIR$/shared" />
