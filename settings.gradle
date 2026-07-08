@@ -1,13 +1,3 @@
 rootProject.name = 'jme-galaxy-plus'
 
-include 'legacy-domain'
-include 'galaxy-core'
-include 'galaxy-domain'
-include 'galaxy-bot'
-
 include 'shared'
-include 'dev-tools'
-
-include 'galaxy-generator'
-
-include 'galaxy-app'
