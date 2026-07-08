@@ -8,8 +8,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import jme3utilities.MyCamera;
 import jme3utilities.debug.AxesVisualizer;
-import shared.InitLemurState;
-import shared.debug.DebugGrid;
+import shared.jme.InitLemurState;
+import shared.jme.debug.DebugGrid;
 
 public class GalaxyUiApp extends SimpleApplication {
 

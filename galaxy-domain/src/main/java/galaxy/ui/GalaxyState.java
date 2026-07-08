@@ -10,8 +10,8 @@ import com.jme3.scene.Node;
 import galaxy.domain.*;
 import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
-import shared.debug.DebugPointMesh;
-import shared.material.UnshadedMaterial;
+import shared.jme.debug.DebugPointMesh;
+import shared.jme.material.UnshadedMaterial;
 
 import java.util.ArrayList;
 import java.util.List;

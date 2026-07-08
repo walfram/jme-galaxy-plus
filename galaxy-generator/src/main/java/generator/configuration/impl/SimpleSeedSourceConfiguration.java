@@ -8,9 +8,9 @@ import com.simsilica.lemur.value.TextFieldValueEditor;
 import generator.SeedSource;
 import generator.configuration.SeedSourceConfiguration;
 import generator.sources.SimpleSeedSource;
-import shared.functions.ObjectToString;
-import shared.functions.StringToInteger;
-import shared.functions.StringToLong;
+import shared.jme.functions.ObjectToString;
+import shared.jme.functions.StringToInteger;
+import shared.jme.functions.StringToLong;
 
 public class SimpleSeedSourceConfiguration implements SeedSourceConfiguration {
 

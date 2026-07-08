@@ -1,4 +1,4 @@
-package shared.debug;
+package shared.jme.debug;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;

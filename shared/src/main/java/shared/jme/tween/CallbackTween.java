@@ -1,4 +1,4 @@
-package shared.tween;
+package shared.jme.tween;
 
 import com.simsilica.lemur.anim.AbstractTween;
 

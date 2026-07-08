@@ -12,8 +12,8 @@ import com.simsilica.event.EventBus;
 import galaxy.domain.Planet;
 import jme3utilities.mesh.Octasphere;
 import org.slf4j.Logger;
-import shared.collision.CursorCollisions;
-import shared.material.LightingMaterial;
+import shared.jme.collision.CursorCollisions;
+import shared.jme.material.LightingMaterial;
 
 import java.util.List;
 

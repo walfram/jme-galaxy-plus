@@ -12,10 +12,9 @@ import com.simsilica.lemur.anim.AnimationState;
 import com.simsilica.lemur.anim.CameraTweens;
 import com.simsilica.lemur.anim.Tween;
 import com.simsilica.lemur.anim.TweenAnimation;
-import galaxy.core.Entity;
 import galaxy.core.PlanetView;
-import shared.debug.DebugGrid;
-import shared.tween.CallbackTween;
+import shared.jme.debug.DebugGrid;
+import shared.jme.tween.CallbackTween;
 import jme3utilities.debug.AxesVisualizer;
 
 public class GalaxyCameraState extends BaseAppState {

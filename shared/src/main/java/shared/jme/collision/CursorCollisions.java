@@ -1,4 +1,4 @@
-package shared.collision;
+package shared.jme.collision;
 
 import com.jme3.collision.Collidable;
 import com.jme3.collision.CollisionResult;

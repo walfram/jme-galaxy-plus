@@ -1,4 +1,4 @@
-package shared.functions;
+package shared.jme.functions;
 
 import com.google.common.base.Function;
 

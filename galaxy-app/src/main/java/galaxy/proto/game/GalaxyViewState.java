@@ -19,8 +19,8 @@ import galaxy.core.team.GalaxyView;
 import galaxy.proto.controls.PlanetRefControl;
 import jme3utilities.mesh.Icosphere;
 import org.slf4j.Logger;
-import shared.collision.CursorCollisions;
-import shared.material.LightingMaterial;
+import shared.jme.collision.CursorCollisions;
+import shared.jme.material.LightingMaterial;
 
 import java.util.Collection;
 import java.util.HashMap;

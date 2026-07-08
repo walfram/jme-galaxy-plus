@@ -9,8 +9,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import generator.SeedSource;
-import shared.debug.DebugPointMesh;
-import shared.material.UnshadedMaterial;
+import shared.jme.debug.DebugPointMesh;
+import shared.jme.material.UnshadedMaterial;
 
 public class GeneratorViewState extends BaseAppState {
 

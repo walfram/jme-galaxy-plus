@@ -8,7 +8,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import galaxy.proto.game.*;
 import galaxy.proto.menu.GameConfig;
-import shared.InitLemurState;
+import shared.jme.InitLemurState;
 import jme3utilities.MyCamera;
 
 public class GalaxyDevMain extends SimpleApplication {

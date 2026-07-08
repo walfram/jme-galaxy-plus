@@ -1,4 +1,4 @@
-package shared.debug;
+package shared.jme.debug;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
