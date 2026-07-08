@@ -1,0 +1,49 @@
+package galaxy.ui;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.DirectionalLight;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
+import jme3utilities.MyCamera;
+import jme3utilities.debug.AxesVisualizer;
+import shared.InitLemurState;
+import shared.debug.DebugGrid;
+
+public class GalaxyUiApp extends SimpleApplication {
+
+	public static void main(String[] args) {
+		GalaxyUiApp app = new GalaxyUiApp();
+		app.start();
+	}
+
+	@Override
+	public void simpleInitApp() {
+		flyCam.setDragToRotate(true);
+		flyCam.setMoveSpeed(100f);
+		flyCam.setZoomSpeed(0f);
+
+		cam.setLocation(new Vector3f(113.60284f, 119.175354f, 514.4556f));
+		cam.setRotation(new Quaternion(-0.013032904f, 0.9867039f, -0.12545282f, -0.102504544f));
+
+		MyCamera.setNearFar(cam, cam.getFrustumNear(), 16384f);
+
+		new DebugGrid(assetManager, 32, 32).attachTo(rootNode);
+		AxesVisualizer axesVisualizer = new AxesVisualizer(assetManager, 256, 1);
+		rootNode.addControl(axesVisualizer);
+		axesVisualizer.setEnabled(true);
+
+		rootNode.addLight(new DirectionalLight(Vector3f.UNIT_XYZ.negate().normalize(), ColorRGBA.White.mult(0.5f)));
+		rootNode.addLight(new AmbientLight(ColorRGBA.White.mult(0.5f)));
+
+		stateManager.attach(new InitLemurState());
+
+		stateManager.attach(new GalaxyState());
+		stateManager.attach(new GalaxyViewState());
+
+		stateManager.attach(new GalaxyCursorState());
+
+		stateManager.attach(new GalaxyInputState());
+	}
+}

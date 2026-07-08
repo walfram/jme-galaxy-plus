@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform(libs.junit.bom.platform)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
+    testImplementation libs.mockito.core
+
+    implementation libs.guava
+    implementation libs.logback.classic
+
+    implementation project(':shared')
+
+    // temporary here for testing purposes
+    implementation libs.bundles.jme.base
+    runtimeOnly libs.jme.awt.dialogs
+    implementation libs.groovy.all
+    implementation libs.bundles.simsilica.ui
+    implementation libs.heart
+    implementation libs.minie
+    implementation libs.jackson.databind
+    implementation libs.reflections
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,174 @@
+{
+  "id": "test-galaxy",
+  "players": [
+    {
+      "id": "player-1",
+      "name": "Player 1",
+      "techLevels": {
+        "engines": 1,
+        "weapons": 1,
+        "shields": 1,
+        "cargo": 1
+      },
+      "sciences": [
+        {
+          "id": "rapid-engines-research",
+          "ratios": {
+            "engines": 1.0,
+            "weapons": 0.0,
+            "shields": 0.0,
+            "cargo": 0.0
+          }
+        },
+        {
+          "id": "weapons-focused-research",
+          "ratios": {
+            "engines": 0.1,
+            "weapons": 0.6,
+            "shields": 0.2,
+            "cargo": 0.1
+          }
+        }
+      ],
+      "ship-designs": [
+        {
+          "id": "drone",
+          "name": "drone",
+          "components" : {
+            "engines": 1,
+            "weapons": {
+              "guns": 0,
+              "caliber": 0
+            },
+            "shields": 0,
+            "cargo": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-2",
+      "name": "Player 2",
+      "techLevels": {
+        "engines": 1.1,
+        "weapons": 1,
+        "shields": 1,
+        "cargo": 1
+      },
+      "sciences": [],
+      "ship-designs": [
+        {
+          "name": "drone with gun",
+          "components" : {
+            "engines": 1,
+            "weapons": {
+              "guns": 1,
+              "caliber": 1
+            },
+            "shields": 0,
+            "cargo": 0
+          }
+        }
+      ]
+    }
+  ],
+  "planets": [
+    {
+      "id": 42,
+      "parameters": {
+        "size": 1000.0,
+        "resources": 10.0,
+        "coordinates": {
+          "x": 1,
+          "y": 2,
+          "z": 3
+        }
+      },
+      "owner": "player-1",
+      "state": {
+        "population": 1000.0,
+        "industry": 1000.0,
+        "materials": 32.0,
+        "colonists": 128.0,
+        "capital": 0.0
+      },
+      "production": {
+        "type": "SCIENCE",
+        "ref": "rapid-engines-research"
+      }
+    },
+    {
+      "id": 43,
+      "parameters": {
+        "size": 1000.0,
+        "resources": 10.0,
+        "coordinates": {
+          "x": 3,
+          "y": 2,
+          "z": 1
+        }
+      },
+      "owner": "player-2",
+      "state": {
+        "population": 0.0,
+        "industry": 0.0,
+        "materials": 0.0,
+        "colonists": 256.0,
+        "capital": 200.0
+      },
+      "production": {
+        "type": "SHIP",
+        "ref": "drone"
+      }
+    }
+  ],
+  "ships": [
+    {
+      "playerId": "player-1",
+      "shipId": "ship#1",
+      "designId": "drone",
+      "planetId": 42,
+      "destination": null,
+      "techLevels": {
+        "engines": 1,
+        "weapons": 1,
+        "shields": 1,
+        "cargo": 1
+      },
+      "params": {
+        "engines": 1,
+        "weapons": {
+          "guns": 0,
+          "caliber": 0
+        },
+        "shields": 0,
+        "cargo": 0
+      }
+    },
+    {
+      "playerId": "player-1",
+      "shipId": "ship#2",
+      "designId": "drone",
+      "planetId": null,
+      "destination": {
+        "destinationId": "43",
+        "progress": 0.75
+      },
+      "techLevels": {
+        "engines": 1,
+        "weapons": 1,
+        "shields": 1,
+        "cargo": 1
+      },
+      "params": {
+        "engines": 1,
+        "weapons": {
+          "guns": 0,
+          "caliber": 0
+        },
+        "shields": 0,
+        "cargo": 0
+      }
+    }
+  ]
+}
