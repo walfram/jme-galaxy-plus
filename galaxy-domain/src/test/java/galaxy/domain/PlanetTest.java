@@ -9,7 +9,7 @@ public class PlanetTest {
 
 	@Test
 	void test_unloading_cap_increases_industry() {
-		Planet planet = new Planet(new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(500f));
+		Planet planet = new Planet(new PlanetId(1), new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(500f));
 
 		assertEquals(0f, planet.capital());
 
@@ -21,7 +21,7 @@ public class PlanetTest {
 
 	@Test
 	void test_produce_colonists() {
-		Planet planet = new Planet(new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(1000f));
+		Planet planet = new Planet(new PlanetId(1), new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(1000f));
 
 		planet.updatePopulation(800f);
 
@@ -52,7 +52,7 @@ public class PlanetTest {
 	@Test
 	void should_create_uninhabited_planet() {
 		Planet planet = new Planet(
-				new Size(1000), new Resources(10), new Coordinates(1, 2, 3)
+				new PlanetId(1), new Size(1000), new Resources(10), new Coordinates(1, 2, 3)
 		);
 
 		assertEquals(0f, planet.population());
@@ -66,7 +66,7 @@ public class PlanetTest {
 	@Test
 	void should_create_homeworld() {
 		Planet planet = new Planet(
-				new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(1000f)
+				new PlanetId(1), new Size(1000), new Resources(10), new Coordinates(1, 2, 3), new Population(1000f), new Industry(1000f)
 		);
 
 		Race race = new Race("test");
