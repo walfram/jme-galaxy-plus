@@ -17,6 +17,8 @@ dependencies {
 
     implementation libs.guava
     implementation libs.logback.classic
+
+    implementation libs.jackson.databind
 }
 
 test {

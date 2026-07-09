@@ -1,0 +1,37 @@
+package galaxy.core.state;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import galaxy.core.GameState;
+import galaxy.core.Planet;
+import galaxy.core.Race;
+
+import java.util.List;
+
+public class ClassicGalaxy implements GameState {
+
+	private final List<Race> races;
+	private final List<Planet> planets;
+
+	public ClassicGalaxy(List<Race> races, List<Planet> planets) {
+		this.races = races;
+		this.planets = planets;
+	}
+
+	@Override
+	public void serializeInto(ObjectNode target) {
+		ArrayNode racesJson = target.putArray("races");
+		for (Race race : races) {
+			ObjectNode o = racesJson.addObject();
+			race.serializeInto(o);
+		}
+
+		ArrayNode planetsJson = target.putArray("planets");
+		for (Planet planet : planets) {
+			ObjectNode o = planetsJson.addObject();
+			planet.serializeInto(o);
+		}
+	}
+}
