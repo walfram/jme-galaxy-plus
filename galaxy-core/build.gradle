@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform(libs.junit.bom.platform)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
+    testImplementation libs.mockito.core
+
+    implementation libs.guava
+    implementation libs.logback.classic
+}
+
+test {
+    useJUnitPlatform()
+}
