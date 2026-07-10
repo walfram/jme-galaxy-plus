@@ -1,7 +1,5 @@
 package galaxy.core.state;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.core.GameState;
@@ -9,6 +7,7 @@ import galaxy.core.Planet;
 import galaxy.core.Race;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ClassicGalaxy implements GameState {
 
@@ -33,5 +32,10 @@ public class ClassicGalaxy implements GameState {
 			ObjectNode o = planetsJson.addObject();
 			planet.serializeInto(o);
 		}
+	}
+
+	@Override
+	public Race findRace(Race.Id id) {
+		return races.stream().filter(r -> r.id().equals(id)).findFirst().orElseThrow(() -> new NoSuchElementException("No such race %s".formatted(id)));
 	}
 }

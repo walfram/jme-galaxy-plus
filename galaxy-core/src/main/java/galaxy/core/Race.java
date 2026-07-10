@@ -2,23 +2,27 @@ package galaxy.core;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import java.util.EnumMap;
+import java.util.*;
 
 public class Race {
 
-	public record Id(String value) {
-
-
-	}
 	private final String name;
-	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
 
+	private final Set<ShipType> shipTypes;
+
+	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
 	public Race(String name) {
 		this.name = name;
 
 		for (Technology technology : Technology.values()) {
 			technologies.put(technology, 1.0);
 		}
+
+		this.shipTypes = new LinkedHashSet<>();
+	}
+
+	public Set<ShipType> shipTypes() {
+		return shipTypes;
 	}
 
 	public void serializeInto(ObjectNode target) {
@@ -46,4 +50,11 @@ public class Race {
 				technologies.get(Technology.CARGO)
 		);
 	}
+
+	public record Id(String value) {
+//		public boolean sameAs(String other) {
+//			return Objects.equals(value, other);
+//		}
+	}
+
 }
