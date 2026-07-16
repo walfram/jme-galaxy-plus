@@ -1,4 +1,4 @@
-package galaxy.dev;
+package galaxy.dev.generator;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

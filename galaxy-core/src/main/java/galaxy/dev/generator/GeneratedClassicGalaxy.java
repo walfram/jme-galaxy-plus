@@ -1,4 +1,4 @@
-package galaxy.dev;
+package galaxy.dev.generator;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.core.GameState;
