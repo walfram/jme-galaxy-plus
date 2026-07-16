@@ -38,4 +38,14 @@ public class ClassicGalaxy implements GameState {
 	public Race findRace(Race.Id id) {
 		return races.stream().filter(r -> r.id().equals(id)).findFirst().orElseThrow(() -> new NoSuchElementException("No such race %s".formatted(id)));
 	}
+
+	@Override
+	public List<Race> races() {
+		return List.of();
+	}
+
+	@Override
+	public List<Planet> planets() {
+		return List.of();
+	}
 }

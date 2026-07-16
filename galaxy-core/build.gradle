@@ -24,3 +24,14 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register('runGalaxyGenerator', JavaExec) {
+    group = 'application'
+    description = 'Run galaxy generator with config parameter'
+    mainClass = 'galaxy.dev.GalaxyGeneratorApp'
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty('appArgs')) {
+        args(project.property('appArgs').toString().split(' '))
+    }
+}

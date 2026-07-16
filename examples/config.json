@@ -1,0 +1,8 @@
+{
+  "galaxyName": "Example Galaxy",
+  "seed": 4273,
+  "races": [
+    "Foo", "Bar", "Baz"
+  ],
+  "planetRatio": 10
+}
