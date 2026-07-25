@@ -41,11 +41,11 @@ public class ClassicGalaxy implements GameState {
 
 	@Override
 	public List<Race> races() {
-		return List.of();
+		return List.copyOf(races);
 	}
 
 	@Override
 	public List<Planet> planets() {
-		return List.of();
+		return List.copyOf(planets);
 	}
 }

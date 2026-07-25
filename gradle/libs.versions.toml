@@ -6,6 +6,7 @@ lemur         = "1.16.0"
 lemur-props   = "1.2.0"
 lemur-proto   = "1.13.0"
 sio2          = "1.8.0"
+sim-math      = "1.6.0"
 heart         = "9.3.0"
 minie         = "9.0.3"
 
@@ -36,6 +37,7 @@ lemur          = { group = "com.simsilica", name = "lemur", version.ref = "lemur
 lemur-props    = { group = "com.simsilica", name = "lemur-props", version.ref = "lemur-props" }
 lemur-proto    = { group = "com.simsilica", name = "lemur-proto", version.ref = "lemur-proto" }
 sio2           = { group = "com.simsilica", name = "sio2", version.ref = "sio2" }
+sim-math       = { group = "com.simsilica", name= "sim-math", version.ref = "sim-math" }
 
 # --- Stephen Gold Libraries ---
 heart          = { group = "com.github.stephengold", name = "Heart", version.ref = "heart" }
