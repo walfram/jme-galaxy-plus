@@ -35,7 +35,6 @@ public class ClassicGalaxyGeneratorTest {
 	private final long seed = 42;
 
 	private final GeneratedPlanets generatedGalaxy = new ClassicGeneratedGalaxy(playerCount, planetRatio, seed);
-	private final WeightedDistribution<PlanetType> distribution = new ClassicPlanetDistribution();
 
 	@Test
 	void test_home_worlds() {
