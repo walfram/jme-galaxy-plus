@@ -15,9 +15,9 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SpacePartitionTest {
+public class GridPartitionTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(SpacePartitionTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(GridPartitionTest.class);
 
 	@Test
 	void should_pick_n_cells_without_repeat() {
