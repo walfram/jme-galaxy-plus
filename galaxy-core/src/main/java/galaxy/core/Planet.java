@@ -25,6 +25,11 @@ public class Planet {
 		this.resources = resources;
 	}
 
+	@Override
+	public String toString() {
+		return "Planet [id: %s, x/y: %s/%s, size: %s, resources: %s, props: {%s}]".formatted(id, x, y, size, resources, properties.values());
+	}
+
 	public int id() {
 		return id;
 	}

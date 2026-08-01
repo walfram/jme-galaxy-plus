@@ -4,12 +4,16 @@ import galaxy.core.Planet;
 import galaxy.core.planet.DaughterWorld;
 import galaxy.core.planet.HomeWorld;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ClassicGalaxyGeneratorTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(ClassicGalaxyGeneratorTest.class);
 
 	// given N players
 
@@ -61,6 +65,11 @@ public class ClassicGalaxyGeneratorTest {
 
 		int expected = (planetRatio * playerCount) - (3 * playerCount);
 		assertEquals(expected, uninhabited.size());
+	}
+
+	@Test
+	void print_planets() {
+		generatedGalaxy.planets().forEach(p -> logger.info(p.toString()));
 	}
 
 }
