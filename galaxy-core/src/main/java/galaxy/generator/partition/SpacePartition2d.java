@@ -1,4 +1,4 @@
-package galaxy.grid;
+package galaxy.generator.partition;
 
 import java.util.HashSet;
 import java.util.Set;

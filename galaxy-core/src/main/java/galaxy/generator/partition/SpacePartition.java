@@ -1,4 +1,4 @@
-package galaxy.grid;
+package galaxy.generator.partition;
 
 public interface SpacePartition<T extends PartitionCell<T>> {
 
