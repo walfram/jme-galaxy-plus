@@ -8,4 +8,5 @@ public interface PartitionCell<T extends PartitionCell<T>> {
 
 	Set<T> neighboursRadius(int radius);
 
+	Set<T> neighboursInRange(int innerRadius, int outerRadius);
 }

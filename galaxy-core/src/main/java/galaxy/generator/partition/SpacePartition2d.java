@@ -21,13 +21,13 @@ public class SpacePartition2d implements SpacePartition<SpacePartition2d.Cell2d>
 
 	public record Cell2d(int x, int y, double width) implements PartitionCell<Cell2d> {
 		@Override
-		public Set<Cell2d> neighbours(int radius) {
-			int capacity = (radius + radius + 1) * (radius + radius + 1);
+		public Set<Cell2d> neighbours(int width) {
+			int capacity = (width + width + 1) * (width + width + 1);
 			Set<Cell2d> neighbours = new HashSet<>(capacity);
 
-			for (int dx = -radius; dx <= radius; dx++) {
-				for (int dy = -radius; dy <= radius; dy++) {
-					neighbours.add(new Cell2d(x + dx, y + dy, width));
+			for (int dx = -width; dx <= width; dx++) {
+				for (int dy = -width; dy <= width; dy++) {
+					neighbours.add(new Cell2d(x + dx, y + dy, this.width));
 				}
 			}
 
@@ -51,6 +51,15 @@ public class SpacePartition2d implements SpacePartition<SpacePartition2d.Cell2d>
 			}
 
 			neighbours.remove(this);
+
+			return neighbours;
+		}
+
+		@Override
+		public Set<Cell2d> neighboursInRange(int innerRadius, int outerRadius) {
+			Set<Cell2d> neighbours = neighboursRadius(outerRadius);
+
+			neighbours.removeAll(neighboursRadius(innerRadius));
 
 			return neighbours;
 		}
