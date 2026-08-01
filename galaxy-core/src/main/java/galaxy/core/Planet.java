@@ -1,6 +1,11 @@
 package galaxy.core;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.ClassToInstanceMap;
+import com.google.common.collect.MutableClassToInstanceMap;
+import galaxy.core.planet.HomeWorld;
+
+import java.util.Optional;
 
 public class Planet {
 
@@ -10,12 +15,34 @@ public class Planet {
 	private final double size;
 	private final double resources;
 
+	private final ClassToInstanceMap<PlanetProperty> properties = MutableClassToInstanceMap.create();
+
 	public Planet(int id, double x, double y, double size, double resources) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.size = size;
 		this.resources = resources;
+	}
+
+	public int id() {
+		return id;
+	}
+
+	public double x() {
+		return x;
+	}
+
+	public double y() {
+		return y;
+	}
+
+	public double size() {
+		return size;
+	}
+
+	public double resources() {
+		return resources;
 	}
 
 	public void serializeInto(ObjectNode target) {
@@ -26,4 +53,13 @@ public class Planet {
 		target.put("resources", resources);
 	}
 
+	public <T extends PlanetProperty> Optional<T> property(Class<T> clazz) {
+		return Optional.ofNullable(properties.getInstance(clazz));
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends PlanetProperty> void putProperty(T prop) {
+		Class<T> clazz = (Class<T>) prop.getClass();
+		properties.putInstance(clazz, prop);
+	}
 }
