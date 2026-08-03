@@ -1,5 +1,8 @@
 package galaxy.generator.partition;
 
+import com.jme3.math.Vector3f;
+import jme3utilities.math.noise.Generator;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -62,6 +65,21 @@ public class SpacePartition2d implements SpacePartition<SpacePartition2d.Cell2d>
 			neighbours.removeAll(neighboursRadius(innerRadius));
 
 			return neighbours;
+		}
+
+		public double centerX() {
+			return (x + 0.5) * width;
+		}
+
+		public double centerY() {
+			return (y + 0.5) * width;
+		}
+
+		@Override
+		public Vector3f toRandomVector3f(Generator random) {
+			double dx = random.nextDouble(-width * 0.5, width * 0.5);
+			double dy = random.nextDouble(-width * 0.5, width * 0.5);
+			return new Vector3f((float) (centerX() + dx), (float) (centerY() + dy), 0);
 		}
 	}
 }
