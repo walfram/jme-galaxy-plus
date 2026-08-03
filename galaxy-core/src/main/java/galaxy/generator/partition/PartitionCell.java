@@ -15,4 +15,5 @@ public interface PartitionCell<T extends PartitionCell<T>> {
 
 	Vector3f toRandomVector3f(Generator random);
 
+	Vector3f centerAsVector3f();
 }

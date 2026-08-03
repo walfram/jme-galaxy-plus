@@ -11,9 +11,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ClassicGalaxyGeneratorTest {
+public class ClassicGeneratedGalaxyTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(ClassicGalaxyGeneratorTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClassicGeneratedGalaxyTest.class);
 
 	// given N players
 

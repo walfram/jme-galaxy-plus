@@ -81,5 +81,10 @@ public class SpacePartition2d implements SpacePartition<SpacePartition2d.Cell2d>
 			double dy = random.nextDouble(-width * 0.5, width * 0.5);
 			return new Vector3f((float) (centerX() + dx), (float) (centerY() + dy), 0);
 		}
+
+		@Override
+		public Vector3f centerAsVector3f() {
+			return new Vector3f((float) centerX(), (float) centerY(), 0);
+		}
 	}
 }
