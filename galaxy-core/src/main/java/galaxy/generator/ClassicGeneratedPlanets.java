@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class ClassicGeneratedGalaxy implements GeneratedPlanets {
+public class ClassicGeneratedPlanets implements GeneratedPlanets {
 
-	private static final Logger logger = getLogger(ClassicGeneratedGalaxy.class);
+	private static final Logger logger = getLogger(ClassicGeneratedPlanets.class);
 
 	private final int playerCount;
 	private final int planetRatio;
@@ -24,7 +24,7 @@ public class ClassicGeneratedGalaxy implements GeneratedPlanets {
 
 	private final AtomicInteger planetIdx = new AtomicInteger(0);
 
-	public ClassicGeneratedGalaxy(int playerCount, int planetRatio, long seed) {
+	public ClassicGeneratedPlanets(int playerCount, int planetRatio, long seed) {
 		this.playerCount = playerCount;
 		this.planetRatio = planetRatio;
 		this.generator = new Generator(seed);
@@ -32,10 +32,10 @@ public class ClassicGeneratedGalaxy implements GeneratedPlanets {
 
 	@Override
 	public List<Planet> planets() {
-		Collection<SpacePartition2d.Cell2d> hwCoords = generateHomeWorldCoordinates();
-		List<Planet> homeWorlds = createHomeWorlds(hwCoords);
+		Collection<SpacePartition2d.Cell2d> homeWorldCells = generateHomeWorldCoordinates();
+		List<Planet> homeWorlds = createHomeWorlds(homeWorldCells);
 		List<Planet> daughterWorlds = createDaughterWorlds(homeWorlds);
-		List<Planet> uninhabited = createUninhabitedPlanets(hwCoords);
+		List<Planet> uninhabited = createUninhabitedPlanets(homeWorldCells);
 
 		List<Planet> planets = new ArrayList<>(homeWorlds);
 		planets.addAll(daughterWorlds);
@@ -44,7 +44,7 @@ public class ClassicGeneratedGalaxy implements GeneratedPlanets {
 		return planets;
 	}
 
-	private List<Planet> createUninhabitedPlanets(Collection<SpacePartition2d.Cell2d> hwCoords) {
+	private List<Planet> createUninhabitedPlanets(Collection<SpacePartition2d.Cell2d> homeWorldCells) {
 		int uninhabitedPlanetCount = playerCount * planetRatio - 3 * playerCount;
 
 		List<Planet> uninhabited = new ArrayList<>(uninhabitedPlanetCount);
@@ -55,16 +55,16 @@ public class ClassicGeneratedGalaxy implements GeneratedPlanets {
 			PlanetType picked = distribution.pick(generator);
 			Set<SpacePartition2d.Cell2d> set = positions.computeIfAbsent(picked, k -> new HashSet<>());
 
-			HashSet<SpacePartition2d.Cell2d> combined = new HashSet<>(hwCoords);
+			HashSet<SpacePartition2d.Cell2d> combined = new HashSet<>(homeWorldCells);
 			combined.addAll(set);
 
-			GeneratedMinDistanceCells coordinates = new GeneratedMinDistanceCells(
+			GeneratedMinDistanceCells cellsSource = new GeneratedMinDistanceCells(
 					picked.minDistance(),
 					1,
 					combined.stream().map(SpacePartition2d.Cell2d::centerAsVector3f).toList()
 			);
 
-			positions.get(picked).addAll(coordinates.cells());
+			positions.get(picked).addAll(cellsSource.cells());
 		}
 
 		for (Map.Entry<PlanetType, Set<SpacePartition2d.Cell2d>> e : positions.entrySet()) {
@@ -95,8 +95,8 @@ public class ClassicGeneratedGalaxy implements GeneratedPlanets {
 		return planets;
 	}
 
-	private List<Planet> createHomeWorlds(Collection<SpacePartition2d.Cell2d> hwCoords) {
-		List<Planet> hws = hwCoords.stream()
+	private List<Planet> createHomeWorlds(Collection<SpacePartition2d.Cell2d> homeWorldCells) {
+		List<Planet> hws = homeWorldCells.stream()
 				.map(c -> c.toRandomVector3f(generator))
 				.map(v -> new Planet(planetIdx.incrementAndGet(), v.x, v.y, 1000.0, 10.0))
 				.toList();

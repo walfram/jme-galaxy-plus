@@ -11,9 +11,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ClassicGeneratedGalaxyTest {
+public class ClassicGeneratedPlanetsTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(ClassicGeneratedGalaxyTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClassicGeneratedPlanetsTest.class);
 
 	// given N players
 
@@ -38,7 +38,7 @@ public class ClassicGeneratedGalaxyTest {
 	private final int planetRatio = 10;
 	private final long seed = 42;
 
-	private final GeneratedPlanets generatedGalaxy = new ClassicGeneratedGalaxy(playerCount, planetRatio, seed);
+	private final GeneratedPlanets generatedGalaxy = new ClassicGeneratedPlanets(playerCount, planetRatio, seed);
 
 	@Test
 	void test_home_worlds() {

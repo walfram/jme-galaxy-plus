@@ -1,10 +1,12 @@
-package galaxy.dev.generator;
+package galaxy.dev.apps.generator;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import galaxy.core.GameState;
 import galaxy.core.Planet;
 import galaxy.core.Race;
+import galaxy.core.state.ClassicGalaxy;
+import galaxy.generator.ClassicGeneratedPlanets;
 import org.slf4j.Logger;
 
 import java.io.FileReader;
@@ -62,7 +64,7 @@ public class GalaxyGeneratorApp {
 		List<Race> races = races(root.path("races"));
 		int planetRatio = root.path("planetRatio").asInt();
 
-		GameState generated = new GeneratedClassicGalaxy(races, planetRatio).generate();
+		GameState generated = new ClassicGeneratedGalaxy(races, planetRatio).generate();
 
 		for (Race race: generated.races()) {
 			logger.info("race = {}", race);

@@ -1,6 +1,5 @@
-package galaxy.dev.generator;
+package galaxy.dev.apps.generator;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.core.GameState;
 import galaxy.core.Planet;
 import galaxy.core.Race;
@@ -9,12 +8,12 @@ import galaxy.core.state.ClassicGalaxy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeneratedClassicGalaxy {
+public class ClassicGeneratedGalaxy {
 
 	private final List<Race> races;
 	private final int planetRatio;
 
-	public GeneratedClassicGalaxy(List<Race> races, int planetRatio) {
+	public ClassicGeneratedGalaxy(List<Race> races, int planetRatio) {
 		this.races = races;
 		this.planetRatio = planetRatio;
 	}
