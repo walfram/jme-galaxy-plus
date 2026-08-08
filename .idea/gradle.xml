@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/shared" />
           </set>
         </option>
+        <option name="myGradleHome" value="C:\apps\gradle-8.14.2" />
       </GradleProjectSettings>
     </option>
   </component>

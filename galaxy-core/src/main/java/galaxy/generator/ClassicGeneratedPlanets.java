@@ -33,13 +33,22 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 	@Override
 	public List<Planet> planets() {
 		Collection<SpacePartition2d.Cell2d> homeWorldCells = generateHomeWorldCoordinates();
+		logger.info("generated homeworld cells {}", homeWorldCells.size());
+
 		List<Planet> homeWorlds = createHomeWorlds(homeWorldCells);
+		logger.info("created homeworlds {}", homeWorlds.size());
+
 		List<Planet> daughterWorlds = createDaughterWorlds(homeWorlds);
+		logger.info("created daughter worlds {}", daughterWorlds.size());
+
 		List<Planet> uninhabited = createUninhabitedPlanets(homeWorldCells);
+		logger.info("created uninhabited planets {}", uninhabited.size());
 
 		List<Planet> planets = new ArrayList<>(homeWorlds);
 		planets.addAll(daughterWorlds);
 		planets.addAll(uninhabited);
+
+		logger.info("total planets {}", planets.size());
 
 		return planets;
 	}
