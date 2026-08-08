@@ -63,8 +63,9 @@ public class GalaxyGeneratorApp {
 
 		List<Race> races = races(root.path("races"));
 		int planetRatio = root.path("planetRatio").asInt();
+		long seed = root.path("seed").asLong();
 
-		GameState generated = new ClassicGeneratedGalaxy(races, planetRatio).generate();
+		GameState generated = new ClassicGeneratedGalaxy(races, planetRatio, seed).generate();
 
 		for (Race race: generated.races()) {
 			logger.info("race = {}", race);

@@ -21,7 +21,6 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 	private final Generator generator;
 
 	private final WeightedDistribution<PlanetType> distribution = new ClassicPlanetDistribution();
-
 	private final AtomicInteger planetIdx = new AtomicInteger(0);
 
 	public ClassicGeneratedPlanets(int playerCount, int planetRatio, long seed) {

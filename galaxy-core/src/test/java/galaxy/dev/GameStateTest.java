@@ -17,6 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class GameStateTest {
 
 	@Test
+	void test_state_restored_from_json() {
+
+	}
+
+	@Test
+	void test_initial_state() {
+
+	}
+
+	@Test
 	void serialize_game_state() {
 		List<Race> races = Fixtures.testRaces();
 		List<Planet> planets = Fixtures.testPlanets();
