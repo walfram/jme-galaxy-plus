@@ -5,11 +5,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.core.GameState;
 import galaxy.core.Planet;
 import galaxy.core.Race;
+import galaxy.core.Serializable;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ClassicGalaxy implements GameState {
+public class ClassicGalaxy implements GameState, Serializable {
 
 	private final List<Race> races;
 	private final List<Planet> planets;
@@ -17,6 +18,13 @@ public class ClassicGalaxy implements GameState {
 	public ClassicGalaxy(List<Race> races, List<Planet> planets) {
 		this.races = races;
 		this.planets = planets;
+	}
+
+	public ClassicGalaxy(GameState source) {
+		this(
+				source.races(),
+				source.planets()
+		);
 	}
 
 	@Override

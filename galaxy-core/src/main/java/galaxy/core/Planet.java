@@ -1,9 +1,9 @@
 package galaxy.core;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
-import galaxy.core.planet.HomeWorld;
 
 import java.util.Optional;
 
@@ -16,6 +16,16 @@ public class Planet {
 	private final double resources;
 
 	private final ClassToInstanceMap<PlanetProperty> properties = MutableClassToInstanceMap.create();
+
+	public Planet(JsonNode source) {
+		this(
+				source.get("id").asInt(),
+				source.get("x").asDouble(),
+				source.get("y").asDouble(),
+				source.get("size").asDouble(),
+				source.get("resources").asDouble()
+		);
+	}
 
 	public Planet(int id, double x, double y, double size, double resources) {
 		this.id = id;

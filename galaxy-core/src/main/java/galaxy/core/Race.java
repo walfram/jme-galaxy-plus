@@ -1,5 +1,6 @@
 package galaxy.core;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.*;
@@ -11,6 +12,16 @@ public class Race {
 	private final Set<ShipType> shipTypes;
 
 	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
+
+	public Race(JsonNode source) {
+		this(source.get("name").asText());
+
+		for (Technology technology : Technology.values()) {
+			JsonNode node = source.get("technologies").get(technology.name());
+			technologies.put(technology, node.asDouble());
+		}
+	}
+
 	public Race(String name) {
 		this.name = name;
 
