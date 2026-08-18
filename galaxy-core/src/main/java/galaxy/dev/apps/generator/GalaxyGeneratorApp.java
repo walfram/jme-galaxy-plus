@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import galaxy.core.GameState;
 import galaxy.core.Planet;
 import galaxy.core.Race;
-import galaxy.core.state.ClassicGalaxy;
-import galaxy.generator.ClassicGeneratedPlanets;
 import org.slf4j.Logger;
 
 import java.io.FileReader;
