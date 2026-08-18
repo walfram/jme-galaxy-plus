@@ -15,11 +15,8 @@ public class PhaseExecution {
 		int executed = 0;
 
 		for (Phase phase : phases) {
-			boolean updated = phase.update(gameState);
-
-			if (updated) {
-				executed++;
-			}
+			phase.update(gameState);
+			executed++;
 		}
 
 		return executed;
