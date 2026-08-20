@@ -5,7 +5,7 @@ import galaxy.phase.Phase;
 
 public class ProductionPhase implements Phase {
 	@Override
-	public boolean update(GameState gameState) {
+	public boolean process(GameState gameState) {
 		return false;
 	}
 }

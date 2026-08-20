@@ -1,4 +1,4 @@
-package galaxy.core.order;
+package galaxy.order;
 
 import galaxy.core.GameState;
 import galaxy.core.Order;
@@ -27,12 +27,20 @@ public class DefineShipType implements Order {
 		this.name = name;
 	}
 
+	public DefineShipType(Race race, ShipType type) {
+		this(
+				race,
+				new Engines(type.engines()),
+				new Weapons(type.guns(), type.caliber()),
+				new Shields(type.shields()),
+				new Cargo(type.cargo()),
+				type.name()
+		);
+	}
+
 	@Override
-	public boolean modify(GameState state) {
+	public void modify(GameState state) {
 		Race target = state.findRace(race.id());
-
 		target.shipTypes().add(new ShipType(engines, weapons, shields, cargo, name));
-
-		return false;
 	}
 }

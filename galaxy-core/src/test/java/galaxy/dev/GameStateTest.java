@@ -3,6 +3,7 @@ package galaxy.dev;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import galaxy.Fixtures;
 import galaxy.core.GameState;
 import galaxy.core.Planet;
 import galaxy.core.Race;

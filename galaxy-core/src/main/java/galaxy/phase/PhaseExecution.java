@@ -15,7 +15,7 @@ public class PhaseExecution {
 		int executed = 0;
 
 		for (Phase phase : phases) {
-			phase.update(gameState);
+			phase.process(gameState);
 			executed++;
 		}
 

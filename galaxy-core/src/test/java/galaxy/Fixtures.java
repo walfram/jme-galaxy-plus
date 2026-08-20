@@ -1,10 +1,13 @@
-package galaxy.dev;
+package galaxy;
 
 import galaxy.core.Planet;
 import galaxy.core.Race;
+import galaxy.core.ShipType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Fixtures {
 	public static List<Race> testRaces() {
@@ -24,5 +27,13 @@ public class Fixtures {
 		}
 
 		return races;
+	}
+
+	public static Set<ShipType> testShipTypes() {
+		return new HashSet<>(
+				Set.of(
+						new ShipType(1.0, 0, 0.0, 0.0, 0.0, "drone")
+				)
+		);
 	}
 }

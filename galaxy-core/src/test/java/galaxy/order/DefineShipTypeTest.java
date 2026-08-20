@@ -1,4 +1,4 @@
-package galaxy.core.order;
+package galaxy.order;
 
 import galaxy.core.GameState;
 import galaxy.core.Order;
@@ -9,7 +9,7 @@ import galaxy.core.ship.Engines;
 import galaxy.core.ship.Shields;
 import galaxy.core.ship.Weapons;
 import galaxy.core.state.ClassicGalaxy;
-import galaxy.dev.Fixtures;
+import galaxy.Fixtures;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
