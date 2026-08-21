@@ -29,7 +29,7 @@ class DefineShipTypeTest {
 
 		assertFalse(race.shipTypes().isEmpty());
 
-		ShipType shipType = race.shipTypes().stream().findFirst().orElseThrow();
+		ShipType shipType = race.shipTypes().first();
 		assertEquals(new ShipType(new Engines(1.0), new Weapons(1, 1.0), new Shields(1.0), new Cargo(1.0), "armed-drone"), shipType);
 	}
 

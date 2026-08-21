@@ -9,7 +9,7 @@ public class Race {
 
 	private final String name;
 
-	private final Set<ShipType> shipTypes;
+	private final ShipTypes shipTypes;
 
 	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
 
@@ -29,10 +29,10 @@ public class Race {
 			technologies.put(technology, 1.0);
 		}
 
-		this.shipTypes = new LinkedHashSet<>();
+		this.shipTypes = new ShipTypes();
 	}
 
-	public Set<ShipType> shipTypes() {
+	public ShipTypes shipTypes() {
 		return shipTypes;
 	}
 

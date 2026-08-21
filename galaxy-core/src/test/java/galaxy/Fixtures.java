@@ -3,9 +3,9 @@ package galaxy;
 import galaxy.core.Planet;
 import galaxy.core.Race;
 import galaxy.core.ShipType;
+import galaxy.core.ShipTypes;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +29,18 @@ public class Fixtures {
 		return races;
 	}
 
-	public static Set<ShipType> testShipTypes() {
-		return new HashSet<>(
+	public static ShipType testShipTypeDroneArmed() {
+		return new ShipType(1.0, 1, 1.0, 0.0, 0.0, "armed-drone");
+	}
+
+	public static ShipType testShipTypeDrone() {
+		return new ShipType(1.0, 0, 0.0, 0.0, 0.0, "drone");
+	}
+
+	public static ShipTypes testShipTypes() {
+		return new ShipTypes(
 				Set.of(
-						new ShipType(1.0, 0, 0.0, 0.0, 0.0, "drone")
+						testShipTypeDrone()
 				)
 		);
 	}

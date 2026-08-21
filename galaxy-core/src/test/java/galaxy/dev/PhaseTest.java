@@ -21,7 +21,7 @@ public class PhaseTest {
 				new ShipTransferPhase(),
 				new ShipJoinPhase(),
 				new FightPhase(),
-				new LoadPhase(),
+				new LoadCargoPhase(),
 				new InterceptPhase(),
 				new ShipMovePhase(),
 				new ShipJoinPhase(),
