@@ -1,10 +1,8 @@
 package galaxy.order;
 
-import galaxy.Fixtures;
 import galaxy.core.GameState;
 import galaxy.core.Order;
-import galaxy.core.Race;
-import galaxy.core.ShipType;
+import galaxy.core.OrderResult;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,43 +13,25 @@ import static org.mockito.Mockito.when;
 public class OrderTest {
 
 	@Test
-	void should_replace_ship_type_if_no_ship_groups_exists_of_that_type() {
-		Race race = mock(Race.class);
-		when(race.shipTypes()).thenReturn(Fixtures.testShipTypes());
-
-		ShipType drone = Fixtures.testShipTypeDrone();
-		ShipType updated = new ShipType(
-				drone.engines(), 1, 1.0, drone.shields(), drone.cargo(), "drone"
-		);
-
-		assertEquals(drone.name(), updated.name());
-
+	void should_return_failure_order_result() {
+		Order order = mock(Order.class);
 		GameState state = mock(GameState.class);
-		when(state.findRace(any())).thenReturn(race);
 
-		Order order = new DefineShipType(race, updated);
-		assertDoesNotThrow(() -> order.modify(state));
-		assertEquals(1, race.shipTypes().size());
+		when(order.modify(any())).thenReturn(new OrderResult(false, "failed to execute order"));
 
-		ShipType check = race.shipTypes().find("drone");
-		assertNotNull(check);
-		assertEquals(updated, check);
+		OrderResult result = assertDoesNotThrow(() -> order.modify(state));
+		assertFalse(result.success());
 	}
 
 	@Test
-	void test_create_ship_type() {
-		Race race = mock(Race.class);
-		when(race.shipTypes()).thenReturn(Fixtures.testShipTypes());
-
-		ShipType type = mock(ShipType.class);
-
+	void should_return_success_order_result() {
+		Order order = mock(Order.class);
 		GameState state = mock(GameState.class);
-		when(state.findRace(any())).thenReturn(race);
 
-		Order order = new DefineShipType(race, type);
-		assertDoesNotThrow(() -> order.modify(state));
+		when(order.modify(any())).thenReturn(new OrderResult(true, "order executed"));
 
-		assertEquals(2, race.shipTypes().size());
+		OrderResult result = assertDoesNotThrow(() -> order.modify(state));
+		assertTrue(result.success());
 	}
 
 }

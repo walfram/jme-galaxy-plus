@@ -1,9 +1,6 @@
 package galaxy.order;
 
-import galaxy.core.GameState;
-import galaxy.core.Order;
-import galaxy.core.Race;
-import galaxy.core.ShipType;
+import galaxy.core.*;
 import galaxy.core.ship.Cargo;
 import galaxy.core.ship.Engines;
 import galaxy.core.ship.Shields;
@@ -39,8 +36,11 @@ public class DefineShipType implements Order {
 	}
 
 	@Override
-	public void modify(GameState state) {
+	public OrderResult modify(GameState state) {
 		Race target = state.findRace(race.id());
+
 		target.shipTypes().add(new ShipType(engines, weapons, shields, cargo, name));
+
+		return new OrderResult(true, "created ship type %s for race %s".formatted(name, race.id()));
 	}
 }
