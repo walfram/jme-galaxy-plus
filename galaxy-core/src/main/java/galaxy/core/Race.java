@@ -62,6 +62,10 @@ public class Race {
 		);
 	}
 
+	public Planet findPlanet(int id) {
+		return null;
+	}
+
 	public record Id(String value) {
 //		public boolean sameAs(String other) {
 //			return Objects.equals(value, other);

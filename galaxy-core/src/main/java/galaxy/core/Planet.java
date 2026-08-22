@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
+import galaxy.core.production.ShipProduction;
 
 import java.util.Optional;
 
@@ -76,5 +77,9 @@ public class Planet {
 	public <T extends PlanetProperty> void putProperty(T prop) {
 		Class<T> clazz = (Class<T>) prop.getClass();
 		properties.putInstance(clazz, prop);
+	}
+
+	public void startProduction(Production production) {
+
 	}
 }
