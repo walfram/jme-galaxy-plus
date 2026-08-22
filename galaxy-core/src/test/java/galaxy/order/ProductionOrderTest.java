@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -38,7 +39,7 @@ class ProductionOrderTest {
 	void should_do_nothing_if_same_production_already_in_progress() {
 		// TODO set planet production to MaterialsProduction
 
-		Order order = new MaterialsProductionOrder(race, planet);
+		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
 		OrderResult result = order.modify(state);
 		assertTrue(result.success());
 	}
@@ -48,7 +49,7 @@ class ProductionOrderTest {
 	void should_fail_if_planet_is_not_owned() {
 		// TODO set planet is not owned by this race
 
-		Order order = new MaterialsProductionOrder(race, planet);
+		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
 		OrderResult result = order.modify(state);
 
 		assertFalse(result.success());
@@ -58,7 +59,7 @@ class ProductionOrderTest {
 	void should_start_science_production() {
 		Science science = mock(Science.class);
 
-		Order order = new ScienceProductionOrder(race, planet, science);
+		Order order = new ProductionOrder(race, planet, new ScienceProduction(science));
 		OrderResult result = order.modify(state);
 
 		assertTrue(result.success());
@@ -69,7 +70,7 @@ class ProductionOrderTest {
 	void should_start_tech_research_production() {
 		Technology tech = Technology.ENGINES;
 
-		Order order = new TechnologyProductionOrder(race, planet, tech);
+		Order order = new ProductionOrder(race, planet, new TechnologyProduction(tech));
 		OrderResult result = order.modify(state);
 
 		assertTrue(result.success());
@@ -78,7 +79,7 @@ class ProductionOrderTest {
 
 	@Test
 	void should_start_capital_production() {
-		Order order = new CapitalProductionOrder(race, planet);
+		Order order = new ProductionOrder(race, planet, new CapitalProduction());
 		OrderResult result = order.modify(state);
 
 		assertTrue(result.success());
@@ -87,7 +88,7 @@ class ProductionOrderTest {
 
 	@Test
 	void should_start_materials_production() {
-		Order order = new MaterialsProductionOrder(race, planet);
+		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
 		OrderResult result = order.modify(state);
 
 		assertTrue(result.success());
@@ -98,7 +99,7 @@ class ProductionOrderTest {
 	void should_start_ship_production() {
 		ShipType shipType = mock(ShipType.class);
 
-		Order order = new ShipProductionOrder(race, planet, shipType);
+		Order order = new ProductionOrder(race, planet, new ShipProduction(shipType));
 		OrderResult result = order.modify(state);
 
 		assertTrue(result.success());
