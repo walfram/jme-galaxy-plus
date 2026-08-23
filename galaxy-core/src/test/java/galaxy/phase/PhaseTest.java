@@ -1,8 +1,6 @@
-package galaxy.dev;
+package galaxy.phase;
 
 import galaxy.core.GameState;
-import galaxy.phase.Phase;
-import galaxy.phase.PhaseExecution;
 import galaxy.phase.impl.*;
 import org.junit.jupiter.api.Test;
 
