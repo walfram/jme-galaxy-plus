@@ -18,6 +18,9 @@ public class Planet {
 
 	private final ClassToInstanceMap<PlanetProperty> properties = MutableClassToInstanceMap.create();
 
+	private Race owner;
+	private Production production;
+
 	public Planet(JsonNode source) {
 		this(
 				source.get("id").asInt(),
@@ -79,7 +82,18 @@ public class Planet {
 		properties.putInstance(clazz, prop);
 	}
 
-	public void startProduction(Production production) {
+	public boolean startProduction(Production production) {
+		if (this.production != null && this.production.getClass() == production.getClass()) {
+			// throw new IllegalStateException("Planet already has production of type %s".formatted(this.production.getClass()));
+			return false;
+		}
 
+		this.production = production;
+
+		return true;
+	}
+
+	public Race owner() {
+		return owner;
 	}
 }

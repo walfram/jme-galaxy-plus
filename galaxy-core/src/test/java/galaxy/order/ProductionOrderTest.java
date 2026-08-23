@@ -3,7 +3,6 @@ package galaxy.order;
 import galaxy.core.*;
 import galaxy.core.production.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,28 +25,42 @@ class ProductionOrderTest {
 
 		when(race.findPlanet(anyInt())).thenReturn(planet);
 		when(state.findRace(any())).thenReturn(race);
+
+		when(planet.startProduction(any(Production.class))).thenCallRealMethod();
 	}
 
 	@Test
-	@Disabled
 	void should_cancel_current_production() {
-		// TODO
-	}
-
-	@Test
-	@Disabled
-	void should_do_nothing_if_same_production_already_in_progress() {
-		// TODO set planet production to MaterialsProduction
-
 		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
 		OrderResult result = order.modify(state);
 		assertTrue(result.success());
+
+		verify(planet, times(1)).startProduction(any(MaterialsProduction.class));
+
+		Order cancel = new ProductionOrder(race, planet, new IdleProduction());
+		OrderResult cancelled = cancel.modify(state);
+		assertTrue(cancelled.success());
+
+		verify(planet, times(1)).startProduction(any(IdleProduction.class));
 	}
 
 	@Test
-	@Disabled
+	void should_do_nothing_if_same_production_already_in_progress() {
+		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
+		OrderResult result = order.modify(state);
+		assertTrue(result.success());
+
+		Order otherOrder = new ProductionOrder(race, planet, new MaterialsProduction());
+		OrderResult otherResult = otherOrder.modify(state);
+		assertFalse(otherResult.success());
+
+		verify(planet, times(2)).startProduction(any(MaterialsProduction.class));
+	}
+
+	@Test
 	void should_fail_if_planet_is_not_owned() {
-		// TODO set planet is not owned by this race
+		Race other = mock(Race.class);
+		when(planet.owner()).thenReturn(other);
 
 		Order order = new ProductionOrder(race, planet, new MaterialsProduction());
 		OrderResult result = order.modify(state);
