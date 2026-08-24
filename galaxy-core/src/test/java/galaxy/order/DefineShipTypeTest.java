@@ -12,6 +12,8 @@ import galaxy.core.state.ClassicGalaxy;
 import galaxy.Fixtures;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -61,7 +63,7 @@ class DefineShipTypeTest {
 
 	@Test
 	void should_add_ship_type_to_race() {
-		GameState state = new ClassicGalaxy(Fixtures.testRaces(), Fixtures.testPlanets());
+		GameState state = new ClassicGalaxy(Fixtures.testRaces(), Fixtures.testPlanets(), Map.of());
 
 		Race race = state.findRace(new Race.Id("foo"));
 

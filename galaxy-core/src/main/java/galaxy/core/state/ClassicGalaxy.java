@@ -2,12 +2,11 @@ package galaxy.core.state;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import galaxy.core.GameState;
-import galaxy.core.Planet;
-import galaxy.core.Race;
-import galaxy.core.Serializable;
+import galaxy.core.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class ClassicGalaxy implements GameState, Serializable {
@@ -15,15 +14,19 @@ public class ClassicGalaxy implements GameState, Serializable {
 	private final List<Race> races;
 	private final List<Planet> planets;
 
-	public ClassicGalaxy(List<Race> races, List<Planet> planets) {
+	private final Map<Integer, ShipGroup> shipGroups;
+
+	public ClassicGalaxy(List<Race> races, List<Planet> planets, Map<Integer, ShipGroup> shipGroups) {
 		this.races = races;
 		this.planets = planets;
+		this.shipGroups = shipGroups;
 	}
 
 	public ClassicGalaxy(GameState source) {
 		this(
 				source.races(),
-				source.planets()
+				source.planets(),
+				source.shipGroups()
 		);
 	}
 
@@ -56,4 +59,14 @@ public class ClassicGalaxy implements GameState, Serializable {
 	public List<Planet> planets() {
 		return List.copyOf(planets);
 	}
+
+	@Override
+	public ShipGroup shipGroup(int id) {
+		return null;
+	}
+
+	public Map<Integer, ShipGroup> shipGroups() {
+		return new HashMap<>(shipGroups);
+	}
+
 }

@@ -9,6 +9,7 @@ import galaxy.generator.GeneratedPlanets;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ClassicGeneratedGalaxy {
 
@@ -29,7 +30,7 @@ public class ClassicGeneratedGalaxy {
 		GeneratedPlanets generatedPlanets = new ClassicGeneratedPlanets(races.size(), planetRatio, seed);
 		planets.addAll(generatedPlanets.planets());
 
-		return new ClassicGalaxy(races, planets);
+		return new ClassicGalaxy(races, planets, Map.of());
 	}
 
 }

@@ -9,11 +9,11 @@ public record ShipType(double engines, int guns, double caliber, double shields,
 	public ShipType(Engines engines, Weapons weapons, Shields shields, Cargo cargo, String name) {
 		this(
 				engines.value(),
-				 weapons.guns(),
-				 weapons.caliber(),
-				 shields.value(),
-				 cargo.value(),
-				 name
+				weapons.guns(),
+				weapons.caliber(),
+				shields.value(),
+				cargo.value(),
+				name
 		);
 	}
 }
