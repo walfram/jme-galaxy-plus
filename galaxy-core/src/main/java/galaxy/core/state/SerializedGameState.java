@@ -39,7 +39,7 @@ public class SerializedGameState implements GameState {
 
 	@Override
 	public Map<Integer, ShipGroup> shipGroups() {
-		return source.get("shipGroups").valueStream().map(ShipGroup::new).collect(Collectors.toMap(
+		return source.path("shipGroups").valueStream().map(ShipGroup::new).collect(Collectors.toMap(
 				ShipGroup::id,
 				e -> e
 		));
