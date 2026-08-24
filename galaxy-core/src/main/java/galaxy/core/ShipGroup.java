@@ -74,6 +74,7 @@ public class ShipGroup {
 	}
 
 	public boolean canFlyTo(Planet destination) {
+		// TODO: check if destination is reachable
 		return true;
 	}
 

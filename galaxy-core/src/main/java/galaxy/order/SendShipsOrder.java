@@ -19,7 +19,6 @@ public class SendShipsOrder implements Order {
 	@Override
 	public OrderResult modify(GameState state) {
 		// find ship group
-//		ShipGroup group = state.shipGroup(shipGroup.id());
 		ShipGroup group = race.shipGroups().find(shipGroup.id());
 
 		// check if this group's owner is correct

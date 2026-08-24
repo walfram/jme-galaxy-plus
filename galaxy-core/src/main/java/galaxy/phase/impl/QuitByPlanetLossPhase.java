@@ -1,9 +1,11 @@
 package galaxy.phase.impl;
 
-import galaxy.core.GameState;import galaxy.phase.Phase;
+import galaxy.core.GameState;
+import galaxy.phase.Phase;
 
 public class QuitByPlanetLossPhase implements Phase {
-@Override
+	@Override
 	public boolean process(GameState gameState) {
 		return false;
-	}}
+	}
+}

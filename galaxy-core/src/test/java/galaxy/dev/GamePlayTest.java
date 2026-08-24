@@ -7,6 +7,7 @@ import galaxy.core.ship.Engines;
 import galaxy.core.ship.Shields;
 import galaxy.core.ship.Weapons;
 import galaxy.core.state.ClassicGalaxy;
+import galaxy.order.DefineShipType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,6 +54,25 @@ public class GamePlayTest {
 		state.colonizePlanet(bar, barA);
 		state.colonizePlanet(bar, barB);
 		state.colonizePlanet(bar, barC);
+	}
+
+	@Test
+	void test_early_gameplay() {
+		// TURN #1
+
+		// FOO defines drone ship type,
+		// FOO starts colonizer drone production on foo-b
+		// FOO starts engine research on foo-a
+		// FOO starts cap production on foo-c
+		// FOO declares peace with BAR
+
+		// BAR defines armed drone ship type,
+		// BAR starts armed colonizer drone production on bar-c
+		// BAR starts engine research on bar-a
+		// BAR starts weapons research on bar-b
+		// BAR declares peace with FOO
+
+		// TURN #2
 	}
 
 	@Test

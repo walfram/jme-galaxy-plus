@@ -62,17 +62,6 @@ class SendShipsOrderTest {
 		ShipGroup shipGroup = new ShipGroup(UUID.randomUUID().toString(), race, shipType, 1, source);
 		race.shipGroups().add(shipGroup);
 
-//		when(shipGroup.canFlyTo(any(Planet.class))).thenReturn(true);
-//		when(shipGroup.owner()).thenReturn(race);
-//		when(shipGroup.currentPlanet()).thenReturn(source);
-//		doCallRealMethod().when(shipGroup).flyTo(any(Planet.class));
-//		when(shipGroup.destinationPlanet()).thenCallRealMethod();
-
-//		GameState state = mock(GameState.class);
-//		when(race.findPlanet(new Id("1"))).thenReturn(source);
-//		when(state.shipGroup(anyInt())).thenReturn(shipGroup);
-//		when(state.findRace(any())).thenReturn(race);
-
 		Order order = new SendShipsOrder(race, shipGroup, source, destination);
 		OrderResult result = order.modify(state);
 
