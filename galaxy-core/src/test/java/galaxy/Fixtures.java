@@ -1,21 +1,24 @@
 package galaxy;
 
-import galaxy.core.Planet;
-import galaxy.core.Race;
-import galaxy.core.ShipType;
-import galaxy.core.ShipTypes;
+import galaxy.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class Fixtures {
+
 	public static List<Race> testRaces() {
 		return List.of(new Race("foo"), new Race("bar"), new Race("baz"));
 	}
 
 	public static List<Planet> testPlanets() {
-		return List.of(new Planet(1, 2, 3, 4, 5), new Planet(6, 7, 8, 9, 10), new Planet(11, 12, 13, 14, 15));
+		return List.of(
+				new Planet(new Id(UUID.randomUUID()), 2, 3, 4, 5),
+				new Planet(new Id(UUID.randomUUID()), 7, 8, 9, 10),
+				new Planet(new Id(UUID.randomUUID()), 12, 13, 14, 15)
+		);
 	}
 
 	public static List<Race> testRaces(int raceCount) {
@@ -43,5 +46,9 @@ public class Fixtures {
 						testShipTypeDrone()
 				)
 		);
+	}
+
+	public static Planet testRandomPlanet(String id) {
+		return new Planet(new Id(id), 1, 2, 3, 4);
 	}
 }

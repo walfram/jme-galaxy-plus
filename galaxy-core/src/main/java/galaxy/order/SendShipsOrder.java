@@ -18,8 +18,9 @@ public class SendShipsOrder implements Order {
 
 	@Override
 	public OrderResult modify(GameState state) {
-		// find ship group from game state
-		ShipGroup group = state.shipGroup(shipGroup.id());
+		// find ship group
+//		ShipGroup group = state.shipGroup(shipGroup.id());
+		ShipGroup group = race.shipGroups().find(shipGroup.id());
 
 		// check if this group's owner is correct
 		Race r = state.findRace(race.id());
@@ -28,7 +29,7 @@ public class SendShipsOrder implements Order {
 		}
 
 		// check if group at defined planet
-		Planet planet = r.findPlanet(source.id());
+		Planet planet = state.findPlanet(source.id());
 		if (!planet.equals(group.currentPlanet())) {
 			return new OrderResult(false, "group %s is not at planet %s".formatted(race.id(), source.id()));
 		}

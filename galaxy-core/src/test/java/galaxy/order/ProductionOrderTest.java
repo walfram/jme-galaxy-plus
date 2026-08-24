@@ -23,7 +23,7 @@ class ProductionOrderTest {
 		planet = mock(Planet.class);
 		state = mock(GameState.class);
 
-		when(race.findPlanet(anyInt())).thenReturn(planet);
+		when(race.findPlanet(any())).thenReturn(planet);
 		when(state.findRace(any())).thenReturn(race);
 
 		when(planet.startProduction(any(Production.class))).thenCallRealMethod();

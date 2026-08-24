@@ -1,9 +1,6 @@
 package galaxy.order;
 
-import galaxy.core.GameState;
-import galaxy.core.Order;
-import galaxy.core.Race;
-import galaxy.core.ShipType;
+import galaxy.core.*;
 import galaxy.core.ship.Cargo;
 import galaxy.core.ship.Engines;
 import galaxy.core.ship.Shields;
@@ -63,9 +60,9 @@ class DefineShipTypeTest {
 
 	@Test
 	void should_add_ship_type_to_race() {
-		GameState state = new ClassicGalaxy(Fixtures.testRaces(), Fixtures.testPlanets(), Map.of());
+		GameState state = new ClassicGalaxy(Fixtures.testRaces(), Fixtures.testPlanets());
 
-		Race race = state.findRace(new Race.Id("foo"));
+		Race race = state.findRace(new Id("foo"));
 
 		assertTrue(race.shipTypes().isEmpty());
 

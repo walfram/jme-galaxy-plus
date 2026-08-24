@@ -8,10 +8,12 @@ import java.util.*;
 public class Race {
 
 	private final String name;
+	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
+
+	private final List<Planet> planets = new ArrayList<>();
 
 	private final ShipTypes shipTypes;
-
-	private final EnumMap<Technology, Double> technologies = new EnumMap<>(Technology.class);
+	private final ShipGroups shipGroups;
 
 	public Race(JsonNode source) {
 		this(source.get("name").asText());
@@ -30,6 +32,7 @@ public class Race {
 		}
 
 		this.shipTypes = new ShipTypes();
+		this.shipGroups = new ShipGroups();
 	}
 
 	public ShipTypes shipTypes() {
@@ -39,6 +42,20 @@ public class Race {
 	public void serializeInto(ObjectNode target) {
 		target.put("name", name);
 		target.putPOJO("technologies", technologies);
+	}
+
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!Race.class.isAssignableFrom(other.getClass()))
+			return false;
+
+		Race that = (Race) other;
+
+		return Objects.equals(this.name, that.name);
 	}
 
 	public Id id() {
@@ -62,14 +79,23 @@ public class Race {
 		);
 	}
 
-	public Planet findPlanet(int id) {
-		return null;
+	public Planet findPlanet(Id id) {
+		return planets.stream().filter(p -> p.id().equals(id)).findFirst().orElseThrow();
 	}
 
-	public record Id(String value) {
-//		public boolean sameAs(String other) {
-//			return Objects.equals(value, other);
-//		}
+	public List<Planet> planets() {
+		return List.copyOf(planets);
 	}
 
+	public void registerPlanet(Planet planet) {
+		planets.add(planet);
+	}
+
+	public void registerShipType(ShipType shipType) {
+		shipTypes.add(shipType);
+	}
+
+	public ShipGroups shipGroups() {
+		return shipGroups;
+	}
 }

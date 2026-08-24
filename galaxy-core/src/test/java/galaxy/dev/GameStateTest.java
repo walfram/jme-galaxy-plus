@@ -45,7 +45,7 @@ public class GameStateTest {
 		GeneratedPlanets planetsSource = new ClassicGeneratedPlanets(10, 10, 37);
 		List<Race> races = Fixtures.testRaces(10);
 
-		Serializable state = new ClassicGalaxy(races, planetsSource.planets(), Map.of());
+		Serializable state = new ClassicGalaxy(races, planetsSource.planets());
 
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode root = mapper.createObjectNode();
@@ -62,7 +62,7 @@ public class GameStateTest {
 		List<Race> races = Fixtures.testRaces();
 		List<Planet> planets = Fixtures.testPlanets();
 
-		Serializable state = new ClassicGalaxy(races, planets, Map.of());
+		Serializable state = new ClassicGalaxy(races, planets);
 
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode root = mapper.createObjectNode();

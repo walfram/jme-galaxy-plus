@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class ShipGroup {
 
-	private final int id;
+	private final Id id;
 
 	private Race owner;
 	private final ShipType type;
@@ -16,7 +16,7 @@ public class ShipGroup {
 
 	public ShipGroup(JsonNode source) {
 		this(
-				source.get("id").asInt(),
+				source.get("id").asText(),
 				toRace(source.get("race")),
 				toShipType(source.get("shipType")),
 				source.get("size").asInt(),
@@ -36,8 +36,8 @@ public class ShipGroup {
 		return null;
 	}
 
-	public ShipGroup(int id, Race owner, ShipType type, int size, Planet planet) {
-		this.id = id;
+	public ShipGroup(String id, Race owner, ShipType type, int size, Planet planet) {
+		this.id = new Id(id);
 		this.owner = owner;
 		this.type = type;
 		this.size = size;
@@ -45,7 +45,7 @@ public class ShipGroup {
 		this.techLevels = new TechLevels(owner.techLevels());
 	}
 
-	public int id() {
+	public Id id() {
 		return id;
 	}
 
@@ -74,7 +74,7 @@ public class ShipGroup {
 	}
 
 	public boolean canFlyTo(Planet destination) {
-		return false;
+		return true;
 	}
 
 	public void flyTo(Planet destination) {

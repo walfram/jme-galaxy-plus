@@ -30,7 +30,7 @@ public class ClassicGeneratedGalaxy {
 		GeneratedPlanets generatedPlanets = new ClassicGeneratedPlanets(races.size(), planetRatio, seed);
 		planets.addAll(generatedPlanets.planets());
 
-		return new ClassicGalaxy(races, planets, Map.of());
+		return new ClassicGalaxy(races, planets);
 	}
 
 }

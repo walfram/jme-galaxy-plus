@@ -1,15 +1,11 @@
 package galaxy.core.state;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.core.GameState;
-import galaxy.core.Planet;
-import galaxy.core.Race;
-import galaxy.core.ShipGroup;
+import galaxy.core.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
+@Deprecated
 public class SerializedGameState implements GameState {
 	private final JsonNode source;
 
@@ -18,7 +14,7 @@ public class SerializedGameState implements GameState {
 	}
 
 	@Override
-	public Race findRace(Race.Id id) {
+	public Race findRace(Id id) {
 		return races().stream().filter(r -> r.id().equals(id)).findFirst().orElseThrow();
 	}
 
@@ -32,16 +28,36 @@ public class SerializedGameState implements GameState {
 		return source.get("planets").valueStream().map(Planet::new).toList();
 	}
 
+//	@Override
+//	public ShipGroup shipGroup(int id) {
+//		return null;
+//	}
+
+//	@Override
+//	public Map<Integer, ShipGroup> shipGroups() {
+//		return source.path("shipGroups").valueStream().map(ShipGroup::new).collect(Collectors.toMap(
+//				ShipGroup::id,
+//				e -> e
+//		));
+//	}
+
 	@Override
-	public ShipGroup shipGroup(int id) {
-		return shipGroups().get(id);
+	public List<Planet> racePlanets(Id id) {
+		return List.of();
 	}
 
 	@Override
-	public Map<Integer, ShipGroup> shipGroups() {
-		return source.path("shipGroups").valueStream().map(ShipGroup::new).collect(Collectors.toMap(
-				ShipGroup::id,
-				e -> e
-		));
+	public void colonizePlanet(Race race, Planet planet) {
+
 	}
+
+	@Override
+	public Planet findPlanet(Id id) {
+		return null;
+	}
+
+//	@Override
+//	public void createShipGroup(Race race, ShipGroup shipGroup) {
+//
+//	}
 }

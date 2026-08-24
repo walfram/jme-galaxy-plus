@@ -1,5 +1,6 @@
 package galaxy.generator;
 
+import galaxy.core.Id;
 import galaxy.core.Planet;
 import galaxy.core.planet.DaughterWorld;
 import galaxy.core.planet.HomeWorld;
@@ -8,7 +9,6 @@ import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -21,7 +21,6 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 	private final Generator generator;
 
 	private final WeightedDistribution<PlanetType> distribution = new ClassicPlanetDistribution();
-	private final AtomicInteger planetIdx = new AtomicInteger(0);
 
 	public ClassicGeneratedPlanets(int playerCount, int planetRatio, long seed) {
 		this.playerCount = playerCount;
@@ -77,7 +76,7 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 
 		for (Map.Entry<PlanetType, Set<SpacePartition2d.Cell2d>> e : positions.entrySet()) {
 			List<Planet> list = e.getValue().stream()
-					.map(c -> e.getKey().generate(planetIdx.incrementAndGet(), c.toRandomVector3f(generator), generator))
+					.map(c -> e.getKey().generate(new Id(UUID.randomUUID()), c.toRandomVector3f(generator), generator))
 					.toList();
 
 			uninhabited.addAll(list);
@@ -90,10 +89,10 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 		List<Planet> planets = new ArrayList<>(playerCount * 2);
 
 		for (Planet p : homeWorlds) {
-			Planet a = new Planet(planetIdx.incrementAndGet(), p.x() + dx(), p.y() + dy(), 500.0, 10.0);
+			Planet a = new Planet(new Id(UUID.randomUUID()), p.x() + dx(), p.y() + dy(), 500.0, 10.0);
 			a.putProperty(new DaughterWorld());
 
-			Planet b = new Planet(planetIdx.incrementAndGet(), p.x() + dx(), p.y() + dy(), 500.0, 10.0);
+			Planet b = new Planet(new Id(UUID.randomUUID()), p.x() + dx(), p.y() + dy(), 500.0, 10.0);
 			b.putProperty(new DaughterWorld());
 
 			planets.add(a);
@@ -106,7 +105,7 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 	private List<Planet> createHomeWorlds(Collection<SpacePartition2d.Cell2d> homeWorldCells) {
 		List<Planet> hws = homeWorldCells.stream()
 				.map(c -> c.toRandomVector3f(generator))
-				.map(v -> new Planet(planetIdx.incrementAndGet(), v.x, v.y, 1000.0, 10.0))
+				.map(v -> new Planet(new Id(UUID.randomUUID()), v.x, v.y, 1000.0, 10.0))
 				.toList();
 
 		hws.forEach(p -> p.putProperty(new HomeWorld()));

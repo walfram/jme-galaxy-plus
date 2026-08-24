@@ -1,12 +1,17 @@
 package galaxy.order;
 
+import galaxy.Fixtures;
 import galaxy.core.*;
+import galaxy.core.state.ClassicGalaxy;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SendShipsOrderTest {
 
@@ -23,13 +28,20 @@ class SendShipsOrderTest {
 		when(shipGroup.owner()).thenReturn(race);
 
 		Planet source = mock(Planet.class);
-		when(race.findPlanet(anyInt())).thenReturn(source);
+		when(source.id()).thenReturn(new Id("source"));
 
 		Planet destination = mock(Planet.class);
+		when(destination.id()).thenReturn(new Id("destination"));
 
 		GameState state = mock(GameState.class);
-		when(state.shipGroup(anyInt())).thenReturn(shipGroup);
+//		when(state.shipGroup(anyInt())).thenReturn(shipGroup);
+		ShipGroups shipGroups = mock(ShipGroups.class);
+		when(shipGroups.find(any())).thenReturn(shipGroup);
+		when(race.shipGroups()).thenReturn(shipGroups);
+
 		when(state.findRace(any())).thenReturn(race);
+		when(state.findPlanet(new Id("source"))).thenReturn(source);
+		when(state.findPlanet(new Id("destination"))).thenReturn(destination);
 
 		Order order = new SendShipsOrder(race, shipGroup, source, destination);
 		OrderResult result = order.modify(state);
@@ -39,28 +51,27 @@ class SendShipsOrderTest {
 
 	@Test
 	void should_send_ship_group_by_setting_destination_planet() {
-		Race race = mock(Race.class);
+		Race race = new Race("foo");
 
-		Planet source = mock(Planet.class);
-		when(source.id()).thenReturn(1);
+		Planet source = Fixtures.testRandomPlanet("source");
+		Planet destination = Fixtures.testRandomPlanet("destination");
 
-		ShipGroup shipGroup = mock(ShipGroup.class);
-		when(shipGroup.canFlyTo(any(Planet.class))).thenReturn(true);
-		when(shipGroup.owner()).thenReturn(race);
-		when(shipGroup.currentPlanet()).thenReturn(source);
-		// when(shipGroup.flyTo(any(Planet.class))).thenCallRealMethod();
-		doCallRealMethod().when(shipGroup).flyTo(any(Planet.class));
-		when(shipGroup.destinationPlanet()).thenCallRealMethod();
+		GameState state = new ClassicGalaxy(List.of(race), List.of(source, destination));
 
-		Planet destination = mock(Planet.class);
-		when(destination.id()).thenReturn(2);
+		ShipType shipType = Fixtures.testShipTypeDroneArmed();
+		ShipGroup shipGroup = new ShipGroup(UUID.randomUUID().toString(), race, shipType, 1, source);
+		race.shipGroups().add(shipGroup);
 
-		GameState state = mock(GameState.class);
+//		when(shipGroup.canFlyTo(any(Planet.class))).thenReturn(true);
+//		when(shipGroup.owner()).thenReturn(race);
+//		when(shipGroup.currentPlanet()).thenReturn(source);
+//		doCallRealMethod().when(shipGroup).flyTo(any(Planet.class));
+//		when(shipGroup.destinationPlanet()).thenCallRealMethod();
 
-		when(race.findPlanet(1)).thenReturn(source);
-
-		when(state.shipGroup(anyInt())).thenReturn(shipGroup);
-		when(state.findRace(any())).thenReturn(race);
+//		GameState state = mock(GameState.class);
+//		when(race.findPlanet(new Id("1"))).thenReturn(source);
+//		when(state.shipGroup(anyInt())).thenReturn(shipGroup);
+//		when(state.findRace(any())).thenReturn(race);
 
 		Order order = new SendShipsOrder(race, shipGroup, source, destination);
 		OrderResult result = order.modify(state);

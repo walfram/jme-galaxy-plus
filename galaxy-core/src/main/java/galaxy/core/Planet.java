@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
-import galaxy.core.production.ShipProduction;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Planet {
 
-	private final int id;
+	private final Id id;
 	private final double x;
 	private final double y;
 	private final double size;
@@ -23,7 +23,7 @@ public class Planet {
 
 	public Planet(JsonNode source) {
 		this(
-				source.get("id").asInt(),
+				source.get("id").asText(),
 				source.get("x").asDouble(),
 				source.get("y").asDouble(),
 				source.get("size").asDouble(),
@@ -31,7 +31,17 @@ public class Planet {
 		);
 	}
 
-	public Planet(int id, double x, double y, double size, double resources) {
+	public Planet(String id, double x, double y, double size, double resources) {
+		this(
+				new Id(id),
+				x,
+				y,
+				size,
+				resources
+		);
+	}
+
+	public Planet(Id id, double x, double y, double size, double resources) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -44,7 +54,7 @@ public class Planet {
 		return "Planet [id: %s, x/y: %s/%s, size: %s, resources: %s, props: {%s}]".formatted(id, x, y, size, resources, properties.values());
 	}
 
-	public int id() {
+	public Id id() {
 		return id;
 	}
 
@@ -64,8 +74,23 @@ public class Planet {
 		return resources;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!Planet.class.isAssignableFrom(other.getClass()))
+			return false;
+
+		Planet that = (Planet) other;
+
+		return Objects.equals(this.id, that.id);
+	}
+
 	public void serializeInto(ObjectNode target) {
-		target.put("id", id);
+		target.put("id", id.value());
 		target.put("x", x);
 		target.put("y", y);
 		target.put("size", size);
