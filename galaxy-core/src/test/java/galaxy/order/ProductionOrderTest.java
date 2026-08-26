@@ -115,7 +115,7 @@ class ProductionOrderTest {
 		Order order = new ProductionOrder(race, planet, new ShipProduction(shipType));
 		OrderResult result = order.modify(state);
 
-		assertTrue(result.success());
+		assertTrue(result.success(), result.message());
 		verify(planet).startProduction(any(ShipProduction.class));
 	}
 
