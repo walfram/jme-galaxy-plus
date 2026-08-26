@@ -1,13 +1,9 @@
-package galaxy.dev;
+package galaxy.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.Fixtures;
-import galaxy.core.GameState;
-import galaxy.core.Planet;
-import galaxy.core.Race;
-import galaxy.core.Serializable;
 import galaxy.core.state.ClassicGalaxy;
 import galaxy.core.state.SerializedGameState;
 import galaxy.generator.ClassicGeneratedPlanets;
@@ -19,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 

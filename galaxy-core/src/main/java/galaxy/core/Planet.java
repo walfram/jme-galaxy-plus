@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
+import galaxy.core.planet.Industry;
+import galaxy.core.planet.Population;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -108,6 +110,10 @@ public class Planet {
 	}
 
 	public boolean startProduction(Production production) {
+		if (this.owner == null) {
+			return false;
+		}
+
 		if (this.production != null && this.production.getClass() == production.getClass()) {
 			// throw new IllegalStateException("Planet already has production of type %s".formatted(this.production.getClass()));
 			return false;
@@ -118,7 +124,21 @@ public class Planet {
 		return true;
 	}
 
+	public Optional<Production> production() {
+		return Optional.ofNullable(production);
+	}
+
+	public void changeOwner(Race race) {
+		this.owner = race;
+	}
+
 	public Race owner() {
 		return owner;
+	}
+
+	public double effort() {
+		double industry = property(Industry.class).map(Industry::value).orElse(0.0);
+		double population = property(Population.class).map(Population::value).orElse(0.0);
+		return 0.75 * industry + 0.25 * population;
 	}
 }

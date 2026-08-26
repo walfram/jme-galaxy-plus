@@ -28,7 +28,7 @@ public class DefineShipType implements Order {
 		this(
 				race,
 				new Engines(type.engines()),
-				new Weapons(type.guns(), type.caliber()),
+				new Weapons(type.weapons()),
 				new Shields(type.shields()),
 				new Cargo(type.cargo()),
 				type.name()

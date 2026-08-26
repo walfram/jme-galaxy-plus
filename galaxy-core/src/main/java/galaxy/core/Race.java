@@ -15,6 +15,8 @@ public class Race {
 	private final ShipTypes shipTypes;
 	private final ShipGroups shipGroups;
 
+	private final Map<Race, DiplomaticStatus> diplomacy = new HashMap<>();
+
 	public Race(JsonNode source) {
 		this(source.get("name").asText());
 
@@ -97,5 +99,13 @@ public class Race {
 
 	public ShipGroups shipGroups() {
 		return shipGroups;
+	}
+
+	public void changeDiplomaticStatus(Race target, DiplomaticStatus status) {
+		diplomacy.put(target, status);
+	}
+
+	public DiplomaticStatus diplomacyWith(Race target) {
+		return diplomacy.getOrDefault(target, DiplomaticStatus.WAR);
 	}
 }

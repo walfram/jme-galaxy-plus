@@ -2,6 +2,7 @@ package galaxy.order;
 
 import galaxy.Fixtures;
 import galaxy.core.*;
+import galaxy.core.ship.Engines;
 import galaxy.core.state.ClassicGalaxy;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class SendShipsOrderTest {
 		Race race = mock(Race.class);
 
 		ShipType shipType = mock(ShipType.class);
-		when(shipType.engines()).thenReturn(0.0);
+		when(shipType.engines()).thenReturn(new Engines(0.0));
 
 		ShipGroup shipGroup = mock(ShipGroup.class);
 		when(shipGroup.shipType()).thenReturn(shipType);

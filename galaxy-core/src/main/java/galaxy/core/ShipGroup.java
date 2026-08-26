@@ -82,4 +82,15 @@ public class ShipGroup {
 		this.destinationPlanet = destination;
 	}
 
+	public CargoType cargoType() {
+		return null;
+	}
+
+	public double cargoWeight() {
+		return 0;
+	}
+
+	public void loadCargo(CargoType cargoType, double value) {
+
+	}
 }

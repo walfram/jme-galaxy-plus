@@ -25,7 +25,7 @@ class DefineShipTypeTest {
 
 		ShipType drone = Fixtures.testShipTypeDrone();
 		ShipType updated = new ShipType(
-				drone.engines(), 1, 1.0, drone.shields(), drone.cargo(), "drone"
+				drone.engines(), new Weapons(1, 1.0), drone.shields(), drone.cargo(), "drone"
 		);
 
 		assertEquals(drone.name(), updated.name());
