@@ -56,4 +56,8 @@ public class ShipGroup {
 	public Id id() {
 		return id;
 	}
+
+	public double weight() {
+		return size * shipType.mass();
+	}
 }
