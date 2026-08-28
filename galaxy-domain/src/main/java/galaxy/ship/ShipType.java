@@ -11,4 +11,11 @@ public record ShipType(Engines engines, Weapons weapons, Shields shields, CargoH
 		return engineWeight + weaponsWeight + shieldsWeight + cargoWeight;
 	}
 
+	public double speed() {
+		double driveTech = 1.0;
+		double effectiveCargoCarried = 0.0;
+
+		return 20 * driveTech * (engines.mass() / (mass() + effectiveCargoCarried));
+	}
+
 }
