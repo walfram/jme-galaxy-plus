@@ -1,3 +1,10 @@
+### open questions
+
+- where to store ship types: race or context
+- where to store race ships: race or context
+- where to store planets: race or context
+- where to store tech levels: race or context
+
 ### todos
 
 - strategic (galaxy) view
