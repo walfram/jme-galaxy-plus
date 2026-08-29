@@ -1,5 +1,6 @@
 package galaxy.ship;
 
+import galaxy.CargoType;
 import galaxy.Id;
 import galaxy.Race;
 import galaxy.TechLevels;
@@ -14,6 +15,9 @@ public class ShipGroup {
 	private final ShipType shipType;
 	private final TechLevels techLevels;
 	private final int size;
+
+	private CargoType cargoType;
+	private double cargoWeight;
 
 	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size) {
 		this(
@@ -59,5 +63,27 @@ public class ShipGroup {
 
 	public double weight() {
 		return size * shipType.mass();
+	}
+
+	public void loadCargo(CargoType cargoType, double weight) {
+		double maxWeight = size * shipType.effectiveCargoWeight();
+		if (weight > maxWeight) {
+			throw new IllegalArgumentException("Cargo weight exceeds max weight");
+		}
+
+		this.cargoType = cargoType;
+		this.cargoWeight = weight;
+	}
+
+	public double cargoWeight() {
+		return cargoWeight;
+	}
+
+	public double speed() {
+		return shipType.speed(techLevels.engines(), cargoWeight / size);
+	}
+
+	public double maxCargoWeight() {
+		return shipType.effectiveCargoWeight();
 	}
 }
