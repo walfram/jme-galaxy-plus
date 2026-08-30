@@ -2,11 +2,15 @@ package hex.grid;
 
 import com.jme3.math.Vector3f;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 public final class HexCell {
 
 	private static final double SQRT_3 = Math.sqrt(3);
+
+	private static final int[][] NEIGHBOUR_OFFSETS = {{1, 0}, {1, -1}, {0, -1}, {-1, 0}, {-1, 1}, {0, 1}};
 
 	private final int q;
 	private final int r;
@@ -78,4 +82,9 @@ public final class HexCell {
 		return "HexCell[q=%s, r=%s, radius=%s]".formatted(q, r, radius);
 	}
 
+	public Collection<HexCell> neighbours() {
+		return Arrays.stream(NEIGHBOUR_OFFSETS)
+				.map(offset -> new HexCell(q + offset[0], r + offset[1], radius))
+				.toList();
+	}
 }

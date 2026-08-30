@@ -3,11 +3,21 @@ package hex.grid;
 import com.jme3.math.Vector3f;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CoordinateConvertTest {
+public class HexGridTest {
 
 	private final HexGrid hexGrid = new HexGrid(10.0);
+
+	@Test
+	void should_return_cell_neighbours() {
+		HexCell cell = new HexCell(1, 2, 10.0);
+
+		Collection<HexCell> neighbours = cell.neighbours();
+		assertEquals(6, neighbours.size());
+	}
 
 	@Test
 	void should_check_if_point_is_inside_cell() {

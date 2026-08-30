@@ -1,10 +1,16 @@
 package hex.grid;
 
+import com.jme3.math.Vector3f;
+
 public class HexGrid {
 	private final double radius;
 
 	public HexGrid(double radius) {
 		this.radius = radius;
+	}
+
+	public HexCell toCell(Vector3f point) {
+		return toCell(point.x, point.y);
 	}
 
 	public HexCell toCell(double x, double y) {
