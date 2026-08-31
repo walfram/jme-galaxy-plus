@@ -1,6 +1,7 @@
 package hex.grid;
 
 import com.jme3.math.Vector3f;
+import jme3utilities.math.noise.Generator;
 
 import java.util.*;
 
@@ -111,5 +112,32 @@ public final class HexCell {
 		}
 
 		return ring;
+	}
+
+	public Vector2d randomPoint(Generator generator) {
+		double hW = (SQRT_3 / 2.0) * radius; // half width
+		double hH = 0.5 * radius;           // half step height
+
+		// Select 1 of 3 rhombuses
+		int choice = generator.nextInt(3);
+		double u = generator.nextDouble();
+		double v = generator.nextDouble();
+
+		double x, y;
+		if (choice == 0) {
+			// Top-right rhombus
+			x = u * hW - v * hW;
+			y = u * hH + v * hH + (v * radius); // aligned along axes
+		} else if (choice == 1) {
+			// Bottom-right rhombus
+			x = u * hW + v * hW;
+			y = u * hH - v * (1.5 * radius);
+		} else {
+			// Left rhombus
+			x = -u * hW + v * 0;
+			y = u * hH + v * radius;
+		}
+
+		return new Vector2d(x, y);
 	}
 }
