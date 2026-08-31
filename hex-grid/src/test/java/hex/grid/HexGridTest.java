@@ -12,6 +12,17 @@ public class HexGridTest {
 	private final HexGrid hexGrid = new HexGrid(10.0);
 
 	@Test
+	void should_return_12_cells_for_ring_2() {
+		HexCell origin = hexGrid.cell(0, 0);
+
+		Collection<HexCell> ring1 = origin.neighbourRing(1);
+		assertEquals(6, ring1.size());
+
+		Collection<HexCell> ring2 = origin.neighbourRing(2);
+		assertEquals(12, ring2.size());
+	}
+
+	@Test
 	void should_return_cell_neighbours() {
 		HexCell cell = new HexCell(1, 2, 10.0);
 

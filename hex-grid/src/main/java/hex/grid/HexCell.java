@@ -2,9 +2,7 @@ package hex.grid;
 
 import com.jme3.math.Vector3f;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 public final class HexCell {
 
@@ -86,5 +84,32 @@ public final class HexCell {
 		return Arrays.stream(NEIGHBOUR_OFFSETS)
 				.map(offset -> new HexCell(q + offset[0], r + offset[1], radius))
 				.toList();
+	}
+
+	public Collection<HexCell> neighbourRing(int offset) {
+		Set<HexCell> ring = new HashSet<>();
+
+		if (offset <= 0) {
+			if (offset == 0) ring.add(new HexCell(q, r, radius));
+			return ring;
+		}
+
+		// Direction vectors for a pointy hex grid
+//		int[][] directions = {{1, 0}, {1, -1}, {0, -1}, {-1, 0}, {-1, 1}, {0, 1}};
+
+		// Start N steps away in direction 4 (bottom-left)
+		int currentQ = q + NEIGHBOUR_OFFSETS[4][0] * offset;
+		int currentR = r + NEIGHBOUR_OFFSETS[4][1] * offset;
+
+		// Travel along each of the 6 sides of length N
+		for (int i = 0; i < 6; i++) {
+			for (int step = 0; step < offset; step++) {
+				ring.add(new HexCell(currentQ, currentR, radius));
+				currentQ += NEIGHBOUR_OFFSETS[i][0];
+				currentR += NEIGHBOUR_OFFSETS[i][1];
+			}
+		}
+
+		return ring;
 	}
 }

@@ -37,4 +37,8 @@ public class HexGrid {
 
 		return new HexCell(q, r, radius);
 	}
+
+	public HexCell cell(int q, int r) {
+		return new HexCell(q, r, radius);
+	}
 }
