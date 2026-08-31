@@ -11,7 +11,7 @@ public class ShipGroup {
 
 	private final Id id;
 
-	private final Race race;
+	private final Race owner;
 	private final ShipType shipType;
 	private final TechLevels techLevels;
 	private final int size;
@@ -19,26 +19,25 @@ public class ShipGroup {
 	private CargoType cargoType;
 	private double cargoWeight;
 
-	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size) {
+	public ShipGroup(Race owner, ShipType shipType, int size) {
 		this(
 				new Id(UUID.randomUUID()),
-				race,
+				owner,
 				shipType,
-				techLevels,
 				size
 		);
 	}
 
-	public ShipGroup(Id id, Race race, ShipType shipType, TechLevels techLevels, int size) {
+	public ShipGroup(Id id, Race owner, ShipType shipType, int size) {
 		this.id = id;
-		this.race = race;
+		this.owner = owner;
 		this.shipType = shipType;
-		this.techLevels = new TechLevels(techLevels);
+		this.techLevels = new TechLevels(owner.techLevels());
 		this.size = size;
 	}
 
-	public Race race() {
-		return race;
+	public Race owner() {
+		return owner;
 	}
 
 	public void upgradeTechLevels(TechLevels techLevels) {

@@ -29,11 +29,11 @@ public class BattleTest {
 		for (Planet planet: planets) {
 			List<ShipGroup> shipGroups = context.findShipGroups(planet);
 
-			List<Race> involvedRaces = shipGroups.stream().map(ShipGroup::race).distinct().toList();
+			List<Race> involvedRaces = shipGroups.stream().map(ShipGroup::owner).distinct().toList();
 
 			Map<Race, List<ShipGroup>> filtered = new HashMap<>(involvedRaces.size());
 			for (ShipGroup shipGroup: shipGroups) {
-				filtered.computeIfAbsent(shipGroup.race(), race -> new ArrayList<>()).add(shipGroup);
+				filtered.computeIfAbsent(shipGroup.owner(), race -> new ArrayList<>()).add(shipGroup);
 			}
 
 			BattleProcessor processor = new BattleProcessor(filtered);

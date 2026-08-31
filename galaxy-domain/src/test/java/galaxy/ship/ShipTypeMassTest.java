@@ -84,7 +84,7 @@ public class ShipTypeMassTest {
 		Race race = Fixtures.race();
 
 		ShipType drone = ShipTypeFixtures.drone();
-		ShipGroup group = new ShipGroup(race, drone, race.techLevels(), 99);
+		ShipGroup group = new ShipGroup(race, drone, 99);
 
 		assertEquals(99.0, group.weight());
 	}

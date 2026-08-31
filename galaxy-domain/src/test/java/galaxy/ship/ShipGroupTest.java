@@ -18,7 +18,7 @@ public class ShipGroupTest {
 
 		ShipType drone = ShipTypeFixtures.drone();
 
-		ShipGroup group = new ShipGroup(race, drone, race.techLevels(), 1);
+		ShipGroup group = new ShipGroup(race, drone, 1);
 		assertEquals(80.0, group.maxFlightDistance());
 	}
 
@@ -28,7 +28,7 @@ public class ShipGroupTest {
 
 		ShipType drone = ShipTypeFixtures.drone();
 
-		ShipGroup group = new ShipGroup(race, drone, race.techLevels(), 1);
+		ShipGroup group = new ShipGroup(race, drone, 1);
 		assertEquals(40.0, group.maxFlightDistance());
 	}
 
