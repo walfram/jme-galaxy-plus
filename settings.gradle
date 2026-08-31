@@ -5,3 +5,4 @@ include 'shared'
 include 'galaxy-domain'
 
 include 'hex-grid'
+include 'map-generator'
