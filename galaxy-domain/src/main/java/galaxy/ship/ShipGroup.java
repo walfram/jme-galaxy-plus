@@ -41,7 +41,7 @@ public class ShipGroup {
 		return race;
 	}
 
-	public void updateTechLevels(TechLevels techLevels) {
+	public void upgradeTechLevels(TechLevels techLevels) {
 
 	}
 
@@ -85,5 +85,9 @@ public class ShipGroup {
 
 	public double maxCargoWeight() {
 		return shipType.effectiveCargoWeight();
+	}
+
+	public double maxFlightDistance() {
+		return 40.0 * techLevels().engines();
 	}
 }
