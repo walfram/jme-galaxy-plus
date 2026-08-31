@@ -41,7 +41,6 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 		List<Planet> planets = new ArrayList<>(planetCount);
 		List<List<Planet>> homeworlds = new ArrayList<>(raceCount);
 
-		// TODO generate planets ;)
 		Generator generator = new Generator(seed);
 		Function<Vector2d, Vector2d> dwOffset = (Vector2d pivot) -> {
 			double distance = generator.nextDouble(5.0, 10.0);
