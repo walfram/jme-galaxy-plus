@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class ShipGroupTest {
+public class ShipGroupSpeedTest {
 
 	private static final double DELTA = 1e-2;
 
