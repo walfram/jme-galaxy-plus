@@ -18,6 +18,10 @@ public class ShipGroupUpgradeProduction implements Production {
 		this.shipGroup = shipGroup;
 	}
 
+	public ShipGroup shipGroup() {
+		return shipGroup;
+	}
+
 	@Override
 	public void update(GameContext context) {
 		TechLevels shipTechLevels = shipGroup.techLevels();

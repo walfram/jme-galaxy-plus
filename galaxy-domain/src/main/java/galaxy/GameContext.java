@@ -40,6 +40,9 @@ public interface GameContext {
 
 	void removeShipGroup(ShipGroup shipGroup);
 
-	List<Production> findProductions();
+	List<Production> findProductions(Race race);
 
+	ShipType findShipType(Race race, String name);
+
+	List<ShipGroup> findShipGroups(Race race, ShipType shipType);
 }

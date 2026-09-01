@@ -16,6 +16,10 @@ public class ShipGroupProduction implements Production {
 		this.shipType = shipType;
 	}
 
+	public ShipType shipType() {
+		return shipType;
+	}
+
 	@Override
 	public void update(GameContext context) {
 		// TODO calculate size and other stuff
