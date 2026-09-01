@@ -5,7 +5,7 @@ import galaxy.Race;
 import galaxy.ship.ShipType;
 
 public class DefineShipTypeOrder implements Order {
-	public DefineShipTypeOrder(Race race, ShipType colonizer) {
+	public DefineShipTypeOrder(Race race, ShipType shipType) {
 
 	}
 }
