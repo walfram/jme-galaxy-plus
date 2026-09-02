@@ -1,0 +1,26 @@
+{
+  "races": {
+    "foo": { "tech": { "ENGINES": 1.0, "WEAPONS": 1.0, "SHIELDS": 1.0, "CARGO": 1.0 } },
+    "bar": { "tech": { "ENGINES": 1.0, "WEAPONS": 1.0, "SHIELDS": 1.0, "CARGO": 1.0 } },
+    "baz": { "tech": { "ENGINES": 1.0, "WEAPONS": 1.0, "SHIELDS": 1.0, "CARGO": 1.0 } }
+  },
+  "entities": {
+    "planets": [
+      {
+        "id": 1,
+        "transform": { "x": -68.1704, "y": 15.4104 },
+        "stats": { "size": 1000, "resources": 10 },
+        "state": { "owner": "foo", "production": { "type": "CAPITAL" } }
+      },
+      {
+        "id": 2,
+        "transform": { "x": 52.1527, "y": 104.8440 },
+        "stats": { "size": 1000, "resources": 10 },
+        "state": { "owner": "bar", "production": { "type": "SHIPS", "shipType": "drone" } }
+      }
+    ],
+    "fleets": [
+      { "id": 101, "owner": "bar", "type": "drone", "count": 99, "locationPlanetId": 2 }
+    ]
+  }
+}
