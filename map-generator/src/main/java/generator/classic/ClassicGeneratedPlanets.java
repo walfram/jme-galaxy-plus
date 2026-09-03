@@ -2,13 +2,12 @@ package generator.classic;
 
 import distribution.Deferred;
 import distribution.PlanetType;
+import galaxy.Planet;
+import galaxy.planet.properties.*;
 import hex.grid.Vector2d;
 import distribution.WeightedDistribution;
 import distribution.classic.ClassicPlanetDistribution;
 import galaxy.Id;
-import galaxy.planet.Planet;
-import galaxy.planet.properties.Industry;
-import galaxy.planet.properties.Population;
 import generator.GeneratedPlanets;
 import jme3utilities.math.noise.Generator;
 
@@ -57,13 +56,13 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 
 		List<Vector2d> origins = new HexGridOrigins(raceCount).asList(generator);
 		origins.stream()
-				.map(v -> new Planet(UUID.randomUUID().toString(), v.x(), v.y(), 1000.0, 10.0, new Industry(1000.0), new Population(1000.0)))
+				.map(v -> new Planet(new Id(), new Transform(v.x(), v.y()), new Size(1000.0), new Resources(10.0), new Industry(1000.0), new Population(1000.0)))
 				.map(p -> {
-					Vector2d p1Offset = dwOffset.apply(new Vector2d(p.x(), p.y()));
-					Planet p1 = new Planet(UUID.randomUUID().toString(), p1Offset.x(), p1Offset.y(), 500.0, 10.0, new Industry(500.0), new Population(500.0));
+					Vector2d p1Offset = dwOffset.apply(new Vector2d(p.transform().x(), p.transform().y()));
+					Planet p1 = new Planet(new Id(), new Transform(p1Offset.x(), p1Offset.y()), new Size(500.0), new Resources(10.0), new Industry(500.0), new Population(500.0));
 
-					Vector2d p2Offset = dwOffset.apply(new Vector2d(p.x(), p.y()));
-					Planet p2 = new Planet(UUID.randomUUID().toString(), p2Offset.x(), p2Offset.y(), 500.0, 10.0, new Industry(500.0), new Population(500.0));
+					Vector2d p2Offset = dwOffset.apply(new Vector2d(p.transform().x(), p.transform().y()));
+					Planet p2 = new Planet(new Id(), new Transform(p2Offset.x(), p2Offset.y()), new Size(500.0), new Resources(10.0), new Industry(500.0), new Population(500.0));
 
 					return List.of(p, p1, p2);
 				})

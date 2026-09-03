@@ -1,6 +1,6 @@
 package generator.classic;
 
-import galaxy.planet.Planet;
+import galaxy.Planet;
 import generator.GeneratedPlanets;
 import org.junit.jupiter.api.Test;
 

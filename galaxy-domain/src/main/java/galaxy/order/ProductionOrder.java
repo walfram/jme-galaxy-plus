@@ -1,10 +1,6 @@
 package galaxy.order;
 
-import galaxy.GameContext;
-import galaxy.Order;
-import galaxy.planet.Planet;
-import galaxy.Production;
-import galaxy.Race;
+import galaxy.*;
 
 public class ProductionOrder implements Order {
 	public ProductionOrder(Race race, Planet planet, Production production) {

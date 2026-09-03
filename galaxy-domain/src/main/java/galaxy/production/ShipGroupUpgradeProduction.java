@@ -1,7 +1,6 @@
 package galaxy.production;
 
 import galaxy.*;
-import galaxy.planet.Planet;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
 

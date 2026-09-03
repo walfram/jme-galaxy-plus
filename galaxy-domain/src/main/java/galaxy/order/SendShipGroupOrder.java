@@ -2,7 +2,7 @@ package galaxy.order;
 
 import galaxy.GameContext;
 import galaxy.Order;
-import galaxy.planet.Planet;
+import galaxy.Planet;
 import galaxy.Race;
 import galaxy.ship.ShipGroup;
 

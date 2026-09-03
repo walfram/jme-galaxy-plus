@@ -3,19 +3,19 @@ package galaxy.planet.properties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public final class Industry {
+public final class Materials {
 
 	private double value;
 
-	public Industry(double value) {
+	public Materials(JsonNode props) {
+		this(props.path("materials").asDouble());
+	}
+
+	public Materials(double value) {
 		this.value = value;
 	}
 
-	public Industry(JsonNode props) {
-		this(props.path("industry").asDouble());
-	}
-
-	public Industry() {
+	public Materials() {
 		this(0.0);
 	}
 
@@ -28,6 +28,6 @@ public final class Industry {
 	}
 
 	public void serializeTo(ObjectNode props) {
-		props.put("industry", value);
+		props.put("materials", value);
 	}
 }

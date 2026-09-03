@@ -1,6 +1,5 @@
 package galaxy;
 
-import galaxy.planet.Planet;
 import galaxy.ship.ShipGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

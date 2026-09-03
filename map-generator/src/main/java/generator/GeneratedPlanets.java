@@ -1,6 +1,6 @@
 package generator;
 
-import galaxy.planet.Planet;
+import galaxy.Planet;
 
 import java.util.List;
 

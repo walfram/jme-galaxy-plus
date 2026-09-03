@@ -1,10 +1,8 @@
 package galaxy.production;
 
 import galaxy.GameContext;
-import galaxy.planet.Planet;
+import galaxy.Planet;
 import galaxy.Production;
-import galaxy.planet.properties.CapitalStockpile;
-import galaxy.planet.properties.MaterialsStockpile;
 
 public class CapitalProduction implements Production {
 
@@ -21,22 +19,20 @@ public class CapitalProduction implements Production {
 	@Override
 	public void update(GameContext context) {
 		double effort = planet.effort();
-		double materials = planet.property(MaterialsStockpile.class).map(MaterialsStockpile::value).orElse(0.0);
+		double materials = planet.materials().value();
 
 		double extra = effort - materials * CAPITAL_COST;
 
 		double produced;
 		if (extra >= 0.0) {
-			double resources = planet.resources();
+			double resources = planet.resources().value();
 			produced = materials + extra * resources / (CAPITAL_COST * resources + 1.0);
-//			planet.materials().update(-materials);
-			planet.putProperty(new MaterialsStockpile(0.0)); // ???
+			planet.materials().update(-materials);
 		} else {
 			produced = effort / CAPITAL_COST;
-//			planet.materials().update(-produced);
-			planet.putProperty(new MaterialsStockpile(materials - produced));
+			planet.materials().update(-produced);
 		}
 
-		planet.putProperty(new CapitalStockpile(produced));
+		planet.industry().update(produced);
 	}
 }

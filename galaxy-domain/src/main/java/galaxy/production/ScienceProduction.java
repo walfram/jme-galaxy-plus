@@ -1,7 +1,6 @@
 package galaxy.production;
 
 import galaxy.*;
-import galaxy.planet.Planet;
 
 public class ScienceProduction implements Production {
 	private final Race race;

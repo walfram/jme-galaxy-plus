@@ -1,7 +1,5 @@
 package galaxy;
 
-import galaxy.planet.Planet;
-import galaxy.planet.PlanetProperty;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
 
@@ -15,8 +13,6 @@ public interface GameContext {
 	Race findRace(String id);
 
 	void changeOwner(Race race, Planet planet);
-
-	List<Planet> findPlanets(Race race, Class<? extends PlanetProperty> planetPropertyClass);
 
 	Planet findPlanet(Id id);
 
