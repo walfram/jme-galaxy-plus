@@ -1,6 +1,7 @@
 {
-  "factions": {
-    "foo": {
+  "factions": [
+    {
+      "id": "foo",
       "tech": {
         "ENGINES": 1.0,
         "WEAPONS": 1.0,
@@ -9,7 +10,8 @@
       },
       "shipTypes": {}
     },
-    "bar": {
+    {
+      "id": "bar",
       "tech": {
         "ENGINES": 1.0,
         "WEAPONS": 1.0,
@@ -25,7 +27,8 @@
         }
       }
     },
-    "baz": {
+    {
+      "id": "baz",
       "tech": {
         "ENGINES": 1.0,
         "WEAPONS": 1.0,
@@ -34,7 +37,7 @@
       },
       "shipTypes": {}
     }
-  },
+  ],
   "entities": {
     "planets": [
       {
@@ -574,13 +577,19 @@
         "stats": { "size": 4.098381405323359, "resources": 0.4555502885055359 }
       }
     ],
-    "fleets": [
+    "shipGroups": [
       {
         "id": 1,
         "owner": "bar",
         "type": "drone",
-        "count": 99,
-        "locationPlanetId": 2
+        "size": 99,
+        "locationPlanetId": 2,
+        "tech": {
+          "ENGINES": 1.0,
+          "WEAPONS": 1.0,
+          "SHIELDS": 1.0,
+          "CARGO": 1.0
+        }
       }
     ]
   }

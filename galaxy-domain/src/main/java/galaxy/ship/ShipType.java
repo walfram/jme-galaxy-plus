@@ -1,6 +1,18 @@
 package galaxy.ship;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public record ShipType(Engines engines, Weapons weapons, Shields shields, CargoHold cargoHold, String name) {
+
+	public ShipType(JsonNode src) {
+		this(
+				new Engines(src.path("engines").asDouble()),
+				new Weapons(src.path("weapons")),
+				new Shields(src.path("shields").asDouble()),
+				new CargoHold(src.path("cargoHold").asDouble()),
+				src.path("name").asText()
+		);
+	}
 
 	public double mass() {
 		double engineWeight = engines.mass();

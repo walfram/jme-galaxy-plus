@@ -1,5 +1,7 @@
 package galaxy;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.Objects;
 
 public class TechLevels {
@@ -26,6 +28,15 @@ public class TechLevels {
 				other.weapons,
 				other.shields,
 				other.cargo
+		);
+	}
+
+	public TechLevels(JsonNode src) {
+		this(
+				src.path("engines").asDouble(),
+				src.path("weapons").asDouble(),
+				src.path("shields").asDouble(),
+				src.path("cargo").asDouble()
 		);
 	}
 

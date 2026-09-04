@@ -1,18 +1,38 @@
 package galaxy;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.ship.ShipType;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Race {
+public final class Race {
 
 	private final Id id;
-	private final TechLevels techLevels = new TechLevels();
+	private final TechLevels techLevels;
+	private final List<ShipType> shipTypes;
 
 	public Race(Id id) {
-		this.id = id;
+		this(id, new TechLevels(), new ArrayList<>());
 	}
 
 	public Race(String id) {
 		this(new Id(id));
+	}
+
+	public Race(JsonNode src) {
+		this(
+				new Id(src),
+				new TechLevels(src.path("techLevels")),
+				src.path("shipTypes").valueStream().map(ShipType::new).toList()
+		);
+	}
+
+	public Race(Id id, TechLevels techLevels, List<ShipType> shipTypes) {
+		this.id = id;
+		this.techLevels = techLevels;
+		this.shipTypes = shipTypes;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.Id;
+import galaxy.Owner;
 import galaxy.Planet;
 import galaxy.planet.properties.Population;
 import galaxy.planet.properties.*;

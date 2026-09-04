@@ -1,17 +1,17 @@
 package galaxy.ship;
 
-import galaxy.CargoType;
-import galaxy.Id;
-import galaxy.Race;
-import galaxy.TechLevels;
+import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.*;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ShipGroup {
 
 	private final Id id;
 
-	private final Race owner;
+	private final Owner owner;
 	private final ShipType shipType;
 	private final TechLevels techLevels;
 	private final int size;
@@ -22,21 +22,39 @@ public class ShipGroup {
 	public ShipGroup(Race owner, ShipType shipType, int size) {
 		this(
 				new Id(UUID.randomUUID()),
-				owner,
+				new Owner(owner),
+				owner.techLevels(),
 				shipType,
 				size
 		);
 	}
 
-	public ShipGroup(Id id, Race owner, ShipType shipType, int size) {
+	public ShipGroup(Id id, Owner owner, TechLevels techLevels, ShipType shipType, int size) {
 		this.id = id;
 		this.owner = owner;
 		this.shipType = shipType;
-		this.techLevels = new TechLevels(owner.techLevels());
+		this.techLevels = new TechLevels(techLevels);
 		this.size = size;
 	}
 
-	public Race owner() {
+	public ShipGroup(JsonNode src, List<ShipType> shipTypes) {
+		this(
+				new Id(src.path("id").asText()),
+				new Owner(src.path("owner").asText()),
+				new TechLevels(src.path("tech")),
+				filteredShipType(shipTypes, src.path("type").asText()),
+				src.path("size").asInt()
+		);
+	}
+
+	private static ShipType filteredShipType(List<ShipType> shipTypes, String name) {
+		return shipTypes.stream()
+				.filter(type -> Objects.equals(type.name(), name))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("Unknown ShipType %s".formatted(name)));
+	}
+
+	public Owner owner() {
 		return owner;
 	}
 

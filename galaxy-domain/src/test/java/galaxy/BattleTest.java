@@ -28,9 +28,9 @@ public class BattleTest {
 		for (Planet planet: planets) {
 			List<ShipGroup> shipGroups = context.findShipGroups(planet);
 
-			List<Race> involvedRaces = shipGroups.stream().map(ShipGroup::owner).distinct().toList();
+			List<Owner> involvedRaces = shipGroups.stream().map(ShipGroup::owner).distinct().toList();
 
-			Map<Race, List<ShipGroup>> filtered = new HashMap<>(involvedRaces.size());
+			Map<Owner, List<ShipGroup>> filtered = new HashMap<>(involvedRaces.size());
 			for (ShipGroup shipGroup: shipGroups) {
 				filtered.computeIfAbsent(shipGroup.owner(), race -> new ArrayList<>()).add(shipGroup);
 			}

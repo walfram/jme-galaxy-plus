@@ -1,4 +1,4 @@
-package galaxy.planet.properties;
+package galaxy;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -19,6 +19,10 @@ public final class Owner {
 
 	public Owner() {
 		this((String) null);
+	}
+
+	public Owner(Race owner) {
+		this(owner.id().value());
 	}
 
 	@Override

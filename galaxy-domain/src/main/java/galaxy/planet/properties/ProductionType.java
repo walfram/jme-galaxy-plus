@@ -13,7 +13,8 @@ public interface ProductionType {
 			case "ships" -> new Ships();
 			case "upgrades" -> new Upgrade();
 			case "tech" -> new Tech();
-			default -> throw new IllegalArgumentException("Unknown production type: " + state.path("production").path("type").asText());
+			// default -> throw new IllegalArgumentException("Unknown production type: " + state.path("production").path("type").asText());
+			default -> null;
 		};
 	}
 
