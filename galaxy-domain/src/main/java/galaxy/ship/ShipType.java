@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public record ShipType(Engines engines, Weapons weapons, Shields shields, CargoHold cargoHold, String name) {
 
-	public ShipType(JsonNode src) {
+	public ShipType(String name, JsonNode src) {
 		this(
-				new Engines(src.path("engines").asDouble()),
-				new Weapons(src.path("weapons")),
-				new Shields(src.path("shields").asDouble()),
-				new CargoHold(src.path("cargoHold").asDouble()),
-				src.path("name").asText()
+				new Engines(src.get("engines").asDouble()),
+				new Weapons(src.get("weapons")),
+				new Shields(src.get("shields").asDouble()),
+				new CargoHold(src.get("cargo").asDouble()),
+				name
 		);
 	}
 

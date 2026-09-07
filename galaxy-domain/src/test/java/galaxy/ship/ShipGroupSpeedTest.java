@@ -1,9 +1,7 @@
 package galaxy.ship;
 
 import fixtures.ShipTypeFixtures;
-import galaxy.CargoType;
-import galaxy.Race;
-import galaxy.TechLevels;
+import galaxy.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,15 +14,17 @@ public class ShipGroupSpeedTest {
 	private static final double DELTA = 1e-2;
 
 	private final Race race = mock(Race.class);
+	private final Planet planet = mock(Planet.class);
 
 	@BeforeEach
 	void setup() {
 		when(race.techLevels()).thenReturn(new TechLevels());
+		when(race.id()).thenReturn(new Id("test"));
 	}
 
 	@Test
 	void test_mega_freighter_speed() {
-		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.megaFreighter(), 1);
+		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.megaFreighter(), 1, planet);
 		assertEquals(12.12, group.speed(), DELTA);
 
 		double maxCargoWeight = group.maxCargoWeight();
@@ -36,7 +36,7 @@ public class ShipGroupSpeedTest {
 
 	@Test
 	void test_freighter_speed() {
-		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.freighter(), 1);
+		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.freighter(), 1, planet);
 		assertEquals(12.12, group.speed(), DELTA);
 
 		double maxCargoWeight = group.maxCargoWeight();
@@ -50,7 +50,7 @@ public class ShipGroupSpeedTest {
 
 	@Test
 	void test_hauler_speed() {
-		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.hauler(), 1);
+		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.hauler(), 1, planet);
 		assertEquals(13.33, group.speed(), DELTA);
 
 		double maxCargoWeight = group.maxCargoWeight();
@@ -62,7 +62,7 @@ public class ShipGroupSpeedTest {
 
 	@Test
 	void test_battleship_speed() {
-		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.battleship(), 1);
+		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.battleship(), 1, planet);
 		assertEquals(6.60, group.speed(), DELTA);
 
 		double maxCargoWeight = group.maxCargoWeight();
@@ -74,7 +74,7 @@ public class ShipGroupSpeedTest {
 
 	@Test
 	void test_battle_cruiser_speed() {
-		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.battleCruiser(), 1);
+		ShipGroup group = new ShipGroup(race, ShipTypeFixtures.battleCruiser(), 1, planet);
 		assertEquals(10.0, group.speed(), DELTA);
 
 		double maxCargoWeight = group.maxCargoWeight();

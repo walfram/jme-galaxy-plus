@@ -18,32 +18,44 @@ public class ShipGroup {
 
 	private CargoType cargoType;
 	private double cargoWeight;
+	
+	private Location location;
 
-	public ShipGroup(Race owner, ShipType shipType, int size) {
+	public ShipGroup(Race owner, ShipType shipType, int size, Planet origin) {
 		this(
 				new Id(UUID.randomUUID()),
 				new Owner(owner),
 				owner.techLevels(),
 				shipType,
-				size
+				size,
+				new Location(origin)
 		);
 	}
 
-	public ShipGroup(Id id, Owner owner, TechLevels techLevels, ShipType shipType, int size) {
+	private ShipGroup(Id id, Owner owner, TechLevels techLevels, ShipType shipType, int size, Location location) {
 		this.id = id;
 		this.owner = owner;
 		this.shipType = shipType;
 		this.techLevels = new TechLevels(techLevels);
 		this.size = size;
+		this.location = location;
 	}
 
-	public ShipGroup(JsonNode src, List<ShipType> shipTypes) {
+	public ShipGroup(JsonNode src, List<Race> races, List<Planet> planets) {
 		this(
-				new Id(src.path("id").asText()),
-				new Owner(src.path("owner").asText()),
-				new TechLevels(src.path("tech")),
-				filteredShipType(shipTypes, src.path("type").asText()),
-				src.path("size").asInt()
+				new Id(src.get("id").asText()),
+				new Owner(src.get("owner").asText()),
+				new TechLevels(src.get("tech")),
+				filteredShipType(
+						races.stream()
+								.filter(race -> Objects.equals(race.id().value(), src.get("owner").asText()))
+								.findFirst()
+								.orElseThrow()
+								.shipTypes(),
+						src.get("type").asText()
+				),
+				src.get("size").asInt(), 
+				new Location(src.get("location"), planets)
 		);
 	}
 
@@ -106,5 +118,25 @@ public class ShipGroup {
 
 	public double maxFlightDistance() {
 		return 40.0 * techLevels().engines();
+	}
+
+	public Planet originPlanet() {
+		return location.origin();
+	}
+
+	public boolean inOrbit() {
+		return location.inOrbit();
+	}
+
+	public void sendTo(Planet destination) {
+		location = location.sendTo(destination);
+	}
+
+	public Planet destinationPlanet() {
+		return location.destination();
+	}
+
+	public boolean inHyperspace() {
+		return location.inHyperspace();
 	}
 }

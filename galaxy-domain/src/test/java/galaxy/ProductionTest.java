@@ -47,7 +47,7 @@ public class ProductionTest {
 		Planet planet = planet();
 
 		ShipType drone = new ShipType(new Engines(1.0), new Weapons(0, 0.0), new Shields(0.0), new CargoHold(0.0), "drone");
-		ShipGroup shipGroup = new ShipGroup(race, drone, 99);
+		ShipGroup shipGroup = new ShipGroup(race, drone, 99, planet);
 
 		race.techLevels().updateEngines(1.0);
 

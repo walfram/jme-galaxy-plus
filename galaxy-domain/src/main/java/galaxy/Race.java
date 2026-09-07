@@ -24,8 +24,8 @@ public final class Race {
 	public Race(JsonNode src) {
 		this(
 				new Id(src),
-				new TechLevels(src.path("techLevels")),
-				src.path("shipTypes").valueStream().map(ShipType::new).toList()
+				new TechLevels(src.get("techLevels")),
+				src.get("shipTypes").properties().stream().map(e -> new ShipType(e.getKey(), e.getValue())).toList()
 		);
 	}
 
@@ -60,4 +60,9 @@ public final class Race {
 	public TechLevels techLevels() {
 		return techLevels;
 	}
+
+	public List<ShipType> shipTypes() {
+		return shipTypes;
+	}
+
 }

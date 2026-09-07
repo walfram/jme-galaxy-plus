@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public record Size(double value) {
 	public Size(JsonNode stats) {
-		this(stats.path("size").asDouble());
+		this(stats.get("size").asDouble());
 	}
 
 	public void serializeTo(ObjectNode stats) {

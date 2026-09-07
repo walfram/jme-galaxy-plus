@@ -2,10 +2,12 @@ package galaxy.ship;
 
 import fixtures.ShipTypeFixtures;
 import galaxy.Fixtures;
+import galaxy.Planet;
 import galaxy.Race;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class ShipTypeMassTest {
 
@@ -84,7 +86,7 @@ public class ShipTypeMassTest {
 		Race race = Fixtures.race();
 
 		ShipType drone = ShipTypeFixtures.drone();
-		ShipGroup group = new ShipGroup(race, drone, 99);
+		ShipGroup group = new ShipGroup(race, drone, 99, mock(Planet.class));
 
 		assertEquals(99.0, group.weight());
 	}

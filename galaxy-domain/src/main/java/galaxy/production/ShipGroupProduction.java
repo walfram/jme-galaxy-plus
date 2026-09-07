@@ -25,7 +25,7 @@ public class ShipGroupProduction implements Production {
 
 		int size = 32;
 
-		ShipGroup group = new ShipGroup(race, shipType, size);
+		ShipGroup group = new ShipGroup(race, shipType, size, planet);
 
 		context.createShipGroup(race, planet, group);
 	}

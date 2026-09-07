@@ -8,7 +8,7 @@ import java.util.UUID;
 public record Id(String value) {
 
 	public Id(JsonNode src) {
-		this(src.path("id").asText());
+		this(src.get("id").asText());
 	}
 
 	public Id(UUID uuid) {

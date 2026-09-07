@@ -41,4 +41,6 @@ public interface GameContext {
 	ShipType findShipType(Race race, String name);
 
 	List<ShipGroup> findShipGroups(Race race, ShipType shipType);
+
+	List<ShipGroup> shipGroups();
 }

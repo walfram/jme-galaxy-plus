@@ -21,12 +21,12 @@ public class Planet {
 
 	public Planet(JsonNode src) {
 		this(
-				new Id(src.path("id").asText()),
+				new Id(src.get("id").asText()),
 
-				new Transform(src.path("transform")),
+				new Transform(src.get("transform")),
 
-				new Size(src.path("stats")),
-				new Resources(src.path("stats")),
+				new Size(src.get("stats")),
+				new Resources(src.get("stats")),
 
 				new Population(src.path("props")),
 				new Industry(src.path("props")),
@@ -185,5 +185,9 @@ public class Planet {
 		ObjectNode state = root.putObject("state");
 		productionType.serializeTo(state);
 		owner.serializeTo(state);
+	}
+
+	public double distanceTo(Planet destination) {
+		return transform.distanceTo(destination.transform());
 	}
 }

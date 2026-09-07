@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameMetadata": {
+    "gameName": "GalaxyNG_Campaign_1",
+    "turnNumber": 42,
+    "timestamp": "2026-09-06T12:00:00Z",
+    "galaxySize": 500.0,
+    "gameOptions": {
+      "battleProtocol": false,
+      "sortGroups": true,
+      "autoUnload": true
+    }
+  },
+  "races": [
+    {
+      "id": "race_1",
+      "name": "Vogons",
+      "playerName": "Arthur Dent",
+      "email": "arthur@example.com",
+      "isEliminated": false,
+      "technologies": {
+        "drive": 2.5,
+        "weapons": 1.8,
+        "shields": 2.1,
+        "cargo": 1.5
+      },
+      "alliances": ["race_2"],
+      "playerOptions": {
+        "anonymous": false,
+        "autoUnload": true,
+        "sortGroups": true,
+        "machineReport": false
+      }
+    }
+  ],
+  "shipDesigns": [
+    {
+      "raceId": "race_1",
+      "name": "Hauler",
+      "driveMass": 2.0,
+      "attacks": 0,
+      "weaponsMass": 0.0,
+      "shieldsMass": 0.0,
+      "cargoMass": 1.0,
+      "shipMass": 3.0
+    }
+  ],
+  "planets": [
+    {
+      "id": "67",
+      "name": "Vogonia",
+      "x": 74.16,
+      "y": 23.86,
+      "ownerId": "race_1",
+      "size": 464.15,
+      "population": 464.15,
+      "industry": 464.15,
+      "resources": 1.65,
+      "stockpiles": {
+        "capital": 0.0,
+        "materials": 0.28,
+        "colonists": 5.85
+      },
+      "production": {
+        "orderType": "SHIP",
+        "target": "Hauler",
+        "excessProduction": 1.21
+      },
+      "routes": {
+        "capital": null,
+        "materials": "Planet_82",
+        "colonists": "Planet_82",
+        "empty": null
+      },
+      "visibility": {
+        "isScanned": true,
+        "knownBy": ["race_1", "race_3"]
+      }
+    }
+  ],
+  "fleets": [
+    {
+      "name": "Defenders",
+      "ownerId": "race_1",
+      "groupIds": [64, 65, 66]
+    }
+  ],
+  "groups": [
+    {
+      "id": 70,
+      "ownerId": "race_1",
+      "shipTypeName": "Cargo0",
+      "count": 11,
+      "fleetName": null,
+      "technologies": {
+        "drive": 7.11,
+        "weapons": 0.0,
+        "shields": 0.0,
+        "cargo": 1.0
+      },
+      "location": {
+        "state": "hyperspace",
+        "originPlanet": "Lima_Bean",
+        "destinationPlanet": "Hops",
+        "distanceRemaining": 15.36,
+        "speed": 7.11
+      },
+      "cargo": {
+        "type": "COL",
+        "amountPerShip": 1.10
+      },
+      "pendingOrders": [
+        {
+          "command": "unload",
+          "target": "Hops",
+          "shipCount": 0
+        }
+      ]
+    }
+  ],
+  "turnEvents": {
+    "battles": [],
+    "bombings": [],
+    "messages": []
+  }
+}
