@@ -6,3 +6,4 @@ include 'galaxy-domain'
 
 include 'hex-grid'
 include 'map-generator'
+include 'galaxy-alternative'
