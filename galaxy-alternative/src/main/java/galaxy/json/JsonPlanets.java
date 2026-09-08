@@ -16,7 +16,7 @@ public class JsonPlanets implements Planets {
 		this.src = src;
 
 		this.planets = new HashMap<>(src.size());
-		src.valueStream().<Planet>map(JsonPlanet::new).forEach(p -> planets.put(p.id(), p));
+		src.valueStream().<Planet>map(JsonPlanet::new).forEach(planet -> planets.put(planet.id(), planet));
 	}
 
 	@Override

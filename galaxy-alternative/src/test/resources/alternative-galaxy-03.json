@@ -828,7 +828,7 @@
           "ENGINES": 1.8,
           "WEAPONS": 1.6,
           "SHIELDS": 1.3,
-          "CARGO": 0.9
+          "CARGO": 1.9
         },
         "location": {
           "state": "HYPERSPACE",
@@ -836,6 +836,10 @@
           "destId": 11,
           "distanceRemaining": 20.0,
           "speed": 6.5
+        },
+        "cargo": {
+          "type": "COLONISTS",
+          "amountPerShip": 12.0
         }
       },
       {

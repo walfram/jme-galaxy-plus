@@ -1,11 +1,5 @@
 package galaxy;
 
-import galaxy.ship.CargoHold;
-import galaxy.ship.Engines;
-import galaxy.ship.Shields;
-import galaxy.ship.Weapons;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

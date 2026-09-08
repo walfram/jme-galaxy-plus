@@ -8,4 +8,6 @@ public interface ShipGroups {
 	List<ShipGroup> all();
 
 	List<ShipGroup> byRaceId(Id id);
+
+	ShipGroup byGroupId(String number);
 }

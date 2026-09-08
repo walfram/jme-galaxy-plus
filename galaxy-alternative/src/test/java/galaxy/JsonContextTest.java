@@ -3,6 +3,8 @@ package galaxy;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import galaxy.json.JsonGameContext;
+import galaxy.ship.Cargo;
+import galaxy.ship.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -78,6 +80,30 @@ public class JsonContextTest {
 		List<ShipGroup> zalthorShips = context.shipGroups().byRaceId(zalthor.id());
 		assertNotNull(zalthorShips);
 		assertEquals(3, zalthorShips.size());
+	}
+
+	@Test
+	void should_read_ship_group_by_id() {
+		ShipGroup group = context.shipGroups().byGroupId("8");
+		assertNotNull(group);
+
+		assertEquals("krynn", group.owner());
+		assertEquals("battleship", group.type());
+		assertEquals(2, group.size());
+
+		assertEquals(1.8, group.techLevels().engines());
+		assertEquals(1.6, group.techLevels().weapons());
+		assertEquals(1.3, group.techLevels().shields());
+		assertEquals(1.9, group.techLevels().cargo());
+
+		Location location = group.location();
+		assertNotNull(location);
+
+		Cargo cargo = group.cargo();
+		assertNotNull(cargo);
+
+		assertEquals(CargoType.COLONISTS, cargo.type());
+		assertEquals(12.0, cargo.amountPerShip());
 	}
 
 	@Test
