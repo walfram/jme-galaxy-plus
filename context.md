@@ -27,3 +27,11 @@
 - ProductionPhase - executes production (maybe upgrade phase not needed?)
 - UnloadPhase - ship groups unload cargo
 - VictoryCheck - checks win conditions
+
+### Production
+- Materials
+- Capital
+- Science
+- Tech
+- Ships
+- Upgrade

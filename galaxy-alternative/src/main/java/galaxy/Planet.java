@@ -1,18 +1,19 @@
 package galaxy;
 
-import galaxy.planet.Props;
-import galaxy.planet.State;
-import galaxy.planet.Stats;
-import galaxy.planet.Transform;
-
 public interface Planet {
 	String id();
 
-	Transform transform();
+	double x();
+	double y();
 
-	Stats stats();
+	double size();
+	double resources();
 
-	Props props();
+	double industry();
+	double population();
+	double materials();
+	String name();
 
-	State state();
+	String owner();
+
 }

@@ -142,20 +142,6 @@
             "type": "CAPITAL",
             "excess": 12.5
           }
-        },
-        "__comment": "// TODO remove logistics",
-        "logistics": {
-          "stockpiles": {
-            "capital": 500.0,
-            "materials": 1200.0,
-            "colonists": 0.0
-          },
-          "routes": {
-            "capital": null,
-            "materials": 4,
-            "colonists": 7,
-            "empty": 8
-          }
         }
       },
       {
@@ -180,19 +166,6 @@
             "shipType": "destroyer",
             "excess": 0.0
           }
-        },
-        "logistics": {
-          "stockpiles": {
-            "capital": 100.0,
-            "materials": 500.0,
-            "colonists": 0.0
-          },
-          "routes": {
-            "capital": null,
-            "materials": null,
-            "colonists": null,
-            "empty": null
-          }
         }
       },
       {
@@ -216,19 +189,6 @@
             "type": "WEAPONS",
             "excess": 0.0
           }
-        },
-        "logistics": {
-          "stockpiles": {
-            "capital": 0.0,
-            "materials": 2000.0,
-            "colonists": 0.0
-          },
-          "routes": {
-            "capital": 6,
-            "materials": null,
-            "colonists": 11,
-            "empty": null
-          }
         }
       },
       {
@@ -251,19 +211,6 @@
           "production": {
             "type": "MATERIALS",
             "excess": 0.0
-          }
-        },
-        "logistics": {
-          "stockpiles": {
-            "capital": 0.0,
-            "materials": 800.0,
-            "colonists": 0.0
-          },
-          "routes": {
-            "capital": null,
-            "materials": 1,
-            "colonists": null,
-            "empty": null
           }
         }
       },
@@ -289,19 +236,6 @@
             "shipType": "hauler",
             "excess": 4.2
           }
-        },
-        "logistics": {
-          "stockpiles": {
-            "capital": 50.0,
-            "materials": 300.0,
-            "colonists": 15.0
-          },
-          "routes": {
-            "capital": null,
-            "materials": null,
-            "colonists": 11,
-            "empty": null
-          }
         }
       },
       {
@@ -324,19 +258,6 @@
           "production": {
             "type": "CAPITAL",
             "excess": 0.0
-          }
-        },
-        "logistics": {
-          "stockpiles": {
-            "capital": 100.0,
-            "materials": 100.0,
-            "colonists": 5.0
-          },
-          "routes": {
-            "capital": 3,
-            "materials": null,
-            "colonists": null,
-            "empty": null
           }
         }
       },

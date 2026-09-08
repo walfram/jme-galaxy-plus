@@ -2,10 +2,6 @@ package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
-import galaxy.planet.Props;
-import galaxy.planet.State;
-import galaxy.planet.Stats;
-import galaxy.planet.Transform;
 
 public class JsonPlanet implements Planet {
 	private final JsonNode src;
@@ -20,22 +16,48 @@ public class JsonPlanet implements Planet {
 	}
 
 	@Override
-	public Transform transform() {
-		return new JsonTransform(src.get("transform"));
+	public double x() {
+		return src.get("x").asDouble();
 	}
 
 	@Override
-	public Stats stats() {
-		return new JsonStats(src.get("stats"));
+	public double y() {
+		return src.get("y").asDouble();
 	}
 
 	@Override
-	public Props props() {
-		return new JsonProps(src.get("props"));
+	public double size() {
+		return src.get("size").asDouble();
 	}
 
 	@Override
-	public State state() {
-		return new JsonState(src.path("state"));
+	public double resources() {
+		return src.get("resources").asDouble();
 	}
+
+	@Override
+	public double industry() {
+		return src.path("industry").asDouble();
+	}
+
+	@Override
+	public double population() {
+		return src.path("population").asDouble();
+	}
+
+	@Override
+	public double materials() {
+		return src.path("materials").asDouble();
+	}
+
+	@Override
+	public String name() {
+		return src.get("name").asText();
+	}
+
+	@Override
+	public String owner() {
+		return src.path("owner").asText();
+	}
+
 }

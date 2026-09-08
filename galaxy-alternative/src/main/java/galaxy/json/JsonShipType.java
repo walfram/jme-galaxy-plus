@@ -12,6 +12,11 @@ public class JsonShipType implements ShipType {
 	}
 
 	@Override
+	public String name() {
+		return src.get("name").asText();
+	}
+
+	@Override
 	public double engines() {
 		return src.get("engines").asDouble();
 	}

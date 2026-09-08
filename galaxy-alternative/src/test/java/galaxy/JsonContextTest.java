@@ -110,38 +110,36 @@ public class JsonContextTest {
 	void should_read_uninhabited_planet() {
 		Planet planet = context.planets().planetById("30");
 
-		assertEquals(70.0, planet.transform().x());
-		assertEquals(-110.0, planet.transform().y());
+		assertEquals(70.0, planet.x());
+		assertEquals(-110.0, planet.y());
 
-		assertEquals(180.0, planet.stats().size());
-		assertEquals(0.8, planet.stats().resources());
+		assertEquals(180.0, planet.size());
+		assertEquals(0.8, planet.resources());
 
-		assertEquals(0.0, planet.props().industry());
-		assertEquals(0.0, planet.props().population());
-		assertEquals(0.0, planet.props().materials());
-		assertEquals("WH-661", planet.props().name());
+		assertEquals(0.0, planet.industry());
+		assertEquals(0.0, planet.population());
+		assertEquals(0.0, planet.materials());
+		assertEquals("WH-661", planet.name());
 
-		assertNull(planet.state().owner());
-		assertNull(planet.state().production());
+		assertNull(planet.owner());
 	}
 
 	@Test
 	void should_read_inhabited_planet() {
 		Planet planet = context.planets().planetById("1");
 
-		assertEquals(1.0, planet.transform().x());
-		assertEquals(2.0, planet.transform().y());
+		assertEquals(1.0, planet.x());
+		assertEquals(2.0, planet.y());
 
-		assertEquals(1000.0, planet.stats().size());
-		assertEquals(10.0, planet.stats().resources());
+		assertEquals(1000.0, planet.size());
+		assertEquals(10.0, planet.resources());
 
-		assertEquals(1000.0, planet.props().industry());
-		assertEquals(1000.0, planet.props().population());
-		assertEquals(0.0, planet.props().materials());
-		assertEquals("Terra", planet.props().name());
+		assertEquals(1000.0, planet.industry());
+		assertEquals(1000.0, planet.population());
+		assertEquals(0.0, planet.materials());
+		assertEquals("Terra", planet.name());
 
-		assertEquals("terran", planet.state().owner());
-		assertNotNull(planet.state().production());
+		assertEquals("terran", planet.owner());
 	}
 
 }
