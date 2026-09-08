@@ -1,4 +1,8 @@
 package galaxy.planet;
 
-public record Stats(Size size, Resources resources) {
+public interface Stats {
+
+	double size();
+	double resources();
+
 }

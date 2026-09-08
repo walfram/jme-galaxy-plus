@@ -3,52 +3,119 @@ package galaxy;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import galaxy.json.JsonGameContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonContextTest {
 
 	private final ObjectMapper mapper = new ObjectMapper();
+	private GameContext context;
+
+	@BeforeEach
+	void setUp() throws IOException {
+		JsonNode root = mapper.readTree(getClass().getResourceAsStream("/alternative-galaxy-03.json"));
+		context = new JsonGameContext(root);
+	}
 
 	@Test
-	void should_read_context_from_json() throws IOException {
-		JsonNode root = mapper.readTree(getClass().getResourceAsStream("/alternative-galaxy-03.json"));
-		GameContext context = new JsonGameContext(root);
-
+	void should_read_factions() {
 		Factions factions = context.factions();
 		assertNotNull(factions);
 		assertEquals(3, factions.size());
 
-		Race terran = factions.raceById("terran");
+		assertNotNull(factions.raceById("terran"));
+		assertNotNull(factions.raceById("zalthor"));
+		assertNotNull(factions.raceById("krynn"));
+	}
+
+	@Test
+	void should_read_terran_ship_types() {
+		Race terran = context.factions().raceById("terran");
 		assertNotNull(terran);
-
 		assertEquals(3, terran.shipTypes().size());
+	}
 
+	@Test
+	void should_read_terran_scout_ship_type_details() {
+		Race terran = context.factions().raceById("terran");
 		ShipType terranScout = terran.shipTypes().typeById("scout");
-		assertNotNull(terranScout);
 
+		assertNotNull(terranScout);
 		assertEquals(2.0, terranScout.engines());
 		assertEquals(0, terranScout.weapons().guns());
 		assertEquals(0.0, terranScout.weapons().caliber());
 		assertEquals(1.0, terranScout.shields());
 		assertEquals(0.0, terranScout.cargo());
+	}
 
-		Race zalthor = factions.raceById("zalthor");
-		assertNotNull(zalthor);
-
-		Race krynn = factions.raceById("krynn");
-		assertNotNull(krynn);
-
+	@Test
+	void should_read_planets() {
 		Planets planets = context.planets();
 		assertNotNull(planets);
 		assertEquals(30, planets.size());
 
+		assertNotNull(planets.planetById("1"));
+		assertNotNull(planets.planetById("30"));
+	}
+
+	@Test
+	void should_read_ship_groups() {
 		ShipGroups shipGroups = context.shipGroups();
 		assertNotNull(shipGroups);
 		assertEquals(9, shipGroups.size());
+	}
+
+	@Test
+	void should_filter_ship_groups_by_race() {
+		Race zalthor = context.factions().raceById("zalthor");
+		assertNotNull(zalthor);
+
+		List<ShipGroup> zalthorShips = context.shipGroups().byRaceId(zalthor.id());
+		assertNotNull(zalthorShips);
+		assertEquals(3, zalthorShips.size());
+	}
+
+	@Test
+	void should_read_uninhabited_planet() {
+		Planet planet = context.planets().planetById("30");
+
+		assertEquals(70.0, planet.transform().x());
+		assertEquals(-110.0, planet.transform().y());
+
+		assertEquals(180.0, planet.stats().size());
+		assertEquals(0.8, planet.stats().resources());
+
+		assertEquals(0.0, planet.props().industry());
+		assertEquals(0.0, planet.props().population());
+		assertEquals(0.0, planet.props().materials());
+		assertEquals("WH-661", planet.props().name());
+
+		assertNull(planet.state().owner());
+		assertNull(planet.state().production());
+	}
+
+	@Test
+	void should_read_inhabited_planet() {
+		Planet planet = context.planets().planetById("1");
+
+		assertEquals(1.0, planet.transform().x());
+		assertEquals(2.0, planet.transform().y());
+
+		assertEquals(1000.0, planet.stats().size());
+		assertEquals(10.0, planet.stats().resources());
+
+		assertEquals(1000.0, planet.props().industry());
+		assertEquals(1000.0, planet.props().population());
+		assertEquals(0.0, planet.props().materials());
+		assertEquals("Terra", planet.props().name());
+
+		assertEquals("terran", planet.state().owner());
+		assertNotNull(planet.state().production());
 	}
 
 }

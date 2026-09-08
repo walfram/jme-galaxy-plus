@@ -1,4 +1,10 @@
 package galaxy.planet;
 
-public record Props(Industry industry, Population population, Materials materials, String name) {
+public interface Props {
+
+	double industry();
+	double population();
+	double materials();
+	String name();
+
 }

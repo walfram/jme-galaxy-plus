@@ -1,7 +1,8 @@
 package galaxy.planet;
 
-public record State(Owner owner, Production production) {
-	public State() {
-		this(null, null);
-	}
+public interface State {
+
+	String owner();
+	Production production();
+
 }
