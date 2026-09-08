@@ -1,7 +1,6 @@
 {
-  "factions": [
-    {
-      "id": "terran",
+  "factions": {
+    "terran" : {
       "techLevels": { "ENGINES": 1.5, "WEAPONS": 1.2, "SHIELDS": 1.4, "CARGO": 1.0 },
       "alliances": ["krynn"],
       "shipTypes": {
@@ -10,8 +9,7 @@
         "freighter": { "engines": 3.0, "weapons": {"guns": 0, "caliber": 0.0}, "shields": 2.0, "cargo": 10.0 }
       }
     },
-    {
-      "id": "zalthor",
+    "zalthor" : {
       "techLevels": { "ENGINES": 1.2, "WEAPONS": 1.5, "SHIELDS": 1.1, "CARGO": 1.3 },
       "alliances": [],
       "shipTypes": {
@@ -20,8 +18,7 @@
         "hauler": { "engines": 2.5, "weapons": {"guns": 0, "caliber": 0.0}, "shields": 1.0, "cargo": 15.0 }
       }
     },
-    {
-      "id": "krynn",
+    "krynn": {
       "techLevels": { "ENGINES": 1.8, "WEAPONS": 1.6, "SHIELDS": 1.3, "CARGO": 0.9 },
       "alliances": ["terran"],
       "shipTypes": {
@@ -30,7 +27,7 @@
         "colony_ship": { "engines": 2.0, "weapons": {"guns": 0, "caliber": 0.0}, "shields": 5.0, "cargo": 20.0 }
       }
     }
-  ],
+  },
   "entities": {
     "planets": [
       {
