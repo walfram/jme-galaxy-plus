@@ -15,5 +15,4 @@ public interface Planet {
 	String name();
 
 	String owner();
-
 }

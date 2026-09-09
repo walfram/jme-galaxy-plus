@@ -57,7 +57,7 @@ public class JsonPlanet implements Planet {
 
 	@Override
 	public String owner() {
-		return src.path("owner").asText();
+		return src.has("owner") ? src.path("owner").asText() : null;
 	}
 
 }
