@@ -1,10 +1,7 @@
 package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.Factions;
-import galaxy.GameContext;
-import galaxy.Planets;
-import galaxy.ShipGroups;
+import galaxy.*;
 
 public class JsonGameContext implements GameContext {
 	private final JsonNode root;
@@ -26,5 +23,10 @@ public class JsonGameContext implements GameContext {
 	@Override
 	public ShipGroups shipGroups() {
 		return new JsonShipGroups(root.get("entities").get("shipGroups"));
+	}
+
+	@Override
+	public Productions productions() {
+		return null;
 	}
 }

@@ -2,14 +2,14 @@ package galaxy.planet.derived;
 
 import galaxy.Planet;
 
-public final class Capital {
+public final class Effort {
 	private final Planet planet;
 
-	public Capital(Planet planet) {
+	public Effort(Planet planet) {
 		this.planet = planet;
 	}
 
 	public double value() {
-		return 0;
+		return 0.75 * planet.industry() + 0.25 * planet.population();
 	}
 }

@@ -1,5 +1,5 @@
 package galaxy;
 
 public interface Phase {
-	GameContext modify(GameContext context);
+	GameContext process(GameContext context);
 }
