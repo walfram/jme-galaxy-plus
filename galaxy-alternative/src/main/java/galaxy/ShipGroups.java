@@ -7,5 +7,5 @@ public interface ShipGroups {
 
 	List<ShipGroup> byRaceId(Id id);
 
-	ShipGroup byGroupId(String number);
+	ShipGroup byGroupId(String id);
 }

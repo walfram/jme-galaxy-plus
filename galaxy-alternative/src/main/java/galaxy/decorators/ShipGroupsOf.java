@@ -25,7 +25,7 @@ public class ShipGroupsOf implements ShipGroups {
 	}
 
 	@Override
-	public ShipGroup byGroupId(String number) {
+	public ShipGroup byGroupId(String id) {
 		return null;
 	}
 }

@@ -36,7 +36,7 @@ public class JsonShipGroups implements ShipGroups {
 		Race race = factions.raceById(id.value());
 
 		return src.valueStream()
-				.filter(json -> json.get("raceId").asText().equals(id.toString()))
+				.filter(json -> json.get("owner").asText().equals(id.value()))
 				.<ShipGroup>map(json -> new JsonShipGroup(json, race.shipTypes().typeById(json.get("type").asText())))
 				.toList();
 	}
@@ -47,7 +47,7 @@ public class JsonShipGroups implements ShipGroups {
 				.filter(json -> json.get("id").asText().equals(id))
 				.findFirst().orElseThrow();
 
-		Race race = factions.raceById(groupJson.get("raceId").asText());
+		Race race = factions.raceById(groupJson.get("owner").asText());
 		ShipType shipType = race.shipTypes().typeById(groupJson.get("type").asText());
 
 		return new JsonShipGroup(groupJson, shipType);

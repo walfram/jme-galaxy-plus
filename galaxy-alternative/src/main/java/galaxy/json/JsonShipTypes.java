@@ -19,7 +19,7 @@ public final class JsonShipTypes implements ShipTypes {
 
 	@Override
 	public ShipType typeById(String id) {
-		return new JsonShipType(src.get(id));
+		return new JsonShipType(src.get(id), id);
 	}
 
 }

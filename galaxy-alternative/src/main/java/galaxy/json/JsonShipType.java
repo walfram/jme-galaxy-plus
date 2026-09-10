@@ -6,14 +6,16 @@ import galaxy.ship.*;
 
 public class JsonShipType implements ShipType {
 	private final JsonNode src;
+	private final String name;
 
-	public JsonShipType(JsonNode src) {
+	public JsonShipType(JsonNode src, String name) {
 		this.src = src;
+		this.name = name;
 	}
 
 	@Override
 	public String name() {
-		return src.get("name").asText();
+		return name;
 	}
 
 	@Override
