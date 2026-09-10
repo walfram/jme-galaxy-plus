@@ -169,7 +169,7 @@
         "fleetId": "Logistics",
         "tech": { "ENGINES": 1.5, "WEAPONS": 1.2, "SHIELDS": 1.4, "CARGO": 1.0 },
         "location": { "state": "ORBIT", "originId": 4 },
-        "cargo": { "type": "MATERIALS", "amountPerShip": 15.0 }
+        "cargo": { "type": "MATERIALS", "quantity": 15.0 }
       },
       {
         "id": 4,
@@ -195,7 +195,7 @@
         "size": 8,
         "tech": { "ENGINES": 1.2, "WEAPONS": 1.5, "SHIELDS": 1.1, "CARGO": 1.3 },
         "location": { "state": "ORBIT", "originId": 5 },
-        "cargo": { "type": "COLONISTS", "amountPerShip": 12.0 },
+        "cargo": { "type": "COLONISTS", "quantity": 12.0 },
         "orders": [ { "cmd": "LOAD", "type": "COLONISTS", "amount": 15.0 } ]
       },
       {
@@ -221,7 +221,7 @@
         "size": 5,
         "tech": { "ENGINES": 1.8, "WEAPONS": 1.6, "SHIELDS": 1.3, "CARGO": 0.9 },
         "location": { "state": "ORBIT", "originId": 6 },
-        "cargo": { "type": "COLONISTS", "amountPerShip": 18.0 }
+        "cargo": { "type": "COLONISTS", "quantity": 18.0 }
       }
     ],
     "fleets": [

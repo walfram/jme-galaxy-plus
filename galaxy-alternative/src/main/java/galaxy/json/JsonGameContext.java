@@ -22,7 +22,7 @@ public class JsonGameContext implements GameContext {
 
 	@Override
 	public ShipGroups shipGroups() {
-		return new JsonShipGroups(root.get("entities").get("shipGroups"));
+		return new JsonShipGroups(root.get("entities").get("shipGroups"), factions(), planets());
 	}
 
 	@Override

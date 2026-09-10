@@ -1,6 +1,7 @@
 package galaxy.phase;
 
 import galaxy.GameContext;
+import galaxy.order.Orders;
 import galaxy.Phase;
 
 import java.util.Arrays;
@@ -19,10 +20,10 @@ public final class Turn implements Phase {
 	}
 
 	@Override
-	public GameContext process(final GameContext context) {
+	public GameContext process(final GameContext context, final Orders orders) {
 		return this.phases.stream().reduce(
 				context,
-				(ctx, phase) -> phase.process(ctx),
+				(ctx, phase) -> phase.process(ctx, orders),
 				(a, b) -> b
 		);
 	}

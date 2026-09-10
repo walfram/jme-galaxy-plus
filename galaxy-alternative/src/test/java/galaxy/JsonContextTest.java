@@ -48,11 +48,11 @@ public class JsonContextTest {
 		ShipType terranScout = terran.shipTypes().typeById("scout");
 
 		assertNotNull(terranScout);
-		assertEquals(2.0, terranScout.engines());
+		assertEquals(2.0, terranScout.engineSize());
 		assertEquals(0, terranScout.weapons().guns());
 		assertEquals(0.0, terranScout.weapons().caliber());
-		assertEquals(1.0, terranScout.shields());
-		assertEquals(0.0, terranScout.cargo());
+		assertEquals(1.0, terranScout.shieldsPower());
+		assertEquals(0.0, terranScout.cargoSize());
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class JsonContextTest {
 		assertNotNull(group);
 
 		assertEquals("krynn", group.owner());
-		assertEquals("battleship", group.type());
+		assertEquals("battleship", group.shipType().name());
 		assertEquals(2, group.size());
 
 		assertEquals(1.8, group.techLevels().engines());
@@ -103,7 +103,7 @@ public class JsonContextTest {
 		assertNotNull(cargo);
 
 		assertEquals(CargoType.COLONISTS, cargo.type());
-		assertEquals(12.0, cargo.amountPerShip());
+		assertEquals(12.0, cargo.quantity());
 	}
 
 	@Test

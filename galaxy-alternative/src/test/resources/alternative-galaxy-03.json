@@ -440,7 +440,7 @@
         },
         "cargo": {
           "type": "MATERIALS",
-          "amountPerShip": 15.0
+          "quantity": 15.0
         }
       },
       {
@@ -496,7 +496,7 @@
         },
         "cargo": {
           "type": "COLONISTS",
-          "amountPerShip": 12.0
+          "quantity": 12.0
         },
         "orders": [
           {
@@ -542,7 +542,7 @@
         },
         "cargo": {
           "type": "COLONISTS",
-          "amountPerShip": 12.0
+          "quantity": 12.0
         }
       },
       {
@@ -562,7 +562,7 @@
         },
         "cargo": {
           "type": "COLONISTS",
-          "amountPerShip": 18.0
+          "quantity": 18.0
         }
       }
     ],

@@ -107,7 +107,7 @@
       },
       "cargo": {
         "type": "COL",
-        "amountPerShip": 1.10
+        "quantity": 1.10
       },
       "pendingOrders": [
         {

@@ -1,4 +1,4 @@
-package galaxy.planet.derived;
+package galaxy.derived;
 
 import galaxy.Planet;
 
@@ -10,6 +10,6 @@ public final class Capital {
 	}
 
 	public double value() {
-		return 0;
+		return Math.max(0.0, planet.industry() - planet.size());
 	}
 }

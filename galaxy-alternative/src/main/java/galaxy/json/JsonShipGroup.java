@@ -2,15 +2,18 @@ package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.ShipGroup;
+import galaxy.ShipType;
 import galaxy.TechLevels;
 import galaxy.ship.Cargo;
 import galaxy.ship.Location;
 
 public class JsonShipGroup implements ShipGroup {
 	private final JsonNode src;
+	private final ShipType shipType;
 
-	public JsonShipGroup(JsonNode src) {
+	public JsonShipGroup(JsonNode src, ShipType shipType) {
 		this.src = src;
+		this.shipType = shipType;
 	}
 
 	@Override
@@ -29,8 +32,8 @@ public class JsonShipGroup implements ShipGroup {
 	}
 
 	@Override
-	public String type() {
-		return src.get("type").asText();
+	public ShipType shipType() {
+		return shipType;
 	}
 
 	@Override
@@ -45,6 +48,11 @@ public class JsonShipGroup implements ShipGroup {
 
 	@Override
 	public Cargo cargo() {
-		return new JsonCargo(src.get("cargo"));
+		return new JsonCargo(src.get("cargo"), shipType().cargoSize());
+	}
+
+	@Override
+	public ShipGroup unloaded() {
+		return null;
 	}
 }

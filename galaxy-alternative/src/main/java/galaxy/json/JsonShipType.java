@@ -2,7 +2,7 @@ package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.ShipType;
-import galaxy.ship.Weapons;
+import galaxy.ship.*;
 
 public class JsonShipType implements ShipType {
 	private final JsonNode src;
@@ -17,8 +17,8 @@ public class JsonShipType implements ShipType {
 	}
 
 	@Override
-	public double engines() {
-		return src.get("engines").asDouble();
+	public EngineSize engineSize() {
+		return new JsonEngineSize(src);
 	}
 
 	@Override
@@ -27,12 +27,17 @@ public class JsonShipType implements ShipType {
 	}
 
 	@Override
-	public double shields() {
-		return src.get("shields").asDouble();
+	public ShieldsPower shieldsPower() {
+		return new JsonShiledsPower(src);
 	}
 
 	@Override
-	public double cargo() {
-		return src.get("cargo").asDouble();
+	public CargoSize cargoSize() {
+		return new JsonCargoSize(src);
+	}
+
+	@Override
+	public Double mass() {
+		return new ShipTypeMass(this).value();
 	}
 }

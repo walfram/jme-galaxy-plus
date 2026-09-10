@@ -3,8 +3,11 @@ package galaxy.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
 import galaxy.Planets;
+import galaxy.decorators.PlanetsOf;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonPlanets implements Planets {
@@ -27,6 +30,11 @@ public class JsonPlanets implements Planets {
 	@Override
 	public Planet planetById(String id) {
 		return planets.get(id);
+	}
+
+	@Override
+	public Collection<Planet> all() {
+		return List.copyOf(planets.values());
 	}
 
 }

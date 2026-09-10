@@ -15,4 +15,8 @@ public interface Planet {
 	String name();
 
 	String owner();
+
+	Planet withPopulation(double population);
+
+	Planet withOwnerId(String owner);
 }

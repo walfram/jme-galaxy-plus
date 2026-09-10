@@ -1,7 +1,10 @@
 package galaxy.phase;
 
 import galaxy.GameContext;
+import galaxy.order.Orders;
 import galaxy.Phase;
+import galaxy.planet.RandomRaceSelection;
+import jme3utilities.math.noise.Generator;
 
 public final class StandardTurn implements Phase {
 	private final Phase origin;
@@ -14,19 +17,20 @@ public final class StandardTurn implements Phase {
 				new JoinShipGroups(),
 				new CombatPhase(),
 				new LoadCargo(),
+				new SendShipGroupsPhase(),
 				new MovePhase(),
 				new JoinShipGroups(),
 				new CombatPhase(),
 				new BombingPhase(),
 				new ProductionPhase(),
-				new UnloadPhase(),
+				new UnloadPhase(new RandomRaceSelection(new Generator())),
 				new JoinShipGroups(),
 				new VictoryCheck()
 		);
 	}
 
 	@Override
-	public GameContext process(final GameContext context) {
-		return this.origin.process(context);
+	public GameContext process(final GameContext context, final Orders orders) {
+		return this.origin.process(context, orders);
 	}
 }

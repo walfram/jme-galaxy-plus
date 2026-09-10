@@ -60,4 +60,14 @@ public class JsonPlanet implements Planet {
 		return src.has("owner") ? src.path("owner").asText() : null;
 	}
 
+	@Override
+	public Planet withPopulation(double population) {
+		return null;
+	}
+
+	@Override
+	public Planet withOwnerId(String owner) {
+		return null;
+	}
+
 }

@@ -10,11 +10,13 @@ public interface ShipGroup {
 
 	int size();
 
-	String type();
+	ShipType shipType();
 
 	TechLevels techLevels();
 
 	Location location();
 
 	Cargo cargo();
+
+	ShipGroup unloaded();
 }
