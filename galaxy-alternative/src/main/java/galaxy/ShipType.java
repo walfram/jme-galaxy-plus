@@ -12,6 +12,4 @@ public interface ShipType {
 	Weapons weapons();
 	ShieldsPower shieldsPower();
 	CargoSize cargoSize();
-
-	Double mass();
 }

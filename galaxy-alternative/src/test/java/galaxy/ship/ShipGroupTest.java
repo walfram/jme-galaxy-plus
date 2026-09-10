@@ -1,8 +1,8 @@
-package galaxy;
+package galaxy.ship;
 
+import galaxy.*;
 import galaxy.decorators.ShipGroupOf;
 import galaxy.decorators.ShipTypeOf;
-import galaxy.ship.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +18,7 @@ class ShipGroupTest {
 		Planet planet = mock(Planet.class);
 
 		ShipGroup shipGroup = new ShipGroupOf(race, shipType, size, planet);
-		Scalar<Double> mass = new MassOf(shipGroup);
+		Scalar<Double> mass = new ShipGroupMass(shipGroup);
 
 		assertEquals(4.0, mass.value());
 	}

@@ -3,7 +3,6 @@ package galaxy.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
 import galaxy.Planets;
-import galaxy.decorators.PlanetsOf;
 
 import java.util.Collection;
 import java.util.HashMap;

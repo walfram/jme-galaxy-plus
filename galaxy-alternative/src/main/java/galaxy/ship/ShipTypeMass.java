@@ -12,6 +12,9 @@ public final class ShipTypeMass implements Scalar<Double> {
 
 	@Override
 	public Double value() {
-		return source.engineSize().mass() + source.weapons().mass() + source.shieldsPower().mass() + source.cargoSize().mass();
+		return source.engineSize().mass()
+				+ source.weapons().mass()
+				+ source.shieldsPower().mass()
+				+ source.cargoSize().mass();
 	}
 }

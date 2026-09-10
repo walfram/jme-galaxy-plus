@@ -37,9 +37,4 @@ public class JsonShipType implements ShipType {
 	public CargoSize cargoSize() {
 		return new JsonCargoSize(src);
 	}
-
-	@Override
-	public Double mass() {
-		return new ShipTypeMass(this).value();
-	}
 }

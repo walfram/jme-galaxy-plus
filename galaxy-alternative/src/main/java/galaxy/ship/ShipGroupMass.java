@@ -3,16 +3,16 @@ package galaxy.ship;
 import galaxy.Scalar;
 import galaxy.ShipGroup;
 
-public class MassOf implements Scalar<Double> {
+public class ShipGroupMass implements Scalar<Double> {
 	private final ShipGroup source;
 
-	public MassOf(ShipGroup source) {
+	public ShipGroupMass(ShipGroup source) {
 		this.source = source;
 	}
 
 	@Override
 	public Double value() {
-		return source.shipType().mass() + cargoMass();
+		return new ShipTypeMass(source.shipType()).value() + cargoMass();
 	}
 
 	private double cargoMass() {
