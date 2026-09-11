@@ -1,8 +1,7 @@
 package galaxy;
 
 import galaxy.decorators.PlanetOf;
-import galaxy.planet.Capital;
-import galaxy.planet.CapitalTransfer;
+import galaxy.planet.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +24,24 @@ public class PlanetTest {
 
 		Capital detached = transfer.capital();
 		assertEquals(600.0, detached.value());
+	}
+
+	@Test
+	void should_covert_population_to_colonists() {
+		Planet planet = new PlanetOf("WD-040", new CoordinatesOf(1.5, 2.5), 1000.0, 10.0, 1000.0, 2000.0, 5000.0, "WD-040", null);
+
+		Colonists available = planet.colonists();
+		assertEquals(125.0, available.value());
+
+		ColonistsTransfer transfer = new ColonistsTransfer(planet, new RequestedColonists(100.0));
+
+		planet = transfer.planet();
+		Colonists colonists = planet.colonists();
+		assertEquals(25.0, colonists.value());
+		assertEquals(1000.0 + 25.0 * 8.0, planet.population());
+
+		Colonists detached = transfer.colonists();
+		assertEquals(100.0, detached.value());
 	}
 
 	@Test

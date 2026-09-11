@@ -1,4 +1,4 @@
-package galaxy.derived;
+package galaxy.planet;
 
 import galaxy.Planet;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class ColonistsTest {
 		when(planet.size()).thenReturn(1000.0);
 		when(planet.population()).thenReturn(1000.0);
 
-		Colonists colonists = new Colonists(planet);
+		Colonists colonists = new ColonistsOf(planet);
 
 		assertEquals(0.0, colonists.value());
 	}
@@ -28,7 +28,7 @@ class ColonistsTest {
 		when(planet.size()).thenReturn(1000.0);
 		when(planet.population()).thenReturn(1080.0);
 
-		Colonists colonists = new Colonists(planet);
+		Colonists colonists = new ColonistsOf(planet);
 
 		assertEquals(10.0, colonists.value());
 	}

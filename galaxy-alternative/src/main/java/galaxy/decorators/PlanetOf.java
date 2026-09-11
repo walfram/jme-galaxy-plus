@@ -2,7 +2,9 @@ package galaxy.decorators;
 
 import galaxy.Coordinates;
 import galaxy.Planet;
+import galaxy.planet.ColonistsOf;
 import galaxy.planet.Capital;
+import galaxy.planet.Colonists;
 
 import java.util.Optional;
 
@@ -35,6 +37,11 @@ public record PlanetOf(String id, Coordinates coordinates, double size, double r
 	@Override
 	public Capital capital() {
 		return new CapitalOf(this);
+	}
+
+	@Override
+	public Colonists colonists() {
+		return new ColonistsOf(this);
 	}
 
 }

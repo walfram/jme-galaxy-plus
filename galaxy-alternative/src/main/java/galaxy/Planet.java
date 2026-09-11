@@ -1,6 +1,7 @@
 package galaxy;
 
 import galaxy.planet.Capital;
+import galaxy.planet.Colonists;
 
 import java.util.Optional;
 
@@ -25,4 +26,6 @@ public interface Planet {
 	Planet withOwnerId(String owner);
 
 	Capital capital();
+
+	Colonists colonists();
 }

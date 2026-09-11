@@ -1,4 +1,4 @@
-package galaxy.derived;
+package galaxy.planet;
 
 import galaxy.Planet;
 import org.junit.jupiter.api.Test;

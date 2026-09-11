@@ -6,7 +6,9 @@ import galaxy.Coordinates;
 import galaxy.CoordinatesOf;
 import galaxy.Planet;
 import galaxy.decorators.CapitalOf;
+import galaxy.planet.ColonistsOf;
 import galaxy.planet.Capital;
+import galaxy.planet.Colonists;
 
 import java.util.Optional;
 
@@ -82,6 +84,11 @@ public class JsonPlanet implements Planet {
 	@Override
 	public Capital capital() {
 		return new CapitalOf(this);
+	}
+
+	@Override
+	public Colonists colonists() {
+		return new ColonistsOf(this);
 	}
 
 }
