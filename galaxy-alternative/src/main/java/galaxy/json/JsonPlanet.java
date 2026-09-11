@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.Coordinates;
 import galaxy.CoordinatesOf;
 import galaxy.Planet;
+import galaxy.decorators.CapitalOf;
+import galaxy.planet.Capital;
 
 import java.util.Optional;
 
@@ -75,6 +77,11 @@ public class JsonPlanet implements Planet {
 		ObjectNode copy = src.deepCopy();
 		copy.put("owner", owner);
 		return new JsonPlanet(copy);
+	}
+
+	@Override
+	public Capital capital() {
+		return new CapitalOf(this);
 	}
 
 }

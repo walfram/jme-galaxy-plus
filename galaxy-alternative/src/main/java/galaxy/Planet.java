@@ -1,5 +1,7 @@
 package galaxy;
 
+import galaxy.planet.Capital;
+
 import java.util.Optional;
 
 public interface Planet {
@@ -21,4 +23,6 @@ public interface Planet {
 	Planet withPopulation(double population);
 
 	Planet withOwnerId(String owner);
+
+	Capital capital();
 }
