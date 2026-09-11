@@ -23,7 +23,7 @@ dependencies {
     implementation libs.sim.math
     implementation libs.heart
 
-    implementation project(':galaxy-domain')
+    implementation project(':galaxy-alternative')
     implementation project(':hex-grid')
 }
 

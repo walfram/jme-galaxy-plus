@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/galaxy-alternative" />
-            <option value="$PROJECT_DIR$/galaxy-domain" />
             <option value="$PROJECT_DIR$/hex-grid" />
             <option value="$PROJECT_DIR$/map-generator" />
             <option value="$PROJECT_DIR$/shared" />

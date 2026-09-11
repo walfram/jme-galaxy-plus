@@ -1,8 +1,8 @@
 package galaxy.phase;
 
 import galaxy.GameContext;
-import galaxy.order.Orders;
 import galaxy.Phase;
+import galaxy.order.Orders;
 
 import java.util.Arrays;
 import java.util.List;

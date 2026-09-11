@@ -1,8 +1,8 @@
 package galaxy.phase;
 
 import galaxy.GameContext;
-import galaxy.order.Orders;
 import galaxy.Phase;
+import galaxy.order.Orders;
 import galaxy.planet.RandomRaceSelection;
 import jme3utilities.math.noise.Generator;
 
