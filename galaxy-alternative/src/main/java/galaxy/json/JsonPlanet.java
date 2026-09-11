@@ -1,7 +1,10 @@
 package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import galaxy.Planet;
+
+import java.util.Optional;
 
 public class JsonPlanet implements Planet {
 	private final JsonNode src;
@@ -56,18 +59,22 @@ public class JsonPlanet implements Planet {
 	}
 
 	@Override
-	public String owner() {
-		return src.has("owner") ? src.path("owner").asText() : null;
+	public Optional<String> owner() {
+		return Optional.ofNullable(src.get("owner")).map(JsonNode::asText);
 	}
 
 	@Override
 	public Planet withPopulation(double population) {
-		return null;
+		ObjectNode copy = src.deepCopy();
+		copy.put("population", population);
+		return new JsonPlanet(copy);
 	}
 
 	@Override
 	public Planet withOwnerId(String owner) {
-		return null;
+		ObjectNode copy = src.deepCopy();
+		copy.put("owner", owner);
+		return new JsonPlanet(copy);
 	}
 
 }

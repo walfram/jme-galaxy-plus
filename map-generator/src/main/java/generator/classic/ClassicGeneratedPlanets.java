@@ -3,12 +3,12 @@ package generator.classic;
 import distribution.Deferred;
 import distribution.PlanetType;
 import galaxy.Planet;
-import galaxy.planet.properties.*;
 import hex.grid.Vector2d;
 import distribution.WeightedDistribution;
 import distribution.classic.ClassicPlanetDistribution;
 import galaxy.Id;
 import generator.GeneratedPlanets;
+import jme3utilities.math.Population;
 import jme3utilities.math.noise.Generator;
 
 import java.util.*;

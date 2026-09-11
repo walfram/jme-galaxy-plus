@@ -11,6 +11,8 @@ public final class StandardTurn implements Phase {
 
 	public StandardTurn() {
 		this.origin = new Turn(
+//				new AdministrativePhase(),   // ChangeDiplomacy, DefineShipType, DefineScience,
+				// NamePlanet, SplitShipGroup, BreakShipGroup, GiftShipGroup
 				new QuitBySleep(),
 				new QuitByNoPlanets(),
 				new ShipTransfer(),

@@ -9,6 +9,10 @@ public record Id(String value)  implements Scalar<String> {
 		}
 	}
 
+	public Id() {
+		this(UUID.randomUUID());
+	}
+
 	public Id(UUID uuid) {
 		this(uuid.toString());
 	}

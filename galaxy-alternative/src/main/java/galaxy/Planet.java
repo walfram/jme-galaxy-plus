@@ -1,5 +1,7 @@
 package galaxy;
 
+import java.util.Optional;
+
 public interface Planet {
 	String id();
 
@@ -14,7 +16,7 @@ public interface Planet {
 	double materials();
 	String name();
 
-	String owner();
+	Optional<String> owner();
 
 	Planet withPopulation(double population);
 
