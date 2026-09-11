@@ -3,11 +3,11 @@ package galaxy.planet;
 import galaxy.Planet;
 import galaxy.Scalar;
 
-public class ReducedPopulation implements Scalar<Double>  {
+public class PopulationReduced implements Scalar<Double>  {
 	private final Planet source;
 	private final Colonists colonists;
 
-	public ReducedPopulation(Planet source, Colonists colonists) {
+	public PopulationReduced(Planet source, Colonists colonists) {
 		this.source = source;
 		this.colonists = colonists;
 	}

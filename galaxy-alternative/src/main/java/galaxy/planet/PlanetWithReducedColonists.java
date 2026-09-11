@@ -2,17 +2,16 @@ package galaxy.planet;
 
 import galaxy.Coordinates;
 import galaxy.Planet;
-import galaxy.decorators.CapitalOf;
 
 import java.util.Optional;
 
-public class ReducedCapital implements Planet {
+public class PlanetWithReducedColonists implements Planet {
 	private final Planet source;
-	private final double amount;
+	private final Colonists colonists;
 
-	public ReducedCapital(Planet source, double amount) {
+	public PlanetWithReducedColonists(Planet source, Colonists colonists) {
 		this.source = source;
-		this.amount = amount;
+		this.colonists = colonists;
 	}
 
 	@Override
@@ -37,12 +36,12 @@ public class ReducedCapital implements Planet {
 
 	@Override
 	public double industry() {
-		return source.industry() - amount;
+		return source.industry();
 	}
 
 	@Override
 	public double population() {
-		return source.population();
+		return new PopulationReduced(source, colonists).value();
 	}
 
 	@Override
@@ -72,11 +71,11 @@ public class ReducedCapital implements Planet {
 
 	@Override
 	public Capital capital() {
-		return new CapitalOf(this);
+		return source.capital();
 	}
 
 	@Override
 	public Colonists colonists() {
-		return source.colonists();
+		return new ColonistsOf(this);
 	}
 }

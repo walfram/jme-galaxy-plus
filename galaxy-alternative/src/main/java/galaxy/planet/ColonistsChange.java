@@ -2,17 +2,17 @@ package galaxy.planet;
 
 import galaxy.Planet;
 
-public class ColonistsTransfer {
+public class ColonistsChange {
 	private final Planet source;
 	private final Colonists requested;
 
-	public ColonistsTransfer(Planet source, Colonists requested) {
+	public ColonistsChange(Planet source, Colonists requested) {
 		this.source = source;
 		this.requested = requested;
 	}
 
 	public Planet planet() {
-		return new ReducedColonists(source, requested);
+		return new PlanetWithReducedColonists(source, requested);
 	}
 
 	public Colonists colonists() {

@@ -5,13 +5,13 @@ import galaxy.Planet;
 
 import java.util.Optional;
 
-public class ReducedColonists implements Planet {
+public class PlanetWithAddedColonists implements Planet {
 	private final Planet source;
-	private final Colonists colonists;
+	private final Colonists requested;
 
-	public ReducedColonists(Planet source, Colonists colonists) {
+	public PlanetWithAddedColonists(Planet source, Colonists requested) {
 		this.source = source;
-		this.colonists = colonists;
+		this.requested = requested;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class ReducedColonists implements Planet {
 
 	@Override
 	public double population() {
-		return new ReducedPopulation(source, colonists).value();
+		return new PopulationIncreased(source, requested).value();
 	}
 
 	@Override

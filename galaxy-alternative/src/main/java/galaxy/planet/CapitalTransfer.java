@@ -12,7 +12,7 @@ public class CapitalTransfer {
 	}
 
 	public Planet planet() {
-		return new ReducedCapital(source, amount);
+		return new PlanetWithReducedCapital(source, amount);
 	}
 
 	public Capital capital() {

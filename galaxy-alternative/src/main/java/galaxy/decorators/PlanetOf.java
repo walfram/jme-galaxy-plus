@@ -1,6 +1,7 @@
 package galaxy.decorators;
 
 import galaxy.Coordinates;
+import galaxy.CoordinatesOf;
 import galaxy.Planet;
 import galaxy.planet.ColonistsOf;
 import galaxy.planet.Capital;
@@ -22,7 +23,6 @@ public record PlanetOf(String id, Coordinates coordinates, double size, double r
 	public PlanetOf(String id, Coordinates coordinates, double size, double resources, double industry, double population) {
 		this(id, coordinates, size, resources, industry, population, 0.0, id, Optional.empty());
 	}
-
 
 	@Override
 	public Planet withPopulation(double population) {

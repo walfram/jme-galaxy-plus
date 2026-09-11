@@ -27,13 +27,25 @@ public class PlanetTest {
 	}
 
 	@Test
+	void should_increase_planet_population_with_colonists() {
+		Planet planet = new PlanetOf("WD-040", new CoordinatesOf(1.5, 2.5), 1000.0, 10.0);
+
+		assertEquals(0.0, planet.population());
+		assertEquals(0.0, planet.colonists().value());
+
+		Planet populated = new PlanetWithAddedColonists(planet, new RequestedColonists(10.0));
+
+		assertEquals(10.0 * 8.0, populated.population());
+	}
+
+	@Test
 	void should_covert_population_to_colonists() {
 		Planet planet = new PlanetOf("WD-040", new CoordinatesOf(1.5, 2.5), 1000.0, 10.0, 1000.0, 2000.0, 5000.0, "WD-040", null);
 
 		Colonists available = planet.colonists();
 		assertEquals(125.0, available.value());
 
-		ColonistsTransfer transfer = new ColonistsTransfer(planet, new RequestedColonists(100.0));
+		ColonistsChange transfer = new ColonistsChange(planet, new RequestedColonists(100.0));
 
 		planet = transfer.planet();
 		Colonists colonists = planet.colonists();
