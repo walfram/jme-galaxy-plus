@@ -1,25 +1,37 @@
 package galaxy.decorators;
 
+import galaxy.Coordinates;
+import galaxy.CoordinatesOf;
+import galaxy.Id;
 import galaxy.Planet;
 
 import java.util.Optional;
 
-public record PlanetOf(String id, double x, double y, double size, double resources, double industry, double population,
+public record PlanetOf(String id, Coordinates coordinates, double size, double resources, double industry,
+                       double population,
 											 double materials, String name, Optional<String> owner) implements Planet {
 
 	public PlanetOf(Planet source) {
-		this(source.id(), source.x(), source.y(), source.size(), source.resources(), source.industry(), source.population(), source.materials(), source.name(), source.owner());
+		this(source.id(), source.coordinates(), source.size(), source.resources(), source.industry(), source.population(), source.materials(), source.name(), source.owner());
+	}
+
+	public PlanetOf(String id, Coordinates coordinates, double size, double resources) {
+		this(id, coordinates, size, resources, 0.0, 0.0, 0.0, id, Optional.empty());
+	}
+
+	public PlanetOf(String 	id, Coordinates coordinates, double size, double resources, double industry, double population) {
+		this(id, coordinates, size, resources, industry, population, 0.0, id, Optional.empty());
 	}
 
 
 	@Override
 	public Planet withPopulation(double population) {
-		return new PlanetOf(id(), x(), y(), size(), resources(), industry(), population, materials(), name(), owner());
+		return new PlanetOf(id(), coordinates(), size(), resources(), industry(), population, materials(), name(), owner());
 	}
 
 	@Override
 	public Planet withOwnerId(String owner) {
-		return new PlanetOf(id(), x(), y(), size(), resources(), industry(), population(), materials(), name(), Optional.ofNullable(owner));
+		return new PlanetOf(id(), coordinates(), size(), resources(), industry(), population(), materials(), name(), Optional.ofNullable(owner));
 	}
 
 }

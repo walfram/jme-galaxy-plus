@@ -2,6 +2,8 @@ package galaxy.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import galaxy.Coordinates;
+import galaxy.CoordinatesOf;
 import galaxy.Planet;
 
 import java.util.Optional;
@@ -19,13 +21,11 @@ public class JsonPlanet implements Planet {
 	}
 
 	@Override
-	public double x() {
-		return src.get("x").asDouble();
-	}
-
-	@Override
-	public double y() {
-		return src.get("y").asDouble();
+	public Coordinates coordinates() {
+		return new CoordinatesOf(
+				src.get("x").asDouble(),
+				src.get("y").asDouble()
+		);
 	}
 
 	@Override

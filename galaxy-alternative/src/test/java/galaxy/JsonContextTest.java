@@ -111,8 +111,8 @@ public class JsonContextTest {
 	void should_read_uninhabited_planet() {
 		Planet planet = context.planets().planetById("30");
 
-		assertEquals(70.0, planet.x());
-		assertEquals(-110.0, planet.y());
+		assertEquals(70.0, planet.coordinates().x());
+		assertEquals(-110.0, planet.coordinates().y());
 
 		assertEquals(180.0, planet.size());
 		assertEquals(0.8, planet.resources());
@@ -122,15 +122,15 @@ public class JsonContextTest {
 		assertEquals(0.0, planet.materials());
 		assertEquals("WH-661", planet.name());
 
-		assertNull(planet.owner());
+		assertFalse(planet.owner().isPresent());
 	}
 
 	@Test
 	void should_read_inhabited_planet() {
 		Planet planet = context.planets().planetById("1");
 
-		assertEquals(1.0, planet.x());
-		assertEquals(2.0, planet.y());
+		assertEquals(1.0, planet.coordinates().x());
+		assertEquals(2.0, planet.coordinates().y());
 
 		assertEquals(1000.0, planet.size());
 		assertEquals(10.0, planet.resources());
@@ -140,7 +140,7 @@ public class JsonContextTest {
 		assertEquals(0.0, planet.materials());
 		assertEquals("Terra", planet.name());
 
-		assertEquals("terran", planet.owner());
+		assertEquals("terran", planet.owner().orElseThrow());
 	}
 
 }

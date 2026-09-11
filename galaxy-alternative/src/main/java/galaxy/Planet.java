@@ -5,8 +5,7 @@ import java.util.Optional;
 public interface Planet {
 	String id();
 
-	double x();
-	double y();
+	Coordinates coordinates();
 
 	double size();
 	double resources();
@@ -14,6 +13,7 @@ public interface Planet {
 	double industry();
 	double population();
 	double materials();
+
 	String name();
 
 	Optional<String> owner();
