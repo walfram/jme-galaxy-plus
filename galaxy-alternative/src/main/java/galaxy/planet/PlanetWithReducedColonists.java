@@ -74,8 +74,4 @@ public class PlanetWithReducedColonists implements Planet {
 		return source.capital();
 	}
 
-	@Override
-	public Colonists colonists() {
-		return new ColonistsOf(this);
-	}
 }

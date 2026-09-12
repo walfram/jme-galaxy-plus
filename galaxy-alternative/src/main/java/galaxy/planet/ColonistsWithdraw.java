@@ -2,11 +2,11 @@ package galaxy.planet;
 
 import galaxy.Planet;
 
-public class ColonistsChange {
+public class ColonistsWithdraw {
 	private final Planet source;
 	private final Colonists requested;
 
-	public ColonistsChange(Planet source, Colonists requested) {
+	public ColonistsWithdraw(Planet source, Colonists requested) {
 		this.source = source;
 		this.requested = requested;
 	}

@@ -27,5 +27,4 @@ public interface Planet {
 
 	Capital capital();
 
-	Colonists colonists();
 }

@@ -86,9 +86,4 @@ public class JsonPlanet implements Planet {
 		return new CapitalOf(this);
 	}
 
-	@Override
-	public Colonists colonists() {
-		return new ColonistsOf(this);
-	}
-
 }

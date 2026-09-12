@@ -39,9 +39,4 @@ public record PlanetOf(String id, Coordinates coordinates, double size, double r
 		return new CapitalOf(this);
 	}
 
-	@Override
-	public Colonists colonists() {
-		return new ColonistsOf(this);
-	}
-
 }

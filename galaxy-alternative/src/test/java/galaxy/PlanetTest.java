@@ -31,7 +31,7 @@ public class PlanetTest {
 		Planet planet = new PlanetOf("WD-040", new CoordinatesOf(1.5, 2.5), 1000.0, 10.0);
 
 		assertEquals(0.0, planet.population());
-		assertEquals(0.0, planet.colonists().value());
+		assertEquals(0.0, new ColonistsOf(planet).value());
 
 		Planet populated = new PlanetWithAddedColonists(planet, new RequestedColonists(10.0));
 
@@ -42,13 +42,13 @@ public class PlanetTest {
 	void should_covert_population_to_colonists() {
 		Planet planet = new PlanetOf("WD-040", new CoordinatesOf(1.5, 2.5), 1000.0, 10.0, 1000.0, 2000.0, 5000.0, "WD-040", null);
 
-		Colonists available = planet.colonists();
+		Colonists available = new ColonistsOf(planet);
 		assertEquals(125.0, available.value());
 
-		ColonistsChange transfer = new ColonistsChange(planet, new RequestedColonists(100.0));
+		ColonistsWithdraw transfer = new ColonistsWithdraw(planet, new RequestedColonists(100.0));
 
 		planet = transfer.planet();
-		Colonists colonists = planet.colonists();
+		Colonists colonists = new ColonistsOf(planet);
 		assertEquals(25.0, colonists.value());
 		assertEquals(1000.0 + 25.0 * 8.0, planet.population());
 

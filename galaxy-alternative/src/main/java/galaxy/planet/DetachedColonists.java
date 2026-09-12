@@ -11,4 +11,5 @@ public class DetachedColonists implements Colonists {
 	public Double value() {
 		return source.value();
 	}
+
 }
