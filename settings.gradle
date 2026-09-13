@@ -4,4 +4,7 @@ include 'shared'
 
 include 'hex-grid'
 include 'map-generator'
-include 'galaxy-alternative'
+
+include 'galaxy-core'
+
+include 'galaxy-exp'

@@ -8,7 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/galaxy-alternative" />
+            <option value="$PROJECT_DIR$/galaxy-core" />
+            <option value="$PROJECT_DIR$/galaxy-exp" />
             <option value="$PROJECT_DIR$/hex-grid" />
             <option value="$PROJECT_DIR$/map-generator" />
             <option value="$PROJECT_DIR$/shared" />

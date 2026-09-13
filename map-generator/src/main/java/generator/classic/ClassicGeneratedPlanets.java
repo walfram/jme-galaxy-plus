@@ -4,10 +4,11 @@ import distribution.Deferred;
 import distribution.PlanetType;
 import distribution.WeightedDistribution;
 import distribution.classic.ClassicPlanetDistribution;
-import galaxy.CoordinatesOf;
-import galaxy.Id;
 import galaxy.Planet;
-import galaxy.decorators.PlanetOf;
+import galaxy.planet.Coordinates;
+import galaxy.planet.PlanetId;
+import galaxy.planet.Resources;
+import galaxy.planet.Size;
 import generator.GeneratedPlanets;
 import hex.grid.Vector2d;
 import jme3utilities.math.noise.Generator;
@@ -57,13 +58,13 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 
 		List<Vector2d> origins = new HexGridOrigins(raceCount).asList(generator);
 		origins.stream()
-				.map(v -> new PlanetOf(new Id().value(), new CoordinatesOf(v.x(), v.y()), 1000.0, 10.0, 1000.0, 1000.0))
+				.map(v -> new Planet(new Coordinates(v.x(), v.y()), new Size(1000.0), new Resources(10.0), new Planet.Ind(1000.0), new Planet.Pop(1000.0)))
 				.map(p -> {
 					Vector2d p1Offset = dwOffset.apply(new Vector2d(p.coordinates().x(), p.coordinates().y()));
-					Planet p1 = new PlanetOf(new Id().value(), new CoordinatesOf(p1Offset.x(), p1Offset.y()), 500.0, 10.0, 500.0, 500.0);
+					Planet p1 = new Planet(new Coordinates(p1Offset.x(), p1Offset.y()), new Size(500.0), new Resources(10.0), new Planet.Ind(500.0), new Planet.Pop(500.0));
 
 					Vector2d p2Offset = dwOffset.apply(new Vector2d(p.coordinates().x(), p.coordinates().y()));
-					Planet p2 = new PlanetOf(new Id().value(), new CoordinatesOf(p2Offset.x(), p2Offset.y()), 500.0, 10.0, 500.0, 500.0);
+					Planet p2 = new Planet(new Coordinates(p2Offset.x(), p2Offset.y()), new Size(500.0), new Resources(10.0), new Planet.Ind(500.0), new Planet.Pop(500.0));
 
 					return List.of(p, p1, p2);
 				})
@@ -82,7 +83,7 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 		for (Map.Entry<PlanetType, Set<Vector2d>> entry: layers.entrySet()) {
 			PlanetType type = entry.getKey();
 			for (Vector2d v: entry.getValue()) {
-				Planet p = type.generate(new Id(UUID.randomUUID()), v, generator);
+				Planet p = type.generate(new PlanetId(), v, generator);
 				planets.add(p);
 			}
 		}

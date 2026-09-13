@@ -1,9 +1,10 @@
 package distribution;
 
-import galaxy.CoordinatesOf;
-import galaxy.Id;
 import galaxy.Planet;
-import galaxy.decorators.PlanetOf;
+import galaxy.planet.Coordinates;
+import galaxy.planet.PlanetId;
+import galaxy.planet.Resources;
+import galaxy.planet.Size;
 import hex.grid.Vector2d;
 import jme3utilities.math.noise.Generator;
 
@@ -19,12 +20,12 @@ public record PlanetType(
 		return weight;
 	}
 
-	public Planet generate(Id id, Vector2d coords, Generator generator) {
-		return new PlanetOf(
-				id.value(),
-				new CoordinatesOf(coords.x(), coords.y()),
-				generator.nextDouble(minSize, maxSize),
-				generator.nextDouble(minResources, maxResources)
+	public Planet generate(PlanetId id, Vector2d coords, Generator generator) {
+		return new Planet(
+				id,
+				new Coordinates(coords.x(), coords.y()),
+				new Size(generator.nextDouble(minSize, maxSize)),
+				new Resources(generator.nextDouble(minResources, maxResources))
 		);
 	}
 }

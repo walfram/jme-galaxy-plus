@@ -1,0 +1,654 @@
+{
+  "factions": {
+    "terran": {
+      "techLevels": {
+        "ENGINES": 1.5,
+        "WEAPONS": 1.2,
+        "SHIELDS": 1.4,
+        "CARGO": 1.0
+      },
+      "alliances": [
+        "krynn"
+      ],
+      "shipTypes": {
+        "scout": {
+          "engines": 2.0,
+          "weapons": {
+            "guns": 0,
+            "caliber": 0.0
+          },
+          "shields": 1.0,
+          "cargo": 0.0
+        },
+        "frigate": {
+          "engines": 4.0,
+          "weapons": {
+            "guns": 1,
+            "caliber": 2.0
+          },
+          "shields": 3.0,
+          "cargo": 0.0
+        },
+        "freighter": {
+          "engines": 3.0,
+          "weapons": {
+            "guns": 0,
+            "caliber": 0.0
+          },
+          "shields": 2.0,
+          "cargo": 10.0
+        }
+      }
+    },
+    "zalthor": {
+      "techLevels": {
+        "ENGINES": 1.2,
+        "WEAPONS": 1.5,
+        "SHIELDS": 1.1,
+        "CARGO": 1.3
+      },
+      "alliances": [],
+      "shipTypes": {
+        "probe": {
+          "engines": 1.5,
+          "weapons": {
+            "guns": 0,
+            "caliber": 0.0
+          },
+          "shields": 0.0,
+          "cargo": 0.0
+        },
+        "destroyer": {
+          "engines": 5.0,
+          "weapons": {
+            "guns": 2,
+            "caliber": 4.0
+          },
+          "shields": 5.0,
+          "cargo": 0.0
+        },
+        "hauler": {
+          "engines": 2.5,
+          "weapons": {
+            "guns": 0,
+            "caliber": 0.0
+          },
+          "shields": 1.0,
+          "cargo": 15.0
+        }
+      }
+    },
+    "krynn": {
+      "techLevels": {
+        "ENGINES": 1.8,
+        "WEAPONS": 1.6,
+        "SHIELDS": 1.3,
+        "CARGO": 0.9
+      },
+      "alliances": [
+        "terran"
+      ],
+      "shipTypes": {
+        "fighter": {
+          "engines": 6.0,
+          "weapons": {
+            "guns": 1,
+            "caliber": 3.0
+          },
+          "shields": 2.0,
+          "cargo": 0.0
+        },
+        "battleship": {
+          "engines": 8.0,
+          "weapons": {
+            "guns": 3,
+            "caliber": 10.0
+          },
+          "shields": 15.0,
+          "cargo": 1.0
+        },
+        "colony_ship": {
+          "engines": 2.0,
+          "weapons": {
+            "guns": 0,
+            "caliber": 0.0
+          },
+          "shields": 5.0,
+          "cargo": 20.0
+        }
+      }
+    }
+  },
+  "entities": {
+    "planets": [
+      {
+        "planetId": 1,
+        "coordinates": {
+          "x": 1.0,
+          "y": 2.0
+        },
+        "size": 1000.0,
+        "resources": 10.0,
+        "industry": 1000.0,
+        "population": 1000.0,
+        "name": "Terra",
+        "raceId": "terran"
+      },
+      {
+        "planetId": 2,
+        "coordinates": {
+          "x": 50.0,
+          "y": 50.0
+        },
+        "size": 1000.0,
+        "resources": 10.0,
+        "industry": 1000.0,
+        "population": 1000.0,
+        "name": "Zalthor",
+        "raceId": "zalthor"
+      },
+      {
+        "planetId": 3,
+        "coordinates": {
+          "x": -50.0,
+          "y": 50.0
+        },
+        "size": 1000.0,
+        "resources": 10.0,
+        "industry": 1000.0,
+        "population": 1000.0,
+        "name": "Krynn",
+        "raceId": "krynn"
+      },
+      {
+        "planetId": 4,
+        "coordinates": {
+          "x": 20.0,
+          "y": 10.0
+        },
+        "size": 500.0,
+        "resources": 2.5,
+        "industry": 400.0,
+        "population": 500.0,
+        "name": "Mars",
+        "raceId": "terran"
+      },
+      {
+        "planetId": 5,
+        "coordinates": {
+          "x": 60.0,
+          "y": 30.0
+        },
+        "size": 600.0,
+        "resources": 3.0,
+        "industry": 300.0,
+        "population": 400.0,
+        "name": "Zor",
+        "raceId": "zalthor"
+      },
+      {
+        "planetId": 6,
+        "coordinates": {
+          "x": -40.0,
+          "y": 20.0
+        },
+        "size": 400.0,
+        "resources": 1.5,
+        "industry": 200.0,
+        "population": 300.0,
+        "name": "Krynn-II",
+        "raceId": "krynn"
+      },
+      {
+        "planetId": 7,
+        "coordinates": {
+          "x": 100.0,
+          "y": 0.0
+        },
+        "size": 250.0,
+        "resources": 1.2,
+        "name": "QA-227"
+      },
+      {
+        "planetId": 8,
+        "coordinates": {
+          "x": 120.0,
+          "y": 40.0
+        },
+        "size": 180.0,
+        "resources": 0.8,
+        "name": "RX-040"
+      },
+      {
+        "planetId": 9,
+        "coordinates": {
+          "x": -100.0,
+          "y": -20.0
+        },
+        "size": 300.0,
+        "resources": 2.1,
+        "name": "FN-016"
+      },
+      {
+        "planetId": 10,
+        "coordinates": {
+          "x": -80.0,
+          "y": 80.0
+        },
+        "size": 150.0,
+        "resources": 0.5,
+        "name": "OF-580"
+      },
+      {
+        "planetId": 11,
+        "coordinates": {
+          "x": 0.0,
+          "y": 100.0
+        },
+        "size": 400.0,
+        "resources": 3.5,
+        "name": "US-319"
+      },
+      {
+        "planetId": 12,
+        "coordinates": {
+          "x": 30.0,
+          "y": -80.0
+        },
+        "size": 220.0,
+        "resources": 1.1,
+        "name": "IC-086"
+      },
+      {
+        "planetId": 13,
+        "coordinates": {
+          "x": -30.0,
+          "y": -90.0
+        },
+        "size": 190.0,
+        "resources": 0.9,
+        "name": "US-593"
+      },
+      {
+        "planetId": 14,
+        "coordinates": {
+          "x": 80.0,
+          "y": -60.0
+        },
+        "size": 270.0,
+        "resources": 1.8,
+        "name": "OV-685"
+      },
+      {
+        "planetId": 15,
+        "coordinates": {
+          "x": -70.0,
+          "y": -50.0
+        },
+        "size": 310.0,
+        "resources": 2.5,
+        "name": "SB-220"
+      },
+      {
+        "planetId": 16,
+        "coordinates": {
+          "x": 150.0,
+          "y": 20.0
+        },
+        "size": 120.0,
+        "resources": 0.4,
+        "name": "GC-263"
+      },
+      {
+        "planetId": 17,
+        "coordinates": {
+          "x": 140.0,
+          "y": -30.0
+        },
+        "size": 210.0,
+        "resources": 1.3,
+        "name": "JF-296"
+      },
+      {
+        "planetId": 18,
+        "coordinates": {
+          "x": -120.0,
+          "y": 10.0
+        },
+        "size": 280.0,
+        "resources": 1.7,
+        "name": "PE-713"
+      },
+      {
+        "planetId": 19,
+        "coordinates": {
+          "x": -110.0,
+          "y": 60.0
+        },
+        "size": 160.0,
+        "resources": 0.7,
+        "name": "ZQ-568"
+      },
+      {
+        "planetId": 20,
+        "coordinates": {
+          "x": 50.0,
+          "y": 120.0
+        },
+        "size": 350.0,
+        "resources": 2.8,
+        "name": "UF-032"
+      },
+      {
+        "planetId": 21,
+        "coordinates": {
+          "x": -50.0,
+          "y": 130.0
+        },
+        "size": 240.0,
+        "resources": 1.5,
+        "name": "FY-836"
+      },
+      {
+        "planetId": 22,
+        "coordinates": {
+          "x": 90.0,
+          "y": 90.0
+        },
+        "size": 170.0,
+        "resources": 0.6,
+        "name": "KX-422"
+      },
+      {
+        "planetId": 23,
+        "coordinates": {
+          "x": -90.0,
+          "y": 110.0
+        },
+        "size": 290.0,
+        "resources": 2.2,
+        "name": "OG-583"
+      },
+      {
+        "planetId": 24,
+        "coordinates": {
+          "x": 110.0,
+          "y": -80.0
+        },
+        "size": 130.0,
+        "resources": 0.3,
+        "name": "FZ-500"
+      },
+      {
+        "planetId": 25,
+        "coordinates": {
+          "x": -130.0,
+          "y": -40.0
+        },
+        "size": 260.0,
+        "resources": 1.9,
+        "name": "CQ-740"
+      },
+      {
+        "planetId": 26,
+        "coordinates": {
+          "x": 40.0,
+          "y": -120.0
+        },
+        "size": 200.0,
+        "resources": 1.0,
+        "name": "JZ-598"
+      },
+      {
+        "planetId": 27,
+        "coordinates": {
+          "x": -40.0,
+          "y": -130.0
+        },
+        "size": 320.0,
+        "resources": 2.6,
+        "name": "AS-652"
+      },
+      {
+        "planetId": 28,
+        "coordinates": {
+          "x": 130.0,
+          "y": 70.0
+        },
+        "size": 140.0,
+        "resources": 0.5,
+        "name": "QC-449"
+      },
+      {
+        "planetId": 29,
+        "coordinates": {
+          "x": -140.0,
+          "y": 90.0
+        },
+        "size": 230.0,
+        "resources": 1.4,
+        "name": "WG-519"
+      },
+      {
+        "planetId": 30,
+        "coordinates": {
+          "x": 70.0,
+          "y": -110.0
+        },
+        "size": 180.0,
+        "resources": 0.8,
+        "name": "WH-661"
+      }
+    ],
+    "shipGroups": [
+      {
+        "id": 1,
+        "owner": "terran",
+        "type": "scout",
+        "size": 5,
+        "tech": {
+          "ENGINES": 1.5,
+          "WEAPONS": 1.2,
+          "SHIELDS": 1.4,
+          "CARGO": 1.0
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 1
+        }
+      },
+      {
+        "id": 2,
+        "owner": "terran",
+        "type": "frigate",
+        "size": 10,
+        "tech": {
+          "ENGINES": 1.5,
+          "WEAPONS": 1.2,
+          "SHIELDS": 1.4,
+          "CARGO": 1.0
+        },
+        "location": {
+          "state": "HYPERSPACE",
+          "originId": 1,
+          "destId": 7,
+          "distanceRemaining": 12.5,
+          "speed": 8.2
+        },
+        "orders": [
+          {
+            "cmd": "INTERCEPT",
+            "targetId": 5
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "owner": "terran",
+        "type": "freighter",
+        "size": 20,
+        "fleetId": "Logistics",
+        "tech": {
+          "ENGINES": 1.5,
+          "WEAPONS": 1.2,
+          "SHIELDS": 1.4,
+          "CARGO": 1.0
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 4
+        },
+        "cargo": {
+          "type": "MATERIALS",
+          "quantity": 15.0
+        }
+      },
+      {
+        "id": 4,
+        "owner": "zalthor",
+        "type": "probe",
+        "size": 2,
+        "tech": {
+          "ENGINES": 1.2,
+          "WEAPONS": 1.5,
+          "SHIELDS": 1.1,
+          "CARGO": 1.3
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 2
+        }
+      },
+      {
+        "id": 5,
+        "owner": "zalthor",
+        "type": "destroyer",
+        "size": 15,
+        "fleetId": "Strike",
+        "tech": {
+          "ENGINES": 1.2,
+          "WEAPONS": 1.5,
+          "SHIELDS": 1.1,
+          "CARGO": 1.3
+        },
+        "location": {
+          "state": "HYPERSPACE",
+          "originId": 2,
+          "destId": 1,
+          "distanceRemaining": 5.0,
+          "speed": 10.5
+        }
+      },
+      {
+        "id": 6,
+        "owner": "zalthor",
+        "type": "hauler",
+        "size": 8,
+        "tech": {
+          "ENGINES": 1.2,
+          "WEAPONS": 1.5,
+          "SHIELDS": 1.1,
+          "CARGO": 1.3
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 5
+        },
+        "cargo": {
+          "type": "COLONISTS",
+          "quantity": 12.0
+        },
+        "orders": [
+          {
+            "cmd": "LOAD",
+            "type": "COLONISTS",
+            "amount": 15.0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "owner": "krynn",
+        "type": "fighter",
+        "size": 30,
+        "tech": {
+          "ENGINES": 1.8,
+          "WEAPONS": 1.6,
+          "SHIELDS": 1.3,
+          "CARGO": 0.9
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 3
+        }
+      },
+      {
+        "id": 8,
+        "owner": "krynn",
+        "type": "battleship",
+        "size": 2,
+        "tech": {
+          "ENGINES": 1.8,
+          "WEAPONS": 1.6,
+          "SHIELDS": 1.3,
+          "CARGO": 1.9
+        },
+        "location": {
+          "state": "HYPERSPACE",
+          "originId": 3,
+          "destId": 11,
+          "distanceRemaining": 20.0,
+          "speed": 6.5
+        },
+        "cargo": {
+          "type": "COLONISTS",
+          "quantity": 12.0
+        }
+      },
+      {
+        "id": 9,
+        "owner": "krynn",
+        "type": "colony_ship",
+        "size": 5,
+        "tech": {
+          "ENGINES": 1.8,
+          "WEAPONS": 1.6,
+          "SHIELDS": 1.3,
+          "CARGO": 0.9
+        },
+        "location": {
+          "state": "ORBIT",
+          "originId": 6
+        },
+        "cargo": {
+          "type": "COLONISTS",
+          "quantity": 18.0
+        }
+      }
+    ],
+    "fleets": [
+      {
+        "id": "Logistics",
+        "owner": "terran",
+        "groupIds": [
+          3
+        ]
+      },
+      {
+        "id": "Strike",
+        "owner": "zalthor",
+        "groupIds": [
+          5
+        ]
+      }
+    ],
+    "productions": {
+      "1": { "type": "CAPITAL" },
+      "2": { "type": "SHIPS", "target": "destroyer", "excess": 0.0 },
+      "3": { "type": "TECH", "target": "ENGINES", "excess": 0.0 },
+      "4": { "type": "MATERIALS", "excess": 0.0 },
+      "5": { "type": "SHIPS", "target": "hauler", "excess": 4.2 },
+      "6": { "type": "CAPITAL", "excess": 0.0 }
+    }
+  }
+}

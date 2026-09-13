@@ -22,9 +22,6 @@ dependencies {
 
     implementation libs.sim.math
     implementation libs.heart
-
-    implementation project(':galaxy-core')
-    implementation project(':hex-grid')
 }
 
 test {
