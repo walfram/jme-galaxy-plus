@@ -12,6 +12,27 @@ public class ShipGroupTest {
 	private static final double DELTA = 1e-2;
 
 	@Test
+	void test_turret_9x11() {
+		Race race = mock(Race.class);
+
+		ShipType turret9x11 = new ShipType("Turret-9x11", new Engines(99.0), new Weapons(9, 11.0), new Shields(43.0), new Cargo(1.0));
+		assertEquals(198.0, turret9x11.mass());
+
+		//		assertEquals(89.63216799463753, type.effectiveDefence()); // at shields 3.91?
+//		assertEquals(22.92382813162085, type.effectiveDefence()); // at shields 1.0?
+
+		ShipGroup group = new ShipGroup(race, turret9x11, new TechLevels(), 1);
+		assertEquals(10.0, group.speed());
+
+		group.upgrade(new TechLevels(4.34, 3.5, 3.91, 2.09));
+		assertEquals(43.4, group.speed(), DELTA);
+		// assertEquals(43.17, group.speedLoaded());
+		assertEquals(38.50, group.attackPower(), DELTA);
+		// assertEquals(561.5, group.bombingPower(), DELTA);
+		assertEquals(89.63, group.defencePower(), DELTA);
+	}
+
+	@Test
 	void test_ship_group_defence_with_cargo() {
 		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.droneMk2(), new TechLevels(), 1, new CargoLoad(CargoType.COLONISTS, 1.05));
 		assertEquals(1.81, drones.defencePower(), DELTA);
