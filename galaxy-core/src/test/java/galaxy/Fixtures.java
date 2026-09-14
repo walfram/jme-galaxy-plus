@@ -8,6 +8,10 @@ public class Fixtures {
 		return new ShipType("drone", new Engines(1.0), new Weapons(0, 0.0), new Shields(0.0), new Cargo(0.0));
 	}
 
+	public static ShipType droneMk2() {
+		return new ShipType("drone", new Engines(1.0), new Weapons(1, 1.0), new Shields(1.0), new Cargo(1.0));
+	}
+
 	public static ShipType flak() {
 		return new ShipType("Flak", new Engines(1.00), new Weapons(0, 0.00), new Shields(2.00), new Cargo(0.00));
 	}
@@ -63,5 +67,4 @@ public class Fixtures {
 	public static ShipType megaFreighter() {
 		return new ShipType("MegaFreighter", new Engines(120.00), new Weapons(0, 0.00), new Shields(38.43), new Cargo(39.57));
 	}
-	
 }

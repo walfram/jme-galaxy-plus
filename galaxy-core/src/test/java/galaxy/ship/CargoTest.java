@@ -44,6 +44,8 @@ class CargoTest {
 		assertEquals(6.25, new CargoCapacity(new Cargo(5.0), levels).value());
 		assertEquals(15.0, new CargoCapacity(new Cargo(10.0), levels).value());
 
+		assertEquals(117.85924500000002, new CargoCapacity(new Cargo(39.57), levels).value());
+
 		assertEquals(175.0, new CargoCapacity(new Cargo(50.0), levels).value());
 		assertEquals(600.0, new CargoCapacity(new Cargo(100.0), levels).value());
 	}

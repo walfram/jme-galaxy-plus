@@ -12,13 +12,39 @@ public class ShipGroupTest {
 	private static final double DELTA = 1e-2;
 
 	@Test
-	void test_ship_group_defense() {
+	void test_ship_group_defence_with_cargo() {
+		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.droneMk2(), new TechLevels(), 1, new CargoLoad(CargoType.COLONISTS, 1.05));
+		assertEquals(1.81, drones.defencePower(), DELTA);
 
+		ShipGroup freighters = new ShipGroup(mock(Race.class), Fixtures.freighter(), new TechLevels(), 1, new CargoLoad(CargoType.COLONISTS, 15.0));
+		assertEquals(7.36, freighters.defencePower(), DELTA);
+
+		ShipGroup megaFreighters = new ShipGroup(mock(Race.class), Fixtures.megaFreighter(), new TechLevels(), 1, new CargoLoad(CargoType.COLONISTS, 117.85));
+		assertEquals(17.53, megaFreighters.defencePower(), DELTA);
+	}
+
+	@Test
+	void test_ship_group_defense_without_cargo() {
+		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.drone(), new TechLevels(), 1);
+		assertEquals(0.0, drones.defencePower(), DELTA);
+
+		ShipGroup fighters = new ShipGroup(mock(Race.class), Fixtures.fighter(), new TechLevels(), 1);
+		assertEquals(2.31, fighters.defencePower(), DELTA);
+
+		ShipGroup battleships = new ShipGroup(mock(Race.class), Fixtures.battleship(), new TechLevels(), 1);
+		assertEquals(10.71, battleships.defencePower(), DELTA);
 	}
 
 	@Test
 	void test_ship_group_offence() {
+		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.drone(), new TechLevels(), 1);
+		assertEquals(0.0, drones.attackPower());
 
+		ShipGroup fighters = new ShipGroup(mock(Race.class), Fixtures.fighter(), new TechLevels(), 1);
+		assertEquals(1.2, fighters.attackPower());
+
+		ShipGroup battleships = new ShipGroup(mock(Race.class), Fixtures.battleship(), new TechLevels(), 1);
+		assertEquals(25.0, battleships.attackPower());
 	}
 
 	@Test

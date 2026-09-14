@@ -1,7 +1,9 @@
 package galaxy;
 
-import galaxy.ship.*;
-import org.jspecify.annotations.Nullable;
+import galaxy.ship.CargoHold;
+import galaxy.ship.CargoLoad;
+import galaxy.ship.CargoType;
+import galaxy.ship.ShipType;
 
 public final class ShipGroup {
 	private final Race race;
@@ -24,11 +26,11 @@ public final class ShipGroup {
 	}
 
 	public double mass() {
-		double typeMass = shipType.mass();
+		double mass = shipType.mass();
 
-		typeMass += cargoHold.cargoMass() / techLevels.cargo();
+		mass += cargoHold.cargoMass() / techLevels.cargo();
 
-		return typeMass;
+		return mass;
 	}
 
 	public double speed() {
@@ -53,5 +55,15 @@ public final class ShipGroup {
 
 	public void upgrade(TechLevels techLevels) {
 		this.techLevels.upgrade(techLevels);
+	}
+
+	public double attackPower() {
+		return techLevels.weapons() * shipType.weapons().caliber();
+	}
+
+	public double defencePower() {
+		double n = techLevels.shields() * shipType.shields().size();
+		double d = Math.pow(mass(), 1.0 / 3.0);
+		return (n / d) * Math.pow(30.0, 1.0 / 3.0);
 	}
 }
