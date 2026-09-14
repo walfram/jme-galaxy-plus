@@ -1,0 +1,40 @@
+package galaxy.ship;
+
+import galaxy.TechLevels;
+
+import java.util.Optional;
+
+public final class StandardCargoHold implements CargoHold {
+
+	private final CargoCapacity cargoCapacity;
+
+	private CargoLoad cargoLoad;
+
+	public StandardCargoHold(int size, Cargo cargo, TechLevels techLevels) {
+		this.cargoCapacity = new CargoCapacity(size, cargo, techLevels);
+	}
+
+	@Override
+	public double cargoMass() {
+		return Optional.ofNullable(cargoLoad).map(CargoLoad::quantity).orElse(0.0);
+	}
+
+	@Override
+	public CargoCapacity cargoCapacity() {
+		return cargoCapacity;
+	}
+
+	@Override
+	public void load(CargoLoad cargoLoad) {
+		if (cargoLoad.quantity() > cargoCapacity.value())
+			throw new IllegalArgumentException("Cargo capacity exceeded");
+
+		this.cargoLoad = cargoLoad;
+	}
+
+	@Override
+	public CargoType cargoType() {
+		return cargoLoad.cargoType();
+	}
+
+}
