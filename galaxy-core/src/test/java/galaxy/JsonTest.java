@@ -32,7 +32,7 @@ public class JsonTest {
 			String raceId = it.next();
 			JsonNode json = factionsRoot.get(raceId);
 
-			assertDoesNotThrow(() -> new Race(json, raceId));
+			assertDoesNotThrow(() -> new Race(raceId, json));
 		}
 	}
 
@@ -40,10 +40,10 @@ public class JsonTest {
 	void should_create_planets_from_json() {
 		JsonNode planetsRoot = root.get("entities").get("planets");
 
-		RaceIndex raceIndex = mock(RaceIndex.class);
+		Races races = mock(Races.class);
 
 		for (JsonNode json : planetsRoot) {
-			assertDoesNotThrow(() -> new Planet(json, raceIndex));
+			assertDoesNotThrow(() -> new Planet(json, races));
 		}
 	}
 

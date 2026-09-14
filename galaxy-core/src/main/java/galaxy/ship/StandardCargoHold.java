@@ -27,7 +27,7 @@ public final class StandardCargoHold implements CargoHold {
 	@Override
 	public void load(CargoLoad cargoLoad) {
 		if (cargoLoad.quantity() > cargoCapacity.value())
-			throw new IllegalArgumentException("Cargo capacity exceeded");
+			throw new IllegalArgumentException("Cargo capacity exceeded, available %s, requested %s".formatted(cargoCapacity.value(), cargoLoad.quantity()));
 
 		this.cargoLoad = cargoLoad;
 	}

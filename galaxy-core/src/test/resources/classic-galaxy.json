@@ -602,7 +602,7 @@
         },
         "cargo": {
           "type": "COLONISTS",
-          "quantity": 12.0
+          "quantity": 3.9
         }
       },
       {
@@ -643,12 +643,32 @@
       }
     ],
     "productions": {
-      "1": { "type": "CAPITAL" },
-      "2": { "type": "SHIPS", "target": "destroyer", "excess": 0.0 },
-      "3": { "type": "TECH", "target": "ENGINES", "excess": 0.0 },
-      "4": { "type": "MATERIALS", "excess": 0.0 },
-      "5": { "type": "SHIPS", "target": "hauler", "excess": 4.2 },
-      "6": { "type": "CAPITAL", "excess": 0.0 }
+      "1": {
+        "type": "CAPITAL"
+      },
+      "2": {
+        "type": "SHIPS",
+        "target": "destroyer",
+        "excess": 0.0
+      },
+      "3": {
+        "type": "TECH",
+        "target": "ENGINES",
+        "excess": 0.0
+      },
+      "4": {
+        "type": "MATERIALS",
+        "excess": 0.0
+      },
+      "5": {
+        "type": "SHIPS",
+        "target": "hauler",
+        "excess": 4.2
+      },
+      "6": {
+        "type": "CAPITAL",
+        "excess": 0.0
+      }
     }
   }
 }

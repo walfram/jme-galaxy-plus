@@ -1,7 +1,7 @@
 package galaxy;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.ship.ShipType;
+import galaxy.race.RaceId;
 
 import java.util.List;
 import java.util.Map;
@@ -12,37 +12,41 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public final class ShipTypes {
+public class Races {
 
-	private final Map<String, ShipType> shipTypes;
+	private final Map<RaceId, Race> races;
 
-	public ShipTypes(Map<String, ShipType> shipTypes) {
-		this.shipTypes = shipTypes;
+	public Races(Map<RaceId, Race> races) {
+		this.races = races;
 	}
 
-	public ShipTypes(JsonNode src) {
+	public Races(List<Race> races) {
 		this(
-				fields(src).map(key -> new ShipType(key, src.get(key))).toList()
-		);
-	}
-
-	public ShipTypes(List<ShipType> shipTypes) {
-		this(
-				shipTypes.stream()
+				races.stream()
 						.collect(
 								Collectors.toUnmodifiableMap(
-										ShipType::name,
+										Race::raceId,
 										Function.identity()
 								)
 						)
 		);
 	}
 
+	public Races(final JsonNode src) {
+		this(
+				fields(src).map(key -> new Race(key, src.get(key))).toList()
+		);
+	}
+
+	public int size() {
+		return races.size();
+	}
+
 	private static Stream<String> fields(final JsonNode source) {
 		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(source.fieldNames(), Spliterator.ORDERED), false);
 	}
 
-	public ShipType findByName(String shipTypeName) {
-		return shipTypes.get(shipTypeName);
+	public Race raceById(String raceId) {
+		return races.get(new RaceId(raceId));
 	}
 }

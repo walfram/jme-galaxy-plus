@@ -54,7 +54,7 @@ public final class Planet {
 		this(coordinates, size, resources, new Industry(), new Population());
 	}
 
-	public Planet(JsonNode src, RaceIndex raceIndex) {
+	public Planet(JsonNode src, Races raceIndex) {
 		this(
 				new PlanetId(src.get("planetId")),
 				new Coordinates(src.get("coordinates")),

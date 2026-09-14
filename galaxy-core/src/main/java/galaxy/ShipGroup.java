@@ -1,11 +1,13 @@
 package galaxy;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.ship.CargoHold;
 import galaxy.ship.CargoLoad;
 import galaxy.ship.CargoType;
 import galaxy.ship.ShipType;
 
 public final class ShipGroup {
+
 	private final Race race;
 	private final ShipType shipType;
 	private final TechLevels techLevels;
@@ -23,6 +25,16 @@ public final class ShipGroup {
 		this.techLevels = new TechLevels(techLevels);
 		this.size = size;
 		this.cargoHold = shipType.cargoHold(size, this.techLevels, cargoLoad);
+	}
+
+	public ShipGroup(JsonNode src, Race race, Planets planets) {
+		this(
+				race,
+				race.shipType(src.get("type").asText()),
+				new TechLevels(src.get("tech")),
+				src.get("size").asInt(),
+				src.has("cargo") ? new CargoLoad(src.path("cargo")) : new CargoLoad()
+		);
 	}
 
 	public double mass() {
