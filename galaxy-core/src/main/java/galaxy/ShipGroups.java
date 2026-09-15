@@ -1,6 +1,7 @@
 package galaxy;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.ship.ShipGroup;
 
 import java.util.List;
 

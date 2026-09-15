@@ -37,4 +37,7 @@ public class Planets {
 		return planets.size();
 	}
 
+	public Planet findById(PlanetId planetId) {
+		return planets.get(planetId);
+	}
 }
