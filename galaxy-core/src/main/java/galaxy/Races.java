@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class Races {
+public final class Races {
 
 	private final Map<RaceId, Race> races;
 
@@ -44,6 +44,10 @@ public class Races {
 
 	private static Stream<String> fields(final JsonNode source) {
 		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(source.fieldNames(), Spliterator.ORDERED), false);
+	}
+
+	public Race raceById(RaceId raceId) {
+		return races.get(raceId);
 	}
 
 	public Race raceById(String raceId) {

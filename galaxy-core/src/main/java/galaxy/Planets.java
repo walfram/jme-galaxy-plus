@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Planets {
+public final class Planets {
 	private final Map<PlanetId, Planet> planets;
 
 	public Planets(Map<PlanetId, Planet> planets) {

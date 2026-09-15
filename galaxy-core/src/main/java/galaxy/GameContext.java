@@ -8,4 +8,6 @@ public interface GameContext {
 	Planets planets();
 
 	ShipGroups shipGroups();
+
+	Productions productions();
 }

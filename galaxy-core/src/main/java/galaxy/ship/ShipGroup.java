@@ -115,6 +115,10 @@ public final class ShipGroup {
 		return race;
 	}
 
+	public ShipType shipType() {
+		return shipType;
+	}
+
 	public Planet planet() {
 		return planet;
 	}
