@@ -26,4 +26,7 @@ public final class Population {
 		value += other.value();
 	}
 
+	public void decrease(Colonists withdrawn) {
+		value -= withdrawn.toPopulation().value();
+	}
 }

@@ -6,6 +6,7 @@ import galaxy.ship.ShipType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public final class Race {
 	private final RaceId raceId;
@@ -28,6 +29,23 @@ public final class Race {
 				new TechLevels(src.get("techLevels")),
 				new ShipTypes(src.get("shipTypes"))
 		);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == null)
+			return false;
+
+		if (!Race.class.isAssignableFrom(other.getClass()))
+			return false;
+
+		Race that = (Race) other;
+		return this.raceId.equals(that.raceId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(raceId);
 	}
 
 	public Race(String raceId) {

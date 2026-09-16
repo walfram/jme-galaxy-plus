@@ -10,7 +10,7 @@ public final class Industry {
 	}
 
 	public Industry(double value) {
-		this.value = value;
+		this.value = Math.abs(value);
 	}
 
 	public Industry(JsonNode src) {
@@ -23,5 +23,9 @@ public final class Industry {
 
 	public double value() {
 		return value;
+	}
+
+	public void decrease(double quantity) {
+		this.value -= Math.abs(quantity);
 	}
 }

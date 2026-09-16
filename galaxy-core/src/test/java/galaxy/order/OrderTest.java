@@ -2,6 +2,8 @@ package galaxy.order;
 
 import galaxy.*;
 import galaxy.race.RaceId;
+import galaxy.ship.CargoLoad;
+import galaxy.ship.CargoType;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
 import org.junit.jupiter.api.BeforeEach;
@@ -135,6 +137,14 @@ public class OrderTest {
 	// join groups
 	// scrap ship group
 	// load ship group
+	@Test
+	void should_load_ship_group_with_colonists() {
+		Race race = new Race("foo");
+		ShipGroup shipGroup = mock(ShipGroup.class);
+
+		Order order = new LoadShipGroup(race, shipGroup, new CargoLoad(CargoType.COLONISTS, 1.0));
+	}
+
 	// rename planet
 	// change production
 	// quit game

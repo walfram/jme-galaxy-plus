@@ -23,15 +23,17 @@ public final class Materials {
 	}
 
 	public void add(Materials materials) {
-		value += materials.value();
+		value += Math.abs(materials.value());
 	}
 
 	public Materials withdraw(double requestedMaterials) {
-		if (value < requestedMaterials)
+		double requested = Math.abs(requestedMaterials);
+
+		if (value < requested)
 			throw new IllegalArgumentException("Cannot withdraw more materials than available");
 
-		value -= requestedMaterials;
+		value -= requested;
 
-		return new Materials(requestedMaterials);
+		return new Materials(requested);
 	}
 }

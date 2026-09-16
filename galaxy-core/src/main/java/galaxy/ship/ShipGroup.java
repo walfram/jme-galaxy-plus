@@ -14,28 +14,31 @@ public final class ShipGroup {
 		ORBIT, LAUNCHED, HYPERSPACE, UPGRADE, TRANSFER, INTERCEPT
 	}
 
+	private final ShipGroupId shipGroupId;
+
 	private final Race race;
 
 	private final ShipType shipType;
+
 	private final TechLevels techLevels;
 	private final int size;
 	private final CargoHold cargoHold;
-
 	private Planet planet;
 
 	private Planet destination;
+
 	private State state;
 	private Coordinates coordinates;
-
 	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size, Planet planet) {
-		this(race, shipType, techLevels, size, new CargoLoad(), planet, State.ORBIT, null, null);
+		this(new ShipGroupId(), race, shipType, techLevels, size, new CargoLoad(), planet, State.ORBIT, null, null);
 	}
 
 	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size, Planet planet, CargoLoad cargoLoad) {
-		this(race, shipType, techLevels, size, cargoLoad, planet, State.ORBIT, null, null);
+		this(new ShipGroupId(), race, shipType, techLevels, size, cargoLoad, planet, State.ORBIT, null, null);
 	}
 
-	private ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size, CargoLoad cargoLoad, Planet planet, State state, Planet destination, Coordinates coordinates) {
+	private ShipGroup(ShipGroupId shipGroupId, Race race, ShipType shipType, TechLevels techLevels, int size, CargoLoad cargoLoad, Planet planet, State state, Planet destination, Coordinates coordinates) {
+		this.shipGroupId = shipGroupId;
 		this.race = race;
 		this.shipType = shipType;
 		this.techLevels = new TechLevels(techLevels);
@@ -49,6 +52,7 @@ public final class ShipGroup {
 
 	public ShipGroup(JsonNode src, Race race, Planets planets) {
 		this(
+				new ShipGroupId(src.get("id")),
 				race,
 				race.shipType(src.get("type").asText()),
 				new TechLevels(src.get("tech")),
@@ -59,6 +63,10 @@ public final class ShipGroup {
 				src.has("destinationId") ? planets.findById(new PlanetId(src.get("destinationId"))) : null,
 				src.has("coordinates") ? new Coordinates(src.get("coordinates")) : null
 		);
+	}
+
+	public ShipGroupId shipGroupId() {
+		return shipGroupId;
 	}
 
 	public double mass() {

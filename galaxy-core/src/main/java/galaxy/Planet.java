@@ -119,4 +119,29 @@ public final class Planet {
 	public void changeOwner(Race race) {
 		this.race = race;
 	}
+
+	public Capital withdrawCapital(double quantity) {
+		double available = capital().value();
+
+		if (available < quantity) {
+			throw new IllegalArgumentException("Not enough capital to withdraw %s".formatted(quantity));
+		}
+
+		industry.decrease(quantity);
+
+		return new CapitalOf(quantity);
+	}
+
+	public Colonists withdrawColonists(double quantity) {
+		double available = colonists().value();
+
+		if (available < quantity) {
+			throw new IllegalArgumentException("Not enough colonists to withdraw %s".formatted(quantity));
+		}
+
+		ColonistsOf withdrawn = new ColonistsOf(quantity);
+		population.decrease(withdrawn);
+
+		return withdrawn;
+	}
 }
