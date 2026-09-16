@@ -14,7 +14,7 @@ public class ClassicGameContext implements GameContext {
 		this.races = new Races(root.get("factions"));
 		this.planets = new Planets(root.get("entities").get("planets"), races);
 		this.shipGroups = new ShipGroups(root.get("entities").get("shipGroups"), races, planets);
-		this.productions = new Productions(root.get("productions").path("productions"));
+		this.productions = new Productions(root.get("entities").path("productions"));
 	}
 
 	@Override
