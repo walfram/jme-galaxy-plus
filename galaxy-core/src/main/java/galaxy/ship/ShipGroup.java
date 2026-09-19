@@ -1,12 +1,11 @@
 package galaxy.ship;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.Planet;
-import galaxy.Planets;
-import galaxy.Race;
-import galaxy.TechLevels;
+import galaxy.*;
 import galaxy.planet.Coordinates;
 import galaxy.planet.PlanetId;
+
+import java.util.Optional;
 
 public final class ShipGroup {
 
@@ -30,7 +29,7 @@ public final class ShipGroup {
 	private State state;
 	private Coordinates coordinates;
 	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size, Planet planet) {
-		this(new ShipGroupId(), race, shipType, techLevels, size, new CargoLoad(), planet, State.ORBIT, null, null);
+		this(new ShipGroupId(), race, shipType, techLevels, size, null, planet, State.ORBIT, null, null);
 	}
 
 	public ShipGroup(Race race, ShipType shipType, TechLevels techLevels, int size, Planet planet, CargoLoad cargoLoad) {
@@ -57,7 +56,7 @@ public final class ShipGroup {
 				race.shipType(src.get("type").asText()),
 				new TechLevels(src.get("tech")),
 				src.get("size").asInt(),
-				src.has("cargo") ? new CargoLoad(src.path("cargo")) : new CargoLoad(),
+				src.has("cargo") ? new CargoLoad(src.path("cargo")) : null,
 				planets.findById(new PlanetId(src.get("planetId"))),
 				State.valueOf(src.get("state").asText()),
 				src.has("destinationId") ? planets.findById(new PlanetId(src.get("destinationId"))) : null,
@@ -72,7 +71,7 @@ public final class ShipGroup {
 	public double mass() {
 		double mass = shipType.mass();
 
-		mass += cargoHold.cargoMass() / techLevels.cargo();
+		mass += cargoHold.orElseThrow().cargoMass() / techLevels.cargo();
 
 		return mass;
 	}
@@ -82,19 +81,19 @@ public final class ShipGroup {
 	}
 
 	public double cargoCapacity() {
-		return cargoHold.cargoCapacity().value();
+		return cargoHold.orElseThrow().cargoCapacity().value();
 	}
 
 	public void load(CargoLoad cargoLoad) {
-		this.cargoHold.load(cargoLoad);
+		this.cargoHold.orElseThrow().load(cargoLoad);
 	}
 
 	public double cargoMass() {
-		return cargoHold.cargoMass();
+		return cargoHold.orElseThrow().cargoMass();
 	}
 
-	public CargoType cargoType() {
-		return cargoHold.cargoType();
+	public Transportable cargo() {
+		return cargoHold.orElseThrow().cargo();
 	}
 
 	public void upgrade(TechLevels techLevels) {

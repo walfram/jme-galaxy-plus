@@ -1,6 +1,7 @@
 package galaxy.ship;
 
 import galaxy.TechLevels;
+import galaxy.Transportable;
 
 import java.util.Optional;
 
@@ -33,8 +34,8 @@ public final class StandardCargoHold implements CargoHold {
 	}
 
 	@Override
-	public CargoType cargoType() {
-		return cargoLoad.cargoType();
+	public Transportable cargo() {
+		return cargoLoad.transportable();
 	}
 
 }

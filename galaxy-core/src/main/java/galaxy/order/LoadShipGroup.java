@@ -3,9 +3,7 @@ package galaxy.order;
 import galaxy.GameContext;
 import galaxy.Order;
 import galaxy.Race;
-import galaxy.planet.Materials;
 import galaxy.ship.CargoLoad;
-import galaxy.ship.CargoType;
 import galaxy.ship.ShipGroup;
 
 import java.util.Objects;

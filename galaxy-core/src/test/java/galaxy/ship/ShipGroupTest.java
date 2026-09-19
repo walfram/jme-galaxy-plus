@@ -179,7 +179,7 @@ public class ShipGroupTest {
 
 		assertDoesNotThrow(() -> haulers.load(new CargoLoad(CargoType.COLONISTS, 10.0 * 1.05)));
 		assertEquals(10.0 * 1.05, haulers.cargoMass());
-		assertEquals(CargoType.COLONISTS, haulers.cargoType());
+		assertEquals(CargoType.COLONISTS, haulers.cargo());
 	}
 
 	@Test

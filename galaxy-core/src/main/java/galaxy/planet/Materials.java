@@ -1,8 +1,11 @@
 package galaxy.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.Transportable;
 
-public final class Materials {
+import java.awt.datatransfer.Transferable;
+
+public final class Materials implements Transportable {
 
 	private double value;
 

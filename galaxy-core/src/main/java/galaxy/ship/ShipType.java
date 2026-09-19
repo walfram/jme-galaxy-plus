@@ -3,6 +3,8 @@ package galaxy.ship;
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.TechLevels;
 
+import java.util.Optional;
+
 public record ShipType(String name, Engines engines, Weapons weapons, Shields shields, Cargo cargo) {
 
 	public ShipType(String name, JsonNode src) {
@@ -28,7 +30,7 @@ public record ShipType(String name, Engines engines, Weapons weapons, Shields sh
 
 	public CargoHold cargoHold(int size, TechLevels techLevels, CargoLoad cargoLoad) {
 		if (cargo.size() == 0) {
-			return new NoCargoHold();
+			return null;
 		} else {
 			StandardCargoHold cargoHold = new StandardCargoHold(size, cargo, techLevels);
 			cargoHold.load(cargoLoad);

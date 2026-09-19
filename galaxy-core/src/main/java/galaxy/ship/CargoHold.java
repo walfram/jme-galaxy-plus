@@ -1,5 +1,7 @@
 package galaxy.ship;
 
+import galaxy.Transportable;
+
 public interface CargoHold {
 	double cargoMass();
 
@@ -7,5 +9,5 @@ public interface CargoHold {
 
 	void load(CargoLoad cargoLoad);
 
-	CargoType cargoType();
+	Transportable cargo();
 }

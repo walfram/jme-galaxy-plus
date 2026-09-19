@@ -1,6 +1,8 @@
 package galaxy.planet;
 
-public interface Colonists {
+import galaxy.Transportable;
+
+public interface Colonists extends Transportable {
 
 	double value();
 

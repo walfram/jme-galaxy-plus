@@ -1,6 +1,8 @@
 package galaxy.planet;
 
-public interface Capital {
+import galaxy.Transportable;
+
+public interface Capital extends Transportable {
 
 	double value();
 
