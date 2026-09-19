@@ -1,9 +1,8 @@
 package galaxy.ship;
 
-import com.fasterxml.jackson.databind.JsonNode;
+public interface Engines extends ShipComponent {
 
-public record Engines(double size) {
-	public Engines(JsonNode src) {
-		this(src.asDouble());
-	}
+	double size();
+
+	double power();
 }

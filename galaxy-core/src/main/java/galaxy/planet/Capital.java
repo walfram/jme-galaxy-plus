@@ -1,10 +1,7 @@
 package galaxy.planet;
 
-import galaxy.Transportable;
+import galaxy.Cargo;
 
-public interface Capital extends Transportable {
-
-	double value();
-
+public interface Capital extends Cargo {
 	Industry toIndustry();
 }

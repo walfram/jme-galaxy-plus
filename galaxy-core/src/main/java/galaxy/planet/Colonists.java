@@ -1,10 +1,7 @@
 package galaxy.planet;
 
-import galaxy.Transportable;
+import galaxy.Cargo;
 
-public interface Colonists extends Transportable {
-
-	double value();
-
+public interface Colonists extends Cargo {
 	Population toPopulation();
 }

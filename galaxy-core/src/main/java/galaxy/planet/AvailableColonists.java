@@ -10,7 +10,7 @@ public class AvailableColonists implements Colonists {
 	}
 
 	@Override
-	public double value() {
+	public double quantity() {
 		return excess() / 8.0;
 	}
 
@@ -20,6 +20,6 @@ public class AvailableColonists implements Colonists {
 
 	@Override
 	public Population toPopulation() {
-		return new Population(value() * 8.0);
+		return new Population(quantity() * 8.0);
 	}
 }

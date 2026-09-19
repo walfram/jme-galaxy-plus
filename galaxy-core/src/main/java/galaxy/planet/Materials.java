@@ -1,16 +1,14 @@
 package galaxy.planet;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.Transportable;
+import galaxy.Cargo;
 
-import java.awt.datatransfer.Transferable;
+public final class Materials implements Cargo {
 
-public final class Materials implements Transportable {
+	private double quantity;
 
-	private double value;
-
-	public Materials(double value) {
-		this.value = value;
+	public Materials(double quantity) {
+		this.quantity = quantity;
 	}
 
 	public Materials() {
@@ -21,21 +19,21 @@ public final class Materials implements Transportable {
 		this(src.asDouble());
 	}
 
-	public double value() {
-		return value;
+	public double quantity() {
+		return quantity;
 	}
 
 	public void add(Materials materials) {
-		value += Math.abs(materials.value());
+		quantity += Math.abs(materials.quantity());
 	}
 
 	public Materials withdraw(double requestedMaterials) {
 		double requested = Math.abs(requestedMaterials);
 
-		if (value < requested)
+		if (quantity < requested)
 			throw new IllegalArgumentException("Cannot withdraw more materials than available");
 
-		value -= requested;
+		quantity -= requested;
 
 		return new Materials(requested);
 	}

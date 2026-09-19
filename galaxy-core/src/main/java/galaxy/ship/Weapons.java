@@ -1,12 +1,8 @@
 package galaxy.ship;
 
-import com.fasterxml.jackson.databind.JsonNode;
+public interface Weapons extends ShipComponent {
 
-public record Weapons(int guns, double caliber) {
-	public Weapons(JsonNode src) {
-		this(
-				src.get("guns").asInt(),
-				src.get("caliber").asDouble()
-		);
-	}
+	int guns();
+	double caliber();
+
 }

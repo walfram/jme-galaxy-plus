@@ -10,7 +10,7 @@ public class AvailableCapital implements Capital {
 	}
 
 	@Override
-	public double value() {
+	public double quantity() {
 		return excess();
 	}
 

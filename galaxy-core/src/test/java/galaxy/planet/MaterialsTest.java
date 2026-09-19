@@ -2,7 +2,8 @@ package galaxy.planet;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MaterialsTest {
 
@@ -18,17 +19,17 @@ class MaterialsTest {
 
 		Materials chunk = materials.withdraw(50.0);
 
-		assertEquals(50.0, chunk.value());
-		assertEquals(50.0, materials.value());
+		assertEquals(50.0, chunk.quantity());
+		assertEquals(50.0, materials.quantity());
 	}
 
 	@Test
 	void test_add_materials() {
 		Materials materials = new Materials();
-		assertEquals(0.0, materials.value());
+		assertEquals(0.0, materials.quantity());
 
 		materials.add(new Materials(100.0));
-		assertEquals(100.0, materials.value());
+		assertEquals(100.0, materials.quantity());
 	}
 
 }

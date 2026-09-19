@@ -2,7 +2,6 @@ package galaxy;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.ship.ShipType;
-import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;

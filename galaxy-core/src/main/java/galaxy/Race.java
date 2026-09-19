@@ -3,6 +3,7 @@ package galaxy;
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipType;
+import galaxy.ship.TechLevels;
 
 import java.util.HashMap;
 import java.util.Map;

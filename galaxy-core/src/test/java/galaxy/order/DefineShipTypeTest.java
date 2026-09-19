@@ -4,6 +4,7 @@ import galaxy.*;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
+import galaxy.ship.TechLevels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,7 @@ class DefineShipTypeTest {
 
 		ShipType shipType = Fixtures.drone();
 
-		when(context.shipGroups()).thenReturn(new ShipGroups(List.of()));
+		when(context.shipGroups()).thenReturn(new ShipGroups());
 
 		Order order = new DefineShipType(race, shipType);
 		assertDoesNotThrow(() -> order.applyTo(context));
@@ -44,8 +45,8 @@ class DefineShipTypeTest {
 		Race race = new Race(new RaceId("foo"), new TechLevels(), new ShipTypes(List.of(drone)));
 
 		ShipGroup shipGroup = mock(ShipGroup.class);
-		when(shipGroup.race()).thenReturn(race);
-		when(shipGroup.shipType()).thenReturn(drone);
+		when(shipGroup.owner()).thenReturn(race);
+		when(shipGroup.type()).thenReturn(drone);
 		when(context.shipGroups()).thenReturn(new ShipGroups(List.of(shipGroup)));
 
 		Order order = new DefineShipType(race, drone);

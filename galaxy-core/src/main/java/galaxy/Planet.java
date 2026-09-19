@@ -121,7 +121,7 @@ public final class Planet {
 	}
 
 	public Capital withdrawCapital(double quantity) {
-		double available = capital().value();
+		double available = capital().quantity();
 
 		if (available < quantity) {
 			throw new IllegalArgumentException("Not enough capital to withdraw %s".formatted(quantity));
@@ -133,7 +133,7 @@ public final class Planet {
 	}
 
 	public Colonists withdrawColonists(double quantity) {
-		double available = colonists().value();
+		double available = colonists().quantity();
 
 		if (available < quantity) {
 			throw new IllegalArgumentException("Not enough colonists to withdraw %s".formatted(quantity));

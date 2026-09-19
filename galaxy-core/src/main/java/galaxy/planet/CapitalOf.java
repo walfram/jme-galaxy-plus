@@ -1,8 +1,8 @@
 package galaxy.planet;
 
-public record CapitalOf(double value) implements Capital {
+public record CapitalOf(double quantity) implements Capital {
 	@Override
 	public Industry toIndustry() {
-		return new Industry(value);
+		return new Industry(quantity);
 	}
 }

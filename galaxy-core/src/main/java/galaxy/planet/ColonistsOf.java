@@ -1,8 +1,8 @@
 package galaxy.planet;
 
-public record ColonistsOf(double value) implements Colonists {
+public record ColonistsOf(double quantity) implements Colonists {
 	@Override
 	public Population toPopulation() {
-		return new Population(8.0 * value);
+		return new Population(8.0 * quantity);
 	}
 }

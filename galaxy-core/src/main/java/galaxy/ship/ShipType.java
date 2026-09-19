@@ -1,40 +1,84 @@
 package galaxy.ship;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.TechLevels;
 
-import java.util.Optional;
+public final  class ShipType {
 
-public record ShipType(String name, Engines engines, Weapons weapons, Shields shields, Cargo cargo) {
+	private final String name;
+	private final Engines engines;
+	private final Weapons weapons;
+	private final Shields shields;
+	private final CargoBay cargoBay;
+
+	public ShipType(String name, Engines engines) {
+		this(name, engines, new NoWeapons(), new NoShields(), new NoCargoBay());
+	}
+
+	public ShipType(String name, Engines engines, Weapons weapons, Shields shields, CargoBay cargoBay) {
+		this.name = name;
+		this.engines = engines;
+		this.weapons = weapons;
+		this.shields = shields;
+		this.cargoBay = cargoBay;
+	}
+
+	public ShipType(String name, Engines engines, Shields shields) {
+		this(name, engines, new NoWeapons(), shields, new NoCargoBay());
+	}
+
+	public ShipType(String name, Engines engines, CargoBay cargoBay) {
+		this(name, engines, new NoWeapons(), new NoShields(), cargoBay);
+	}
+
+	public ShipType(String name, Engines engines, Shields shields, CargoBay cargoBay) {
+		this(name, engines, new NoWeapons(), shields, cargoBay);
+	}
+
+	public ShipType(ShipType source, TechLevels techLevels) {
+		this(
+				source.name,
+				new EnginesOf(source.engines, techLevels.engines()),
+				new WeaponsOf(source.weapons, techLevels.weapons()),
+				new ShieldsOf(source.shields, techLevels.shields()),
+				new CargoBayOf(source.cargoBay, techLevels.cargo())
+		);
+	}
 
 	public ShipType(String name, JsonNode src) {
 		this(
 				name,
-				new Engines(src.get("engines")),
-				new Weapons(src.get("weapons")),
-				new Shields(src.get("shields")),
-				new Cargo(src.get("cargo"))
+				new EnginesOf(src.get("engines")),
+				new WeaponsOf(src.get("weapons")),
+				new ShieldsOf(src.get("shields")),
+				new CargoBayOf(src.get("cargo"))
 		);
 	}
 
+	public double speed() {
+		return engines.power() / mass();
+	}
+
 	public double mass() {
-		return engines.size()
-				+ weaponsMass()
-				+ shields.size()
-				+ cargo.size();
+		return engines.mass() + weapons.mass() + shields.mass() + cargoBay.mass();
 	}
 
-	private double weaponsMass() {
-		return weapons.caliber() * (weapons.guns() + 1) / 2.0;
+	public Engines engines() {
+		return engines;
 	}
 
-	public CargoHold cargoHold(int size, TechLevels techLevels, CargoLoad cargoLoad) {
-		if (cargo.size() == 0) {
-			return null;
-		} else {
-			StandardCargoHold cargoHold = new StandardCargoHold(size, cargo, techLevels);
-			cargoHold.load(cargoLoad);
-			return cargoHold;
-		}
+	public Weapons weapons() {
+		return weapons;
+	}
+
+	public Shields shields() {
+		return shields;
+	}
+
+	public CargoBay cargoBay() {
+		return cargoBay;
+	}
+
+	public String name() {
+		return name;
 	}
 }
