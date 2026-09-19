@@ -1,4 +1,7 @@
 package galaxy;
 
-public class Race {
+public final class Race {
+	public Race(String raceId) {
+
+	}
 }

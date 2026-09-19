@@ -1,4 +1,10 @@
 package galaxy;
 
-public class Planet {
+public final class Planet {
+
+	private final Coordinates coordinates = new Coordinates();
+
+	public Coordinates coordinates() {
+		return coordinates;
+	}
 }

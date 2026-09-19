@@ -1,4 +1,4 @@
 package galaxy;
 
-public record Colonists(double value) {
+public record Colonists(double quantity) implements Cargo {
 }
