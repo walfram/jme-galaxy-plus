@@ -60,9 +60,9 @@ public final class ShipGroups {
 	}
 
 	public Optional<Planet> orbitingPlanet(ShipGroup shipGroup) {
-		return orbiting().stream()
-				.filter(state -> Objects.equals(shipGroup, state.group()))
-				.findFirst()
+		return Optional.ofNullable(states.get(shipGroup))
+				.filter(InOrbit.class::isInstance)
+				.map(InOrbit.class::cast)
 				.map(InOrbit::planet);
 	}
 
