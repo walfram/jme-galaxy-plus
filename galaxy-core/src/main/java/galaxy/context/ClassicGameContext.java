@@ -13,7 +13,8 @@ public class ClassicGameContext implements GameContext {
 	public ClassicGameContext(JsonNode root) {
 		this.races = new Races(root.get("factions"));
 		this.planets = new Planets(root.get("entities").get("planets"), races);
-		this.shipGroups = new ShipGroups(root.get("entities").get("shipGroups"), races, planets);
+		// this.shipGroups = new ShipGroups(root.get("entities").get("shipGroups"), races, planets);
+		this.shipGroups = new ShipGroups(new JsonStates(root.get("entities").get("shipGroups"), races, planets).get());
 		this.productions = new Productions(root.get("entities").path("productions"));
 	}
 

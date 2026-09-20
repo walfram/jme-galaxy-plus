@@ -1,3 +1,8 @@
+### helper commands
+
+- `find galaxy-core/src/main/java/galaxy -type f -exec sh -c 'echo "===== $1 ====="; cat "$1"' _ {} \; > galaxy-core.txt`
+- `head -n -0 *`
+
 ### open questions
 
 - where to store ship types: race or context

@@ -20,35 +20,7 @@ public final class ShipGroups {
 	private final Map<ShipGroup, ShipGroupState> states = new LinkedHashMap<>();
 
 	public ShipGroups() {
-
-	}
-
-	public ShipGroups(JsonNode src, Races races, Planets planets) {
-		Map<String, BiFunction<ShipGroup, JsonNode, ShipGroupState>> mapping = Map.of(
-				"ORBIT", (group, data) -> new InOrbit(group, planets.findById(new PlanetId(data.get("planetId")))),
-				"LAUNCHED", (group, data) -> new Launched(group, planets.findById(new PlanetId(data.get("planetId"))), planets.findById(new PlanetId(data.get("destinationId")))),
-				"HYPERSPACE", (group, data) -> new InHyperspace(group,
-						planets.findById(new PlanetId(data.get("planetId"))), planets.findById(new PlanetId(data.get("destinationId"))),
-						new Coordinates(data.get("coordinates"))),
-				"UPGRADE", (group, data) -> new InUpgrade(group, planets.findById(new PlanetId(data.get("planetId")))),
-				"TRANSFER", (group, data) -> new InTransfer(group,
-						planets.findById(new PlanetId(data.get("planetId"))),
-						races.raceById(new RaceId(data.get("fromRaceId"))),
-						races.raceById(new RaceId(data.get("toRaceId"))))
-		);
-
-		src.valueStream().forEach(json -> {
-			Race owner = races.raceById(json.get("owner").asText());
-			Planet planet = planets.findById(new PlanetId(json.get("planetId").asText()));
-			ShipType type = owner.shipType(json.get("type").asText());
-			TechLevels techLevels = new TechLevels(json.get("tech"));
-			int size = json.get("size").asInt();
-
-			ShipGroup group = new ShipGroup(owner, planet, type, size, techLevels);
-
-			BiFunction<ShipGroup, JsonNode, ShipGroupState> stateFactory = mapping.get(json.get("state").asText());
-			states.put(group, stateFactory.apply(group, json));
-		});
+		this(Map.of());
 	}
 
 	public ShipGroups(Map<ShipGroup, ShipGroupState> states) {
