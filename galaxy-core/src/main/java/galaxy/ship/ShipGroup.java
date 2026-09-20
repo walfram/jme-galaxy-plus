@@ -41,10 +41,10 @@ public final class ShipGroup {
 	}
 
 	public void load(Cargo cargo) {
-		double totalCapacity = size * type.cargoBay().capacity();
+		double cargoCapacity = cargoCapacity();
 
-		if (cargo.quantity() > totalCapacity) {
-			throw new IllegalArgumentException("Cargo capacity exceeded, available %s, requested %s".formatted(totalCapacity, cargo.quantity()));
+		if (cargo.quantity() > cargoCapacity) {
+			throw new IllegalArgumentException("Cargo capacity exceeded, available %s, requested %s".formatted(cargoCapacity, cargo.quantity()));
 		}
 
 		this.cargo = cargo;
@@ -79,7 +79,19 @@ public final class ShipGroup {
 		return type.engines().power() / mass();
 	}
 
-	public double cargoBayCapacity() {
-		return type.cargoBay().capacity();
+	public void upgrade(TechLevels techLevels) {
+		type.engines().techLevel().upgradeTo(techLevels.engines());
+		type.weapons().techLevel().upgradeTo(techLevels.weapons());
+		type.shields().techLevel().upgradeTo(techLevels.shields());
+		type.cargoBay().techLevel().upgradeTo(techLevels.cargo());
 	}
+
+	public double cargoCapacity() {
+		return size * type.cargoBay().capacity();
+	}
+
+	public Cargo cargo() {
+		return cargo;
+	}
+
 }

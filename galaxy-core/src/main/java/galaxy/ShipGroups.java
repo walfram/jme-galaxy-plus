@@ -5,10 +5,7 @@ import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.state.*;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public final class ShipGroups {
 
@@ -22,8 +19,8 @@ public final class ShipGroups {
 
 	}
 
-	public ShipGroups(List<ShipGroup> groups) {
-
+	public ShipGroups(Map<ShipGroup, ShipGroupState> states) {
+		this.states.putAll(states);
 	}
 
 	// --- transitions -------------------------------------------------------
@@ -101,7 +98,10 @@ public final class ShipGroups {
 	}
 
 	public Optional<ShipGroup> findByOwnerAndName(RaceId raceId, String shipTypeName) {
-		return Optional.empty();
+		return states.keySet().stream()
+				.filter(g -> Objects.equals(raceId, g.owner().raceId()))
+				.filter(g -> Objects.equals(shipTypeName, g.type().name()))
+				.findFirst();
 	}
 
 	public int size() {

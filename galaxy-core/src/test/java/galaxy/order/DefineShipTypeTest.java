@@ -5,10 +5,12 @@ import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
 import galaxy.ship.TechLevels;
+import galaxy.ship.state.InOrbit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -47,12 +49,14 @@ class DefineShipTypeTest {
 		ShipGroup shipGroup = mock(ShipGroup.class);
 		when(shipGroup.owner()).thenReturn(race);
 		when(shipGroup.type()).thenReturn(drone);
-		when(context.shipGroups()).thenReturn(new ShipGroups(List.of(shipGroup)));
+
+		Planet planet = mock(Planet.class);
+		when(context.shipGroups()).thenReturn(new ShipGroups(Map.of(shipGroup, new InOrbit(shipGroup, planet))));
 
 		Order order = new DefineShipType(race, drone);
 		assertThrows(IllegalStateException.class, () -> order.applyTo(context));
 
-		when(context.shipGroups()).thenReturn(new ShipGroups(List.of()));
+		when(context.shipGroups()).thenReturn(new ShipGroups(Map.of()));
 
 		assertDoesNotThrow(() -> order.applyTo(context));
 	}

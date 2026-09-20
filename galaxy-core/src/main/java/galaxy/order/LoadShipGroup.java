@@ -51,18 +51,30 @@ public final class LoadShipGroup implements Order {
 
 	private void loadMaterials() {
 		double quantity = Math.min(shipGroup.planet().materials().quantity(), cargo.quantity());
+
+		if (quantity == 0)
+			throw new IllegalStateException("No materials available to load");
+
 		shipGroup.planet().materials().withdraw(quantity);
 		shipGroup.load(new Materials(quantity));
 	}
 
 	private void loadCapital() {
 		double quantity = Math.min(shipGroup.planet().capital().quantity(), cargo.quantity());
+
+		if (quantity == 0)
+			throw new IllegalStateException("No capital available to load");
+
 		shipGroup.planet().withdrawCapital(quantity);
 		shipGroup.load(new CapitalOf(quantity));
 	}
 
 	private void loadColonists() {
 		double quantity = Math.min(shipGroup.planet().colonists().quantity(), cargo.quantity());
+
+		if (quantity == 0)
+			throw new IllegalStateException("No colonists available to load");
+
 		shipGroup.planet().withdrawColonists(quantity);
 		shipGroup.load(new ColonistsOf(quantity));
 	}
