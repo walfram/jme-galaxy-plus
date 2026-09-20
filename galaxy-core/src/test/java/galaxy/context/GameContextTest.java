@@ -13,7 +13,7 @@ public class GameContextTest {
 	@Test
 	void should_read_game_context_from_json() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode root = mapper.readTree(getClass().getResourceAsStream("/classic-galaxy.json"));
+		JsonNode root = mapper.readTree(getClass().getResourceAsStream("/sample-galaxy.json"));
 
 		GameContext context = assertDoesNotThrow(() -> new GameContextOf(root));
 
@@ -27,7 +27,7 @@ public class GameContextTest {
 
 		ShipGroups groups = context.shipGroups();
 		assertNotNull(groups);
-		assertEquals(9, groups.size());
+		assertEquals(12, groups.size());
 	}
 
 }

@@ -599,6 +599,53 @@
           "type": "COLONISTS",
           "quantity": 18.0
         }
+      },
+      {
+        "id": 10,
+        "owner": "terran",
+        "type": "frigate",
+        "size": 4,
+        "tech": {
+          "ENGINES": 1.5,
+          "WEAPONS": 1.2,
+          "SHIELDS": 1.4,
+          "CARGO": 1.0
+        },
+        "state": "LAUNCHED",
+        "planetId": 1,
+        "destinationId": 4
+      },
+      {
+        "id": 11,
+        "owner": "zalthor",
+        "type": "hauler",
+        "size": 3,
+        "tech": {
+          "ENGINES": 1.2,
+          "WEAPONS": 1.5,
+          "SHIELDS": 1.1,
+          "CARGO": 1.3
+        },
+        "shipGroupId": 11,
+        "state": "UPGRADE",
+        "planetId": 2
+      },
+      {
+        "id": 12,
+        "owner": "krynn",
+        "type": "fighter",
+        "size": 12,
+        "tech": {
+          "ENGINES": 1.8,
+          "WEAPONS": 1.6,
+          "SHIELDS": 1.3,
+          "CARGO": 0.9
+        },
+        "shipGroupId": 12,
+        "state": "TRANSFER",
+        "planetId": 3,
+        "fromRaceId": "krynn",
+        "toRaceId": "terran"
       }
     ],
     "fleets": [

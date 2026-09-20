@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import galaxy.Planet;
 import galaxy.Race;
-import galaxy.ship.ShipGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ public class JsonTest {
 
 	@BeforeEach
 	void setup() throws IOException {
-		root = mapper.readTree(getClass().getResourceAsStream("/classic-galaxy.json"));
+		root = mapper.readTree(getClass().getResourceAsStream("/sample-galaxy.json"));
 	}
 
 	@Test
