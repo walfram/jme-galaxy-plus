@@ -10,7 +10,6 @@ public final class ShipGroup {
 
 	private final ShipGroupId shipGroupId;
 	private final Race owner;
-	private final Planet planet;
 	private final ShipType type;
 	private final int size;
 
@@ -18,26 +17,25 @@ public final class ShipGroup {
 
 	private Cargo cargo;
 
-	public ShipGroup(Race owner, Planet planet, ShipType type, int size, TechLevels techLevels) {
+	public ShipGroup(Race owner, ShipType type, int size, TechLevels techLevels) {
 		this.shipGroupId = new ShipGroupId();
 		this.owner = owner;
-		this.planet = planet;
 		this.type = new ShipType(type, techLevels);
 		this.size = size;
 		// TODO move each TechLevel into group component
 		this.techLevels = new TechLevels(techLevels);
 	}
 
-	public ShipGroup(Race owner, Planet planet, ShipType type) {
-		this(owner, planet, type, 1, new TechLevels());
+	public ShipGroup(Race owner, ShipType type) {
+		this(owner, type, 1, new TechLevels());
 	}
 
-	public ShipGroup(Race owner, Planet planet, ShipType type, TechLevels techLevels) {
-		this(owner, planet, type, 1, techLevels);
+	public ShipGroup(Race owner, ShipType type, TechLevels techLevels) {
+		this(owner, type, 1, techLevels);
 	}
 
-	public ShipGroup(Race owner, Planet planet, ShipType type, int size) {
-		this(owner, planet, type, size, new TechLevels());
+	public ShipGroup(Race owner, ShipType type, int size) {
+		this(owner, type, size, new TechLevels());
 	}
 
 	public void load(Cargo cargo) {
@@ -56,10 +54,6 @@ public final class ShipGroup {
 
 	public Race owner() {
 		return owner;
-	}
-
-	public Planet planet() {
-		return planet;
 	}
 
 	public ShipType type() {

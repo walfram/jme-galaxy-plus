@@ -15,7 +15,7 @@ public class GameContextTest {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(getClass().getResourceAsStream("/classic-galaxy.json"));
 
-		GameContext context = assertDoesNotThrow(() -> new ClassicGameContext(root));
+		GameContext context = assertDoesNotThrow(() -> new GameContextOf(root));
 
 		Races races = context.races();
 		assertNotNull(races);

@@ -1,9 +1,10 @@
 package galaxy.order;
 
 import galaxy.Cargo;
-import galaxy.context.GameContext;
 import galaxy.Order;
+import galaxy.Planet;
 import galaxy.Race;
+import galaxy.context.GameContext;
 import galaxy.planet.CapitalOf;
 import galaxy.planet.ColonistsOf;
 import galaxy.planet.Materials;
@@ -28,54 +29,52 @@ public final class LoadShipGroup implements Order {
 			throw new IllegalArgumentException("Ship group %s does not belong to race %s".formatted(shipGroup.shipGroupId(), race.raceId()));
 		}
 
-		// TODO
-		// if (!shipGroup.isInOrbit()) {
-		//	throw new IllegalStateException("Ship group %s is not in orbit".formatted(shipGroup.shipGroupId()));
-		// }
+		Planet planet = context.shipGroups().orbitingPlanet(shipGroup)
+				.orElseThrow(() -> new IllegalStateException("Ship group %s is not in orbit".formatted(shipGroup.shipGroupId())));
 
-		if (shipGroup.planet().owner().isEmpty()) {
-			throw new IllegalStateException("Planet %s is uninhabited, cannot load ship group".formatted(shipGroup.planet().planetId()));
+		if (planet.owner().isEmpty()) {
+			throw new IllegalStateException("Planet %s is uninhabited, cannot load ship group".formatted(planet.planetId()));
 		}
 
-		if (!Objects.equals(shipGroup.planet().owner().get(), race)) {
-			throw new IllegalStateException("Planet %s is not owned by %s, cannot load ship group".formatted(shipGroup.planet().planetId(), race.raceId()));
+		if (!Objects.equals(planet.owner().get(), race)) {
+			throw new IllegalStateException("Planet %s is not owned by %s, cannot load ship group".formatted(planet.planetId(), race.raceId()));
 		}
 
 		// TODO refactor
 		switch (cargo.getClass().getSimpleName()) {
-			case "ColonistsOf" -> loadColonists();
-			case "CapitalOf" -> loadCapital();
-			case "Materials" -> loadMaterials();
+			case "ColonistsOf" -> loadColonists(planet);
+			case "CapitalOf" -> loadCapital(planet);
+			case "Materials" -> loadMaterials(planet);
 		}
 	}
 
-	private void loadMaterials() {
-		double quantity = Math.min(shipGroup.planet().materials().quantity(), cargo.quantity());
+	private void loadMaterials(Planet planet) {
+		double quantity = Math.min(planet.materials().quantity(), cargo.quantity());
 
 		if (quantity == 0)
 			throw new IllegalStateException("No materials available to load");
 
-		shipGroup.planet().materials().withdraw(quantity);
+		planet.materials().withdraw(quantity);
 		shipGroup.load(new Materials(quantity));
 	}
 
-	private void loadCapital() {
-		double quantity = Math.min(shipGroup.planet().capital().quantity(), cargo.quantity());
+	private void loadCapital(Planet planet) {
+		double quantity = Math.min(planet.capital().quantity(), cargo.quantity());
 
 		if (quantity == 0)
 			throw new IllegalStateException("No capital available to load");
 
-		shipGroup.planet().withdrawCapital(quantity);
+		planet.withdrawCapital(quantity);
 		shipGroup.load(new CapitalOf(quantity));
 	}
 
-	private void loadColonists() {
-		double quantity = Math.min(shipGroup.planet().colonists().quantity(), cargo.quantity());
+	private void loadColonists(Planet planet) {
+		double quantity = Math.min(planet.colonists().quantity(), cargo.quantity());
 
 		if (quantity == 0)
 			throw new IllegalStateException("No colonists available to load");
 
-		shipGroup.planet().withdrawColonists(quantity);
+		planet.withdrawColonists(quantity);
 		shipGroup.load(new ColonistsOf(quantity));
 	}
 }

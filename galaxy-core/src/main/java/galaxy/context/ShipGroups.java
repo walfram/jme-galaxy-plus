@@ -59,6 +59,13 @@ public final class ShipGroups {
 		return all(InOrbit.class);
 	}
 
+	public Optional<Planet> orbitingPlanet(ShipGroup shipGroup) {
+		return orbiting().stream()
+				.filter(state -> Objects.equals(shipGroup, state.group()))
+				.findFirst()
+				.map(InOrbit::planet);
+	}
+
 	public List<Launched> launched() {
 		return all(Launched.class);
 	}

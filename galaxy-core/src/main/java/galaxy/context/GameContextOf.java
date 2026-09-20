@@ -2,18 +2,21 @@ package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class ClassicGameContext implements GameContext {
+public class GameContextOf implements GameContext {
 
 	private final Races races;
 	private final Planets planets;
 	private final ShipGroups shipGroups;
 	private final Productions productions;
 
-	public ClassicGameContext(JsonNode root) {
+	public GameContextOf(JsonNode root) {
 		this.races = new Races(root.get("factions"));
 		this.planets = new Planets(root.get("entities").get("planets"), races);
-		// this.shipGroups = new ShipGroups(root.get("entities").get("shipGroups"), races, planets);
-		this.shipGroups = new ShipGroups(new JsonStates(root.get("entities").get("shipGroups"), races, planets).get());
+
+		this.shipGroups = new ShipGroups(
+				new JsonShipGroups(root.get("entities").get("shipGroups"), this.races, this.planets).parse()
+		);
+
 		this.productions = new Productions(root.get("entities").path("productions"));
 	}
 
