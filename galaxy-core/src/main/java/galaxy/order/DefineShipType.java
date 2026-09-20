@@ -1,6 +1,6 @@
 package galaxy.order;
 
-import galaxy.GameContext;
+import galaxy.context.GameContext;
 import galaxy.Order;
 import galaxy.Race;
 import galaxy.ship.ShipGroup;

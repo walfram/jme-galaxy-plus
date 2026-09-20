@@ -1,6 +1,6 @@
 package galaxy.phase;
 
-import galaxy.GameContext;
+import galaxy.context.GameContext;
 import galaxy.Phase;
 
 public class VictoryCheck implements Phase {

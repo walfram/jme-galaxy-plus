@@ -2,8 +2,6 @@ package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
-import galaxy.Planets;
-import galaxy.Races;
 import galaxy.planet.Coordinates;
 import galaxy.planet.PlanetId;
 import galaxy.race.RaceId;

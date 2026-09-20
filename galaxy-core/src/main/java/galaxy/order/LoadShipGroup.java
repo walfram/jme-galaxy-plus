@@ -1,7 +1,7 @@
 package galaxy.order;
 
 import galaxy.Cargo;
-import galaxy.GameContext;
+import galaxy.context.GameContext;
 import galaxy.Order;
 import galaxy.Race;
 import galaxy.planet.CapitalOf;

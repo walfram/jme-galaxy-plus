@@ -1,6 +1,7 @@
-package galaxy;
+package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.Planet;
 import galaxy.planet.PlanetId;
 
 import java.util.List;

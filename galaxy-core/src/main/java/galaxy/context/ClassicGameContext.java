@@ -1,7 +1,6 @@
 package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.*;
 
 public class ClassicGameContext implements GameContext {
 

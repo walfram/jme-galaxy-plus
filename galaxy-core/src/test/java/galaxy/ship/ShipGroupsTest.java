@@ -2,7 +2,7 @@ package galaxy.ship;
 
 import galaxy.Planet;
 import galaxy.Race;
-import galaxy.ShipGroups;
+import galaxy.context.ShipGroups;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

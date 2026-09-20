@@ -1,4 +1,4 @@
-package galaxy;
+package galaxy.context;
 
 public interface GameContext {
 	Races races();

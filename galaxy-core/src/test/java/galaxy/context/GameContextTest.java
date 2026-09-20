@@ -1,8 +1,7 @@
-package galaxy;
+package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import galaxy.context.ClassicGameContext;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

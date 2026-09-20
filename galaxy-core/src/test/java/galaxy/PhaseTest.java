@@ -1,5 +1,6 @@
 package galaxy;
 
+import galaxy.context.GameContext;
 import galaxy.phase.StandardTurn;
 import org.junit.jupiter.api.Test;
 

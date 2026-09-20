@@ -1,19 +1,12 @@
-package galaxy;
+package galaxy.context;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.planet.Coordinates;
-import galaxy.planet.PlanetId;
+import galaxy.Planet;
+import galaxy.Race;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
-import galaxy.ship.ShipType;
-import galaxy.ship.TechLevels;
 import galaxy.ship.state.*;
 
-import javax.naming.spi.StateFactory;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public final class ShipGroups {
 

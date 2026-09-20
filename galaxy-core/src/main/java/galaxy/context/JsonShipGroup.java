@@ -1,9 +1,7 @@
 package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.Planets;
 import galaxy.Race;
-import galaxy.Races;
 import galaxy.planet.PlanetId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.TechLevels;
