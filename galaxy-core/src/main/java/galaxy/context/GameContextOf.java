@@ -2,7 +2,7 @@ package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class GameContextOf implements GameContext {
+public final class GameContextOf implements GameContext {
 
 	private final Races races;
 	private final Planets planets;

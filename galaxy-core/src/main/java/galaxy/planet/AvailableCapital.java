@@ -1,6 +1,6 @@
 package galaxy.planet;
 
-public class AvailableCapital implements Capital {
+public final class AvailableCapital implements Capital {
 	private final Size size;
 	private final Industry industry;
 

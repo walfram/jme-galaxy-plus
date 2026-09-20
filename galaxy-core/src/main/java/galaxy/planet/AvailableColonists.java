@@ -1,6 +1,6 @@
 package galaxy.planet;
 
-public class AvailableColonists implements Colonists {
+public final class AvailableColonists implements Colonists {
 	private final Size size;
 	private final Population population;
 

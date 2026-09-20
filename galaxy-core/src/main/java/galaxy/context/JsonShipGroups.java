@@ -13,7 +13,7 @@ import galaxy.ship.state.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JsonShipGroups {
+final class JsonShipGroups {
 
 	private final JsonNode source;
 	private final Races races;

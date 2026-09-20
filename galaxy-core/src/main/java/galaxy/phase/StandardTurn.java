@@ -5,7 +5,7 @@ import galaxy.Phase;
 
 import java.util.List;
 
-public class StandardTurn implements Phase {
+public final class StandardTurn implements Phase {
 
 	private final List<Phase> phases;
 
