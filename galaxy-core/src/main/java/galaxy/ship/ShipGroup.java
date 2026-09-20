@@ -28,16 +28,16 @@ public final class ShipGroup {
 		this.techLevels = new TechLevels(techLevels);
 	}
 
-	public ShipGroup(Race race, Planet planet, ShipType type) {
-		this(race, planet, type, 1, new TechLevels());
+	public ShipGroup(Race owner, Planet planet, ShipType type) {
+		this(owner, planet, type, 1, new TechLevels());
 	}
 
-	public ShipGroup(Race race, Planet planet, ShipType type, TechLevels techLevels) {
-		this(race, planet, type, 1, techLevels);
+	public ShipGroup(Race owner, Planet planet, ShipType type, TechLevels techLevels) {
+		this(owner, planet, type, 1, techLevels);
 	}
 
-	public ShipGroup(Race race, Planet planet, ShipType type, int size) {
-		this(race, planet, type, size, new TechLevels());
+	public ShipGroup(Race owner, Planet planet, ShipType type, int size) {
+		this(owner, planet, type, size, new TechLevels());
 	}
 
 	public void load(Cargo cargo) {
