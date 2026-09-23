@@ -1,6 +1,10 @@
 package galaxy.ships;
 
 import galaxy.*;
+import galaxy.planet.Capital;
+import galaxy.planet.Colonists;
+import galaxy.planet.Materials;
+import galaxy.planet.Planet;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

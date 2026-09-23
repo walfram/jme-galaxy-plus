@@ -1,4 +1,4 @@
-package galaxy;
+package galaxy.planet;
 
 public record Coordinates(double x, double y) {
 	public Coordinates() {

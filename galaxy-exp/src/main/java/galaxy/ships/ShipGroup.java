@@ -1,7 +1,7 @@
 package galaxy.ships;
 
 import galaxy.Cargo;
-import galaxy.Planet;
+import galaxy.planet.Planet;
 import galaxy.Race;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package galaxy.ships.state;
 
-import galaxy.Planet;
+import galaxy.planet.Planet;
 import galaxy.Race;
 import galaxy.ships.ShipGroup;
 
