@@ -47,10 +47,10 @@ public final  class ShipType {
 	public ShipType(String name, JsonNode src) {
 		this(
 				name,
-				new EnginesOf(src.get("engines")),
-				new WeaponsOf(src.get("weapons")),
-				new ShieldsOf(src.get("shields")),
-				new CargoBayOf(src.get("cargo"))
+				new EnginesOf(src.required("engines")),
+				new WeaponsOf(src.required("weapons")),
+				new ShieldsOf(src.required("shields")),
+				new CargoBayOf(src.required("cargo"))
 		);
 	}
 

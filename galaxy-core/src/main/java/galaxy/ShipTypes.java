@@ -19,7 +19,7 @@ public final class ShipTypes {
 
 	public ShipTypes(JsonNode src) {
 		this(
-				fields(src).map(key -> new ShipType(key, src.get(key))).toList()
+				fields(src).map(key -> new ShipType(key, src.required(key))).toList()
 		);
 	}
 

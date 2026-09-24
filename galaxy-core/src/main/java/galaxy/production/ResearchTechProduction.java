@@ -11,7 +11,7 @@ public final class ResearchTechProduction implements Production {
 	}
 
 	public ResearchTechProduction(JsonNode src) {
-		this(Tech.valueOf(src.get("type").asText()));
+		this(Tech.valueOf(src.required("target").asText()));
 	}
 
 	@Override

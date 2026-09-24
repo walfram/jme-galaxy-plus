@@ -40,10 +40,10 @@ public final class TechLevels {
 
 	public TechLevels(JsonNode src) {
 		this(
-				src.get("ENGINES").asDouble(),
-				src.get("WEAPONS").asDouble(),
-				src.get("SHIELDS").asDouble(),
-				src.get("CARGO").asDouble()
+				src.required("ENGINES").asDouble(),
+				src.required("WEAPONS").asDouble(),
+				src.required("SHIELDS").asDouble(),
+				src.required("CARGO").asDouble()
 		);
 	}
 

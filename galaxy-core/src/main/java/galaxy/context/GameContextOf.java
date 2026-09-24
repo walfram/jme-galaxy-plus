@@ -10,14 +10,14 @@ public final class GameContextOf implements GameContext {
 	private final Productions productions;
 
 	public GameContextOf(JsonNode root) {
-		this.races = new Races(root.get("factions"));
-		this.planets = new Planets(root.get("entities").get("planets"), races);
+		this.races = new Races(root.required("factions"));
+		this.planets = new Planets(root.required("entities").required("planets"), races);
 
 		this.shipGroups = new ShipGroups(
-				new JsonShipGroups(root.get("entities").get("shipGroups"), races, planets).parse()
+				new JsonShipGroups(root.required("entities").required("shipGroups"), races, planets).parse()
 		);
 
-		this.productions = new Productions(root.get("entities").path("productions"), planets);
+		this.productions = new Productions(root.required("entities").path("productions"), planets);
 	}
 
 	@Override

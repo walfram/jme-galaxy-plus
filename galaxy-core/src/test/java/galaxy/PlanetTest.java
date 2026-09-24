@@ -38,7 +38,7 @@ public class PlanetTest {
 
 	@Test
 	void test_planet_industry() {
-		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0));
+		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new PopulationOf(1000.0));
 		assertEquals(0.0, planet.industry().value());
 		assertEquals(0.0, planet.capital().quantity());
 
@@ -77,7 +77,7 @@ public class PlanetTest {
 	@Test
 	void test_inhabited_planet_effort() {
 		Planet planet = new Planet(
-				new Coordinates(1, 2), new Size(1000.0), new Resources(1000.0), new IndustryOf(1000.0), new PopulationOf(1000.0)
+				new Coordinates(1, 2), new Size(1000.0), new Resources(1000.0), new PopulationOf(1000.0), new IndustryOf(1000.0)
 		);
 
 		Effort effort = new Effort(planet);

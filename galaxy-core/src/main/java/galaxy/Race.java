@@ -27,8 +27,8 @@ public final class Race {
 	public Race(String raceId, JsonNode src) {
 		this(
 				new RaceId(raceId),
-				new TechLevels(src.get("techLevels")),
-				new ShipTypes(src.get("shipTypes"))
+				new TechLevels(src.required("techLevels")),
+				new ShipTypes(src.required("shipTypes"))
 		);
 	}
 

@@ -36,32 +36,32 @@ final class JsonShipGroups {
 	}
 
 	private ShipGroup parseGroup(JsonNode json) {
-		Race owner = races.raceById(json.get("owner").asText());
+		Race owner = races.raceById(json.required("owner").asText());
 		return new ShipGroup(
 				owner,
-				owner.shipType(json.get("type").asText()),
-				json.get("size").asInt(),
-				new TechLevels(json.get("tech"))
+				owner.shipType(json.required("type").asText()),
+				json.required("size").asInt(),
+				new TechLevels(json.required("tech"))
 		);
 	}
 
 	private ShipGroupState parseState(JsonNode json, ShipGroup group) {
-		String name = json.get("state").asText();
+		String name = json.required("state").asText();
 		return switch (name) {
 			case "ORBIT" -> new InOrbit(group, planet(json, "planetId"));
 			case "LAUNCHED" -> new Launched(group, planet(json, "planetId"), planet(json, "destinationId"));
 			case "HYPERSPACE" ->
-					new InHyperspace(group, planet(json, "planetId"), planet(json, "destinationId"), new Coordinates(json.get("coordinates")));
+					new InHyperspace(group, planet(json, "planetId"), planet(json, "destinationId"), new Coordinates(json.required("coordinates")));
 			case "UPGRADE" -> new InUpgrade(group, planet(json, "planetId"));
 			case "TRANSFER" -> new InTransfer(group, planet(json, "planetId"),
-					races.raceById(new RaceId(json.get("fromRaceId"))),
-					races.raceById(new RaceId(json.get("toRaceId"))));
+					races.raceById(new RaceId(json.required("fromRaceId"))),
+					races.raceById(new RaceId(json.required("toRaceId"))));
 			default -> throw new IllegalArgumentException("Unknown ship group state: " + name);
 		};
 	}
 
 	private Planet planet(JsonNode json, String field) {
-		return planets.findById(new PlanetId(json.get(field).asText()));
+		return planets.findById(new PlanetId(json.required(field).asText()));
 	}
 
 }

@@ -19,7 +19,7 @@ public final class Planet {
 	private String name;
 	private Race race;
 
-	private Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources, Industry industry, Population population, Materials materials, Race race, String name) {
+	private Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials, Race race, String name) {
 		this.planetId = planetId;
 		this.coordinates = coordinates;
 		this.size = size;
@@ -31,14 +31,14 @@ public final class Planet {
 		this.race = race;
 	}
 
-	public Planet(Coordinates coordinates, Size size, Resources resources, Industry industry, Population population) {
+	public Planet(Coordinates coordinates, Size size, Resources resources, Population population, Industry industry) {
 		this(
 				new PlanetId(),
 				coordinates,
 				size,
 				resources,
-				industry,
 				population,
+				industry,
 				new Materials(),
 				null,
 				null
@@ -47,12 +47,16 @@ public final class Planet {
 		this.name = this.planetId.toString();
 	}
 
+	public Planet(Coordinates coordinates, Size size, Resources resources, Population population) {
+		this(coordinates, size, resources, population, new IndustryOf());
+	}
+
 	public Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources) {
-		this(planetId, coordinates, size, resources, new IndustryOf(), new PopulationOf(), new Materials(), null, null);
+		this(planetId, coordinates, size, resources, new PopulationOf(), new IndustryOf(), new Materials(), null, null);
 	}
 
 	public Planet(Coordinates coordinates, Size size, Resources resources) {
-		this(coordinates, size, resources, new IndustryOf(), new PopulationOf());
+		this(coordinates, size, resources, new PopulationOf(), new IndustryOf());
 	}
 
 	public Planet(JsonNode src, Races raceIndex) {
@@ -61,9 +65,10 @@ public final class Planet {
 				new Coordinates(src.required("coordinates")),
 				new Size(src.required("size")),
 				new Resources(src.required("resources")),
-				new IndustryOf(src.path("industry")),
 				new PopulationOf(src.path("population")),
+				new IndustryOf(src.path("industry")),
 				new Materials(src.path("materials")),
+				// TODO fix raceId here
 				raceIndex.raceById(src.path("raceId").asText()),
 				src.required("name").asText()
 		);

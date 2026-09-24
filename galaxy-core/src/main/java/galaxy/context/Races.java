@@ -35,7 +35,7 @@ public final class Races {
 
 	public Races(final JsonNode src) {
 		this(
-				fields(src).map(key -> new Race(key, src.get(key))).toList()
+				fields(src).map(key -> new Race(key, src.required(key))).toList()
 		);
 	}
 

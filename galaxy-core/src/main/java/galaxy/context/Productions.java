@@ -18,21 +18,21 @@ public final class Productions {
 
 	public Productions(JsonNode src, Planets planets) {
 		src.valueStream().forEach(json -> {
-			Planet planet = planets.findById(new PlanetId(json.get("planetId").asText()));
+			Planet planet = planets.findById(new PlanetId(json.required("planetId").asText()));
 			Production production = productionOf(json, planets);
 			productions.put(planet, production);
 		});
 	}
 
 	private static Production productionOf(JsonNode src, Planets planets) {
-		Planet planet = planets.findById(new PlanetId(src.get("planetId").asText()));
+		Planet planet = planets.findById(new PlanetId(src.required("planetId").asText()));
 
-		return switch (src.get("type").asText()) {
+		return switch (src.required("type").asText()) {
 			case "CAPITAL" -> new CapitalProduction();
 			case "MATERIALS" -> new MaterialsProduction(planet);
 			case "SHIPS" -> new ShipGroupBuildProduction(src);
 			case "TECH" -> new ResearchTechProduction(src);
-			default -> throw new IllegalArgumentException("Unknown production type %s".formatted(src.get("type").asText()));
+			default -> throw new IllegalArgumentException("Unknown production type %s".formatted(src.required("type").asText()));
 		};
 	}
 
