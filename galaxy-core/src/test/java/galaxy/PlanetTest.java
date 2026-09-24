@@ -42,15 +42,15 @@ public class PlanetTest {
 		assertEquals(0.0, planet.industry().value());
 		assertEquals(0.0, planet.capital().quantity());
 
-		planet.unloadCapital(new CapitalOf(500.0));
+		planet.unloadCapital(new Capital(500.0));
 		assertEquals(500.0, planet.industry().value());
 		assertEquals(0.0, planet.capital().quantity());
 
-		planet.unloadCapital(new CapitalOf(500.0));
+		planet.unloadCapital(new Capital(500.0));
 		assertEquals(1000.0, planet.industry().value());
 		assertEquals(0.0, planet.capital().quantity());
 
-		planet.unloadCapital(new CapitalOf(100.0));
+		planet.unloadCapital(new Capital(100.0));
 		assertEquals(1000.0, planet.industry().value());
 		assertEquals(100.0, planet.capital().quantity());
 	}
@@ -61,11 +61,11 @@ public class PlanetTest {
 		assertEquals(0.0, planet.population().value());
 		assertEquals(0.0, planet.colonists().quantity());
 
-		planet.unloadColonists(new ColonistsOf(10.0));
+		planet.unloadColonists(new Colonists(10.0));
 		assertEquals(80.0, planet.population().value());
 		assertEquals(0.0, planet.colonists().quantity());
 
-		planet.unloadColonists(new ColonistsOf(200.0));
+		planet.unloadColonists(new Colonists(200.0));
 		double totalPopulation = 210.0 * 8;
 		double expectedColonists = (totalPopulation - 1000.0) / 8.0;
 
@@ -77,7 +77,7 @@ public class PlanetTest {
 	@Test
 	void test_inhabited_planet_effort() {
 		Planet planet = new Planet(
-				new Coordinates(1, 2), new Size(1000.0), new Resources(1000.0), new Industry(1000.0), new Population(1000.0)
+				new Coordinates(1, 2), new Size(1000.0), new Resources(1000.0), new IndustryOf(1000.0), new PopulationOf(1000.0)
 		);
 
 		Effort effort = new Effort(planet);

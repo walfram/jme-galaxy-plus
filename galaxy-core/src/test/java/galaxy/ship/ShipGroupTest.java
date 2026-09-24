@@ -3,8 +3,8 @@ package galaxy.ship;
 import galaxy.Fixtures;
 import galaxy.Planet;
 import galaxy.Race;
-import galaxy.planet.CapitalOf;
-import galaxy.planet.ColonistsOf;
+import galaxy.planet.Capital;
+import galaxy.planet.Colonists;
 import galaxy.planet.Materials;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class ShipGroupTest {
 		ShipGroup haulers = new ShipGroup(race, hauler);
 
 		assertEquals(1, haulers.size());
-		haulers.load(new ColonistsOf(1.05));
+		haulers.load(new Colonists(1.05));
 
 		assertEquals(4.05, haulers.mass());
 		assertEquals(9.876543209876544, haulers.speed());
@@ -48,13 +48,13 @@ public class ShipGroupTest {
 	void test_ship_group_cargo_loading() {
 		ShipGroup colTransport = new ShipGroup(race, freighter);
 		assertEquals(15.0, colTransport.cargoCapacity());
-		assertDoesNotThrow(() -> colTransport.load(new ColonistsOf(10.0)));
+		assertDoesNotThrow(() -> colTransport.load(new Colonists(10.0)));
 
 		ShipGroup matTransport = new ShipGroup(race, megaFreighter, new TechLevels(1.0, 1.0, 1.0, 2.0));
 		assertDoesNotThrow(() -> matTransport.load(new Materials(200.0)));
 
 		ShipGroup capTransport = new ShipGroup(race, megaFreighter);
-		assertDoesNotThrow(() -> capTransport.load(new CapitalOf(100.0)));
+		assertDoesNotThrow(() -> capTransport.load(new Capital(100.0)));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class ShipGroupTest {
 		assertEquals(1.0, group.mass());
 		assertEquals(20.0, group.speed());
 
-		assertThrows(IllegalArgumentException.class, () -> group.load(new ColonistsOf(1.0)));
+		assertThrows(IllegalArgumentException.class, () -> group.load(new Colonists(1.0)));
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class ShipGroupTest {
 
 		group.upgrade(new TechLevels(4.34, 3.5, 3.91, 2.09));
 		assertEquals(43.39999999999999, group.speed());
-		// TODO group.load(new ColonistsOf(1.05));
+		// TODO group.load(new Colonists(1.05));
 		// TODO assertEquals(43.17, group.speed());
 		// TODO assertEquals(38.50, group.attackPower());
 		// assertEquals(561.5, group.bombingPower());
@@ -96,15 +96,15 @@ public class ShipGroupTest {
 		Planet planet = mock(Planet.class);
 
 		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.droneMk2(), new TechLevels());
-		drones.load(new ColonistsOf(1.05));
+		drones.load(new Colonists(1.05));
 		// TODO: assertEquals(1.81, drones.defencePower());
 
 		ShipGroup freighters = new ShipGroup(mock(Race.class), Fixtures.freighter(), 1, new TechLevels());
-		freighters.load(new ColonistsOf(15.0));
+		freighters.load(new Colonists(15.0));
 		// TODO: assertEquals(7.36, freighters.defencePower());
 
 		ShipGroup megaFreighters = new ShipGroup(mock(Race.class), Fixtures.megaFreighter(), 1, new TechLevels());
-		megaFreighters.load(new ColonistsOf(117.85));
+		megaFreighters.load(new Colonists(117.85));
 		// TODO: assertEquals(17.53, megaFreighters.defencePower());
 	}
 
@@ -148,7 +148,7 @@ public class ShipGroupTest {
 		Planet planet = mock(Planet.class);
 
 		ShipGroup group = new ShipGroup(race, hauler, 1, techLevels);
-		group.load(new ColonistsOf(1.05));
+		group.load(new Colonists(1.05));
 		assertEquals(9.876543209876544, group.speed());
 	}
 
@@ -177,7 +177,7 @@ public class ShipGroupTest {
 		Planet planet = mock(Planet.class);
 
 		ShipGroup group = new ShipGroup(race, hauler, 1, techLevels);
-		group.load(new ColonistsOf(1.0));
+		group.load(new Colonists(1.0));
 		assertEquals(4.0, group.mass());
 	}
 
@@ -203,7 +203,7 @@ public class ShipGroupTest {
 		ShipGroup haulers = new ShipGroup(race, shipType, 10, new TechLevels());
 		assertEquals(10 * 1.05, haulers.cargoCapacity());
 
-		assertDoesNotThrow(() -> haulers.load(new ColonistsOf(10 * 1.05)));
+		assertDoesNotThrow(() -> haulers.load(new Colonists(10 * 1.05)));
 		// TODO: assertEquals(10.0 * 1.05, haulers.cargoMass());
 		// TODO: assertEquals(CargoType.COLONISTS, haulers.cargo());
 	}

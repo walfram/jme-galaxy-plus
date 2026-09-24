@@ -1,37 +1,53 @@
 package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.Planet;
 import galaxy.Production;
 import galaxy.Race;
+import galaxy.planet.PlanetId;
+import galaxy.production.CapitalProduction;
+import galaxy.production.MaterialsProduction;
+import galaxy.production.ResearchTechProduction;
+import galaxy.production.ShipGroupBuildProduction;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public final class Productions {
 
-	private final List<Production> productions;
+	private final Map<Planet, Production> productions = new HashMap<>();
 
-	public Productions(List<Production> productions) {
-		this.productions = new ArrayList<>(productions);
+	public Productions(JsonNode src, Planets planets) {
+		src.valueStream().forEach(json -> {
+			Planet planet = planets.findById(new PlanetId(json.get("planetId").asText()));
+			Production production = productionOf(json, planets);
+			productions.put(planet, production);
+		});
 	}
 
-	public Productions(JsonNode src) {
-		this(
-				// TODO read productions from json
-				List.of()
-		);
+	private static Production productionOf(JsonNode src, Planets planets) {
+		Planet planet = planets.findById(new PlanetId(src.get("planetId").asText()));
+
+		return switch (src.get("type").asText()) {
+			case "CAPITAL" -> new CapitalProduction();
+			case "MATERIALS" -> new MaterialsProduction(planet);
+			case "SHIPS" -> new ShipGroupBuildProduction(src);
+			case "TECH" -> new ResearchTechProduction(src);
+			default -> throw new IllegalArgumentException("Unknown production type %s".formatted(src.get("type").asText()));
+		};
 	}
 
 	public Productions() {
-		this(List.of());
 	}
 
 	public Optional<Production> findByOwnerAndName(Race race, String name) {
-		return productions.stream()
-				.filter(p -> Objects.equals(p.race().raceId(), race.raceId()))
-				.filter(p -> Objects.equals(p.name(), name))
-				.findFirst();
+//		return productions.stream()
+//				.filter(p -> Objects.equals(p.race().raceId(), race.raceId()))
+//				.filter(p -> Objects.equals(p.name(), name))
+//				.findFirst();
+		return Optional.empty();
+	}
+
+	public Optional<Production> atPlanet(Planet planet) {
+		return Optional.ofNullable(productions.get(planet));
 	}
 }

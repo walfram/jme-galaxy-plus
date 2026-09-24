@@ -20,4 +20,8 @@ public final class PopulationOf implements Population {
 	public void grow() {
 		value += value * 0.08;
 	}
+
+	public Colonists remove(Colonists colonists) {
+		return null;
+	}
 }

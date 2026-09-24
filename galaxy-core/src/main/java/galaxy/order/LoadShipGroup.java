@@ -5,9 +5,7 @@ import galaxy.Order;
 import galaxy.Planet;
 import galaxy.Race;
 import galaxy.context.GameContext;
-import galaxy.planet.CapitalOf;
-import galaxy.planet.ColonistsOf;
-import galaxy.planet.Materials;
+import galaxy.planet.*;
 import galaxy.ship.ShipGroup;
 
 import java.util.Objects;
@@ -54,8 +52,8 @@ public final class LoadShipGroup implements Order {
 		if (quantity == 0)
 			throw new IllegalStateException("No materials available to load");
 
-		planet.materials().withdraw(quantity);
-		shipGroup.load(new Materials(quantity));
+		Materials materials = planet.materials().withdraw(quantity);
+		shipGroup.load(materials);
 	}
 
 	private void loadCapital(Planet planet) {
@@ -64,8 +62,8 @@ public final class LoadShipGroup implements Order {
 		if (quantity == 0)
 			throw new IllegalStateException("No capital available to load");
 
-		planet.withdrawCapital(quantity);
-		shipGroup.load(new CapitalOf(quantity));
+		Capital capital = planet.withdrawCapital(quantity);
+		shipGroup.load(capital);
 	}
 
 	private void loadColonists(Planet planet) {
@@ -74,7 +72,7 @@ public final class LoadShipGroup implements Order {
 		if (quantity == 0)
 			throw new IllegalStateException("No colonists available to load");
 
-		planet.withdrawColonists(quantity);
-		shipGroup.load(new ColonistsOf(quantity));
+		Colonists colonists = planet.withdrawColonists(quantity);
+		shipGroup.load(colonists);
 	}
 }

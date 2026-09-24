@@ -2,6 +2,5 @@ package galaxy.planet;
 
 import galaxy.Cargo;
 
-public interface Capital extends Cargo {
-	Industry toIndustry();
+public record Capital(double quantity) implements Cargo {
 }

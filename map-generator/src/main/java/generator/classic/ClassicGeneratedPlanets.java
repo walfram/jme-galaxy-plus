@@ -55,13 +55,13 @@ public class ClassicGeneratedPlanets implements GeneratedPlanets {
 
 		List<Vector2d> origins = new HexGridOrigins(raceCount).asList(generator);
 		origins.stream()
-				.map(v -> new Planet(new Coordinates(v.x(), v.y()), new Size(1000.0), new Resources(10.0), new Industry(1000.0), new Population(1000.0)))
+				.map(v -> new Planet(new Coordinates(v.x(), v.y()), new Size(1000.0), new Resources(10.0), new IndustryOf(1000.0), new PopulationOf(1000.0)))
 				.map(p -> {
 					Vector2d p1Offset = dwOffset.apply(new Vector2d(p.coordinates().x(), p.coordinates().y()));
-					Planet p1 = new Planet(new Coordinates(p1Offset.x(), p1Offset.y()), new Size(500.0), new Resources(10.0), new Industry(500.0), new Population(500.0));
+					Planet p1 = new Planet(new Coordinates(p1Offset.x(), p1Offset.y()), new Size(500.0), new Resources(10.0), new IndustryOf(500.0), new PopulationOf(500.0));
 
 					Vector2d p2Offset = dwOffset.apply(new Vector2d(p.coordinates().x(), p.coordinates().y()));
-					Planet p2 = new Planet(new Coordinates(p2Offset.x(), p2Offset.y()), new Size(500.0), new Resources(10.0), new Industry(500.0), new Population(500.0));
+					Planet p2 = new Planet(new Coordinates(p2Offset.x(), p2Offset.y()), new Size(500.0), new Resources(10.0), new IndustryOf(500.0), new PopulationOf(500.0));
 
 					return List.of(p, p1, p2);
 				})

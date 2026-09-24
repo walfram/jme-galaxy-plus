@@ -51,11 +51,11 @@ class DefineScienceTest {
 		Race race = new Race("foo");
 		Science science = new Science("science-name", Map.of());
 
-		Production production = mock(Production.class);
-		when(production.name()).thenReturn(science.productionName());
-		when(production.race()).thenReturn(race);
+//		Production production = mock(Production.class);
+//		when(production.name()).thenReturn(science.productionName());
+//		when(production.race()).thenReturn(race);
 
-		when(context.productions()).thenReturn(new Productions(List.of(production)));
+//		when(context.productions()).thenReturn(new Productions(List.of(production)));
 
 		Order order = new DefineScience(race, science);
 		assertThrows(IllegalStateException.class, () -> order.applyTo(context));

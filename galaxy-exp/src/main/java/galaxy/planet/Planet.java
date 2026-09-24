@@ -14,7 +14,6 @@ public final class Planet {
 	private final Materials materials;
 
 	private Race owner;
-//	private double massFromPrevTurn;
 
 	public Planet(Coordinates coordinates, Size size, Resources resources, IndustryOf industry, PopulationOf population) {
 		this.coordinates = coordinates;
@@ -41,9 +40,21 @@ public final class Planet {
 		return resources;
 	}
 
+	// industry/capital
+
 	public Industry industry() {
 		return new IndustryCap(industry, population());
 	}
+
+	public Capital capital() {
+		return new Capital(industry, population());
+	}
+
+	public void unload(Capital capital) {
+		industry.add(capital);
+	}
+
+	// population/colonists
 
 	public Population population() {
 		return new PopulationCap(population, size);
@@ -60,21 +71,15 @@ public final class Planet {
 		population.add(colonists);
 	}
 
+	public Colonists remove(Colonists colonists) {
+		return population.remove(colonists);
+	}
+
 	public void growPopulation() {
 		population.grow();
 	}
 
-	public Capital capital() {
-		return new Capital(industry, population());
-	}
-
-	public void unload(Capital capital) {
-		industry.add(capital);
-	}
-
-	public Effort effort() {
-		return new Effort(industry(), population());
-	}
+	// materials
 
 	public Materials materials() {
 		return materials;
@@ -84,15 +89,12 @@ public final class Planet {
 		this.materials.remove(materials);
 	}
 
+	public Effort effort() {
+		return new Effort(industry(), population());
+	}
+
 	public Optional<Race> owner() {
 		return Optional.ofNullable(owner);
 	}
 
-//	public double massFromPrevTurn() {
-//		return massFromPrevTurn;
-//	}
-
-//	public void massFromPrevTurn(double massFromPrevTurn) {
-//		this.massFromPrevTurn = massFromPrevTurn;
-//	}
 }

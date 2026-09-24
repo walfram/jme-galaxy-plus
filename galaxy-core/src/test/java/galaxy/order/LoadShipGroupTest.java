@@ -28,7 +28,7 @@ class LoadShipGroupTest {
 	void should_throw_exception_if_no_cargo_available() {
 		Race race = new Race("foo");
 
-		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new Industry(1000.0), new Population(1000.0));
+		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new IndustryOf(1000.0), new PopulationOf(1000.0));
 		planet.changeOwner(race);
 
 		ShipGroup shipGroup = new ShipGroup(race, Fixtures.hauler());
@@ -38,7 +38,7 @@ class LoadShipGroupTest {
 				)
 		));
 
-		Order order = new LoadShipGroup(race, shipGroup, new ColonistsOf(1.0));
+		Order order = new LoadShipGroup(race, shipGroup, new Colonists(1.0));
 		assertThrows(IllegalStateException.class, () -> order.applyTo(context));
 	}
 
@@ -46,7 +46,7 @@ class LoadShipGroupTest {
 	void should_load_ship_group_with_colonists() {
 		Race race = new Race("foo");
 
-		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new Industry(1000.0), new Population(1080.0));
+		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new IndustryOf(1000.0), new PopulationOf(1080.0));
 		planet.changeOwner(race);
 
 		ShipGroup shipGroup = new ShipGroup(race, Fixtures.hauler());
@@ -56,7 +56,7 @@ class LoadShipGroupTest {
 				)
 		));
 
-		Order order = new LoadShipGroup(race, shipGroup, new ColonistsOf(1.0));
+		Order order = new LoadShipGroup(race, shipGroup, new Colonists(1.0));
 		assertDoesNotThrow(() -> order.applyTo(context));
 
 		Cargo cargo = shipGroup.cargo();

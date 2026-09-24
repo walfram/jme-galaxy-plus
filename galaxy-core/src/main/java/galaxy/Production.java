@@ -1,11 +1,9 @@
 package galaxy;
 
-import galaxy.planet.PlanetId;
+import galaxy.context.GameContext;
 
 public interface Production {
 
-	Race race();
-	String name();
-	PlanetId planetId();
+	void produce(GameContext context);
 
 }

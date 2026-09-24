@@ -12,8 +12,8 @@ public final class Planet {
 	private final Size size;
 	private final Resources resources;
 
-	private final Industry industry;
-	private final Population population;
+	private final CappedPopulation population;
+	private final CappedIndustry industry;
 	private final Materials materials;
 
 	private String name;
@@ -24,8 +24,8 @@ public final class Planet {
 		this.coordinates = coordinates;
 		this.size = size;
 		this.resources = resources;
-		this.industry = industry;
-		this.population = population;
+		this.population = new CappedPopulation(population, size);
+		this.industry = new CappedIndustry(industry, population);
 		this.materials = materials;
 		this.name = name;
 		this.race = race;
@@ -48,24 +48,24 @@ public final class Planet {
 	}
 
 	public Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources) {
-		this(planetId, coordinates, size, resources, new Industry(), new Population(), new Materials(), null, null);
+		this(planetId, coordinates, size, resources, new IndustryOf(), new PopulationOf(), new Materials(), null, null);
 	}
 
 	public Planet(Coordinates coordinates, Size size, Resources resources) {
-		this(coordinates, size, resources, new Industry(), new Population());
+		this(coordinates, size, resources, new IndustryOf(), new PopulationOf());
 	}
 
 	public Planet(JsonNode src, Races raceIndex) {
 		this(
-				new PlanetId(src.get("planetId")),
-				new Coordinates(src.get("coordinates")),
-				new Size(src.get("size")),
-				new Resources(src.get("resources")),
-				new Industry(src.path("industry")),
-				new Population(src.path("population")),
+				new PlanetId(src.required("planetId")),
+				new Coordinates(src.required("coordinates")),
+				new Size(src.required("size")),
+				new Resources(src.required("resources")),
+				new IndustryOf(src.path("industry")),
+				new PopulationOf(src.path("population")),
 				new Materials(src.path("materials")),
-				raceIndex.raceById(src.path("raceId").textValue()),
-				src.get("name").textValue()
+				raceIndex.raceById(src.path("raceId").asText()),
+				src.required("name").asText()
 		);
 	}
 
@@ -81,28 +81,32 @@ public final class Planet {
 		return size;
 	}
 
+	public Resources resources() {
+		return resources;
+	}
+
 	public Population population() {
-		return new Population(Math.min(size.value(), population.value()));
+		return population;
 	}
 
 	public void unloadColonists(Colonists colonists) {
-		this.population.add(colonists.toPopulation());
+		population.add(colonists);
 	}
 
 	public Colonists colonists() {
-		return new AvailableColonists(size, population);
+		return new Colonists(population.colonistsValue());
 	}
 
 	public Industry industry() {
-		return new Industry(Math.min(size.value(), industry.value()));
+		return industry;
 	}
 
 	public Capital capital() {
-		return new AvailableCapital(size, industry);
+		return new Capital(industry.capitalValue());
 	}
 
 	public void unloadCapital(Capital capital) {
-		this.industry.add(capital.toIndustry());
+		industry.add(capital);
 	}
 
 	public Materials materials() {
@@ -122,27 +126,10 @@ public final class Planet {
 	}
 
 	public Capital withdrawCapital(double quantity) {
-		double available = capital().quantity();
-
-		if (available < quantity) {
-			throw new IllegalArgumentException("Not enough capital to withdraw %s".formatted(quantity));
-		}
-
-		industry.decrease(quantity);
-
-		return new CapitalOf(quantity);
+		return industry.remove(new Capital(quantity));
 	}
 
 	public Colonists withdrawColonists(double quantity) {
-		double available = colonists().quantity();
-
-		if (available < quantity) {
-			throw new IllegalArgumentException("Not enough colonists to withdraw %s".formatted(quantity));
-		}
-
-		ColonistsOf withdrawn = new ColonistsOf(quantity);
-		population.decrease(withdrawn);
-
-		return withdrawn;
+		return population.remove(new Colonists(quantity));
 	}
 }
