@@ -97,6 +97,10 @@ public final class Planet {
 		return new Colonists(population.colonistsValue());
 	}
 
+	public Colonists withdrawColonists(double quantity) {
+		return population.remove(new Colonists(quantity));
+	}
+
 	public Industry industry() {
 		return industry;
 	}
@@ -107,6 +111,10 @@ public final class Planet {
 
 	public void unloadCapital(Capital capital) {
 		industry.add(capital);
+	}
+
+	public Capital withdrawCapital(double quantity) {
+		return industry.remove(new Capital(quantity));
 	}
 
 	public Materials materials() {
@@ -123,13 +131,5 @@ public final class Planet {
 
 	public void changeOwner(Race race) {
 		this.race = race;
-	}
-
-	public Capital withdrawCapital(double quantity) {
-		return industry.remove(new Capital(quantity));
-	}
-
-	public Colonists withdrawColonists(double quantity) {
-		return population.remove(new Colonists(quantity));
 	}
 }
