@@ -5,16 +5,17 @@ import galaxy.Planet;
 import galaxy.Production;
 import galaxy.Race;
 import galaxy.planet.PlanetId;
-import galaxy.production.CapitalProduction;
-import galaxy.production.MaterialsProduction;
-import galaxy.production.ResearchTechProduction;
-import galaxy.production.ShipGroupBuildProduction;
+import galaxy.production.*;
 
 import java.util.*;
 
 public final class Productions {
 
 	private final Map<Planet, Production> productions = new HashMap<>();
+
+	public Productions(Map<Planet, Production> source) {
+		this.productions.putAll(source);
+	}
 
 	public Productions(JsonNode src, Planets planets) {
 		src.valueStream().forEach(json -> {
@@ -37,17 +38,17 @@ public final class Productions {
 	}
 
 	public Productions() {
-	}
-
-	public Optional<Production> findByOwnerAndName(Race race, String name) {
-//		return productions.stream()
-//				.filter(p -> Objects.equals(p.race().raceId(), race.raceId()))
-//				.filter(p -> Objects.equals(p.name(), name))
-//				.findFirst();
-		return Optional.empty();
+		this(Map.of());
 	}
 
 	public Optional<Production> atPlanet(Planet planet) {
 		return Optional.ofNullable(productions.get(planet));
+	}
+
+	public void start(Planet planet, Race race, Production production) {
+		if (productions.containsKey(planet)) {
+			// TODO replace production, check for "massFromPrevTurn" value
+		}
+		productions.put(planet, production);
 	}
 }

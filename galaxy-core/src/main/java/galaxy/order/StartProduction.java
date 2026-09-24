@@ -20,6 +20,6 @@ public final class StartProduction implements Order {
 
 	@Override
 	public void applyTo(GameContext context) {
-
+		context.productions().start(planet, race, production);
 	}
 }

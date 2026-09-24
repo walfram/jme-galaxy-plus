@@ -1,6 +1,8 @@
-package galaxy;
+package galaxy.planet;
 
-import galaxy.planet.*;
+import galaxy.Effort;
+import galaxy.Planet;
+import galaxy.Race;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -9,6 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class PlanetTest {
+
+	@Test
+	void test_planet_equality() {
+		Planet a = new Planet(new PlanetId("test"), new Coordinates(1, 2), new Size(1000.0), new Resources(10.0));
+		Planet b = new Planet(new PlanetId("test"), new Coordinates(1, 2), new Size(1000.0), new Resources(10.0));
+
+		assertEquals(a, b);
+	}
 
 	@Test
 	void test_planet_owner() {

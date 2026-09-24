@@ -2,6 +2,7 @@ package galaxy.order;
 
 import galaxy.*;
 import galaxy.context.GameContext;
+import galaxy.context.Productions;
 import galaxy.production.*;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class StartProductionTest {
 
@@ -18,6 +20,7 @@ class StartProductionTest {
 	@BeforeEach
 	void setup() {
 		context = mock(GameContext.class);
+		when(context.productions()).thenReturn(new Productions());
 	}
 
 	@Test

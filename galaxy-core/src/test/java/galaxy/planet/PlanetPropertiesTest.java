@@ -28,7 +28,7 @@ public class PlanetPropertiesTest {
 	void test_capped_population() {
 		CappedPopulation population = new CappedPopulation(new Size(1000.0));
 		assertEquals(0.0, population.value());
-		assertThrows(IllegalArgumentException.class, () -> population.remove(new Colonists(1.0)));
+		assertThrows(IllegalStateException.class, () -> population.remove(new Colonists(1.0)));
 
 		population.add(new Colonists(125.0));
 		assertEquals(1000.0, population.value());

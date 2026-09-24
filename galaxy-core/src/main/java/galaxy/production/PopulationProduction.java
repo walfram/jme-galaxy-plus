@@ -13,6 +13,6 @@ public class PopulationProduction implements Production {
 
 	@Override
 	public void produce(GameContext context) {
-		throw new UnsupportedOperationException("Population production is not implemented yet");
+		planet.growPopulation();
 	}
 }

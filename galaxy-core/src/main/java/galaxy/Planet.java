@@ -19,6 +19,21 @@ public final class Planet {
 	private String name;
 	private Race race;
 
+	public Planet(JsonNode src, Races raceIndex) {
+		this(
+				new PlanetId(src.required("planetId")),
+				new Coordinates(src.required("coordinates")),
+				new Size(src.required("size")),
+				new Resources(src.required("resources")),
+				new PopulationOf(src.path("population")),
+				new IndustryOf(src.path("industry")),
+				new Materials(src.path("materials")),
+				// TODO fix raceId here
+				raceIndex.raceById(src.path("raceId").asText()),
+				src.required("name").asText()
+		);
+	}
+
 	private Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry, Materials materials, Race race, String name) {
 		this.planetId = planetId;
 		this.coordinates = coordinates;
@@ -59,20 +74,9 @@ public final class Planet {
 		this(coordinates, size, resources, new PopulationOf(), new IndustryOf());
 	}
 
-	public Planet(JsonNode src, Races raceIndex) {
-		this(
-				new PlanetId(src.required("planetId")),
-				new Coordinates(src.required("coordinates")),
-				new Size(src.required("size")),
-				new Resources(src.required("resources")),
-				new PopulationOf(src.path("population")),
-				new IndustryOf(src.path("industry")),
-				new Materials(src.path("materials")),
-				// TODO fix raceId here
-				raceIndex.raceById(src.path("raceId").asText()),
-				src.required("name").asText()
-		);
-	}
+//	public Planet(PlanetId planetId, Coordinates coordinates, Size size, Resources resources, Population population, Industry industry) {
+//		this(planetId, coordinates, size, resources, population, industry, new Materials(), null, null);
+//	}
 
 	public PlanetId planetId() {
 		return planetId;
@@ -141,4 +145,22 @@ public final class Planet {
 	public void changeOwner(Race race) {
 		this.race = race;
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object == null)
+			return false;
+
+		if (object instanceof Planet planet) {
+			return planetId.equals(planet.planetId);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return planetId.hashCode();
+	}
+
 }
