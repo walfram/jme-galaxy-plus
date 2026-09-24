@@ -33,7 +33,7 @@ public final class CappedPopulation implements Population {
 
 	public Colonists remove(Colonists requested) {
 		if (requested.quantity() > colonistsValue())
-			throw new IllegalArgumentException("Cannot remove more colonists (%s) than are present (%s)".formatted(requested.quantity(), colonistsValue()));
+			throw new IllegalStateException("Cannot remove more colonists (%s) than are present (%s)".formatted(requested.quantity(), colonistsValue()));
 
 		value -= requested.quantity() * 8.0;
 

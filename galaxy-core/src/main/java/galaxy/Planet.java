@@ -25,7 +25,7 @@ public final class Planet {
 		this.size = size;
 		this.resources = resources;
 		this.population = new CappedPopulation(population, size);
-		this.industry = new CappedIndustry(industry, population);
+		this.industry = new CappedIndustry(industry, this.population);
 		this.materials = materials;
 		this.name = name;
 		this.race = race;
@@ -104,6 +104,10 @@ public final class Planet {
 
 	public Colonists withdrawColonists(double quantity) {
 		return population.remove(new Colonists(quantity));
+	}
+
+	public void growPopulation() {
+		population.grow();
 	}
 
 	public Industry industry() {

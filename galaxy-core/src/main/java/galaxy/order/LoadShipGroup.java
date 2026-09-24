@@ -24,7 +24,7 @@ public final class LoadShipGroup implements Order {
 	@Override
 	public void applyTo(GameContext context) {
 		if (!Objects.equals(shipGroup.owner(), race)) {
-			throw new IllegalArgumentException("Ship group %s does not belong to race %s".formatted(shipGroup.shipGroupId(), race.raceId()));
+			throw new IllegalStateException("Ship group %s does not belong to race %s".formatted(shipGroup.shipGroupId(), race.raceId()));
 		}
 
 		Planet planet = context.shipGroups().orbitingPlanet(shipGroup)
@@ -38,11 +38,11 @@ public final class LoadShipGroup implements Order {
 			throw new IllegalStateException("Planet %s is not owned by %s, cannot load ship group".formatted(planet.planetId(), race.raceId()));
 		}
 
-		// TODO refactor
-		switch (cargo.getClass().getSimpleName()) {
-			case "ColonistsOf" -> loadColonists(planet);
-			case "CapitalOf" -> loadCapital(planet);
-			case "Materials" -> loadMaterials(planet);
+		switch (cargo) {
+			case Colonists col -> loadColonists(planet);
+			case Capital cap -> loadCapital(planet);
+			case Materials mat -> loadMaterials(planet);
+			default -> throw new IllegalStateException("Unknown cargo: %s".formatted(cargo));
 		}
 	}
 
@@ -67,12 +67,12 @@ public final class LoadShipGroup implements Order {
 	}
 
 	private void loadColonists(Planet planet) {
-		double quantity = Math.min(planet.colonists().quantity(), cargo.quantity());
+//		double quantity = Math.min(planet.colonists().quantity(), cargo.quantity());
 
-		if (quantity == 0)
-			throw new IllegalStateException("No colonists available to load");
+//		if (quantity == 0)
+//			throw new IllegalStateException("No colonists available to load");
 
-		Colonists colonists = planet.withdrawColonists(quantity);
+		Colonists colonists = planet.withdrawColonists(cargo.quantity());
 		shipGroup.load(colonists);
 	}
 }
