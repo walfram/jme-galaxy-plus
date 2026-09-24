@@ -1,5 +1,9 @@
 package galaxy.planet;
 
+import galaxy.Race;
+
+import java.util.Optional;
+
 public final class Planet {
 
 	private final Coordinates coordinates;
@@ -7,6 +11,10 @@ public final class Planet {
 	private final Resources resources;
 	private final IndustryOf industry;
 	private final PopulationOf population;
+	private final Materials materials;
+
+	private Race owner;
+//	private double massFromPrevTurn;
 
 	public Planet(Coordinates coordinates, Size size, Resources resources, IndustryOf industry, PopulationOf population) {
 		this.coordinates = coordinates;
@@ -14,6 +22,7 @@ public final class Planet {
 		this.resources = resources;
 		this.industry = industry;
 		this.population = population;
+		this.materials = new Materials(0.0);
 	}
 
 	public Planet(Coordinates coordinates, Size size, Resources resources) {
@@ -62,4 +71,28 @@ public final class Planet {
 	public void unload(Capital capital) {
 		industry.add(capital);
 	}
+
+	public Effort effort() {
+		return new Effort(industry(), population());
+	}
+
+	public Materials materials() {
+		return materials;
+	}
+
+	public void remove(Materials materials) {
+		this.materials.remove(materials);
+	}
+
+	public Optional<Race> owner() {
+		return Optional.ofNullable(owner);
+	}
+
+//	public double massFromPrevTurn() {
+//		return massFromPrevTurn;
+//	}
+
+//	public void massFromPrevTurn(double massFromPrevTurn) {
+//		this.massFromPrevTurn = massFromPrevTurn;
+//	}
 }
