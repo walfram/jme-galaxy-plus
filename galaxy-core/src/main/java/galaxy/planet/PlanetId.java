@@ -10,6 +10,6 @@ public record PlanetId(String value) {
 	}
 
 	public PlanetId(JsonNode src) {
-		this(src.asText());
+		this(src.required("planetId").asText());
 	}
 }

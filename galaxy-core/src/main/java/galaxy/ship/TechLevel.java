@@ -20,4 +20,7 @@ public final class TechLevel {
 		return value;
 	}
 
+	public void upgradeBy(double delta) {
+		value += delta;
+	}
 }

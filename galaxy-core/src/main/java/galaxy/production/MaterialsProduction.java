@@ -15,12 +15,15 @@ public final class MaterialsProduction implements Production {
 
 	@Override
 	public void produce(GameContext context) {
-		double effort = new Effort(planet).value();
-
+		double effort = planet.effort().value();
 		double resources = planet.resources().value();
-
 		double produced = effort * resources;
 
-		planet.materials().add(new Materials(produced));
+		planet.unloadMaterials(new Materials(produced));
+	}
+
+	@Override
+	public Materials cancel() {
+		return new Materials();
 	}
 }

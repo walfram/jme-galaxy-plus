@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
 import galaxy.Production;
 import galaxy.Race;
+import galaxy.planet.Materials;
 import galaxy.planet.PlanetId;
 import galaxy.production.*;
 
@@ -29,10 +30,10 @@ public final class Productions {
 		Planet planet = planets.findById(new PlanetId(src.required("planetId").asText()));
 
 		return switch (src.required("type").asText()) {
-			case "CAPITAL" -> new CapitalProduction();
+			case "CAPITAL" -> new CapitalProduction(planet);
 			case "MATERIALS" -> new MaterialsProduction(planet);
-			case "SHIPS" -> new ShipGroupBuildProduction(src);
-			case "TECH" -> new ResearchTechProduction(src);
+			case "SHIPS" -> new ShipGroupBuildProduction(src, planets);
+			case "TECH" -> new ResearchTechProduction(src, planets);
 			default -> throw new IllegalArgumentException("Unknown production type %s".formatted(src.required("type").asText()));
 		};
 	}
@@ -47,7 +48,9 @@ public final class Productions {
 
 	public void start(Planet planet, Race race, Production production) {
 		if (productions.containsKey(planet)) {
-			// TODO replace production, check for "massFromPrevTurn" value
+			Production prev = productions.get(planet);
+			Materials prevMaterials = prev.cancel();
+			planet.unloadMaterials(prevMaterials);
 		}
 		productions.put(planet, production);
 	}

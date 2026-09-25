@@ -52,7 +52,7 @@ public final class LoadShipGroup implements Order {
 		if (quantity == 0)
 			throw new IllegalStateException("No materials available to load");
 
-		Materials materials = planet.materials().withdraw(quantity);
+		Materials materials = planet.materials().remove(quantity);
 		shipGroup.load(materials);
 	}
 

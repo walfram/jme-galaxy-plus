@@ -1,6 +1,7 @@
 package galaxy.ship;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.Tech;
 
 public final class TechLevels {
 
@@ -63,4 +64,12 @@ public final class TechLevels {
 		return cargo;
 	}
 
+	public void upgradeTo(Tech tech, double delta) {
+		switch (tech) {
+			case ENGINES -> engines.upgradeBy(delta);
+			case WEAPONS -> weapons.upgradeBy(delta);
+			case SHIELDS -> shields.upgradeBy(delta);
+			case CARGO -> cargo.upgradeBy(delta);
+		}
+	}
 }

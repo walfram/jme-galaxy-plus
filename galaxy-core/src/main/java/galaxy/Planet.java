@@ -21,7 +21,7 @@ public final class Planet {
 
 	public Planet(JsonNode src, Races raceIndex) {
 		this(
-				new PlanetId(src.required("planetId")),
+				new PlanetId(src),
 				new Coordinates(src.required("coordinates")),
 				new Size(src.required("size")),
 				new Resources(src.required("resources")),
@@ -138,6 +138,10 @@ public final class Planet {
 		this.materials.add(materials);
 	}
 
+	public void withdrawMaterials(Materials materials) {
+		this.materials.remove(materials.quantity());
+	}
+
 	public Optional<Race> owner() {
 		return Optional.ofNullable(race);
 	}
@@ -163,4 +167,7 @@ public final class Planet {
 		return planetId.hashCode();
 	}
 
+	public Effort effort() {
+		return new Effort(this);
+	}
 }

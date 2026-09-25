@@ -27,7 +27,7 @@ public final class Materials implements Cargo {
 		quantity += Math.abs(materials.quantity());
 	}
 
-	public Materials withdraw(double requestedMaterials) {
+	public Materials remove(double requestedMaterials) {
 		double requested = Math.abs(requestedMaterials);
 
 		if (quantity < requested)

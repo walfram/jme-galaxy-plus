@@ -45,7 +45,7 @@ class StartProductionTest {
 
 		ShipType shipType = mock(ShipType.class);
 
-		Order order = new StartProduction(race, planet, new ShipGroupBuildProduction(shipType));
+		Order order = new StartProduction(race, planet, new ShipGroupBuildProduction(planet, shipType));
 		assertDoesNotThrow(() -> order.applyTo(context));
 
 		Production production = context.productions().atPlanet(planet).orElseThrow();
@@ -74,7 +74,7 @@ class StartProductionTest {
 		Planet planet = mock(Planet.class);
 		Tech tech = Tech.ENGINES;
 
-		Order order = new StartProduction(race, planet, new ResearchTechProduction(tech));
+		Order order = new StartProduction(race, planet, new ResearchTechProduction(planet, tech));
 		assertDoesNotThrow(() -> order.applyTo(context));
 
 		Production production = context.productions().atPlanet(planet).orElseThrow();
@@ -87,7 +87,7 @@ class StartProductionTest {
 		Race race = new Race("foo");
 		Planet planet = mock(Planet.class);
 
-		Order order = new StartProduction(race, planet, new CapitalProduction());
+		Order order = new StartProduction(race, planet, new CapitalProduction(planet));
 		assertDoesNotThrow(() -> order.applyTo(context));
 
 		Production production = context.productions().atPlanet(planet).orElseThrow();
