@@ -3,7 +3,7 @@ package galaxy;
 import galaxy.context.GameContext;
 import galaxy.planet.*;
 import galaxy.production.MaterialsProduction;
-import galaxy.production.PopulationProduction;
+import galaxy.production.PopulationGrowProduction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +21,7 @@ class ProductionTest {
 
 		assertEquals(100.0, planet.population().value());
 
-		Production production = new PopulationProduction(planet);
+		Production production = new PopulationGrowProduction(planet);
 		production.produce(context);
 
 		assertEquals(108.0, planet.population().value());

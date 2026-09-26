@@ -27,7 +27,7 @@ public final class LoadShipGroup implements Order {
 			throw new IllegalStateException("Ship group %s does not belong to race %s".formatted(shipGroup.shipGroupId(), race.raceId()));
 		}
 
-		Planet planet = context.shipGroups().orbitingPlanet(shipGroup)
+		Planet planet = context.shipGroups().findPlanet(shipGroup)
 				.orElseThrow(() -> new IllegalStateException("Ship group %s is not in orbit".formatted(shipGroup.shipGroupId())));
 
 		if (planet.owner().isEmpty()) {

@@ -59,11 +59,19 @@ public final class ShipGroups {
 		return all(InOrbit.class);
 	}
 
-	public Optional<Planet> orbitingPlanet(ShipGroup shipGroup) {
+	public Optional<Planet> findPlanet(ShipGroup shipGroup) {
 		return Optional.ofNullable(states.get(shipGroup))
 				.filter(InOrbit.class::isInstance)
 				.map(InOrbit.class::cast)
 				.map(InOrbit::planet);
+	}
+
+	public List<ShipGroup> atPlanet(Planet planet) {
+		return all(InOrbit.class)
+				.stream()
+				.filter(state -> state.planet().equals(planet))
+				.map(InOrbit::group)
+				.toList();
 	}
 
 	public List<Launched> launched() {

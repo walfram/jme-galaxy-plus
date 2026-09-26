@@ -28,7 +28,7 @@ public final class SendShipGroup implements Order {
 			throw new IllegalArgumentException("Ship group %s does not belong to race %s".formatted(shipGroup.shipGroupId(), race.raceId()));
 		}
 
-		Optional<Planet> check = context.shipGroups().orbitingPlanet(shipGroup);
+		Optional<Planet> check = context.shipGroups().findPlanet(shipGroup);
 
 		if (check.isEmpty()) {
 			throw new IllegalStateException("Ship group %s is not in orbit of %s".formatted(shipGroup.shipGroupId(), origin.planetId()));
