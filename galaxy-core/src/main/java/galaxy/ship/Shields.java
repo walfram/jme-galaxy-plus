@@ -1,7 +1,18 @@
 package galaxy.ship;
 
-public interface Shields extends ShipComponent {
+import com.fasterxml.jackson.databind.JsonNode;
 
-	double size();
+public record Shields(double size) implements ShipComponent {
+	public Shields(JsonNode src) {
+		this(src.asDouble());
+	}
 
+	public Shields() {
+		this(0.0);
+	}
+
+	@Override
+	public double mass() {
+		return size;
+	}
 }
