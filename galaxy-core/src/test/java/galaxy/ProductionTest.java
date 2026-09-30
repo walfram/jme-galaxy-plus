@@ -11,12 +11,13 @@ import static org.mockito.Mockito.mock;
 
 class ProductionTest {
 
-	// production requires context
-	// production requires planet
-
 	@Test
 	void test_produce_population() {
 		Planet planet = new Planet(new Coordinates(1, 2), new Size(1000.0), new Resources(10.0), new PopulationOf(100.0), new IndustryOf(1000.0));
+
+		Race race = new Race("test");
+		planet.changeOwner(race);
+
 		GameContext context = mock(GameContext.class);
 
 		assertEquals(100.0, planet.population().value());

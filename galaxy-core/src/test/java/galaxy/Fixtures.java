@@ -67,4 +67,12 @@ public class Fixtures {
 	public static ShipType megaFreighter() {
 		return new ShipType("MegaFreighter", new EnginesOf(120.00), new WeaponsOf(0, 0.00), new ShieldsOf(38.43), new CargoBayOf(39.57));
 	}
+
+	public static ShipType megaFreighterMk2() {
+		return new ShipType("MegaFreighter-Mk2", new EnginesOf(80.00), new WeaponsOf(2, 2.00), new ShieldsOf(30.0), new CargoBayOf(100.0));
+	}
+
+	public static ShipType turret9x11() {
+		return new ShipType("Turret-9x11", new EnginesOf(99.0), new WeaponsOf(9, 11.0), new ShieldsOf(43.0), new CargoBayOf(1.0));
+	}
 }

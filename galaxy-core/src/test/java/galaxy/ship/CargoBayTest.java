@@ -1,10 +1,15 @@
 package galaxy.ship;
 
+import galaxy.Race;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CargoBayTest {
+
+	private final Race race = new Race("test");
+
+	private final ShipType type = new ShipType("container", new CargoBayOf(100.0));
 
 	@Test
 	void test_capacity() {
@@ -24,9 +29,9 @@ class CargoBayTest {
 
 	@Test
 	void should_return_capacity_and_size_tech_level_2() {
-		CargoBay cargoBay = new CargoBayOf(100.0, new TechLevel(2.0));
+		CargoBay cargoBay = new CargoBayOf(100.0);
 		assertEquals(100.0, cargoBay.size());
-		assertEquals(1200.0, cargoBay.capacity());
+		assertEquals(1200.0, cargoBay.capacity(new TechLevel(2.0)));
 	}
 
 }

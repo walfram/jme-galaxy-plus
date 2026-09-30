@@ -15,9 +15,4 @@ public final class NoWeapons implements Weapons {
 	public double mass() {
 		return 0;
 	}
-
-	@Override
-	public TechLevel techLevel() {
-		return new TechLevel();
-	}
 }

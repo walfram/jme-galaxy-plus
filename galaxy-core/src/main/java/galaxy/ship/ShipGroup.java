@@ -1,7 +1,6 @@
 package galaxy.ship;
 
 import galaxy.Cargo;
-import galaxy.Planet;
 import galaxy.Race;
 
 import java.util.Optional;
@@ -20,9 +19,8 @@ public final class ShipGroup {
 	public ShipGroup(Race owner, ShipType type, int size, TechLevels techLevels) {
 		this.shipGroupId = new ShipGroupId();
 		this.owner = owner;
-		this.type = new ShipType(type, techLevels);
+		this.type = type;
 		this.size = size;
-		// TODO move each TechLevel into group component
 		this.techLevels = new TechLevels(techLevels);
 	}
 
@@ -65,23 +63,20 @@ public final class ShipGroup {
 	}
 
 	public double mass() {
-		double cargoMass = Optional.ofNullable(cargo).map(Cargo::quantity).orElse(0.0);
-		return type.mass() + cargoMass / type.cargoBay().techLevel().value();
+		double cargoMass = Optional.ofNullable(cargo).map(Cargo::quantity).orElse(0.0) / size;
+		return type.mass() + cargoMass / techLevels.cargo().value();
 	}
 
 	public double speed() {
-		return type.engines().power() / mass();
+		return 20.0 * techLevels.engines().value() * type.engines().size() / mass();
 	}
 
-	public void upgrade(TechLevels techLevels) {
-		type.engines().techLevel().upgradeTo(techLevels.engines());
-		type.weapons().techLevel().upgradeTo(techLevels.weapons());
-		type.shields().techLevel().upgradeTo(techLevels.shields());
-		type.cargoBay().techLevel().upgradeTo(techLevels.cargo());
+	public void upgrade(TechLevels other) {
+		this.techLevels.upgradeTo(other);
 	}
 
 	public double cargoCapacity() {
-		return size * type.cargoBay().capacity();
+		return size * (techLevels.cargo().value() * type.cargoBay().capacity());
 	}
 
 	public Cargo cargo() {

@@ -72,4 +72,11 @@ public final class TechLevels {
 			case CARGO -> cargo.upgradeBy(delta);
 		}
 	}
+
+	public void upgradeTo(TechLevels techLevels) {
+		engines.upgradeTo(techLevels.engines);
+		weapons.upgradeTo(techLevels.weapons);
+		shields.upgradeTo(techLevels.shields);
+		cargo.upgradeTo(techLevels.cargo);
+	}
 }

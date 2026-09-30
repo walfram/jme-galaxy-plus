@@ -12,12 +12,13 @@ public final class NoCargoBay implements CargoBay {
 	}
 
 	@Override
-	public double mass() {
+	public double capacity(TechLevel techLevel) {
 		return 0;
 	}
 
 	@Override
-	public TechLevel techLevel() {
-		return new TechLevel();
+	public double mass() {
+		return 0;
 	}
+
 }

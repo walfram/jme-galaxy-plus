@@ -1,6 +1,6 @@
 package galaxy.ship;
 
-public final class NoShields implements Shields {
+public final class NoEngines implements Engines {
 	@Override
 	public double size() {
 		return 0;
@@ -10,5 +10,4 @@ public final class NoShields implements Shields {
 	public double mass() {
 		return 0;
 	}
-
 }
