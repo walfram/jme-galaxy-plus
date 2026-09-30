@@ -1,8 +1,8 @@
-package galaxy.ship;
+package galaxy.context;
 
 import galaxy.Planet;
 import galaxy.Race;
-import galaxy.context.ShipGroups;
+import galaxy.ship.ShipGroup;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
