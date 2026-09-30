@@ -8,7 +8,7 @@ import galaxy.planet.PlanetId;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.TechLevels;
-import galaxy.ship.state.*;
+import galaxy.state.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

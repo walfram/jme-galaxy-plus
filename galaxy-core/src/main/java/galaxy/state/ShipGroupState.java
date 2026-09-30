@@ -1,4 +1,4 @@
-package galaxy.ship.state;
+package galaxy.state;
 
 import galaxy.ship.ShipGroup;
 

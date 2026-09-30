@@ -7,7 +7,7 @@ import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;
 import galaxy.ship.TechLevels;
-import galaxy.ship.state.InOrbit;
+import galaxy.state.InOrbit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

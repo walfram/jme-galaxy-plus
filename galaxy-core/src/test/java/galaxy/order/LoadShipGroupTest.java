@@ -5,7 +5,7 @@ import galaxy.context.GameContext;
 import galaxy.context.ShipGroups;
 import galaxy.planet.*;
 import galaxy.ship.ShipGroup;
-import galaxy.ship.state.InOrbit;
+import galaxy.state.InOrbit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

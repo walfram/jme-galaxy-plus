@@ -4,7 +4,7 @@ import galaxy.Planet;
 import galaxy.Race;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
-import galaxy.ship.state.*;
+import galaxy.state.*;
 
 import java.util.*;
 

@@ -7,7 +7,7 @@ import galaxy.Race;
 import galaxy.context.GameContext;
 import galaxy.context.ShipGroups;
 import galaxy.ship.ShipGroup;
-import galaxy.ship.state.InOrbit;
+import galaxy.state.InOrbit;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
