@@ -44,13 +44,13 @@ class ShipGroupBuildProductionTest {
 		assertEquals(1, context.shipGroups().size());
 
 		List<ShipGroup> initial = context.shipGroups().atPlanet(planet);
-		assertEquals(1, initial.getFirst().size());
+		assertEquals(1, initial.getFirst().groupSize());
 
 		production.produce(context);
 		assertEquals(2, context.shipGroups().size());
 
 		List<ShipGroup> group = context.shipGroups().atPlanet(planet);
-		int total = group.stream().mapToInt(ShipGroup::size).sum();
+		int total = group.stream().mapToInt(ShipGroup::groupSize).sum();
 		assertEquals(3, total);
 	}
 
@@ -75,7 +75,7 @@ class ShipGroupBuildProductionTest {
 		assertEquals(1, context.shipGroups().size());
 
 		List<ShipGroup> group = context.shipGroups().atPlanet(planet);
-		assertEquals(50, group.getFirst().size());
+		assertEquals(50, group.getFirst().groupSize());
 	}
 
 	@Test
@@ -99,7 +99,7 @@ class ShipGroupBuildProductionTest {
 		assertEquals(1, context.shipGroups().size());
 
 		List<ShipGroup> group = context.shipGroups().atPlanet(planet);
-		assertEquals(99, group.getFirst().size());
+		assertEquals(99, group.getFirst().groupSize());
 	}
 
 }

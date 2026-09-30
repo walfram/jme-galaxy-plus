@@ -1,7 +1,6 @@
 package galaxy.ship;
 
 import galaxy.Fixtures;
-import galaxy.Planet;
 import galaxy.Race;
 import galaxy.planet.Capital;
 import galaxy.planet.Colonists;
@@ -27,12 +26,12 @@ public class ShipGroupTest {
 	@Test
 	void test_mega_freighter_mk2_fully_loaded_speed() {
 		ShipGroup megaFreighters = new ShipGroup(race, Fixtures.megaFreighterMk2());
-		assertEquals(1, megaFreighters.size());
+		assertEquals(1, megaFreighters.groupSize());
 		assertDoesNotThrow(() -> megaFreighters.load(new Colonists(600.0)));
 		assertEquals(1.968019680196802, megaFreighters.speed());
 
 		ShipGroup freighters = new ShipGroup(race, Fixtures.megaFreighterMk2(), 2);
-		assertEquals(2, freighters.size());
+		assertEquals(2, freighters.groupSize());
 		assertDoesNotThrow(() -> freighters.load(new Colonists(1200.0)));
 		assertEquals(1.968019680196802, freighters.speed());
 	}
@@ -41,7 +40,7 @@ public class ShipGroupTest {
 	void test_group_mass_and_speed_loaded() {
 		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
 
-		assertEquals(1, haulers.size());
+		assertEquals(1, haulers.groupSize());
 		haulers.load(new Colonists(1.05));
 
 		assertEquals(4.05, haulers.mass());
@@ -73,7 +72,6 @@ public class ShipGroupTest {
 
 	@Test
 	void test_group_created() {
-		Race race = new Race("foo");
 		ShipGroup group = new ShipGroup(race, Fixtures.drone(), 1);
 
 		assertEquals(1.0, group.mass());
@@ -84,68 +82,69 @@ public class ShipGroupTest {
 
 	@Test
 	void test_turret_9x11() {
-		Race race = mock(Race.class);
-
-		ShipType turret9x11 = new ShipType("Turret-9x11", new EnginesOf(99.0), new WeaponsOf(9, 11.0), new ShieldsOf(43.0), new CargoBayOf(1.0));
+		ShipType turret9x11 = Fixtures.turret9x11();
 		assertEquals(198.0, turret9x11.mass());
 		assertEquals(1.05, turret9x11.cargoBay().capacity());
 
 		ShipGroup group = new ShipGroup(race, turret9x11, 1, new TechLevels());
 		assertEquals(10.0, group.speed());
-		// TODO: assertEquals(22.92382813162085, group.defencePower());
+		assertEquals(22.92382813162085, group.defenceValue());
 
 		group.upgrade(new TechLevels(4.34, 3.5, 3.91, 2.09));
 		assertEquals(43.39999999999999, group.speed());
-		// TODO group.load(new Colonists(1.05));
-		// TODO assertEquals(43.17, group.speed());
-		// TODO assertEquals(38.50, group.attackPower());
-		// assertEquals(561.5, group.bombingPower());
-		// TODO assertEquals(89.63, group.defencePower());
+		assertEquals(89.63216799463753, group.defenceValue());
+		assertEquals(43.39999999999999, group.speed());
+
+		group.load(new Colonists(1.05));
+
+		assertEquals(43.29015836286065, group.speed());
+		assertEquals(89.55648702938927, group.defenceValue());
+
+		assertEquals(38.50, group.attackValue());
+		assertEquals(561.4975959167915, group.bombingValue());
 	}
 
 	@Test
 	void test_ship_group_defence_with_cargo() {
 		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.droneMk2(), new TechLevels());
 		drones.load(new Colonists(1.05));
-		// TODO: assertEquals(1.81, drones.defencePower());
+		assertEquals(1.8111035931715271, drones.defenceValue());
 
 		ShipGroup freighters = new ShipGroup(mock(Race.class), Fixtures.freighter(), 1, new TechLevels());
 		freighters.load(new Colonists(15.0));
-		// TODO: assertEquals(7.36, freighters.defencePower());
+		assertEquals(7.360558781266525, freighters.defenceValue());
 
 		ShipGroup megaFreighters = new ShipGroup(mock(Race.class), Fixtures.megaFreighter(), 1, new TechLevels());
 		megaFreighters.load(new Colonists(117.85));
-		// TODO: assertEquals(17.53, megaFreighters.defencePower());
+		assertEquals(17.53411466425152, megaFreighters.defenceValue());
 	}
 
 	@Test
 	void test_ship_group_defense_without_cargo() {
 		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.drone(), 1, new TechLevels());
-		// TODO: assertEquals(0.0, drones.defencePower());
+		assertEquals(0.0, drones.defenceValue());
 
 		ShipGroup fighters = new ShipGroup(mock(Race.class), Fixtures.fighter(), 1, new TechLevels());
-		// TODO: assertEquals(2.31, fighters.defencePower());
+		assertEquals(2.315487315476478, fighters.defenceValue());
 
 		ShipGroup battleships = new ShipGroup(mock(Race.class), Fixtures.battleship(), 1, new TechLevels());
-		// TODO: assertEquals(10.71, battleships.defencePower());
+		assertEquals(10.710927201314712, battleships.defenceValue());
 	}
 
 	@Test
 	void test_ship_group_offence() {
 		ShipGroup drones = new ShipGroup(mock(Race.class), Fixtures.drone(), 1, new TechLevels());
-		// TODO: assertEquals(0.0, drones.attackPower());
+		assertEquals(0.0, drones.attackValue());
 
 		ShipGroup fighters = new ShipGroup(mock(Race.class), Fixtures.fighter(), 1, new TechLevels());
-		// TODO: assertEquals(1.2, fighters.attackPower());
+		assertEquals(1.2, fighters.attackValue());
 
 		ShipGroup battleships = new ShipGroup(mock(Race.class), Fixtures.battleship(), 1, new TechLevels());
-		// TODO: assertEquals(25.0, battleships.attackPower());
+		assertEquals(25.0, battleships.attackValue());
 	}
 
 	@Test
 	void test_ship_group_speed_with_cargo() {
-		Race race = mock(Race.class);
-
 		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
 		assertEquals(3.0, haulers.mass());
 
@@ -155,8 +154,6 @@ public class ShipGroupTest {
 
 	@Test
 	void test_ship_group_speed_without_cargo() {
-		Race race = mock(Race.class);
-
 		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
 		assertEquals(13.3333333333333334, haulers.speed());
 	}
@@ -171,35 +168,27 @@ public class ShipGroupTest {
 
 	@Test
 	void test_ship_group_mass_without_cargo() {
-		Race race = mock(Race.class);
-
 		ShipGroup group = new ShipGroup(race, Fixtures.droneMk2(), 10);
-
 		assertEquals(4.0, group.mass());
 	}
 
 	@Test
 	void should_be_able_to_load_all_ships_in_group() {
-		Race race = mock(Race.class);
-
 		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler(), 10);
 		assertEquals(10 * 1.05, haulers.cargoCapacity());
 
 		assertDoesNotThrow(() -> haulers.load(new Colonists(10 * 1.05)));
-		// TODO: assertEquals(10.0 * 1.05, haulers.cargoMass());
-		// TODO: assertEquals(CargoType.COLONISTS, haulers.cargo());
+		assertEquals(10.0 * 1.05, haulers.cargo().quantity());
+		assertInstanceOf(Colonists.class, haulers.cargo());
 	}
 
 	@Test
 	void should_increase_cargo_capacity_when_upgrading_ship_group_tech_levels() {
-		Race race = mock(Race.class);
-
 		ShipGroup group = new ShipGroup(race, Fixtures.hauler());
 		assertEquals(1.05, group.cargoCapacity());
 
-		// TODO
-		// group.upgrade(new TechLevels(1, 1, 1, 2));
-		// assertEquals(2.1, group.cargoBayCapacity());
+		group.upgrade(new TechLevels(1, 1, 1, 2));
+		assertEquals(2.1, group.cargoCapacity());
 	}
 
 }
