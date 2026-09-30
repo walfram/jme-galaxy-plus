@@ -5,7 +5,7 @@ import galaxy.ship.*;
 public class Fixtures {
 
 	public static ShipType drone() {
-		return new ShipType("drone", new EnginesOf(1.0), new WeaponsOf(0, 0.0), new ShieldsOf(0.0), new CargoBayOf(0.0));
+		return new ShipType("drone", new EnginesOf(1.0), new NoWeapons(), new NoShields(), new NoCargoBay());
 	}
 
 	public static ShipType droneMk2() {
@@ -13,27 +13,27 @@ public class Fixtures {
 	}
 
 	public static ShipType flak() {
-		return new ShipType("Flak", new EnginesOf(1.00), new WeaponsOf(0, 0.00), new ShieldsOf(2.00), new CargoBayOf(0.00));
+		return new ShipType("Flak", new EnginesOf(1.00), new NoWeapons(), new ShieldsOf(2.00), new NoCargoBay());
 	}
 
 	public static ShipType fastFlak() {
-		return new ShipType("FastFlak", new EnginesOf(1.01), new WeaponsOf(0, 0.00), new ShieldsOf(1.01), new CargoBayOf(0.00));
+		return new ShipType("FastFlak", new EnginesOf(1.01), new NoWeapons(), new ShieldsOf(1.01), new NoCargoBay());
 	}
 
 	public static ShipType fighter() {
-		return new ShipType("Fighter", new EnginesOf(2.48), new WeaponsOf(1, 1.20), new ShieldsOf(1.27), new CargoBayOf(0.00));
+		return new ShipType("Fighter", new EnginesOf(2.48), new WeaponsOf(1, 1.20), new ShieldsOf(1.27), new NoCargoBay());
 	}
 
 	public static ShipType gunship() {
-		return new ShipType("Gunship", new EnginesOf(4.00), new WeaponsOf(2, 2.00), new ShieldsOf(4.00), new CargoBayOf(0.00));
+		return new ShipType("Gunship", new EnginesOf(4.00), new WeaponsOf(2, 2.00), new ShieldsOf(4.00), new NoCargoBay());
 	}
 
 	public static ShipType destroyer() {
-		return new ShipType("Destroyer", new EnginesOf(6.00), new WeaponsOf(3, 4.00), new ShieldsOf(4.00), new CargoBayOf(0.00));
+		return new ShipType("Destroyer", new EnginesOf(6.00), new WeaponsOf(3, 4.00), new ShieldsOf(4.00), new NoCargoBay());
 	}
 
 	public static ShipType cruiser() {
-		return new ShipType("Cruiser", new EnginesOf(16.50), new WeaponsOf(30, 1.50), new ShieldsOf(9.75), new CargoBayOf(0.00));
+		return new ShipType("Cruiser", new EnginesOf(16.50), new WeaponsOf(30, 1.50), new ShieldsOf(9.75), new NoCargoBay());
 	}
 
 	public static ShipType battleCruiser() {
@@ -45,31 +45,31 @@ public class Fixtures {
 	}
 
 	public static ShipType battleStation() {
-		return new ShipType("BattleStation", new EnginesOf(99.00), new WeaponsOf(1, 50.00), new ShieldsOf(49.00), new CargoBayOf(0.00));
+		return new ShipType("BattleStation", new EnginesOf(99.00), new WeaponsOf(1, 50.0), new ShieldsOf(49.00), new NoCargoBay());
 	}
 
 	public static ShipType orbitalFort() {
-		return new ShipType("OrbitalFort", new EnginesOf(0.00), new WeaponsOf(11, 10.00), new ShieldsOf(39.00), new CargoBayOf(0.00));
+		return new ShipType("OrbitalFort", new EnginesOf(0.0), new WeaponsOf(11, 10.0), new ShieldsOf(39.00), new NoCargoBay());
 	}
 
 	public static ShipType spaceGun() {
-		return new ShipType("SpaceGun", new EnginesOf(0.00), new WeaponsOf(1, 9.90), new ShieldsOf(9.90), new CargoBayOf(0.00));
+		return new ShipType("SpaceGun", new EnginesOf(0.0), new WeaponsOf(1, 9.90), new ShieldsOf(9.90), new NoCargoBay());
 	}
 
 	public static ShipType hauler() {
-		return new ShipType("Hauler", new EnginesOf(2.00), new WeaponsOf(0, 0.00), new ShieldsOf(0.00), new CargoBayOf(1.00));
+		return new ShipType("Hauler", new EnginesOf(2.00), new NoWeapons(), new NoShields(), new CargoBayOf(1.00));
 	}
 
 	public static ShipType freighter() {
-		return new ShipType("Freighter", new EnginesOf(30.00), new WeaponsOf(0, 0.00), new ShieldsOf(9.50), new CargoBayOf(10.00));
+		return new ShipType("Freighter", new EnginesOf(30.0), new NoWeapons(), new ShieldsOf(9.50), new CargoBayOf(10.0));
 	}
 
 	public static ShipType megaFreighter() {
-		return new ShipType("MegaFreighter", new EnginesOf(120.00), new WeaponsOf(0, 0.00), new ShieldsOf(38.43), new CargoBayOf(39.57));
+		return new ShipType("MegaFreighter", new EnginesOf(120.0), new NoWeapons(), new ShieldsOf(38.43), new CargoBayOf(39.57));
 	}
 
 	public static ShipType megaFreighterMk2() {
-		return new ShipType("MegaFreighter-Mk2", new EnginesOf(80.00), new WeaponsOf(2, 2.00), new ShieldsOf(30.0), new CargoBayOf(100.0));
+		return new ShipType("MegaFreighter-Mk2", new EnginesOf(80.0), new WeaponsOf(2, 2.00), new ShieldsOf(30.0), new CargoBayOf(100.0));
 	}
 
 	public static ShipType turret9x11() {
