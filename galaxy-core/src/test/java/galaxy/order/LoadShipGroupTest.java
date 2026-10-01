@@ -1,6 +1,8 @@
 package galaxy.order;
 
 import galaxy.*;
+import galaxy.cargo.Cargo;
+import galaxy.cargo.Colonists;
 import galaxy.context.GameContext;
 import galaxy.context.ShipGroups;
 import galaxy.planet.*;

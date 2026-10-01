@@ -1,6 +1,9 @@
 package galaxy;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import galaxy.cargo.Capital;
+import galaxy.cargo.Colonists;
+import galaxy.cargo.Materials;
 import galaxy.context.Races;
 import galaxy.planet.*;
 

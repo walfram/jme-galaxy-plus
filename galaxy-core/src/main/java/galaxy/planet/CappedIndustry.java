@@ -1,5 +1,7 @@
 package galaxy.planet;
 
+import galaxy.cargo.Capital;
+
 public final class CappedIndustry implements Industry {
 
 	private double value;

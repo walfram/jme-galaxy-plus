@@ -1,5 +1,7 @@
 package galaxy.planet;
 
+import galaxy.cargo.Colonists;
+
 public final class CappedPopulation implements Population {
 
 	private double value;

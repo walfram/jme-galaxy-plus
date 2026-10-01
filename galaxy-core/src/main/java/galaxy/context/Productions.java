@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
 import galaxy.Production;
 import galaxy.Race;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 import galaxy.planet.PlanetId;
 import galaxy.production.*;
 

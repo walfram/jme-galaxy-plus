@@ -3,7 +3,7 @@ package galaxy.production;
 import galaxy.Planet;
 import galaxy.Production;
 import galaxy.context.GameContext;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 
 public class PopulationGrowProduction implements Production {
 	private final Planet planet;

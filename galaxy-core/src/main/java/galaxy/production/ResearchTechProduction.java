@@ -6,7 +6,7 @@ import galaxy.Production;
 import galaxy.Tech;
 import galaxy.context.GameContext;
 import galaxy.context.Planets;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 import galaxy.planet.PlanetId;
 
 public final class ResearchTechProduction implements Production {

@@ -1,7 +1,8 @@
 package galaxy.ship;
 
-import galaxy.Cargo;
+import galaxy.cargo.Cargo;
 import galaxy.Race;
+import galaxy.cargo.EmptyCargo;
 
 import java.util.Optional;
 
@@ -43,7 +44,11 @@ public final class ShipGroup {
 			throw new IllegalArgumentException("Cargo capacity exceeded, available %s, requested %s".formatted(cargoCapacity, cargo.quantity()));
 		}
 
-		this.cargo = cargo;
+		if (this.cargo != null) {
+			this.cargo = this.cargo.add(cargo);
+		} else {
+			this.cargo = cargo;
+		}
 	}
 
 	public ShipGroupId shipGroupId() {
@@ -80,7 +85,7 @@ public final class ShipGroup {
 	}
 
 	public Cargo cargo() {
-		return cargo;
+		return cargo != null ? cargo : new EmptyCargo();
 	}
 
 	public double attackValue() {
@@ -93,5 +98,14 @@ public final class ShipGroup {
 
 	public double bombingValue() {
 		return attackValue() * type.weapons().guns() * groupSize * (1.0 + Math.sqrt(attackValue() / 100.0));
+	}
+
+	public Cargo unload() {
+		if (this.cargo == null)
+			throw new IllegalStateException("Cargo is empty");
+
+		Cargo unloaded = cargo;
+		this.cargo = null;
+		return unloaded;
 	}
 }

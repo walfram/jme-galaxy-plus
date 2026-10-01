@@ -1,7 +1,7 @@
 package galaxy;
 
 import galaxy.context.GameContext;
-import galaxy.planet.Colonists;
+import galaxy.cargo.Colonists;
 import galaxy.planet.Coordinates;
 import galaxy.planet.Resources;
 import galaxy.planet.Size;

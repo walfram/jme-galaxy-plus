@@ -1,11 +1,13 @@
 package galaxy.order;
 
-import galaxy.Cargo;
+import galaxy.cargo.Cargo;
 import galaxy.Order;
 import galaxy.Planet;
 import galaxy.Race;
+import galaxy.cargo.Capital;
+import galaxy.cargo.Colonists;
+import galaxy.cargo.Materials;
 import galaxy.context.GameContext;
-import galaxy.planet.*;
 import galaxy.ship.ShipGroup;
 
 import java.util.Objects;

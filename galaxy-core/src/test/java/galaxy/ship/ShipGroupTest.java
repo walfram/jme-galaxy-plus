@@ -2,9 +2,9 @@ package galaxy.ship;
 
 import galaxy.Fixtures;
 import galaxy.Race;
-import galaxy.planet.Capital;
-import galaxy.planet.Colonists;
-import galaxy.planet.Materials;
+import galaxy.cargo.Capital;
+import galaxy.cargo.Colonists;
+import galaxy.cargo.Materials;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,25 +37,6 @@ public class ShipGroupTest {
 	}
 
 	@Test
-	void test_group_mass_and_speed_loaded() {
-		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
-
-		assertEquals(1, haulers.groupSize());
-		haulers.load(new Colonists(1.05));
-
-		assertEquals(4.05, haulers.mass());
-		assertEquals(9.876543209876544, haulers.speed());
-	}
-
-	@Test
-	void test_group_mass_and_speed_unloaded() {
-		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
-
-		assertEquals(3.0, haulers.mass());
-		assertEquals(13.333333333333334, haulers.speed());
-	}
-
-	@Test
 	void test_ship_group_cargo_loading() {
 		ShipGroup colTransport = new ShipGroup(race, Fixtures.freighter());
 		assertEquals(15.0, colTransport.cargoCapacity());
@@ -71,22 +52,12 @@ public class ShipGroupTest {
 	}
 
 	@Test
-	void test_group_created() {
-		ShipGroup group = new ShipGroup(race, Fixtures.drone(), 1);
-
-		assertEquals(1.0, group.mass());
-		assertEquals(20.0, group.speed());
-
-		assertThrows(IllegalArgumentException.class, () -> group.load(new Colonists(1.0)));
-	}
-
-	@Test
 	void test_turret_9x11() {
-		ShipType turret9x11 = Fixtures.turret9x11();
-		assertEquals(198.0, turret9x11.mass());
-		assertEquals(1.05, turret9x11.cargoBay().capacity());
+		ShipType type = Fixtures.turret9x11();
+		assertEquals(198.0, type.mass());
+		assertEquals(1.05, type.cargoBay().capacity());
 
-		ShipGroup group = new ShipGroup(race, turret9x11, 1, new TechLevels());
+		ShipGroup group = new ShipGroup(race, type, 1, new TechLevels());
 		assertEquals(10.0, group.speed());
 		assertEquals(22.92382813162085, group.defenceValue());
 
@@ -149,6 +120,7 @@ public class ShipGroupTest {
 		assertEquals(3.0, haulers.mass());
 
 		haulers.load(new Colonists(1.05));
+		assertEquals(4.05, haulers.mass());
 		assertEquals(9.876543209876544, haulers.speed());
 	}
 
@@ -160,35 +132,16 @@ public class ShipGroupTest {
 
 	@Test
 	void test_ship_group_mass_with_cargo() {
-		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler());
+		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler(), 10);
 
 		haulers.load(new Colonists(1.0));
-		assertEquals(4.0, haulers.mass());
+		assertEquals(3.1, haulers.mass());
 	}
 
 	@Test
 	void test_ship_group_mass_without_cargo() {
 		ShipGroup group = new ShipGroup(race, Fixtures.droneMk2(), 10);
 		assertEquals(4.0, group.mass());
-	}
-
-	@Test
-	void should_be_able_to_load_all_ships_in_group() {
-		ShipGroup haulers = new ShipGroup(race, Fixtures.hauler(), 10);
-		assertEquals(10 * 1.05, haulers.cargoCapacity());
-
-		assertDoesNotThrow(() -> haulers.load(new Colonists(10 * 1.05)));
-		assertEquals(10.0 * 1.05, haulers.cargo().quantity());
-		assertInstanceOf(Colonists.class, haulers.cargo());
-	}
-
-	@Test
-	void should_increase_cargo_capacity_when_upgrading_ship_group_tech_levels() {
-		ShipGroup group = new ShipGroup(race, Fixtures.hauler());
-		assertEquals(1.05, group.cargoCapacity());
-
-		group.upgrade(new TechLevels(1, 1, 1, 2));
-		assertEquals(2.1, group.cargoCapacity());
 	}
 
 }

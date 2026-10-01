@@ -1,7 +1,7 @@
 package galaxy;
 
 import galaxy.context.GameContext;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 
 public interface Production {
 

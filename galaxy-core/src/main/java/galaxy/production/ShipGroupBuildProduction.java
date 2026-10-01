@@ -5,7 +5,7 @@ import galaxy.Planet;
 import galaxy.Production;
 import galaxy.context.GameContext;
 import galaxy.context.Planets;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 import galaxy.planet.PlanetId;
 import galaxy.ship.ShipGroup;
 import galaxy.ship.ShipType;

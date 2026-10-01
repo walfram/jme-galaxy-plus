@@ -1,7 +1,6 @@
-package galaxy.planet;
+package galaxy.cargo;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import galaxy.Cargo;
 
 public final class Materials implements Cargo {
 
@@ -21,6 +20,14 @@ public final class Materials implements Cargo {
 
 	public double quantity() {
 		return quantity;
+	}
+
+	@Override
+	public Cargo add(Cargo other) {
+		if (other instanceof Materials)
+			return new Materials(quantity + other.quantity());
+
+		throw new IllegalArgumentException("Cannot load different cargo types");
 	}
 
 	public void add(Materials materials) {

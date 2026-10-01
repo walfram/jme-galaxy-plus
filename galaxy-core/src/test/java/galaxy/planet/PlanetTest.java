@@ -3,6 +3,9 @@ package galaxy.planet;
 import galaxy.Effort;
 import galaxy.Planet;
 import galaxy.Race;
+import galaxy.cargo.Capital;
+import galaxy.cargo.Colonists;
+import galaxy.cargo.Materials;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

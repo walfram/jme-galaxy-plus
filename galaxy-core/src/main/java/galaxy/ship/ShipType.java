@@ -42,5 +42,4 @@ public record ShipType(String name, Engines engines, Weapons weapons, Shields sh
 		return engines.mass() + weapons.mass() + shields.mass() + cargoBay.mass();
 	}
 
-
 }

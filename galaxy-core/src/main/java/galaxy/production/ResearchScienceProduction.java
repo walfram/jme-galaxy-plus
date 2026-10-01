@@ -3,7 +3,7 @@ package galaxy.production;
 import galaxy.Production;
 import galaxy.Science;
 import galaxy.context.GameContext;
-import galaxy.planet.Materials;
+import galaxy.cargo.Materials;
 
 public final class ResearchScienceProduction implements Production {
 
