@@ -5,7 +5,7 @@ import galaxy.Production;
 import galaxy.context.GameContext;
 import galaxy.cargo.Materials;
 
-public class PopulationGrowProduction implements Production {
+public final class PopulationGrowProduction implements Production {
 	private final Planet planet;
 
 	public PopulationGrowProduction(Planet planet) {
