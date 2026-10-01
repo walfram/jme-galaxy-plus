@@ -1,7 +1,7 @@
 package galaxy.ship;
 
-import galaxy.cargo.Cargo;
 import galaxy.Race;
+import galaxy.cargo.Cargo;
 import galaxy.cargo.EmptyCargo;
 
 import java.util.Optional;
@@ -17,12 +17,24 @@ public final class ShipGroup {
 
 	private Cargo cargo;
 
-	public ShipGroup(Race owner, ShipType type, int groupSize, TechLevels techLevels) {
-		this.shipGroupId = new ShipGroupId();
+	public ShipGroup(ShipGroupId shipGroupId, Race owner, ShipType type, int groupSize, TechLevels techLevels, Cargo cargo) {
+		this.shipGroupId = shipGroupId;
 		this.owner = owner;
 		this.type = type;
 		this.groupSize = groupSize;
 		this.techLevels = new TechLevels(techLevels);
+		this.cargo = cargo;
+	}
+
+	public ShipGroup(Race owner, ShipType type, int groupSize, TechLevels techLevels) {
+		this(
+				new ShipGroupId(),
+				owner,
+				type,
+				groupSize,
+				techLevels,
+				new EmptyCargo()
+		);
 	}
 
 	public ShipGroup(Race owner, ShipType type) {

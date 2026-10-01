@@ -2,6 +2,9 @@ package galaxy.context;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import galaxy.cargo.Colonists;
+import galaxy.ship.ShipGroup;
+import galaxy.ship.ShipGroupId;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -28,6 +31,10 @@ public class GameContextTest {
 		ShipGroups groups = context.shipGroups();
 		assertNotNull(groups);
 		assertEquals(12, groups.size());
+
+		ShipGroup id8 = groups.findById(new ShipGroupId("8")).orElseThrow();
+		assertEquals(3.9, id8.cargo().quantity());
+		assertInstanceOf(Colonists.class, id8.cargo());
 	}
 
 }

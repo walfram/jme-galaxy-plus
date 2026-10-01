@@ -4,6 +4,7 @@ import galaxy.Planet;
 import galaxy.Race;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
+import galaxy.ship.ShipGroupId;
 import galaxy.state.*;
 
 import java.util.*;
@@ -118,5 +119,9 @@ public final class ShipGroups {
 
 	public int size() {
 		return states.size();
+	}
+
+	public Optional<ShipGroup> findById(ShipGroupId shipGroupId) {
+		return states.keySet().stream().filter(group -> group.shipGroupId().equals(shipGroupId)).findFirst();
 	}
 }

@@ -3,10 +3,12 @@ package galaxy.context;
 import com.fasterxml.jackson.databind.JsonNode;
 import galaxy.Planet;
 import galaxy.Race;
+import galaxy.cargo.*;
 import galaxy.planet.Coordinates;
 import galaxy.planet.PlanetId;
 import galaxy.race.RaceId;
 import galaxy.ship.ShipGroup;
+import galaxy.ship.ShipGroupId;
 import galaxy.ship.TechLevels;
 import galaxy.state.*;
 
@@ -38,11 +40,22 @@ final class JsonShipGroups {
 	private ShipGroup parseGroup(JsonNode json) {
 		Race owner = races.raceById(json.required("owner").asText());
 		return new ShipGroup(
+				new ShipGroupId(json.required("id")),
 				owner,
 				owner.shipType(json.required("type").asText()),
 				json.required("size").asInt(),
-				new TechLevels(json.required("tech"))
+				new TechLevels(json.required("tech")),
+				parseCargo(json.path("cargo"))
 		);
+	}
+
+	private Cargo parseCargo(JsonNode json) {
+		return switch(json.path("type").asText()) {
+			case "COLONISTS" -> new Colonists(json.required("quantity").doubleValue());
+			case "MATERIALS" -> new Materials(json.required("quantity").doubleValue());
+			case "CAPITAL" -> new Capital(json.required("quantity").doubleValue());
+			default -> new EmptyCargo();
+		};
 	}
 
 	private ShipGroupState parseState(JsonNode json, ShipGroup group) {
@@ -56,7 +69,7 @@ final class JsonShipGroups {
 			case "TRANSFER" -> new InTransfer(group, planet(json, "planetId"),
 					races.raceById(new RaceId(json.required("fromRaceId"))),
 					races.raceById(new RaceId(json.required("toRaceId"))));
-			default -> throw new IllegalArgumentException("Unknown ship group state: " + name);
+			default -> throw new IllegalArgumentException("Unknown ship group state %s".formatted(name));
 		};
 	}
 
