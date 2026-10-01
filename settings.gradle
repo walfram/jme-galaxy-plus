@@ -7,4 +7,4 @@ include 'map-generator'
 
 include 'galaxy-core'
 
-include 'galaxy-exp'
+include 'galaxy-battle'
