@@ -1,9 +1,7 @@
 package generator.classic;
 
-import distribution.Deferred;
-import distribution.PlanetType;
-import distribution.WeightedDistribution;
-import distribution.classic.ClassicPlanetDistribution;
+import generator.Deferred;
+import random.WeightedDistribution;
 import galaxy.Planet;
 import galaxy.planet.*;
 import generator.GeneratedPlanets;

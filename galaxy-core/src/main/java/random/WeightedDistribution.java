@@ -1,4 +1,4 @@
-package distribution;
+package random;
 
 import jme3utilities.math.noise.Generator;
 

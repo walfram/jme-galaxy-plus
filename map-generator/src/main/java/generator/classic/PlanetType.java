@@ -1,5 +1,6 @@
-package distribution;
+package generator.classic;
 
+import random.Weighted;
 import galaxy.Planet;
 import galaxy.planet.Coordinates;
 import galaxy.planet.PlanetId;

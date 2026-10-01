@@ -1,4 +1,4 @@
-package distribution;
+package generator;
 
 import java.util.concurrent.Callable;
 
