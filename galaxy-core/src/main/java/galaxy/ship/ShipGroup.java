@@ -49,6 +49,11 @@ public final class ShipGroup {
 		this(owner, type, groupSize, new TechLevels());
 	}
 
+	@Override
+	public String toString() {
+		return "ShipGroup(type=%s, size=%s)".formatted(type, groupSize);
+	}
+
 	public void load(Cargo cargo) {
 		double cargoCapacity = cargoCapacity();
 

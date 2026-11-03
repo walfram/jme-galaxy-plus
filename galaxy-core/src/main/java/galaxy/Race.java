@@ -53,6 +53,11 @@ public final class Race {
 		this(new RaceId(raceId), new TechLevels(), new ShipTypes());
 	}
 
+	@Override
+	public String toString() {
+		return "Race(id=%s, techLevels=%s, shipTypes=%d)".formatted(raceId, techLevels, shipTypes.size());
+	}
+
 	public RaceId raceId() {
 		return raceId;
 	}

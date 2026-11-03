@@ -42,4 +42,9 @@ public record ShipType(String name, Engines engines, Weapons weapons, Shields sh
 		return engines.mass() + weapons.mass() + shields.mass() + cargoBay.mass();
 	}
 
+	@Override
+	public String toString() {
+		return "ShipType(%s: E(%s), W(%s, %s), S(%s), C(%s)".formatted(name, engines.size(), weapons.guns(), weapons.caliber(), shields.size(), cargoBay.size());
+	}
+
 }
