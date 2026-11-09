@@ -35,10 +35,6 @@ public final class BattleGroup {
 		return shipGroup.owner();
 	}
 
-	public Collection<BattleGroup> attack(Collection<BattleGroup> targets) {
-		return null;
-	}
-
 	public boolean attack(BattleGroup target) {
 		return false;
 	}

@@ -13,7 +13,7 @@ public final class RandomAttacker {
 		this.random = random;
 	}
 
-	public BattleGroup value() {
+	public BattleGroup pick() {
 		int idx = random.nextInt(attackers.size());
 		return attackers.get(idx);
 	}

@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class RandomDronesFleet {
+public final class RandomDronesFleet {
 
 	private static final List<ShipType> droneTypes = List.of(
 			new ShipType("drone-mk-1", new Engines(1)),
