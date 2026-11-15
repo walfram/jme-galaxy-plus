@@ -29,7 +29,7 @@ public final class BattleGenerator {
 		for (Map.Entry<Race, Collection<ShipGroup>> entry : fleets.entrySet()) {
 			Race race = entry.getKey();
 			Collection<ShipGroup> ships = entry.getValue();
-			battleGroups.put(race, new BattleGroupsOf(ships).value());
+			battleGroups.put(race, new ArrayList<>(new BattleGroupsOf(ships).value()));
 		}
 
 		logger.info("battle groups size = {}", battleGroups.size());
@@ -56,6 +56,7 @@ public final class BattleGenerator {
 
 		while (true) {
 			BattleGroup attacker = new RandomAttacker(attackers, generator).pick();
+			logger.info("Attacker: {}", attacker);
 
 			Collection<BattleGroup> targets = new Targets(battleGroups, attacker).pick();
 
@@ -64,11 +65,16 @@ public final class BattleGenerator {
 			for (int shot = 0; shot < shots; shot++) {
 				long skip = generator.nextLong(targets.size());
 				BattleGroup target = targets.stream().skip(skip).findFirst().orElseThrow();
-				boolean attack = attacker.attack(target);
+				boolean attack = attacker.attack(target, generator);
 
 				if (attack) {
 					logger.info("DESTROY: {} attacked {}", attacker, target);
 					battleGroups.get(target.owner()).remove(target);
+
+					battleGroups.computeIfPresent(target.owner(), (owner, group) -> {
+						group.remove(target);
+						return group.isEmpty() ? null : group;
+					});
 				} else {
 					logger.info("MISS: {} attacked {}", attacker, target);
 				}
@@ -77,6 +83,11 @@ public final class BattleGenerator {
 			Attackers check = new Attackers(battleGroups);
 			if (check.asList().isEmpty()) {
 				logger.info("No attackers left, battle finished");
+				break;
+			}
+
+			if (battleGroups.size() == 1) {
+				logger.info("Only one group left, battle finished");
 				break;
 			}
 		}

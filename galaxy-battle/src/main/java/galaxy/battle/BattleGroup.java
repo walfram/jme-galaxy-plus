@@ -2,6 +2,7 @@ package galaxy.battle;
 
 import galaxy.Race;
 import galaxy.ship.ShipGroup;
+import jme3utilities.math.noise.Generator;
 
 import java.util.Collection;
 
@@ -35,11 +36,26 @@ public final class BattleGroup {
 		return shipGroup.owner();
 	}
 
-	public boolean attack(BattleGroup target) {
+	public boolean attack(BattleGroup target, Generator random) {
+		double excess = attackValue() - target.defenceValue();
+
+		if( excess <= -1.0 )
+			// return Shot.Result.ALWAYSSHIELDS;
+			return false;
+
+		if( excess >= 1.0 )
+			// return Shot.Result.DESTROYED;
+			return true;
+
+		if( excess > 2.0 * random.nextDouble() - 1.0 )
+			// return Shot.Result.DESTROYED;
+			return true;
+
+		// return Shot.Result.SHIELDS;
 		return false;
 	}
 
 	public int guns() {
-		return 0;
+		return shipGroup.type().weapons().guns();
 	}
 }
