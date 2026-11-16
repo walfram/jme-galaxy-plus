@@ -49,6 +49,17 @@ public final class ShipGroup {
 		this(owner, type, groupSize, new TechLevels());
 	}
 
+	public ShipGroup(ShipGroup source, long count) {
+		this(
+				source.shipGroupId(),
+				source.owner(),
+				source.type(),
+				(int) count,
+				source.techLevels,
+				source.cargo()
+		);
+	}
+
 	@Override
 	public String toString() {
 		return "ShipGroup(type=%s, size=%s)".formatted(type, groupSize);

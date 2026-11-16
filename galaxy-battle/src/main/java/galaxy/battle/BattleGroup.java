@@ -2,9 +2,8 @@ package galaxy.battle;
 
 import galaxy.Race;
 import galaxy.ship.ShipGroup;
+import galaxy.ship.ShipGroupId;
 import jme3utilities.math.noise.Generator;
-
-import java.util.Collection;
 
 public final class BattleGroup {
 
@@ -32,6 +31,10 @@ public final class BattleGroup {
 		return "BattleGroup(%s, NA=%s, ND=%s".formatted(shipGroup, attackValue(), defenceValue());
 	}
 
+	public ShipGroupId shipGroupId() {
+		return shipGroup.shipGroupId();
+	}
+
 	public Race owner() {
 		return shipGroup.owner();
 	}
@@ -57,5 +60,9 @@ public final class BattleGroup {
 
 	public int guns() {
 		return shipGroup.type().weapons().guns();
+	}
+
+	public ShipGroup asShipGroup(long count) {
+		return new ShipGroup(shipGroup, count);
 	}
 }

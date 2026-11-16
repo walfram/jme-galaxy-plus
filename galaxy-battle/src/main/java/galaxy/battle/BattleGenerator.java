@@ -6,6 +6,7 @@ import jme3utilities.math.noise.Generator;
 import org.slf4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -92,6 +93,27 @@ public final class BattleGenerator {
 			}
 		}
 
-		return Map.copyOf(fleets);
+		Map<Race, Collection<ShipGroup>> survivors = new HashMap<>(battleGroups.size());
+		for (Race race : battleGroups.keySet()) {
+			Collection<BattleGroup> groups = battleGroups.get(race);
+
+			if (groups == null) {
+				logger.warn("groups for race {} is null", race);
+				continue;
+			}
+
+			if (groups.isEmpty()) {
+				continue;
+			}
+
+			groups.stream()
+					.collect(Collectors.groupingBy(BattleGroup::shipGroupId))
+					.forEach((id, list) -> {
+						ShipGroup shipGroup = list.getFirst().asShipGroup(list.size());
+						survivors.computeIfAbsent(race, k -> new ArrayList<>()).add(shipGroup);
+					});
+		}
+
+		return Map.copyOf(survivors);
 	}
 }
